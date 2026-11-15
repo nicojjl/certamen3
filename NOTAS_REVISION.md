@@ -102,10 +102,10 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 ### 4.3. Pauta C3 2026-1 Problema 1c: Comparación en $r = 3R/4$
 - **Caso Uniforme ($J' = I/\pi R^2$):**
   $$I'_{enc} = J' \pi \left(\frac{3R}{4}\right)^2 = \frac{9}{16}I = \frac{9}{16}\left(\frac{5}{2}\pi J_0 R^2\right) = \frac{45}{32}\pi J_0 R^2$$
-  $$B_{unif}\left(\frac{3R}{4}\right) = \frac{\mu_0 I'_{enc}}{2\pi(3R/4)} = \frac{\mu_0 \frac{45}{32}\pi J_0 R^2}{\frac{3}{2}\pi R} = \frac{15}{16}\mu_0 J_0 R \approx 0.9375\,\mu_0 J_0 R$$
+  $$B_{unif}\left(\frac{3R}{4}\right) = \frac{\mu_0 I'_{enc}}{2\pi(3R/4)} = \frac{\mu_0 \frac{45}{32}\pi J_0 R^2}{\frac{3}{2}\pi R} = \frac{15}{16}\mu_0 J_0 R \approx 0.9375\text{ }\mu_0 J_0 R$$
 - **Caso Escalonado ($J_0$ en $r \le R/2$ y $3J_0$ en $R/2 < r \le R$):**
   $$I_{enc} = J_0 \pi \frac{R^2}{4} + 3J_0 \pi \left[\frac{9R^2}{16} - \frac{R^2}{4}\right] = \pi J_0 R^2 \left[\frac{4}{16} + \frac{15}{16}\right] = \frac{19}{16}\pi J_0 R^2$$
-  $$B_{esc}\left(\frac{3R}{4}\right) = \frac{\mu_0 \frac{19}{16}\pi J_0 R^2}{2\pi(3R/4)} = \frac{19}{24}\mu_0 J_0 R \approx 0.7917\,\mu_0 J_0 R$$
+  $$B_{esc}\left(\frac{3R}{4}\right) = \frac{\mu_0 \frac{19}{16}\pi J_0 R^2}{2\pi(3R/4)} = \frac{19}{24}\mu_0 J_0 R \approx 0.7917\text{ }\mu_0 J_0 R$$
 - **Comparación:** $\frac{19}{24} \approx 0.792 < \frac{15}{16} \approx 0.938 \implies B_{esc} < B_{unif}$ en $r = 3R/4$.
 
 ### 4.4. Simulacro C3 Problema 1: Toroide Ideal de Sección Rectangular
@@ -273,7 +273,7 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 ## 9. MÓDULO 8: CIRCUITOS TRANSIENTES RC Y RL
 
 ### 9.1. Pauta C3 2026-1 Problema 3: Circuito con Interruptor de 2 Posiciones
-- $C = 5\,\mu\text{F}$, $R = 370\,\Omega$, $\mathcal{E} = 112\,\text{V}$.
+- $C = 5\text{ }\mu\text{F}$, $R = 370\text{ }\Omega$, $\mathcal{E} = 112\text{ V}$.
 - **a) Igualdad de constantes $\tau_L = \tau_C$:**
   $$\frac{L}{R} = RC \implies L = R^2 C = (370)^2 \cdot (5\times 10^{-6}) = 136900 \times 5\times 10^{-6} = 0.6845\text{ H}$$
 - **b) Régimen permanente en posición 1 ($t \to \infty$):**

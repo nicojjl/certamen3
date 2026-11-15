@@ -33,10 +33,10 @@ window.MODULE_DATA_MOD4 = {
     <div class="box-method">
       <strong>2. Cómo Determinar el Sentido de Lenz Sin Equivocarse:</strong>
       <ol style="padding-left: 1.2rem; margin-top: 0.5rem;">
-        <li><strong>Identifica el campo original $\\vec{B}_{ext}$:</strong> ¿Entra ($\otimes$) o sale ($\odot$) del plano de la espira?</li>
+        <li><strong>Identifica el campo original $\\vec{B}_{ext}$:</strong> ¿Entra ($\\otimes$) o sale ($\\odot$) del plano de la espira?</li>
         <li><strong>Analiza la tendencia del flujo $\\phi_B(t)$ con el tiempo:</strong>
-          <br>• Si el flujo <em>aumenta</em> ($\frac{d\phi_B}{dt} > 0$), la espira <strong>se opone al incremento</strong> generando un campo inducido $\\vec{B}_{ind}$ en sentido <em>contrario</em> a $\\vec{B}_{ext}$.
-          <br>• Si el flujo <em>disminuye</em> ($\frac{d\phi_B}{dt} < 0$), la espira <strong>se opone a la disminución</strong> generando un campo inducido $\\vec{B}_{ind}$ en el <em>mismo sentido</em> que $\\vec{B}_{ext}$ para reforzarlo.
+          <br>• Si el flujo <em>aumenta</em> ($\\frac{d\\phi_B}{dt} > 0$), la espira <strong>se opone al incremento</strong> generando un campo inducido $\\vec{B}_{ind}$ en sentido <em>contrario</em> a $\\vec{B}_{ext}$.
+          <br>• Si el flujo <em>disminuye</em> ($\\frac{d\\phi_B}{dt} < 0$), la espira <strong>se opone a la disminución</strong> generando un campo inducido $\\vec{B}_{ind}$ en el <em>mismo sentido</em> que $\\vec{B}_{ext}$ para reforzarlo.
         </li>
         <li><strong>Aplica la regla de la mano derecha:</strong> Apunta el pulgar en la dirección del campo inducido $\\vec{B}_{ind}$; los dedos que abrazan la espira indicarán el sentido de la corriente inducida $I_{ind}$ (horario o antihorario).</li>
       </ol>
@@ -100,11 +100,11 @@ window.MODULE_DATA_MOD4 = {
       source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
-        Si un campo magnético uniforme saliente del plano de la página ($\odot$) está disminuyendo con el tiempo, la corriente inducida en una espira en dicho plano circulará en sentido antihorario.
+        Si un campo magnético uniforme saliente del plano de la página ($\\\\odot$) está disminuyendo con el tiempo, la corriente inducida en una espira en dicho plano circulará en sentido antihorario.
       `,
       correct: true,
       justification: `
-        Verdadero. El campo saliente ($\odot$) está decreciendo en el tiempo. Por la Ley de Lenz, la corriente inducida se opone a esta disminución intentando mantener el flujo original; por ende, debe producir un campo inducido $\\vec{B}_{ind}$ que también apunte hacia afuera de la página ($\odot$). Por regla de la mano derecha, dedos curvados en sentido antihorario producen un campo saliente.
+        Verdadero. El campo saliente ($\\\\odot$) está decreciendo en el tiempo. Por la Ley de Lenz, la corriente inducida se opone a esta disminución intentando mantener el flujo original; por ende, debe producir un campo inducido $\\vec{B}_{ind}$ que también apunte hacia afuera de la página ($\\\\odot$). Por regla de la mano derecha, dedos curvados en sentido antihorario producen un campo saliente.
       `
     },
     {
@@ -269,7 +269,7 @@ window.MODULE_DATA_MOD4 = {
             Como el flujo entrante disminuye a medida que la espira se aleja ($d\\phi_B/dt < 0$), por la Ley de Faraday:
             $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = +\\frac{\\mu_0 I b v a}{2\\pi (d_0 + vt)(d_0 + vt + a)} > 0$$
             <strong>Justificación del signo:</strong> El resultado $\\varepsilon_{ind} > 0$ es estrictamente positivo porque concuerda con el sentido positivo de circulación asociado a la normal $\\hat{n} = -\\hat{k}$, que es el <strong>sentido horario</strong>.<br>
-            <em>Nota didáctica:</em> Si hubiésemos elegido $\\hat{n} = +\\hat{k}$ (saliente), el flujo habría sido negativo, su derivada positiva y la fem negativa ($\varepsilon < 0$), indicando formalmente que la corriente circula en sentido opuesto a la normal saliente (opuesto a antihorario), es decir, en sentido horario. El sentido físico real nunca depende de la convención de normal elegida.
+            <em>Nota didáctica:</em> Si hubiésemos elegido $\\hat{n} = +\\hat{k}$ (saliente), el flujo habría sido negativo, su derivada positiva y la fem negativa ($\\\\varepsilon < 0$), indicando formalmente que la corriente circula en sentido opuesto a la normal saliente (opuesto a antihorario), es decir, en sentido horario. El sentido físico real nunca depende de la convención de normal elegida.
           `
         },
         {

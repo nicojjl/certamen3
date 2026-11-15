@@ -168,7 +168,7 @@ window.MODULE_DATA_MOD8 = {
             Sustituyendo los valores numéricos:
             $$L = (370)^2 \\cdot (5 \\times 10^{-6})\\text{ [H]} = 136900 \\cdot 5 \\times 10^{-6}\\text{ [H]} = 0.6845\\text{ [H]}$$
             $$L \\simeq 0.684\\text{ [H]}$$
-            <strong>Chequeo dimensional:</strong> $[\Omega^2 \\cdot F] = [\Omega \\cdot (\Omega \\cdot F)] = [\Omega \\cdot s] = \\text{Henrio [H]}$.
+            <strong>Chequeo dimensional:</strong> $[\\Omega^2 \\cdot \\text{F}] = [\\Omega \\cdot (\\Omega \\cdot \\text{F})] = [\\Omega \\cdot \\text{s}] = \\text{Henrio [H]}$.
           `
         }
       ]
