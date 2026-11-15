@@ -10,6 +10,9 @@ __pycache__/
 
 # Referencias del curso (PDFs y material de estudio local)
 referencias/
+*.pdf
+*ref_*.png
+ref_*.png
 
 # Artefactos de inspección visual y vistas previas generadas
 scripts/inspeccion_png/
