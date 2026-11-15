@@ -203,7 +203,7 @@ window.MODULE_DATA_MOD5 = {
         Un carrito de masa $m$ formado por una espira conductora rectangular de ancho $a$ (en $y$) y largo $w$ (en $x$, dimensión en la dirección de avance) con resistencia $R$ se desplaza sin fricción con velocidad inicial $\\vec{v} = v_0\\hat{\\imath}$. Este ingresa a una región $x \\ge 0$ con campo magnético uniforme $\\vec{B} = B_0\\hat{k}$.<br>
         a) Luego de que el carrito ingresa a la zona con campo, indique el vector normal elegido, el signo de la fem y si se induce en sentido horario o antihorario.<br>
         b) Determine la corriente inducida y la fuerza magnética neta sobre la espira.<br>
-        c) Demuestre que la distancia de parada teórica mientras penetra es $x_{\\max} = \\frac{m v_0 R}{B_0^2 a^2}$. Aclare por qué esta expresión solo es válida si $w > x_{\\max}$ y explique detalladamente qué ocurre con la fem, la corriente y la velocidad si $w \\le x_{\\max}$ (cuando la espira queda totalmente inmersa en el campo).
+        c) Demuestre que la distancia de parada teórica mientras penetra es $x_{\\max} = \\frac{m v_0 R}{B_0^2 a^2}$. Aclare por qué esta expresión solo es válida si $w > x_{\\max}$ y explique detalladamente qué ocurre si $w < x_{\\max}$ (cuando la espira entra totalmente con $v_f > 0$) y si $w = x_{\\max}$ (la espira se detiene justo al terminar de entrar, $v_f = 0$).
       `,
       steps: [
         {
@@ -254,10 +254,10 @@ window.MODULE_DATA_MOD5 = {
           `
         },
         {
-          title: 'Paso 4: Caso alternativo si w <= x_max (Espira entra totalmente al campo)',
+          title: 'Paso 4: Casos si w < x_max y si w = x_max (Espira entra totalmente al campo)',
           content: `
-            <strong>¿Qué ocurre si $w \\le x_{\\max}$?</strong><br>
-            Si el largo del carrito es menor o igual a la distancia de frenado ($w \\le x_{\\max}$), la espira no alcanza a detenerse durante la penetración y entra <strong>completamente</strong> a la región de campo en la posición $x = w$.<br><br>
+            <strong>¿Qué ocurre si $w < x_{\\max}$?</strong><br>
+            Si el largo del carrito es estrictamente menor que la distancia de frenado ($w < x_{\\max}$), la espira no alcanza a detenerse durante la penetración y entra <strong>completamente</strong> a la región de campo en la posición $x = w$.<br><br>
             En ese instante, su velocidad residual es estrictamente positiva:
             $$v_f = v(w) = v_0 - \\frac{B_0^2 a^2 w}{m R} > 0$$
             A partir de ese instante ($t > t_{ingreso}$), la espira completa viaja dentro del campo magnético uniforme $\\vec{B} = B_0\\hat{k}$:<br>
@@ -272,7 +272,11 @@ window.MODULE_DATA_MOD5 = {
             $$\\vec{F}_B = \\vec{0}$$
             Por la <strong>Primera Ley de Newton (Principio de Inercia)</strong>, al cesar toda fuerza neta externa sobre el carrito, este <strong>continúa moviéndose indefinidamente hacia adelante con velocidad constante residual</strong>:
             $$\\vec{v}(t) = v_f\\,\\hat{\\imath} = \\left(v_0 - \\frac{B_0^2 a^2 w}{m R}\\right)\\hat{\\imath} = \\text{constante}$$
-            ¡El carrito nunca se detiene, sino que atraviesa la región de campo a velocidad crucero!
+            ¡El carrito nunca se detiene, sino que atraviesa la región de campo a velocidad crucero!<br><br>
+            <strong>¿Qué ocurre en el caso límite si $w = x_{\\max}$?</strong><br>
+            Si el largo del carrito coincide exactamente con la distancia teórica de frenado ($w = x_{\\max}$), la espira se detiene justo al terminar de entrar ($v_f = 0$):
+            $$v_f = v(x_{\\max}) = v_0 - \\frac{B_0^2 a^2}{m R}\\left(\\frac{m v_0 R}{B_0^2 a^2}\\right) = v_0 - v_0 = 0$$
+            En ese instante de entrada completa, la velocidad se anula simultáneamente con la fem y la corriente inducida ($v_f = 0, \\varepsilon_{ind} = 0, i = 0$). Como ya no hay velocidad ni fuerza aceleradora neta, el carrito queda en <strong>reposo permanente</strong> en la posición $x = x_{\\max} = w$.
           `
         }
       ]
