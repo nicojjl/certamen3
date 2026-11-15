@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD6 = {
+window.MODULE_DATA_MOD6 = {
   number: '6',
   title: 'Inductancia Mutua y Transformadores',
   description: 'Teorema de reciprocidad magnética, acoplamiento de flujo entre circuitos acoplados, bobinas concéntricas, solenoides inclinados y transformadores ideales.',

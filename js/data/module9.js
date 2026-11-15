@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD9 = {
+window.MODULE_DATA_MOD9 = {
   number: '9',
   title: 'Circuitos Oscilantes LC y RLC',
   description: 'Oscilaciones libres LC, frecuencia de resonancia natural, amortiguamiento RLC serie, regímenes subamortiguado, crítico y sobreamortiguado según el formulario oficial.',

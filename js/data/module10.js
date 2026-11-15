@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD10 = {
+window.MODULE_DATA_MOD10 = {
   number: '10',
   title: 'Maxwell y Síntesis Conceptual',
   description: 'Las 4 ecuaciones de Maxwell en forma integral, corriente de desplazamiento, paradoja de Ampère en condensadores (superficies S1 vs S2), campo B entre placas y aplicaciones como la cocina de inducción.',

@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD4 = {
+window.MODULE_DATA_MOD4 = {
   number: '4',
   title: 'Flujo Magnético y Ley de Faraday-Lenz',
   description: 'Cálculo riguroso de flujo magnético en campos no homogéneos, fuerza electromotriz inducida, sentido de circulación por la Ley de Lenz y principio de conservación de energía.',

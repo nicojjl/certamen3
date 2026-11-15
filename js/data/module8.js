@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD8 = {
+window.MODULE_DATA_MOD8 = {
   number: '8',
   title: 'Circuitos Transientes RC y RL',
   description: 'Constantes de tiempo tau_C y tau_L, ecuaciones diferenciales del formulario, comportamiento en t = 0+ y t -> infinito, y circuitos con interruptores de múltiples posiciones.',

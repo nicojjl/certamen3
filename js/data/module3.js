@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD3 = {
+window.MODULE_DATA_MOD3 = {
   number: '3',
   title: 'Ley de Ampère y Simetrías',
   description: 'Elección rigurosa de lazos amperianos, cálculo del campo en cables coaxiales de múltiples capas, distribuciones volumétricas no homogéneas, solenoides, toroides y superposición vectorial fuera del eje.',

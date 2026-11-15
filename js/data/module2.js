@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD2 = {
+window.MODULE_DATA_MOD2 = {
   number: '2',
   title: 'Densidad de Corriente J(r) y Corriente Total',
   description: 'Integración del vector densidad de corriente en conductores con perfiles homogéneos y no homogéneos: perfiles parabólicos, lineales, escalonados (efecto pelicular) y angulares.',

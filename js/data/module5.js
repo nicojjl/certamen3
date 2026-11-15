@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD5 = {
+window.MODULE_DATA_MOD5 = {
   number: '5',
   title: 'fem de Movimiento y Rieles con Gravedad',
   description: 'Conductores móviles en campos magnéticos, fuerza de frenado de Lorentz, leyes de Newton aplicadas a circuitos, velocidad terminal y balance riguroso de potencia electromecánica.',

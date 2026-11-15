@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD0 = {
+window.MODULE_DATA_MOD0 = {
   number: '0',
   title: 'Repaso Matemático y Conceptual para C3',
   description: 'Herramientas matemáticas esenciales para el Certamen 3: álgebra vectorial, regla de la mano derecha, coordenadas cilíndricas, integrales del formulario oficial y análisis dimensional de unidades del SI.',

@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD1 = {
+window.MODULE_DATA_MOD1 = {
   number: '1',
   title: 'Biot-Savart y Campo Magnético de Cables',
   description: 'Cálculo del campo magnético generado por corrientes estacionarias: cable recto infinito y finito, espiras circulares, arcos y superposición vectorial con regla de la mano derecha.',

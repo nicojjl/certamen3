@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD7 = {
+window.MODULE_DATA_MOD7 = {
   number: '7',
   title: 'Autoinductancia y Energía Magnética',
   description: 'Cálculo de inductancia propia L en solenoides y toroides, fem autoinducida de Faraday, densidad de energía magnética u_B y almacenamiento en inductores.',

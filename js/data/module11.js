@@ -3,7 +3,7 @@
  * FIS120 / FIS12125 · UTFSM
  */
 
-const MODULE_DATA_MOD11 = {
+window.MODULE_DATA_MOD11 = {
   number: '11',
   title: 'SIMULACRO FINAL CERTAMEN 3',
   description: 'Certamen 3 completo cronometrado (2026-2) en formato oficial UTFSM: 3 problemas analíticos de 30 puntos cada uno + 1 pregunta conceptual de 10 puntos (Total: 100 puntos), con rúbrica detallada y autoevaluación.',
