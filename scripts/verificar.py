@@ -171,22 +171,38 @@ def verify_all():
     emf_st = sp.simplify(-sp.diff(phi_space_time, t))
     check("Ayudantía 11 P3: fem inducida = (alpha*beta*L/3)*[(C+H)^3 - C^3]*e^(-beta*t)", emf_st, (alpha * beta * L_w / 3) * ((C + H)**3 - C**3) * sp.exp(-beta * t))
 
-    # 3.5 Ayudantía 11 P4: Solenoide y espira inclinada ángulo alpha_ang
+    # 3.5 Ayudantía 11 P4: Verificación geométrica rigurosa con vectores 3D y proyecciones de alfa
     alpha_ang = sp.symbols('alpha_ang', real=True)
+    theta_ang = sp.symbols('theta_ang', real=True)
     n_dens = sp.symbols('n_dens', positive=True)
-    # Convención de la figura oficial del PDF: alpha medido entre el eje longitudinal y el PLANO de la espira.
-    # El vector normal está a (90° - alpha), luego B·n = B*cos(90°-alpha) = B*sin(alpha):
-    phi_tilted_sin = (mu0 * n_dens * I) * (sp.pi * b**2) * sp.sin(alpha_ang)
-    M_tilted_sin = phi_tilted_sin / I
-    check("Ayudantía 11 P4: Inductancia mutua (convención figura PDF: plano-eje -> sin(alpha))", M_tilted_sin, mu0 * n_dens * sp.pi * b**2 * sp.sin(alpha_ang))
-    emf_tilted_sin = -sp.diff(phi_tilted_sin.subs(I, I0 * sp.sin(omega * t if 'omega' in locals() else sp.symbols('omega', positive=True) * t)), t)
-    omega_sym = sp.symbols('omega', positive=True)
-    phi_tilted_t = (mu0 * n_dens * I0 * sp.sin(omega_sym * t)) * (sp.pi * b**2) * sp.sin(alpha_ang)
-    check("Ayudantía 11 P4: fem inducida (figura PDF: sin(alpha))", -sp.diff(phi_tilted_t, t), -mu0 * n_dens * sp.pi * b**2 * sp.sin(alpha_ang) * I0 * omega_sym * sp.cos(omega_sym * t))
-    # Convención alternativa: si alpha fuese el ángulo entre el eje longitudinal y el VECTOR NORMAL de la espira:
-    phi_tilted_cos = (mu0 * n_dens * I) * (sp.pi * b**2) * sp.cos(alpha_ang)
-    M_tilted_cos = phi_tilted_cos / I
-    check("Ayudantía 11 P4: Inductancia mutua (convención alternativa: normal-eje -> cos(alpha))", M_tilted_cos, mu0 * n_dens * sp.pi * b**2 * sp.cos(alpha_ang))
+    omega_sym = sp.symbols('omega_sym', positive=True)
+    B_mag = mu0 * n_dens * I
+
+    # Construcción de vector campo B = B0 * z_hat y normal unitaria n = (sin theta, 0, cos theta)
+    B_vec = sp.Matrix([0, 0, B_mag])
+    n_vec = sp.Matrix([sp.sin(theta_ang), 0, sp.cos(theta_ang)])
+
+    # Producto punto B·n = B * cos(theta_ang)
+    dot_Bn = n_vec.dot(B_vec)
+    check("Ayudantía 11 P4: Geometría 3D B·n == B*cos(theta)", dot_Bn, B_mag * sp.cos(theta_ang))
+
+    # Caso 1: theta = alpha (alpha medido entre eje z y normal n) -> B*cos(alpha)
+    dot_Bn_normal = dot_Bn.subs(theta_ang, alpha_ang)
+    check("Ayudantía 11 P4: Deducción geométrica theta = alpha (eje a normal) -> cos(alpha)", dot_Bn_normal, B_mag * sp.cos(alpha_ang))
+    M_tilted_cos = (dot_Bn_normal * sp.pi * b**2) / I
+    check("Ayudantía 11 P4: M bajo convención normal-eje (cos(alpha))", M_tilted_cos, mu0 * n_dens * sp.pi * b**2 * sp.cos(alpha_ang))
+
+    # Caso 2: theta = pi/2 - alpha (alpha medido entre eje z y plano de espira) -> B*sin(alpha)
+    dot_Bn_plano = sp.trigsimp(dot_Bn.subs(theta_ang, sp.pi/2 - alpha_ang))
+    check("Ayudantía 11 P4: Deducción geométrica theta = 90° - alpha (eje a plano) -> sin(alpha)", dot_Bn_plano, B_mag * sp.sin(alpha_ang))
+    M_tilted_sin = (dot_Bn_plano * sp.pi * b**2) / I
+    check("Ayudantía 11 P4: M bajo convención plano-eje (sin(alpha))", M_tilted_sin, mu0 * n_dens * sp.pi * b**2 * sp.sin(alpha_ang))
+
+    # fem inducida con I(t) = I0 * sin(omega * t) para ambas convenciones
+    I_t = I0 * sp.sin(omega_sym * t)
+    dI_dt = sp.diff(I_t, t)
+    check("Ayudantía 11 P4: fem inducida (convención cos(alpha))", -M_tilted_cos * dI_dt, -mu0 * n_dens * sp.pi * b**2 * sp.cos(alpha_ang) * I0 * omega_sym * sp.cos(omega_sym * t))
+    check("Ayudantía 11 P4: fem inducida (convención sin(alpha))", -M_tilted_sin * dI_dt, -mu0 * n_dens * sp.pi * b**2 * sp.sin(alpha_ang) * I0 * omega_sym * sp.cos(omega_sym * t))
 
     # -------------------------------------------------------------
     # 4. DINÁMICA DE RIELES Y BALANCE DE ENERGÍA

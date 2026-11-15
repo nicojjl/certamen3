@@ -394,9 +394,13 @@ INICIANDO VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY
 [PASS] Ayudantía 11 P2: Inductancia mutua M = mu0*b*ln(2)/(2*pi)
 [PASS] Ayudantía 11 P3: Flujo con B(y,t)
 [PASS] Ayudantía 11 P3: fem inducida = (alpha*beta*L/3)*[(C+H)^3 - C^3]*e^(-beta*t)
-[PASS] Ayudantía 11 P4: Inductancia mutua (convención figura PDF: plano-eje -> sin(alpha))
-[PASS] Ayudantía 11 P4: fem inducida (figura PDF: sin(alpha))
-[PASS] Ayudantía 11 P4: Inductancia mutua (convención alternativa: normal-eje -> cos(alpha))
+[PASS] Ayudantía 11 P4: Geometría 3D B·n == B*cos(theta)
+[PASS] Ayudantía 11 P4: Deducción geométrica theta = alpha (eje a normal) -> cos(alpha)
+[PASS] Ayudantía 11 P4: M bajo convención normal-eje (cos(alpha))
+[PASS] Ayudantía 11 P4: Deducción geométrica theta = 90° - alpha (eje a plano) -> sin(alpha)
+[PASS] Ayudantía 11 P4: M bajo convención plano-eje (sin(alpha))
+[PASS] Ayudantía 11 P4: fem inducida (convención cos(alpha))
+[PASS] Ayudantía 11 P4: fem inducida (convención sin(alpha))
 
 --- 4. Dinámica de Rieles y Balance de Potencia ---
 [PASS] Ayudantía 10 P3: Balance exacto P_mec == P_Joule en v_term
@@ -415,7 +419,7 @@ INICIANDO VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY
 [PASS] Pauta C3 P3c: tau_RC = 1.85 ms
 
 ======================================================================
-RESUMEN DE PRUEBAS SYMPY: 41/41 CORRECTAS
+RESUMEN DE PRUEBAS SYMPY: 45/45 CORRECTAS
 ======================================================================
 ```
 
