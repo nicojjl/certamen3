@@ -10,3 +10,4 @@ __pycache__/
 
 # Local figure inspection outputs
 scripts/inspeccion_png/
+scripts/check_figures.py
