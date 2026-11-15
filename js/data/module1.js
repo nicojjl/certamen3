@@ -141,7 +141,7 @@ window.MODULE_DATA_MOD1 = {
       source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
-        Dos cables rectos paralelos e infinitos están separados por una distancia $d = 30.0\\text{ cm}$. El cable 1 transporta una corriente $I_1 = 4.0\\text{ A}$ y el cable 2 transporta $I_2 = 8.0\\text{ A}$, ambas en el mismo sentido hacia $+z$. ¿A qué distancia del cable 1 (a lo largo del segmento que une ambos cables) el campo magnético neto se anula?
+        Dos cables rectos paralelos e infinitos transportan corrientes que circulan en el mismo sentido (ambas hacia $+z$), con magnitudes $I_1 = 4.0\\text{ A}$ e $I_2 = 8.0\\text{ A}$, separados por una distancia $d = 30.0\\text{ cm}$. ¿A qué distancia del cable 1 (a lo largo del segmento perpendicular que une ambos cables) el campo magnético neto se anula?
       `,
       placeholder: 'Ej: 10.0',
       units: 'cm',
