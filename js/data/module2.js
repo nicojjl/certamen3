@@ -40,7 +40,7 @@ window.MODULE_DATA_MOD2 = {
         $$I_T = \\int_0^R (\\beta r) 2\\pi r\\,dr = 2\\pi \\beta \\int_0^R r^2\\,dr = \\frac{2\\pi \\beta R^3}{3}$$
         <br>
         <strong>C. Densidad Escalonada - Efecto Pelicular:</strong> (Pauta C3 2026-1 P1)
-        $$J(r) = \\begin{cases} J_0, & 0 \\le r \\le R/2 \\\\ 3J_0, & R/2 < r \\le R \\end{cases}$$
+        $$J(r) = \\begin{cases} J_0, & 0 \\le r \\le R/2 \\cr 3J_0, & R/2 < r \\le R \\end{cases}$$
         $$I = J_0 \\pi \\left(\\frac{R}{2}\\right)^2 + 3J_0 \\pi \\left[R^2 - \\left(\\frac{R}{2}\\right)^2\\right] = \\frac{\\pi J_0 R^2}{4} + \\frac{9\\pi J_0 R^2}{4} = \\frac{10\\pi J_0 R^2}{4} = \\frac{5}{2}\\pi J_0 R^2$$
         Despejando: $J_0 = \\frac{2I}{5\\pi R^2}$.
       </p>
@@ -175,7 +175,7 @@ window.MODULE_DATA_MOD2 = {
       figureCaption: 'Sección transversal del conductor: $J_0$ para $r \\le R/2$ y $3J_0$ para $R/2 < r \\le R$.',
       statement: `
         Un ingeniero en telecomunicaciones estudia el efecto pelicular en un cable coaxial de radio $R$. Modela la dependencia radial con una función escalonada que reproduce una corriente total $I$:
-        $$J(r) = \\begin{cases} J_0, & 0 \\le r \\le R/2 \\\\ 3J_0, & R/2 < r \\le R \\end{cases}$$
+        $$J(r) = \\begin{cases} J_0, & 0 \\le r \\le R/2 \\cr 3J_0, & R/2 < r \\le R \\end{cases}$$
         Usando la condición de corriente total, determine la expresión analítica para $J_0$ en función de $R$ e $I$.
       `,
       steps: [

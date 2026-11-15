@@ -226,7 +226,7 @@ window.MODULE_DATA_MOD11 = {
             Por lo tanto:
             $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = +\\frac{\\mu_0 I b v a}{2\\pi (d_0 + vt)(d_0 + vt + a)} > 0$$
             <strong>Justificación del signo según la normal:</strong><br>
-            Como escogimos $\\hat{n} = -\\hat{k}$ (entrante), la regla de la mano derecha asocia una circulación horaria al sentido positivo. El signo positivo obtenido ($\\varepsilon > 0$) significa que la fem induce circulación en sentido positivo de la normal, es decir, en <strong>sentido horario</strong>. Si hubiésemos elegido la normal saliente $+\\hat{k}$, la fem habría resultado negativa ($\\\\varepsilon < 0$), lo que indica circulación contraria a la antihoraria, o sea, igualmente horaria.
+            Como escogimos $\\hat{n} = -\\hat{k}$ (entrante), la regla de la mano derecha asocia una circulación horaria al sentido positivo. El signo positivo obtenido ($\\varepsilon > 0$) significa que la fem induce circulación en sentido positivo de la normal, es decir, en <strong>sentido horario</strong>. Si hubiésemos elegido la normal saliente $+\\hat{k}$, la fem habría resultado negativa ($\\varepsilon < 0$), lo que indica circulación contraria a la antihoraria, o sea, igualmente horaria.
             <div style="margin-top: 0.5rem; font-size: 0.9rem;">
               <strong>Autocalificación Inciso b:</strong>
               <select onchange="MODULE_DATA_MOD11.setScore('p2_b', this.value)" class="input-number" style="max-width: 140px;">

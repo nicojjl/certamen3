@@ -219,7 +219,7 @@ window.MODULE_DATA_MOD5 = {
             Por la Ley de Faraday-Lenz:
             $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -B_0 a v(t) < 0$$
             <strong>Signo y sentido:</strong> Al resultar $\\varepsilon_{ind} < 0$, la corriente circula en sentido opuesto al positivo de la normal (opuesto al antihorario), es decir, en <strong>sentido horario</strong>.<br>
-            <strong>Fundamento con Lenz:</strong> El flujo saliente ($\\\\odot$) está aumentando. Para contrarrestar este incremento, la espira induce un campo magnético propio hacia adentro ($\\\\otimes$), lo que exige corriente en <strong>sentido horario</strong>.
+            <strong>Fundamento con Lenz:</strong> El flujo saliente ($\\odot$) está aumentando. Para contrarrestar este incremento, la espira induce un campo magnético propio hacia adentro ($\\otimes$), lo que exige corriente en <strong>sentido horario</strong>.
           `
         },
         {
@@ -230,8 +230,8 @@ window.MODULE_DATA_MOD5 = {
             Analizamos la fuerza de Lorentz $\\vec{F} = i (\\vec{L} \\times \\vec{B})$ en cada lado de la espira:<br>
             • <strong>Lado frontal (líder):</strong> Está dentro del campo. Al circular en sentido horario, la corriente en este lado viaja hacia abajo ($-\\hat{\\jmath}$):
             $$\\vec{F}_{frontal} = i (-a\\hat{\\jmath}) \\times (B_0\\hat{k}) = -i a B_0 (\\hat{\\jmath}\\times\\hat{k}) = -i a B_0\\,\\hat{\\imath}$$
-            • <strong>Lados superior e inferior:</strong> Transportan corrientes en sentidos opuestos ($+\\hat{\\imath}$ y $-\\hat{\\imath}$), por lo que sus fuerzas magnéticas verticales ($\\\\pm \\hat{\\jmath}$) se anulan exactamente por simetría.<br>
-            • <strong>Lado posterior:</strong> Mientras la espira está ingresando, este lado aún se encuentra fuera del campo magnético ($\\\\vec{B} = 0$), por lo que no experimenta fuerza.<br><br>
+            • <strong>Lados superior e inferior:</strong> Transportan corrientes en sentidos opuestos ($+\\hat{\\imath}$ y $-\\hat{\\imath}$), por lo que sus fuerzas magnéticas verticales ($\\pm \\hat{\\jmath}$) se anulan exactamente por simetría.<br>
+            • <strong>Lado posterior:</strong> Mientras la espira está ingresando, este lado aún se encuentra fuera del campo magnético ($\\vec{B} = 0$), por lo que no experimenta fuerza.<br><br>
             Sustituyendo la corriente $i(t)$, la fuerza neta total sobre la espira es:
             $$\\vec{F}_{neto} = -\\frac{B_0^2 a^2 v(t)}{R}\\,\\hat{\\imath}$$
             La fuerza apunta en $-\\hat{\\imath}$ (opuesta a la velocidad $\\vec{v} = v\\hat{\\imath}$), actuando como una <strong>fuerza neta de frenado</strong>.

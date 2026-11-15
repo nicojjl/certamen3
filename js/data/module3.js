@@ -44,7 +44,7 @@ window.MODULE_DATA_MOD3 = {
         <br>
         <strong>C. Toroide Ideal ($N$ espiras, radios $a < r < b$):</strong>
         Lazo circular concéntrico de radio $r$:
-        $$B(r) = \\begin{cases} 0, & r < a \\\\ \\frac{\\mu_0 N I}{2\\pi r}, & a < r < b \\\\ 0, & r > b \\end{cases}$$
+        $$B(r) = \\begin{cases} 0, & r < a \\cr \\frac{\\mu_0 N I}{2\\pi r}, & a < r < b \\cr 0, & r > b \\end{cases}$$
       </p>
     </div>
 
@@ -277,7 +277,7 @@ window.MODULE_DATA_MOD3 = {
         {
           title: 'Paso 3: Síntesis final de campo en todo el espacio',
           content: `
-            $$\\vec{B}(r, \\phi, z) = \\begin{cases} \\vec{0}, & r < a \\\\ \\frac{\\mu_0 N I}{2\\pi r}\\,\\hat{\\phi}, & a < r < b \\\\ \\vec{0}, & r > b \\end{cases}$$
+            $$\\vec{B}(r, \\phi, z) = \\begin{cases} \\vec{0}, & r < a \\cr \\frac{\\mu_0 N I}{2\\pi r}\\,\\hat{\\phi}, & a < r < b \\cr \\vec{0}, & r > b \\end{cases}$$
             El campo magnético queda estrictamente confinado al interior del volumen del toroide.
           `
         }
