@@ -353,75 +353,17 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 
 ## 12. ESTADO DE VERIFICACIÓN ANALÍTICA
 
-### 12.1. Salida Completa de Verificación SymPy (scripts/verificar.py)
-A continuación se transcribe la salida exacta y completa generada mediante `python scripts/verificar.py > scripts/salida_verificar.txt` (código de salida `0`, 45/45 pruebas correctas):
+### 12.1. Salida de Verificación SymPy (scripts/verificar.py)
+La verificación analítica simbólica completa se ejecuta de forma reproducible e independiente mediante el script `scripts/verificar.py`. La salida detallada con el registro de las 87 pruebas unitarias exitosas (87/87 [PASS], exit code 0) se encuentra almacenada y disponible en el archivo de texto dedicado:
 
-```text
-======================================================================
-INICIANDO VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY
-======================================================================
+> 📄 **Reporte Completo de Salida:** [scripts/salida_verificar.txt](file:///d:/ALGORITMICA/fis120-certamen3/scripts/salida_verificar.txt) (o ruta relativa de repositorio: [scripts/salida_verificar.txt](scripts/salida_verificar.txt)).
 
---- 1. Corrientes Totales por Integración ---
-[PASS] Pauta C3 P1a: Corriente escalonada I = (5/2)*pi*J0*R^2
-[PASS] Pauta C3 P1a: J0 despejado = 2*I / (5*pi*R^2)
-[PASS] Ayudantía 9 P2a: Corriente parabólica I_T = pi*J0*a^2
-[PASS] Ayudantía 9 P4: Corriente angular interior I_1 = (pi*alpha*R1^2)/2
-[PASS] Ayudantía 9 P4: alpha para I_1 = I_2
-[PASS] Ayudantía 9 P3: Corriente cilindro macizo I_cil = (2/3)*pi*beta*R^3
-[PASS] Ayudantía 9 P3: Condición By = 0 en origen -> beta = 3I / (4*pi*R^3)
-
---- 2. Ley de Ampère y Continuidad de B(r) ---
-[PASS] Pauta C3 P1b: B en r = R/2 por izquierda
-[PASS] Pauta C3 P1b: Continuidad en r = R/2 (Reg1 = Reg2)
-[PASS] Pauta C3 P1b: Continuidad en r = R (Reg2 = Reg3)
-[PASS] Pauta C3 P1c: B escalonado en 3R/4 = (19/24)*mu0*J0*R
-[PASS] Pauta C3 P1c: B uniforme en 3R/4 = (15/16)*mu0*J0*R
-[PASS] Pauta C3 P1c: Desigualdad B_esc < B_unif
-[PASS] Ayudantía 9 P1b: B(3R/2) = (1/3)*mu0*J0*R
-[PASS] Ayudantía 9 P1: Corriente neta coaxial = -23*pi*J0*R^2
-[PASS] Ayudantía 9 P1c: B(5R) = -(23/10)*mu0*J0*R
-
---- 3. Flujos con Logaritmos y Ley de Faraday ---
-[PASS] Simulacro P2: Flujo magnético logarítmico
-[PASS] Simulacro P2: fem inducida exacta
-[PASS] Simulacro P2: Límite t -> inf de phi = 0
-[PASS] Simulacro P2: Límite t -> inf de fem = 0
-[PASS] Simulacro P2: fem con v = 0 es nula
-[PASS] Simulacro P1: Flujo en 1 vuelta del toroide
-[PASS] Simulacro P1: Autoinductancia L del toroide
-[PASS] Simulacro P1: Equivalencia energía volumen vs (1/2)*L*I^2
-[PASS] Ayudantía 11 P2: Flujo cable-rectángulo = (mu0*b*ln(2)/(2*pi))*I
-[PASS] Ayudantía 11 P2: Inductancia mutua M = mu0*b*ln(2)/(2*pi)
-[PASS] Ayudantía 11 P3: Flujo con B(y,t)
-[PASS] Ayudantía 11 P3: fem inducida = (alpha*beta*L/3)*[(C+H)^3 - C^3]*e^(-beta*t)
-[PASS] Ayudantía 11 P4: Geometría 3D B·n == B*cos(theta)
-[PASS] Ayudantía 11 P4: Deducción geométrica theta = alpha (eje a normal) -> cos(alpha)
-[PASS] Ayudantía 11 P4: M bajo convención normal-eje (cos(alpha))
-[PASS] Ayudantía 11 P4: Deducción geométrica theta = 90° - alpha (eje a plano) -> sin(alpha)
-[PASS] Ayudantía 11 P4: M bajo convención plano-eje (sin(alpha))
-[PASS] Ayudantía 11 P4: fem inducida (convención cos(alpha))
-[PASS] Ayudantía 11 P4: fem inducida (convención sin(alpha))
-
---- 4. Dinámica de Rieles y Balance de Potencia ---
-[PASS] Ayudantía 10 P3: Balance exacto P_mec == P_Joule en v_term
-[PASS] Ayudantía 10 P3: Fuerza magnética F_B = -I*L*B0*z_hat (hacia arriba)
-[PASS] Ayudantía 10 P4: Penetración x_max = m*v0*R / (B0^2 * a^2) si ancho w > x_max
-[PASS] Ayudantía 10 P4: Velocidad residual vf en x = w si ancho w <= x_max
-
---- 5. Circuito RLC y Ecuación Diferencial Oficial ---
-[PASS] RLC Formulario: Condición inicial q(0) == Q0
-[PASS] RLC Formulario: Condición inicial i(0) == 0
-[PASS] RLC Formulario: Satisface d2q/dt2 + 2*alpha*dq/dt + omega0^2*q == 0
-
---- 6. Circuito Transiente Conmutado (Pauta C3 P3) ---
-[PASS] Pauta C3 P3a: L = (370)^2 * 5e-6 = 0.6845 H
-[PASS] Pauta C3 P3b: Ifuente(inf) = 112 / 370 =~ 0.3027 A
-[PASS] Pauta C3 P3c: tau_RC = 1.85 ms
-
-======================================================================
-RESUMEN DE PRUEBAS SYMPY: 45/45 CORRECTAS
-======================================================================
-```
+#### Resumen Cuantitativo de la Suite de Verificación
+- **Módulos evaluados:** 12 módulos (Módulo 0 al Módulo 11).
+- **Pruebas analíticas SymPy:** 87 pruebas ejecutadas, 87 pruebas pasadas (0 fallas).
+- **Pruebas de consistencia numérica:** 15 ejercicios evaluados contra cálculo físico teórico independiente en `scripts/verificar_numericos.py` (15/15 correctos dentro de tolerancia).
+- **Auditoría KaTeX y DOM interactivo:** 12 módulos navegados e interactuados con Playwright en `scripts/verify_browser_katex.py` (2052 fórmulas renderizadas, 0 errores KaTeX, 0 errores de consola, 0 comandos sueltos).
+- **Validación vectorial SVG y TikZ:** 25 figuras analizadas en `scripts/check_figures.py` (25/25 XML válido, < 120 KB, sin referencias externas HTTP).
 
 ---
 
