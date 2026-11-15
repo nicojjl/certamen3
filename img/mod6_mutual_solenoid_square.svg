@@ -91,7 +91,7 @@
 <use x='89.08' y='22.59' xlink:href='#g4-108'/>
 </g>
 <g fill='none' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
-<path d='m-60.58 22.59h181.42' stroke='#b3b3b3' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m-60.58 22.59h181.42' stroke='currentColor' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <path d='m-43.57-5.76h147.41' stroke="currentColor" stroke-width='.8'/>
 <path d='m-43.57 50.93h147.41' stroke="currentColor" stroke-width='.8'/>
 </g>
@@ -105,7 +105,7 @@
 <use x='34.56' y='22.59' xlink:href='#g5-1'/>
 <use x='38.98' y='22.59' xlink:href='#g5-1'/>
 </g>
-<g stroke='#4ea9d8' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
+<g stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
 <path d='m-37.9 50.93l11.34-56.69'/>
 <path d='m-20.89 50.93l11.34-56.69'/>
 <path d='m-3.89 50.93l11.34-56.69'/>

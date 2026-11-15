@@ -90,9 +90,9 @@
 </defs>
 <g id='page1'>
 <g fill='none' stroke-linecap='round' stroke-linejoin='round'>
-<path d='m-31.53 28.87h181.42' stroke='#bfbfbf' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m-31.53 28.87h181.42' stroke='currentColor' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <g stroke-miterlimit='10'>
-<path d='m59.18 119.58v-181.42' stroke='#bfbfbf' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m59.18 119.58v-181.42' stroke='currentColor' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <g stroke="currentColor">
 <path d='m125.8 28.87c0-36.79-29.82-66.62-66.62-66.62s-66.61 29.82-66.61 66.62s29.82 66.61 66.61 66.61s66.62-29.82 66.62-66.61z' stroke-width='.8'/>
 <path d='m127.21 28.87c0-37.57-30.46-68.03-68.03-68.03s-68.03 30.46-68.03 68.03s30.46 68.03 68.03 68.03s68.03-30.46 68.03-68.03z' stroke-width='1.2'/>

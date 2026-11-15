@@ -177,8 +177,8 @@ const App = {
     // Render KaTeX math
     this.renderMathInElement(container);
 
-    // Keep native <img> tags for figures to support naturalWidth validation and vector rendering
-    // this.inlineSVGs(container);
+    // Inline SVGs for seamless dark/light mode CSS styling
+    this.inlineSVGs(container);
 
     // Initialize interactive widget if any
     if (dataObj.hasInteractive) {
@@ -286,14 +286,14 @@ const App = {
   },
 
   inlineSVGs(container) {
-    if (!container) return;
+    if (!container) return Promise.resolve();
     const figureBoxes = container.querySelectorAll('.figure-container[data-svg-src], .figure-container');
-    figureBoxes.forEach(box => {
+    const promises = Array.from(figureBoxes).map(box => {
       const img = box.querySelector('img');
       const src = box.getAttribute('data-svg-src') || (img ? img.getAttribute('src') : null);
-      if (!src || !src.endsWith('.svg')) return;
+      if (!src || !src.endsWith('.svg')) return Promise.resolve();
 
-      fetch(src)
+      return fetch(src)
         .then(res => {
           if (!res.ok) throw new Error(`HTTP error ${res.status}`);
           return res.text();
@@ -309,12 +309,14 @@ const App = {
             if (currentImg) {
               currentImg.replaceWith(svgEl);
             }
+            box.setAttribute('data-svg-inlined', 'true');
           }
         })
-        .catch(() => {
-          // Fallback silencioso: <img> permanece visible
+        .catch(err => {
+          console.warn('SVG inlining error:', src, err);
         });
     });
+    return Promise.all(promises);
   },
 
   setupEventListeners() {

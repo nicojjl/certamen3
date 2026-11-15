@@ -76,15 +76,15 @@
 <path id='g0-0' d='m4.76-1.34c.1 0 .25 0 .25-.16s-.15-.16-.25-.16h-3.77c-.1 0-.25 0-.25 .16s.15 .16 .25 .16h3.77z'/>
 </defs>
 <g id='page1'>
-<path d='m-18.3 47.61h186.58' stroke='#595959' fill='none' stroke-width='.8' stroke-linecap='round' stroke-linejoin='round'/>
+<path d='m-18.3 47.61h186.58' stroke='currentColor' fill='none' stroke-width='.8' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m172.82 47.61c-.55-.14-3-.92-4.54-1.77v3.54c1.53-.85 3.98-1.63 4.54-1.77z' fill='#595959'/>
-<path d='m172.82 47.61c-.55-.14-3-.92-4.54-1.77v3.54c1.53-.85 3.98-1.63 4.54-1.77z' stroke='#595959' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round'/>
+<path d='m172.82 47.61c-.55-.14-3-.92-4.54-1.77v3.54c1.53-.85 3.98-1.63 4.54-1.77z' stroke='currentColor' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round'/>
 <g fill='#595959' transform='translate(100.1 2.14)'>
 <use x='78.08' y='47.61' xlink:href='#g6-120'/>
 </g>
-<path d='m78.08 143.98v-186.58' stroke='#595959' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
+<path d='m78.08 143.98v-186.58' stroke='currentColor' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m78.08-47.13c-.14 .55-.92 3-1.77 4.54h3.54c-.85-1.53-1.63-3.98-1.77-4.54z' fill='#595959'/>
-<path d='m78.08-47.13c-.14 .55-.92 3-1.77 4.54h3.54c-.85-1.53-1.63-3.98-1.77-4.54z' stroke='#595959' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round'/>
+<path d='m78.08-47.13c-.14 .55-.92 3-1.77 4.54h3.54c-.85-1.53-1.63-3.98-1.77-4.54z' stroke='currentColor' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round'/>
 <g fill='#595959' transform='translate(-2.62 -102.04)'>
 <use x='78.08' y='47.61' xlink:href='#g6-121'/>
 </g>

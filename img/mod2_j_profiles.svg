@@ -95,11 +95,11 @@
 <g transform='translate(-8.5 9.94)'>
 <use x='41.79' y='57.01' xlink:href='#g6-48'/>
 </g>
-<path d='m155.18 57.01v-90.71' stroke='#808080' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<path d='m155.18 57.01v-90.71' stroke='currentColor' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
 <g transform='translate(110.75 7.81)'>
 <use x='41.79' y='57.01' xlink:href='#g5-97'/>
 </g>
-<path d='m41.79 23h113.39' stroke='#595959' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<path d='m41.79 23h113.39' stroke='currentColor' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
 <g fill='#595959' transform='translate(117.11 -32.02)'>
 <use x='41.79' y='57.01' xlink:href='#g4-85'/>
 <use x='48.13' y='57.01' xlink:href='#g4-110'/>

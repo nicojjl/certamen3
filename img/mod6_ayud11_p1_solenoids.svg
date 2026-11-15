@@ -70,15 +70,15 @@
 <path d='m129.7 119.37c0 9.39-30.46 17.01-68.03 17.01s-68.04-7.61-68.04-17.01'/>
 </g>
 <g fill='none' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
-<path d='m-6.37 119.37c0-9.39 30.46-17.01 68.04-17.01s68.03 7.61 68.03 17.01' stroke='#b3b3b3' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
-<path d='m38.99 119.37v-124.73' stroke='#359dd2' stroke-width='1.2'/>
-<path d='m84.34 119.37v-124.73' stroke='#359dd2' stroke-width='1.2'/>
+<path d='m-6.37 119.37c0-9.39 30.46-17.01 68.04-17.01s68.03 7.61 68.03 17.01' stroke='currentColor' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m38.99 119.37v-124.73' stroke='var(--fig-azul, #0369a1)' stroke-width='1.2'/>
+<path d='m84.34 119.37v-124.73' stroke='var(--fig-azul, #0369a1)' stroke-width='1.2'/>
 </g>
 <path d='m84.34-5.36c0-3.45-10.15-6.23-22.68-6.23s-22.68 2.79-22.68 6.23s10.15 6.24 22.68 6.24s22.68-2.79 22.68-6.24z' fill='#d9edf7'/>
 <g fill='none' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
-<path d='m84.34-5.36c0-3.45-10.15-6.23-22.68-6.23s-22.68 2.79-22.68 6.23s10.15 6.24 22.68 6.24s22.68-2.79 22.68-6.24z' stroke='#359dd2' stroke-width='1.2'/>
-<path d='m84.34 119.37c0 3.45-10.15 6.23-22.68 6.23s-22.68-2.79-22.68-6.23' stroke='#359dd2' stroke-width='1.2'/>
-<path d='m38.99 119.37c0-3.45 10.15-6.23 22.68-6.23s22.68 2.79 22.68 6.23' stroke='#67b5dd' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m84.34-5.36c0-3.45-10.15-6.23-22.68-6.23s-22.68 2.79-22.68 6.23s10.15 6.24 22.68 6.24s22.68-2.79 22.68-6.24z' stroke='var(--fig-azul, #0369a1)' stroke-width='1.2'/>
+<path d='m84.34 119.37c0 3.45-10.15 6.23-22.68 6.23s-22.68-2.79-22.68-6.23' stroke='var(--fig-azul, #0369a1)' stroke-width='1.2'/>
+<path d='m38.99 119.37c0-3.45 10.15-6.23 22.68-6.23s22.68 2.79 22.68 6.23' stroke='var(--fig-azul, #0369a1)' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <path d='m84.34 45.67c0 3.45-10.15 6.24-22.68 6.24s-22.68-2.79-22.68 3.13' stroke="var(--fig-azul, #0369a1)" stroke-width='1.59'/>
 </g>
 <path d='m38.99 48.96c-.19 .75-1.26 4.03-2.42 6.08h4.84c-1.16-2.05-2.23-5.33-2.42-6.08z' fill="var(--fig-azul, #0369a1)"/>

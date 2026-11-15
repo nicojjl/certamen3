@@ -83,7 +83,7 @@
 <path d='m.7-40.37v107.72'/>
 <path d='m57.4-40.37v107.72'/>
 </g>
-<g stroke='#359dd2' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
+<g stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
 <path d='m18.28-20.52c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z'/>
 <path d='m12.61-18.26l4.54-4.54'/>
 <path d='m12.61-22.79l4.54 4.54'/>

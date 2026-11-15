@@ -183,11 +183,11 @@
 <use x='140' y='24.93' xlink:href='#g6-107'/>
 <use x='145.5' y='24.93' xlink:href='#g8-41'/>
 </g>
-<path d='m130.78 87.29v-62.36' stroke='#808080' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<path d='m130.78 87.29v-62.36' stroke='currentColor' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
 <g fill='#808080' transform='translate(60.11 -3.52)'>
 <use x='68.42' y='24.93' xlink:href='#g3-97'/>
 </g>
-<path d='m130.78 87.29h-62.36' stroke='#808080' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<path d='m130.78 87.29h-62.36' stroke='currentColor' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
 <g fill='#808080' transform='translate(-14.6 64.36)'>
 <use x='68.42' y='24.93' xlink:href='#g1-0'/>
 <use x='75' y='24.93' xlink:href='#g3-97'/>

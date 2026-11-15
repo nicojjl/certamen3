@@ -52,9 +52,9 @@
 </defs>
 <g id='page1'>
 <g fill='none' stroke-linecap='round' stroke-linejoin='round'>
-<path d='m-61.84 17.53h158.74' stroke='#bfbfbf' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m-61.84 17.53h158.74' stroke='currentColor' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <g stroke-miterlimit='10'>
-<path d='m17.53 96.9v-158.74' stroke='#bfbfbf' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
+<path d='m17.53 96.9v-158.74' stroke='currentColor' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <path d='m79.89 17.53c0-34.44-27.92-62.36-62.36-62.36s-62.36 27.92-62.36 62.36s27.92 62.36 62.36 62.36s62.36-27.92 62.36-62.36z' stroke="currentColor" stroke-width='1.2'/>
 <path d='m71.54-13.65c-6.4-11.08-16.05-19.93-19.16-21.38' stroke="var(--fig-azul, #0369a1)" stroke-width='1.59'/>
 </g>

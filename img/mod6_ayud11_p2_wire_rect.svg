@@ -104,7 +104,7 @@
 <use x='61.48' y='38.32' xlink:href='#g8-61'/>
 <use x='65.57' y='38.32' xlink:href='#g8-28'/>
 </g>
-<g stroke='#67b5dd' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
+<g stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'>
 <path d='m34.77 87.29c0-1.72-1.4-3.12-3.12-3.12s-3.12 1.39-3.12 3.12s1.39 3.12 3.12 3.12s3.12-1.39 3.12-3.12z'/>
 <path d='m29.66 89.28l3.97-3.97'/>
 <path d='m29.66 85.31l3.97 3.97'/>

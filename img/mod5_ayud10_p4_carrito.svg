@@ -79,7 +79,7 @@
 <g transform='translate(-11.4 10.33)'>
 <use x='34.74' y='24.93' xlink:href='#g7-79'/>
 </g>
-<path d='m34.74 84.46v-127.56' stroke='#b3b3b3' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<path d='m34.74 84.46v-127.56' stroke='currentColor' fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
 <path d='m60.82 70.29c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m59.01 70.29c0-.88-.71-1.59-1.59-1.59s-1.59 .71-1.59 1.59s.71 1.59 1.59 1.59s1.59-.71 1.59-1.59z' fill="var(--fig-azul, #0369a1)"/>
 <path d='m60.82 47.61c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
