@@ -28,13 +28,13 @@ AUDITORÍA VISUAL AUTOMÁTICA Y VALIDACIÓN VECTORIAL DE FIGURAS SVG
 [PASS] mod3_toroid_simulacro.svg         ( 26.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (13 textos)
 [PASS] mod4_ayud10_p1_rotating.svg       ( 27.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
 [PASS] mod4_ayud10_p2_concentric.svg     ( 14.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (6 textos)
-[PASS] mod4_ayud11_p3_spacetime.svg      ( 24.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
+[PASS] mod4_ayud11_p3_spacetime.svg      ( 24.9 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
 [PASS] mod4_faraday_moving_loop.svg      ( 24.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (10 textos)
 [PASS] mod5_ayud10_p4_carrito.svg        ( 27.2 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
 [PASS] mod5_motional_emf_rails.svg       ( 18.1 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (8 textos)
-[PASS] mod6_ayud11_p1_solenoids.svg      ( 18.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
+[PASS] mod6_ayud11_p1_solenoids.svg      ( 18.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
 [PASS] mod6_ayud11_p2_wire_rect.svg      ( 29.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (10 textos)
-[PASS] mod6_mutual_solenoid_square.svg   ( 29.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
+[PASS] mod6_mutual_solenoid_square.svg   ( 29.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
 [PASS] mod6_pauta_p2_rollo.svg           ( 32.3 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (8 textos)
 [PASS] mod6_solenoid_tilted_loop.svg     ( 39.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (11 textos)
 [PASS] mod6_transformador.svg            ( 40.4 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (5 textos)
@@ -44,3 +44,10 @@ AUDITORÍA VISUAL AUTOMÁTICA Y VALIDACIÓN VECTORIAL DE FIGURAS SVG
 ===========================================================================
 RESUMEN AUDITORÍA DE FIGURAS: 25/25 CORRECTAS (0 FALLAS)
 ===========================================================================
+
+--- Contadores de Auditoría Vectorial y Accesibilidad ---
+TOTAL_FIGURAS: 25/25
+RECORTE: 25/25
+SOLAPAMIENTO: 25/25
+CONTRASTE: 10/10
+RATIO_MIN_CONTRASTE: 4.83:1

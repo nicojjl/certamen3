@@ -362,15 +362,15 @@ La verificación analítica simbólica completa se ejecuta de forma reproducible
 <!-- TABLA_RESUMEN_INICIO -->
 | Dimensión de Verificación | Componente / Herramienta | Cobertura y Métricas Clave | Estado |
 | :--- | :--- | :---: | :---: |
-| **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **89 / 89** comprobaciones analíticas aprobadas | **0 Fallas (Exit 0)** |
-| **Consistencia Numérica** | `scripts/verificar_numericos.py` (Tolerancia estricta) | **15 / 15** ejercicios numéricos teóricamente exactos | **Exacto (Exit 0)** |
-| **Renderizado Matemático** | `scripts/verify_browser_katex.py` (Chromium Headless) | **2223** fórmulas KaTeX renderizadas | **0 Errores / 0 Sueltos** |
-| **Visibilidad de Soluciones** | Pasos `.step-box`, `.feedback-box`, pistas y pautas | **158 / 158** cajas interactivas visibles tras `revealAll` | **0 Ocultos tras revelado** |
-| **Carga de Figuras en Web** | Figuras de ejercicios (`img.naturalWidth > 0`) | **31 / 31** imágenes cargadas correctamente | **0 Imágenes rotas** |
-| **Validación Vectorial SVG** | `scripts/check_figures.py` (< 120 KB, XML, TeX fuente) | **25 / 25** figuras vectoriales validadas | **Válido (Exit 0)** |
-| **Control de Recorte y ViewBox** | Detección geométrica de límites y márgenes | **25 / 25** figuras con margen seguro en viewBox | **0 Recortes de trazo/glifo** |
-| **Solapamiento de Textos** | Análisis de colisión de bounding boxes en SVGs | **25 / 25** figuras con etiquetas separadas | **0 Colisiones de texto** |
-| **Contraste Accesible WCAG AA** | Paletas de color clara (`#ffffff`) y oscura (`#0f172a`) | **Ratio $\ge 4.5:1$** en todos los modos | **Accesible WCAG AA** |
+| **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **89 / 89** comprobaciones analíticas aprobadas | ✅ 0 Fallas (Exit 0) |
+| **Consistencia Numérica** | `scripts/verificar_numericos.py` (Tolerancia estricta) | **15 / 15** ejercicios numéricos teóricamente exactos | ✅ Exacto (Exit 0) |
+| **Renderizado Matemático** | `scripts/verify_browser_katex.py` (Chromium Headless) | **2223 / 2223** fórmulas KaTeX renderizadas sin error | ✅ 0 Errores / 0 Sueltos |
+| **Visibilidad de Soluciones** | Pasos `.step-box`, `.feedback-box`, pistas y pautas | **158 / 158** cajas interactivas visibles tras `revealAll` | ✅ 0 Ocultos tras revelado |
+| **Carga de Figuras en Web** | Figuras de ejercicios (inlined `<svg>` en DOM) | **31 / 31** figuras validadas con `width > 0` y trazo | ✅ 0 Figuras rotas |
+| **Validación Vectorial SVG** | `scripts/check_figures.py` (< 120 KB, XML, TeX fuente) | **25 / 25** figuras vectoriales validadas | ✅ Válido (Exit 0) |
+| **Control de Recorte y ViewBox** | Detección geométrica de límites y márgenes | **25 / 25** figuras con margen seguro en viewBox | ✅ 0 Recortes de trazo/glifo |
+| **Solapamiento de Textos** | Análisis de colisión de bounding boxes en SVGs | **25 / 25** figuras sin colisión de etiquetas | ✅ 0 Colisiones de texto |
+| **Contraste de Paleta** | Paletas de color clara (`#ffffff`) y oscura (`#0f172a`) | **10 / 10** verificadas (Ratio mín: **4.83:1**) | ✅ Ratio 4.83:1 ≥ 4.5:1 |
 <!-- TABLA_RESUMEN_FIN -->
 
 ---

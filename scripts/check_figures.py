@@ -35,7 +35,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.environ.get("IMG_DIR") or (sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith('-') else os.path.join(BASE_DIR, 'img'))
 TEX_DIR = os.path.join(BASE_DIR, 'scripts', 'figuras_tex')
 PREVIEW_DIR = os.path.join(IMG_DIR, '_preview')
-OUTPUT_REPORT = os.path.join(BASE_DIR, 'scripts', 'salida_figuras.txt')
+OUTPUT_REPORT = os.environ.get("FIGURES_REPORT") or os.path.join(BASE_DIR, 'scripts', 'salida_figuras.txt')
 
 os.makedirs(PREVIEW_DIR, exist_ok=True)
 MAX_SIZE_BYTES = 120 * 1024  # 120 KB
@@ -138,16 +138,28 @@ def validate_all_figures():
 
     log("\n--- Comprobación de Ratios de Contraste WCAG AA (Mínimo 4.5:1) ---")
     contrast_errors = []
+    contrast_passed = 0
+    contrast_total = len(light_palette) + len(dark_palette)
+    min_palette_ratio = 999.0
+
     for name, fg, bg in light_palette:
         cr = contrast_ratio(fg, bg)
+        if cr < min_palette_ratio:
+            min_palette_ratio = cr
         status = "PASS" if cr >= 4.5 else "FAIL"
+        if cr >= 4.5:
+            contrast_passed += 1
         log(f"  [Modo Claro]  {name:15} ({fg} vs {bg}): {cr:5.2f}:1 -> [{status}]")
         if cr < 4.5:
             contrast_errors.append(f"Modo Claro {name} ({fg}): {cr:.2f}:1 < 4.5:1")
 
     for name, fg, bg in dark_palette:
         cr = contrast_ratio(fg, bg)
+        if cr < min_palette_ratio:
+            min_palette_ratio = cr
         status = "PASS" if cr >= 4.5 else "FAIL"
+        if cr >= 4.5:
+            contrast_passed += 1
         log(f"  [Modo Oscuro] {name:15} ({fg} vs {bg}): {cr:5.2f}:1 -> [{status}]")
         if cr < 4.5:
             contrast_errors.append(f"Modo Oscuro {name} ({fg}): {cr:.2f}:1 < 4.5:1")
@@ -159,12 +171,16 @@ def validate_all_figures():
         failures.extend(contrast_errors)
 
     log("\n--- Comprobación Geométrica, Renderizado PNG y Control de Recorte por Figura ---")
+    recorte_passed = 0
+    solapamiento_passed = 0
 
     for svg_path in svg_files:
         fname = os.path.basename(svg_path)
         base_name, _ = os.path.splitext(fname)
         tex_path = os.path.join(TEX_DIR, f"{base_name}.tex")
         errors = []
+        has_clipping_error = False
+        has_overlap_error = False
 
         # 1. Existencia del fuente TeX
         if not os.path.exists(tex_path):
@@ -230,8 +246,10 @@ def validate_all_figures():
                 if r.x0 < -0.5 or r.y0 < -0.5 or r.x1 > p_rect.x1 + 0.5 or r.y1 > p_rect.y1 + 0.5:
                     clipped.append(r)
             if clipped:
+                has_clipping_error = True
                 errors.append(f"{len(clipped)} trazos/glifos tocan o exceden el viewBox ({p_rect})")
         except Exception as e:
+            has_clipping_error = True
             errors.append(f"Error analizando límites de viewBox: {e}")
 
         # 7. Detección de solapamiento de bounding boxes de texto
@@ -247,9 +265,16 @@ def validate_all_figures():
                         if (c1[0] < c2[2] and c1[2] > c2[0] and c1[1] < c2[3] and c1[3] > c2[1]):
                             overlaps.append((c1, c2))
                 if overlaps:
+                    has_overlap_error = True
                     errors.append(f"{len(overlaps)} colisión(es) de solapamiento entre bounding boxes de texto")
             except Exception as e:
+                has_overlap_error = True
                 errors.append(f"Error comprobando solapamiento de texto: {e}")
+
+        if not has_clipping_error:
+            recorte_passed += 1
+        if not has_overlap_error:
+            solapamiento_passed += 1
 
         if errors:
             msg = f"[FAIL] {fname:33} ({size_kb:5.1f} KB): {'; '.join(errors)}"
@@ -262,6 +287,12 @@ def validate_all_figures():
     log("\n" + "=" * 75)
     log(f"RESUMEN AUDITORÍA DE FIGURAS: {passed}/{total} CORRECTAS (0 FALLAS)")
     log("=" * 75)
+    log("\n--- Contadores de Auditoría Vectorial y Accesibilidad ---")
+    log(f"TOTAL_FIGURAS: {passed}/{total}")
+    log(f"RECORTE: {recorte_passed}/{total}")
+    log(f"SOLAPAMIENTO: {solapamiento_passed}/{total}")
+    log(f"CONTRASTE: {contrast_passed}/{contrast_total}")
+    log(f"RATIO_MIN_CONTRASTE: {min_palette_ratio:.2f}:1")
 
     # Validación contra scripts/esperados.json
     esperados_path = os.path.join(BASE_DIR, 'scripts', 'esperados.json')
