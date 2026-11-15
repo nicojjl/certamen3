@@ -7,3 +7,10 @@
 # Python cache
 __pycache__/
 *.pyc
+
+# Referencias del curso (PDFs y material de estudio local)
+referencias/
+
+# Artefactos de inspección visual y vistas previas generadas
+scripts/inspeccion_png/
+img/_preview/
