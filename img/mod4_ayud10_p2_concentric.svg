@@ -4,6 +4,7 @@
 <style>
   :root {
     color: #1f2937;
+    fill: currentColor;
     --fig-azul: #0284c7;
     --fig-rojo: #dc2626;
     --fig-verde: #16a34a;
@@ -12,6 +13,7 @@
   @media (prefers-color-scheme: dark) {
     :root {
       color: #f8fafc;
+      fill: currentColor;
       --fig-azul: #38bdf8;
       --fig-rojo: #f87171;
       --fig-verde: #4ade80;
@@ -20,6 +22,7 @@
   }
   [data-theme="dark"] svg, .dark-mode svg {
     color: #f8fafc;
+    fill: currentColor;
     --fig-azul: #38bdf8;
     --fig-rojo: #f87171;
     --fig-verde: #4ade80;
