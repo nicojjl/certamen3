@@ -365,6 +365,21 @@ def main():
     print(f"RESUMEN FINAL DE CONSISTENCIA NUMÉRICA: {passed_numerical}/{total_numerical} CORRECTOS")
     print("=" * 75)
 
+    # Validación contra scripts/esperados.json
+    esperados_path = os.path.join(BASE_DIR, 'scripts', 'esperados.json')
+    if os.path.exists(esperados_path):
+        try:
+            import json
+            with open(esperados_path, 'r', encoding='utf-8') as f_esp:
+                esp_data = json.load(f_esp)
+            exp_num = esp_data.get('ejercicios_numericos_total')
+            if exp_num is not None and total_numerical != exp_num:
+                msg = f"Conteo de ejercicios numéricos ({total_numerical}) no coincide con el valor esperado ({exp_num}) en scripts/esperados.json"
+                print(f"[FAIL] {msg}")
+                failures.append(msg)
+        except Exception as e:
+            print(f"[WARN] No se pudo leer {esperados_path}: {e}")
+
     if missing_formulas:
         print("\nEJERCICIOS NUMÉRICOS SIN FÓRMULA REGISTRADA:")
         for mf in missing_formulas:

@@ -263,6 +263,21 @@ def validate_all_figures():
     log(f"RESUMEN AUDITORÍA DE FIGURAS: {passed}/{total} CORRECTAS (0 FALLAS)")
     log("=" * 75)
 
+    # Validación contra scripts/esperados.json
+    esperados_path = os.path.join(BASE_DIR, 'scripts', 'esperados.json')
+    if os.path.exists(esperados_path):
+        try:
+            import json
+            with open(esperados_path, 'r', encoding='utf-8') as f_esp:
+                esp_data = json.load(f_esp)
+            exp_figs = esp_data.get('figuras_svg_total')
+            if exp_figs is not None and total != exp_figs:
+                msg = f"[FAIL] Conteo de figuras SVG ({total}) no coincide con el valor esperado ({exp_figs}) en scripts/esperados.json"
+                log(msg)
+                failures.append(msg)
+        except Exception as e:
+            log(f"[WARN] No se pudo leer {esperados_path}: {e}")
+
     # Escribir reporte en UTF-8 sin BOM
     with open(OUTPUT_REPORT, 'w', encoding='utf-8', newline='\n') as f:
         f.write("\n".join(lines) + "\n")

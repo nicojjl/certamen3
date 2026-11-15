@@ -8,6 +8,10 @@ Genera scripts/salida_verificar.txt directamente en UTF-8 sin BOM.
 
 import os
 import sys
+import glob
+import re
+import json
+import argparse
 import sympy as sp
 
 # Configuración de codificación UTF-8 sin BOM para stdout
@@ -16,8 +20,9 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(BASE_DIR, 'scripts', 'salida_verificar.txt')
+ESPERADOS_PATH = os.path.join(BASE_DIR, 'scripts', 'esperados.json')
 
-def verify_all():
+def verify_all(actualizar_esperados=False):
     lines_buffer = []
 
     def log(msg=""):
@@ -474,10 +479,40 @@ def verify_all():
 
     print(f"\n[INFO] Archivo escrito exitosamente en UTF-8 sin BOM: scripts/salida_verificar.txt")
 
+    # Manejo de scripts/esperados.json
+    if actualizar_esperados:
+        svg_files = glob.glob(os.path.join(BASE_DIR, 'img', '*.svg'))
+        num_count = 0
+        for f in glob.glob(os.path.join(BASE_DIR, 'js', 'data', 'module*.js')):
+            with open(f, 'r', encoding='utf-8') as fp:
+                num_count += len(re.findall(r'type\s*:\s*[\'\"]numerical[\'\"]', fp.read()))
+        
+        esperados_data = {
+            "verificar_sympy_pass": passed,
+            "ejercicios_numericos_total": num_count,
+            "figuras_svg_total": len(svg_files)
+        }
+        with open(ESPERADOS_PATH, 'w', encoding='utf-8', newline='\n') as f_esp:
+            json.dump(esperados_data, f_esp, indent=2, ensure_ascii=False)
+            f_esp.write('\n')
+        print(f"[INFO] Archivo {ESPERADOS_PATH} actualizado exitosamente:")
+        print(json.dumps(esperados_data, indent=2))
+    elif os.path.exists(ESPERADOS_PATH):
+        with open(ESPERADOS_PATH, 'r', encoding='utf-8') as f_esp:
+            esperados_data = json.load(f_esp)
+        exp_pass = esperados_data.get("verificar_sympy_pass")
+        if exp_pass is not None and passed != exp_pass:
+            msg = f"[FAIL] Conteo de pruebas SymPy ({passed}) no coincide con el valor exacto esperado ({exp_pass}) en scripts/esperados.json"
+            print(msg)
+            failures.append(msg)
+
     if failures:
         sys.exit(1)
     else:
         sys.exit(0)
 
 if __name__ == '__main__':
-    verify_all()
+    parser = argparse.ArgumentParser(description="Verificación Analítica Independiente con SymPy")
+    parser.add_argument('--actualizar-esperados', action='store_true', help="Actualiza scripts/esperados.json con los conteos exactos")
+    args = parser.parse_args()
+    verify_all(actualizar_esperados=args.actualizar_esperados)
