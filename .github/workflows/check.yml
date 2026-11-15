@@ -46,26 +46,30 @@ jobs:
       - name: 4. Ejecutar Verificación de Consistencia Numérica
         run: |
           python scripts/verificar_numericos.py
-          python -c "import json, sys; sys.path.insert(0, '.'); from scripts.verificar_numericos import NUMERICAL_REGISTRY; exp = json.load(open('scripts/esperados.json', encoding='utf-8')); actual = len(NUMERICAL_REGISTRY); expected = exp['ejercicios_numericos_total']; print(f'Ejercicios numéricos: {actual} / esperados: {expected}'); sys.exit(0 if actual == expected else 1)"
+          python -c "import json, sys; sys.path.insert(0, '.'); from scripts.verificar_numericos import NUMERICAL_REGISTRY; exp = json.load(open('scripts/esperados.json', encoding='utf-8')); actual = len(NUMERICAL_REGISTRY); expected = exp['ejercicios_numericos_total']; print(f'Ejercicios numéricos: {actual} / esperadas: {expected}'); sys.exit(0 if actual == expected else 1)"
 
-      - name: 5. Ejecutar Suite de Pruebas de Mutación
-        run: |
-          python scripts/test_mutacion.py
-
-      - name: 6. Iniciar Servidor HTTP Local
+      - name: 5. Iniciar Servidor HTTP Local
         run: |
           python -m http.server 8080 &
           sleep 2
 
-      - name: 7. Ejecutar Auditoría KaTeX y DOM en Navegador (Playwright Headless)
+      - name: 6. Ejecutar Auditoría KaTeX y DOM en Navegador (Playwright Headless)
         run: |
           python scripts/verify_browser_katex.py --port 8080
 
-      - name: 8. Generar Tabla Resumen Automatizada en NOTAS_REVISION.md
+      - name: 7. Validar Contraste y Renderizado de Figuras SVG en Modo Claro y Oscuro
+        run: |
+          python scripts/verify_figures_contrast.py 8080
+
+      - name: 8. Ejecutar Suite de Pruebas de Mutación
+        run: |
+          python scripts/test_mutacion.py
+
+      - name: 9. Generar Tabla Resumen Automatizada en NOTAS_REVISION.md
         run: |
           python scripts/generar_resumen.py
 
-      - name: 9. Subir Reportes de Verificación como Artefactos
+      - name: 10. Subir Reportes de Verificación como Artefactos
         uses: actions/upload-artifact@v4
         if: always()
         with:
