@@ -25,6 +25,11 @@ window.MODULE_DATA_MOD9 = {
       </p>
     </div>
 
+    <div class="figure-container">
+      <img src="img/mod9_rlc_circuit.svg" alt="Circuito RLC serie oscilante">
+      <div class="figure-caption">Circuito RLC serie oscilante con capacitor $C$, resistencia $R$ e inductancia $L$.</div>
+    </div>
+
     <div class="box-method">
       <strong>2. Clasificación de Regímenes de Amortiguamiento (Formulario C3):</strong>
       <table style="width: 100%; border-collapse: collapse; margin-top: 0.6rem; font-size: 0.95rem;">
@@ -196,6 +201,8 @@ window.MODULE_DATA_MOD9 = {
       level: 'certamen',
       source: 'Pauta Certamen / Formulario C3 (oficial)',
       type: 'step_by_step',
+      figure: 'img/mod9_rlc_circuit.svg',
+      figureCaption: 'Circuito RLC serie oscilante con amortiguamiento subamortiguado.',
       statement: `
         Considere un circuito RLC serie con $L = 0.50\\text{ H}$, $C = 2.0\\,\\mu\\text{F} = 2.0 \\times 10^{-6}\\text{ F}$ y $R = 200\\,\\Omega$. En $t = 0$, el capacitor tiene carga $Q_0 = 40.0\\,\\mu\\text{C}$ y no circula corriente.<br>
         a) Demuestre que el circuito es subamortiguado.<br>

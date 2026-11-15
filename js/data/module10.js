@@ -202,6 +202,8 @@ window.MODULE_DATA_MOD10 = {
       level: 'certamen',
       source: 'Simulacro C3 Pregunta Conceptual c',
       type: 'step_by_step',
+      figure: 'img/mod10_maxwell_capacitor.svg',
+      figureCaption: 'Vista frontal de placa de radio $R$ y lazo amperiano coaxial de radio $r < R$.',
       statement: `
         Entre las placas circulares de radio $R$ del condensador en proceso de carga con corriente $I(t)$, calcule el vector campo magnético a una distancia radial $r < R$ del eje central en función de $I(t), r$ y $R$. Indique su orientación azimutal y su sentido relativo a $\\vec{E}$ y a $\\frac{\\partial\\vec{E}}{\\partial t}$.
       `,
