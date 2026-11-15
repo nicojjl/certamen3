@@ -7,7 +7,7 @@ Plataforma web de estudio interactiva, estática y ultra-minimalista, orientada 
 
 ## 🚀 Demo en Vivo (GitHub Pages)
 Una vez activado GitHub Pages en la rama `main` (directorio raíz `/`), el sitio está disponible en:
-👉 **[https://nicojjl.github.io/fis120-certamen3/](https://nicojjl.github.io/fis120-certamen3/)**
+👉 **[https://nicojjl.github.io/certamen3/](https://nicojjl.github.io/certamen3/)**
 
 ---
 
