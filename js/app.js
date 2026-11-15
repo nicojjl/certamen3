@@ -258,6 +258,9 @@ const App = {
     container.querySelectorAll('.step-controls button').forEach(btn => {
       btn.textContent = 'Solución Completa Visible';
     });
+
+    // 5. Renderizar fórmulas matemáticas en todos los elementos recién revelados
+    this.renderMathInElement(container);
   },
 
   renderMathInElement(el) {
