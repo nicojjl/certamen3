@@ -120,41 +120,42 @@ window.MODULE_DATA_MOD6 = {
     },
     {
       id: 'm6_ex5',
-      title: 'Bobinas Concéntricas y Corriente Armónica',
+      title: 'Solenoides Concéntricos Muy Largos y Corriente Armónica',
       level: 'certamen',
       source: 'Ayudantía 11 Problema 1',
       type: 'step_by_step',
       statement: `
-        Se cuenta con dos espiras ideales concéntricas en el mismo plano. La bobina interna es de radio $R$ con $N_i$ vueltas y la externa es de radio $3R$ con $N_e$ espiras. Por la bobina interna circula corriente $I_1(t) = I_0 \\cos(\\omega t)$ en sentido antihorario.<br>
-        a) Determine la inductancia mutua $M$ entre ambas bobinas (aproxime considerando que el campo de la bobina interna está concentrado en el área interior).<br>
-        b) Determine la fem inducida en la espira exterior en función del tiempo.
+        Se cuenta con dos solenoides ideales concéntricos muy largos de longitud $l$. El solenoide interno tiene radio $R$ y $N_i$ vueltas, mientras que el externo tiene radio $3R$ y $N_e$ vueltas. Por la espira interna circula una corriente $I(t)$ en sentido antihorario.<br>
+        a) Determine el flujo magnético sobre una vuelta del solenoide de radio $3R$.<br>
+        b) Encuentre la inductancia mutua $M$ entre ambas bobinas.<br>
+        c) Si la corriente interna varía según $I(t) = I_0 \\cos(\\omega t)$ con $I_0, \\omega > 0$, determine la fem inducida en el solenoide exterior en función del tiempo.
       `,
       steps: [
         {
-          title: 'Paso 1: Análisis de flujo y estrategia de reciprocidad',
+          title: 'Paso 1: Campo magnético del solenoide interno y flujo sobre una vuelta exterior',
           content: `
-            Si intentamos calcular el flujo de la bobina interna sobre la externa, el campo $B(r)$ decae de forma no uniforme entre $R$ y $3R$.<br>
-            Sin embargo, por el teorema de reciprocidad $M = \\frac{N_e \\phi_{i\\to e}}{I_i} = \\frac{N_i \\phi_{e\\to i}}{I_e}$.<br>
-            Si hacemos circular una corriente virtual $I_e$ por la espira exterior grande (radio $3R$), en la zona central de radio $R$ (donde $R < 3R$) el campo es aproximadamente uniforme:
-            $$B_e \\approx \\frac{\\mu_0 N_e I_e}{2(3R)} = \\frac{\\mu_0 N_e I_e}{6R}$$
+            El solenoide interno (radio $R$, densidad $n_i = N_i/l$) transporta corriente $I$ y produce un campo magnético confinado a su interior:
+            $$\\vec{B}_i = \\mu_0 \\frac{N_i}{l} I\\,\\hat{z} \\quad (r < R), \\qquad \\vec{B}_i = 0 \\quad (r > R)$$
+            Para una vuelta del solenoide exterior (radio $3R$), tomamos como normal $\\hat{n} = +\\hat{z}$. El flujo magnético se integra sobre el disco de radio $3R$, pero como el campo es nulo para $r > R$, la integral se reduce estrictamente a la sección del solenoide interno:
+            $$\\phi_1 = \\iint_{r \\le 3R} \\vec{B}_i\\cdot d\\vec{A} = \\iint_{r \\le R} \\left(\\mu_0 \\frac{N_i}{l} I\\right) dA + \\iint_{R < r \\le 3R} 0\\,dA = \\mu_0 \\frac{N_i}{l} \\pi R^2 I$$
           `
         },
         {
-          title: 'Paso 2: Cálculo de la inductancia mutua M',
+          title: 'Paso 2: Inductancia mutua entre las bobinas',
           content: `
-            El flujo magnético producido por la bobina exterior que atraviesa las $N_i$ vueltas de la bobina interior es:
-            $$\\phi_{e\\to i} = B_e \\cdot (\\pi R^2) = \\left(\\frac{\\mu_0 N_e I_e}{6R}\\right) (\\pi R^2) = \\frac{\\mu_0 \\pi N_e R I_e}{6}$$
-            Por la definición de inductancia mutua:
-            $$M = \\frac{N_i \\phi_{e\\to i}}{I_e} = \\frac{\\mu_0 \\pi N_i N_e R}{6}$$
+            El flujo concatenado con las $N_e$ espiras de la bobina externa debido a la corriente interna $I$ es $\\Phi_{total} = N_e \\phi_1$.<br>
+            Por definición de inductancia mutua:
+            $$M = \\frac{N_e \\phi_1}{I} = \\mu_0 \\frac{N_i N_e \\pi R^2}{l}$$
+            Obsérvese que $M$ depende únicamente de la geometría y del radio $R$ de la bobina interna, sin depender del radio $3R$ de la bobina externa.
           `
         },
         {
-          title: 'Paso 3: fem inducida en la bobina exterior',
+          title: 'Paso 3: fem inducida con corriente armónica',
           content: `
-            Dado que la corriente en la bobina interior varía como $I_1(t) = I_0 \\cos(\\omega t)$:
-            $$\\varepsilon_e(t) = -M \\frac{dI_1}{dt} = -M \\frac{d}{dt}(I_0 \\cos(\\omega t)) = -M (-I_0 \\omega \\sin(\\omega t)) = M I_0 \\omega \\sin(\\omega t)$$
-            Sustituyendo $M$:
-            $$\\varepsilon_e(t) = \\frac{\\mu_0 \\pi N_i N_e R I_0 \\omega}{6} \\sin(\\omega t)$$
+            Aplicando la Ley de Faraday para la inductancia mutua:
+            $$\\varepsilon_e(t) = -M \\frac{dI}{dt} = -M \\frac{d}{dt}(I_0 \\cos(\\omega t)) = -M (-I_0 \\omega \\sin(\\omega t)) = M I_0 \\omega \\sin(\\omega t)$$
+            Sustituyendo la inductancia mutua $M$:
+            $$\\varepsilon_e(t) = \\mu_0 \\frac{N_i N_e \\pi R^2}{l} I_0 \\omega \\sin(\\omega t)$$
           `
         }
       ]
@@ -242,6 +243,93 @@ window.MODULE_DATA_MOD6 = {
             $$|\\varepsilon_1(t)| = M \\left|\\frac{dI_2}{dt}\\right| = (\\mu_0 n N \\pi a^2) \\frac{d}{dt}(\\alpha t) = \\mu_0 n N \\pi a^2 \\alpha$$
             <strong>¿Depende este resultado de $L$?</strong><br>
             <strong>NO depende de $L$</strong>, siempre y cuando $L > 2a$, porque todo el flujo acoplado está restringido al volumen interior del solenoide (radio $a$). ¡El espacio exterior vacío entre el solenoide y el cuadrado no contiene campo magnético!
+          `
+        }
+      ]
+    },
+    {
+      id: 'm6_ex7b',
+      title: 'Bobina Larga con Espira Inclinada en Ángulo α',
+      level: 'certamen',
+      source: 'Ayudantía 11 Problema 4',
+      type: 'step_by_step',
+      statement: `
+        Considere una bobina muy larga de radio $a$ y $n$ vueltas por unidad de largo. Al interior de la bobina, existe una espira de radio $b < a$ cuyo vector normal forma un ángulo $\\alpha$ con respecto al eje longitudinal de la bobina.<br>
+        a) Determine la inductancia mutua $M$ entre la bobina y la espira interior.<br>
+        b) Si por la bobina circula una corriente $I(t) = I_0 \\sin(\\omega t)$, determine la fem inducida en la espira en función del tiempo.
+      `,
+      steps: [
+        {
+          title: 'Paso 1: Campo en el interior de la bobina y vector normal',
+          content: `
+            La bobina muy larga (solenoide ideal) de densidad de vueltas $n$ produce en su interior un campo magnético uniforme paralelo a su eje:
+            $$\\vec{B}(t) = \\mu_0 n I(t)\\,\\hat{z}$$
+            La espira de radio $b$ está inclinada un ángulo $\\alpha$ respecto al eje $\\hat{z}$, por lo que su vector normal unitario satisface $\\hat{n}\\cdot\\hat{z} = \\cos\\alpha$.
+          `
+        },
+        {
+          title: 'Paso 2: Flujo magnético e inductancia mutua M',
+          content: `
+            El flujo magnético a través de la espira circular de área $A = \\pi b^2$ es:
+            $$\\phi_B(t) = \\iint_{\\text{espira}} \\vec{B}\\cdot d\\vec{A} = (\\mu_0 n I(t)) (\\pi b^2) \\cos\\alpha = \\mu_0 n \\pi b^2 \\cos\\alpha\\,I(t)$$
+            Dado que la espira consta de una sola vuelta ($N_{espira} = 1$), la inductancia mutua es:
+            $$M = \\frac{\\phi_B(t)}{I(t)} = \\mu_0 n \\pi b^2 \\cos\\alpha$$
+            Note que para $\\alpha = 0^\\circ$ el acoplamiento es máximo ($M = \\mu_0 n \\pi b^2$), mientras que para $\\alpha = 90^\\circ$ la espira es paralela al campo y el acoplamiento es nulo ($M = 0$).
+          `
+        },
+        {
+          title: 'Paso 3: fem inducida por Faraday-Lenz',
+          content: `
+            Con $I(t) = I_0 \\sin(\\omega t)$, derivamos respecto al tiempo:
+            $$\\frac{dI}{dt} = I_0 \\omega \\cos(\\omega t)$$
+            Por la ley de Faraday:
+            $$\\varepsilon_{ind}(t) = -M \\frac{dI}{dt} = -(\\mu_0 n \\pi b^2 \\cos\\alpha) I_0 \\omega \\cos(\\omega t) = -\\mu_0 n \\pi b^2 \\cos\\alpha\\,I_0 \\omega \\cos(\\omega t)$$
+            La magnitud de la fem inducida es $|\\varepsilon_{ind}(t)| = \\mu_0 n \\pi b^2 \\cos\\alpha\\,I_0 \\omega |\\cos(\\omega t)|$.
+          `
+        }
+      ]
+    },
+    {
+      id: 'm6_ex7c',
+      title: 'Rollo Circular con Espira Central Pequeña y Decaimiento Exponencial',
+      level: 'certamen',
+      source: 'Pauta Certamen 3 2026-1 Problema 2',
+      type: 'step_by_step',
+      statement: `
+        Con un conductor aislado se fabrica un rollo plano de $N$ vueltas circulares de radio $R$ sobre una mesa. En torno a su centro se ubica una pequeña espira circular de radio $r \\ll R$. Por el rollo circula una corriente $I(t)$ en sentido antihorario.<br>
+        a) Encuentre una expresión para la inductancia mutua $M$ del sistema formado por el rollo y la pequeña espira.<br>
+        b) Si la corriente varía según $I(t) = I_0$ para $t < 0$ e $I(t) = I_0 e^{-t/\\tau}$ para $t \\ge 0$, encuentre la fem inducida en la pequeña espira en función del tiempo.<br>
+        c) Indique el sentido de la fem inducida para $t < 0$ y $t \\ge 0$, fundamentando rigurosamente con la Ley de Lenz.
+      `,
+      steps: [
+        {
+          title: 'Paso 1: Campo en el centro e inductancia mutua',
+          content: `
+            El campo magnético en el centro de un rollo de $N$ espiras de radio $R$ con corriente $I(t)$ antihoraria apunta perpendicular a la mesa ($+\\hat{k}$) y vale:
+            $$B(t) = \\frac{N \\mu_0 I(t)}{2R}$$
+            Como $r \\ll R$, el campo es prácticamente uniforme sobre toda el área $A = \\pi r^2$ de la pequeña espira central.<br>
+            Tomando $\\hat{n} = +\\hat{k}$, el flujo magnético en la pequeña espira ($N_{espira} = 1$) es:
+            $$\\phi_B(t) = B(t) \\cdot (\\pi r^2) = \\frac{N \\mu_0 \\pi r^2}{2R} I(t)$$
+            Por definición, la inductancia mutua del sistema es:
+            $$M = \\frac{\\phi_B(t)}{I(t)} = \\frac{N \\mu_0 \\pi r^2}{2R}$$
+          `
+        },
+        {
+          title: 'Paso 2: Cálculo de la fem inducida en ambos intervalos de tiempo',
+          content: `
+            Aplicando $\\varepsilon_{ind}(t) = -M \\frac{dI}{dt}$:<br>
+            • <strong>Para $t < 0$:</strong> La corriente es constante ($I(t) = I_0$), por lo que $\\frac{dI}{dt} = 0$:
+            $$\\varepsilon_{ind}(t) = 0$$
+            • <strong>Para $t \\ge 0$:</strong> La corriente decae exponencialmente:
+            $$\\frac{dI}{dt} = -\\frac{I_0}{\\tau} e^{-t/\\tau} \\implies \\varepsilon_{ind}(t) = -M \\left(-\\frac{I_0}{\\tau} e^{-t/\\tau}\\right) = \\frac{N \\mu_0 \\pi r^2 I_0}{2R\\tau} e^{-t/\\tau}$$
+          `
+        },
+        {
+          title: 'Paso 3: Justificación del sentido según la Ley de Lenz',
+          content: `
+            • <strong>Para $t < 0$:</strong> Como no hay variación de flujo magnético en el tiempo ($d\\phi_B/dt = 0$), no se induce fem ni corriente en la espira central.<br>
+            • <strong>Para $t \\ge 0$:</strong> La corriente externa $I(t)$ decrece, provocando una disminución del flujo magnético saliente ($\\odot$). Por la Ley de Lenz, el sistema reacciona induciendo una corriente que genere un campo magnético en el mismo sentido original ($\\odot$) para frenar la pérdida de flujo.<br>
+            Por la regla de la mano derecha, un campo saliente exige que la corriente circule en <strong>sentido antihorario</strong>.
           `
         }
       ]

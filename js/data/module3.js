@@ -115,27 +115,37 @@ window.MODULE_DATA_MOD3 = {
     },
     {
       id: 'm3_ex4',
-      title: 'Campo en Cable Coaxial Asimétrico',
-      level: 'intermediate',
+      title: 'Campo en Cable Coaxial Asimétrico (r = 3R/2 y r = 5R)',
+      level: 'certamen',
       source: 'Ayudantía 9 Problema 1b,c',
       type: 'multiple_choice',
       statement: `
-        Un cable coaxial tiene un conductor interior de radio $R$ con densidad $\\vec{J}_1 = J_0\\hat{k}$ y un conductor exterior entre radios $2R$ y $4R$ con $\\vec{J}_2 = 2J_0(-\\hat{k})$. ¿Cuál es la magnitud del campo magnético en el espacio aislante intermedio $r = 1.5R = \\frac{3R}{2}$?
+        Un cable coaxial tiene un conductor interior macizo de radio $R$ con densidad uniforme $\\vec{J}_1 = J_0\\hat{k}$ y un conductor exterior entre radios $2R$ y $4R$ con densidad $\\vec{J}_2 = 2J_0(-\\hat{k})$. ¿Cuáles son los campos magnéticos $\\vec{B}$ en el aislante intermedio $r = \\frac{3R}{2}$ y en el exterior $r = 5R$?
       `,
       options: [
-        '$\\frac{\\mu_0 J_0 R}{3}$',
-        '$\\frac{\\mu_0 J_0 R}{2}$',
-        '$\\frac{2\\mu_0 J_0 R}{3}$',
-        '$\\frac{\\mu_0 J_0 R}{6}$'
+        '$\\vec{B}(3R/2) = \\frac{\\mu_0 J_0 R}{3}\\hat{\\theta} \\quad ; \\quad \\vec{B}(5R) = -\\frac{23}{10}\\mu_0 J_0 R\\hat{\\theta}$',
+        '$\\vec{B}(3R/2) = \\frac{\\mu_0 J_0 R}{2}\\hat{\\theta} \\quad ; \\quad \\vec{B}(5R) = -\\frac{11}{5}\\mu_0 J_0 R\\hat{\\theta}$',
+        '$\\vec{B}(3R/2) = \\frac{\\mu_0 J_0 R}{3}\\hat{\\theta} \\quad ; \\quad \\vec{B}(5R) = 0$',
+        '$\\vec{B}(3R/2) = \\frac{2\\mu_0 J_0 R}{3}\\hat{\\theta} \\quad ; \\quad \\vec{B}(5R) = -\\frac{23}{5}\\mu_0 J_0 R\\hat{\\theta}$'
       ],
       correctOption: 0,
       explanation: `
-        Para $R < r < 2R$, el lazo amperiano solo encierra al conductor interior completo:
+        <strong>1. En $r = 3R/2$ ($R < r < 2R$):</strong><br>
+        El lazo amperiano circular encierra únicamente al conductor interior:
         $$I_{enl} = J_0 (\\pi R^2) = \\pi J_0 R^2$$
         Por la Ley de Ampère:
-        $$B(r) 2\\pi r = \\mu_0 (\\pi J_0 R^2) \\implies B(r) = \\frac{\\mu_0 J_0 R^2}{2r}$$
+        $$B(r) 2\\pi r = \\mu_0 I_{enl} \\implies \\vec{B}(r) = \\frac{\\mu_0 \\pi J_0 R^2}{2\\pi r}\\hat{\\theta} = \\frac{\\mu_0 J_0 R^2}{2r}\\hat{\\theta}$$
         Evaluando en $r = \\frac{3R}{2}$:
-        $$B\\left(\\frac{3R}{2}\\right) = \\frac{\\mu_0 J_0 R^2}{2 \\cdot (3R/2)} = \\frac{\\mu_0 J_0 R}{3}$$
+        $$\\vec{B}(3R/2) = \\frac{\\mu_0 J_0 R^2}{2 \\cdot (3R/2)}\\hat{\\theta} = \\frac{\\mu_0 J_0 R}{3}\\hat{\\theta}$$
+        <br>
+        <strong>2. En $r = 5R$ ($r > 4R$):</strong><br>
+        El lazo amperiano encierra ambos conductores:<br>
+        • Conductor interior: $I_1 = +\\pi J_0 R^2$.<br>
+        • Conductor exterior: $I_2 = 2J_0 \\pi [(4R)^2 - (2R)^2] = 2J_0 \\pi (16R^2 - 4R^2) = 24\\pi J_0 R^2$ hacia $-\\hat{k}$.<br>
+        Corriente total enlazada:
+        $$I_{enl} = I_1 - I_2 = \\pi J_0 R^2 - 24\\pi J_0 R^2 = -23\\pi J_0 R^2$$
+        Por la Ley de Ampère:
+        $$\\vec{B}(5R) = \\frac{\\mu_0 (-23\\pi J_0 R^2)}{2\\pi (5R)}\\hat{\\theta} = -\\frac{23}{10}\\mu_0 J_0 R\\hat{\\theta}$$
       `
     },
     {

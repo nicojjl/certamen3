@@ -1,102 +1,366 @@
 # NOTAS DE REVISIÓN Y VERIFICACIÓN FÍSICA
 **FIS120 / FIS12125 · Certamen 3 (2026-2) · UTFSM**
 
-Este documento recopila las verificaciones analíticas, convenciones de signos, elección de normales y casos límite de todos los problemas de ayudantías, pautas y simulacros integrados en la plataforma web.
+Este documento recopila las deducciones analíticas completas, convenciones de signos, elección de vectores normales, sentido físico según Lenz, chequeo de unidades y casos límite de todos los problemas de las ayudantías (9, 10, 11), el simulacro oficial y la pauta de certamen incorporados en la plataforma web.
 
 ---
 
-### Módulo 0: Repaso Matemático y Conceptual
-- **Producto vectorial:** Se enfatiza la anticonmutatividad $\vec{B}\times\vec{A} = -(\vec{A}\times\vec{B})$ y la regla de la mano derecha.
-- **Jacobiano en cilíndricas:** En integrales de superficie plana perpendicular al eje $z$, $d\vec{A} = r\,dr\,d\theta\,\hat{k}$. Al haber simetría azimutal, $\int_0^{2\pi} d\theta = 2\pi \implies dA = 2\pi r dr$.
-- **Dimensionalidad:**
-  - $\tau_C = RC$: $[\Omega][F] = \left(\frac{V}{A}\right)\left(\frac{A\cdot s}{V}\right) = s$ (segundos).
-  - $\tau_L = L/R$: $[H]/[\Omega] = \left(\frac{V\cdot s}{A}\right)\left(\frac{A}{V}\right) = s$ (segundos).
-  - Verificado conforme al formulario oficial.
+## 1. MÓDULO 0: REPASO MATEMÁTICO Y VECTORIAL
+
+### 1.1. Álgebra Vectorial y Regla de la Mano Derecha
+- **Anticonmutatividad:** $\vec{A}\times\vec{B} = -(\vec{B}\times\vec{A})$.
+- **Versores canónicos cilíndricos:** $\hat{r}\times\hat{\theta} = \hat{k}$, $\hat{\theta}\times\hat{k} = \hat{r}$, $\hat{k}\times\hat{r} = \hat{\theta}$.
+- **Elementos de línea y superficie:**
+  - $d\vec{l} = dr\,\hat{r} + r\,d\theta\,\hat{\theta} + dz\,\hat{k}$.
+  - Para disco plano en $z = \text{cte}$: $d\vec{A} = r\,dr\,d\theta\,\hat{k}$. Con simetría azimutal: $dA = 2\pi r dr$.
+  - Para superficie lateral cilíndrica de radio $R$: $d\vec{A} = R\,d\theta\,dz\,\hat{r}$.
+
+### 1.2. Análisis Dimensional
+- **Campo magnético:** $[B] = \text{Tesla [T]} = \frac{\text{N}}{\text{A}\cdot\text{m}} = \frac{\text{kg}}{\text{A}\cdot\text{s}^2}$.
+- **Permeabilidad del vacío:** $[\mu_0] = \frac{\text{T}\cdot\text{m}}{\text{A}} = \frac{\text{H}}{\text{m}} = \frac{\text{N}}{\text{A}^2} = 4\pi\times 10^{-7}\left[\frac{\text{H}}{\text{m}}\right]$.
+- **Inductancia:** $[L] = [M] = \text{Henrio [H]} = \frac{\text{V}\cdot\text{s}}{\text{A}} = \Omega\cdot\text{s}$.
+- **Constantes de tiempo:**
+  - $\tau_C = RC$: $[\Omega][\text{F}] = \left(\frac{\text{V}}{\text{A}}\right)\left(\frac{\text{A}\cdot\text{s}}{\text{V}}\right) = \text{s}$.
+  - $\tau_L = L/R$: $[\text{H}]/[\Omega] = \left(\frac{\text{V}\cdot\text{s}}{\text{A}}\right)\left(\frac{\text{A}}{\text{V}}\right) = \text{s}$.
 
 ---
 
-### Módulo 1: Biot-Savart y Campo de Cables
-- **Problema de Simulacro 2 (Arco y segmento finito):**
-  - **Arco:** Radio $R$, 4to cuadrante ($\Delta\theta = \pi/2$), corriente antihoraria. Regla mano derecha: $\vec{B}_{arco} = +\frac{\mu_0 I}{8R}\hat{k}$.
-  - **Segmento finito:** Longitud $4R$ ($z \in [-2R, 2R]$), ubicado en $x=2R, y=0$, corriente $+I\hat{k}$.
-    - Distancia mínima al origen: $d = 2R$.
-    - Semi-longitud: $L = 2R$.
-    - Factor de longitud: $\frac{2L}{\sqrt{d^2+L^2}} = \frac{4R}{\sqrt{4R^2+4R^2}} = \frac{4}{2\sqrt{2}} = \sqrt{2}$.
-    - Magnitud: $B_{seg} = \frac{\mu_0 I}{4\pi (2R)} \sqrt{2} = \frac{\sqrt{2}\mu_0 I}{8\pi R}$.
-    - Dirección por Biot-Savart: $d\vec{l} \times \hat{r}_{obs} = \hat{k} \times (-\hat{\imath}) = -\hat{\jmath}$.
-    - Campo total en $O$: $\vec{B}_{neto} = -\frac{\sqrt{2}\mu_0 I}{8\pi R}\hat{\jmath} + \frac{\mu_0 I}{8R}\hat{k}$. Verificado y coherente.
-- **Segmentos alineados con el punto de observación:** Aportan $d\vec{B} = 0$ puesto que $d\vec{l}\times\hat{r} = 0$.
+## 2. MÓDULO 1: LEY DE BIOT-SAVART
+
+### 2.1. Cable Recto y Espiras Circulares
+- **Cable recto infinito:** $B = \frac{\mu_0 I}{2\pi r}$, dirección azimutal $+\hat{\theta}$.
+- **Espira circular en su eje:** $\vec{B}(z) = \frac{\mu_0 I R^2}{2(R^2+z^2)^{3/2}}\hat{k}$. En el centro ($z=0$): $B(0) = \frac{\mu_0 I}{2R}$.
+- **Arco circular de ángulo $\Delta\theta$:** $B = \frac{\mu_0 I \Delta\theta}{4\pi R}$. Para semicírculo ($\Delta\theta = \pi$): $B = \frac{\mu_0 I}{4R}$; para cuarto de círculo ($\Delta\theta = \pi/2$): $B = \frac{\mu_0 I}{8R}$.
+- **Segmentos radiales dirigidos hacia el punto de observación:** $d\vec{l}\times\hat{r} = 0 \implies \vec{B} = 0$.
+
+### 2.2. Ejercicio Original: Arco y Segmento Finito (Antes rotulado erróneamente como Simulacro P2)
+- **Arco en 4to cuadrante:** Radio $R$, corriente $I$ antihoraria $\implies \vec{B}_{arco} = +\frac{\mu_0 I}{8R}\hat{k}$.
+- **Segmento finito paralelo a $z$:** Longitud $4R$ ($z \in [-2R, 2R]$), en $x = 2R, y = 0$, corriente $+I\hat{k}$.
+  - Distancia al origen: $d = 2R$. Factor de extremos: $\frac{2L}{\sqrt{d^2+L^2}} = \frac{4R}{\sqrt{4R^2+4R^2}} = \sqrt{2}$.
+  - Magnitud: $B_{seg} = \frac{\mu_0 I}{4\pi(2R)}\sqrt{2} = \frac{\sqrt{2}\mu_0 I}{8\pi R}$.
+  - Dirección: $d\vec{l}\times\hat{r}_{obs} = \hat{k}\times(-\hat{\imath}) = -\hat{\jmath}$.
+  - Campo neto en el origen: $\vec{B}(O) = -\frac{\sqrt{2}\mu_0 I}{8\pi R}\hat{\jmath} + \frac{\mu_0 I}{8R}\hat{k}$.
+  - *Clasificación:* Ejercicio original (no oficial).
 
 ---
 
-### Módulo 2: Densidad de Corriente $J(r)$
-- **Ayudantía 9 Problema 2:** $J(r) = 2J_0(1 - r^2/a^2)\hat{k}$.
-  - Corriente total: $I_T = \int_0^a 2J_0(1 - r^2/a^2) 2\pi r dr = 4\pi J_0 \left[\frac{r^2}{2} - \frac{r^4}{4a^2}\right]_0^a = 4\pi J_0 \frac{a^2}{4} = \pi J_0 a^2$.
-- **Pauta C3 Problema 1:** Densidad escalonada:
-  - $J_0$ para $0 \le r \le R/2$ y $3J_0$ para $R/2 < r \le R$.
-  - $I = J_0 \pi (R/2)^2 + 3J_0 \pi [R^2 - (R/2)^2] = \frac{1}{4}\pi J_0 R^2 + \frac{9}{4}\pi J_0 R^2 = \frac{10}{4}\pi J_0 R^2 = \frac{5}{2}\pi J_0 R^2$.
-  - Por tanto: $J_0 = \frac{2I}{5\pi R^2}$. Verificado exactamente con la pauta oficial.
-- **Ayudantía 9 Problema 4:** $J_1(\theta) = \alpha \sin^2\theta \hat{k}$.
-  - $I_1 = \int_0^{R_1} r dr \int_0^{2\pi} \alpha \sin^2\theta d\theta = \frac{R_1^2}{2} \cdot \alpha \pi = \frac{\pi \alpha R_1^2}{2}$.
-  - Igualando con corriente exterior $I_2 = J_0 \pi(R_2^2 - R_1^2)$:
-  - $\alpha = \frac{2 J_0 (R_2^2 - R_1^2)}{R_1^2}$.
+## 3. MÓDULO 2: DENSIDAD DE CORRIENTE $J(r)$
+
+### 3.1. Ayudantía 9 Problema 2: Perfil Parabólico
+- $\vec{J}(r) = 2J_0\left(1 - \frac{r^2}{a^2}\right)\hat{k}$ para $r \le a$.
+- Corriente total:
+  $$I_T = \int_0^a 2J_0\left(1 - \frac{r^2}{a^2}\right) 2\pi r dr = 4\pi J_0 \left[\frac{r^2}{2} - \frac{r^4}{4a^2}\right]_0^a = 4\pi J_0 \left(\frac{a^2}{2} - \frac{a^2}{4}\right) = \pi J_0 a^2$$
+
+### 3.2. Pauta C3 2026-1 Problema 1: Efecto Pelicular Escalonado
+- Conductor cilíndrico de radio $R$:
+  $$J(r) = \begin{cases} J_0, & 0 \le r \le R/2 \\ 3J_0, & R/2 < r \le R \end{cases}$$
+- Corriente total $I$:
+  $$I = J_0 \pi \left(\frac{R}{2}\right)^2 + 3J_0 \pi \left[R^2 - \left(\frac{R}{2}\right)^2\right] = \frac{\pi J_0 R^2}{4} + 3\pi J_0 \frac{3R^2}{4} = \frac{10\pi J_0 R^2}{4} = \frac{5}{2}\pi J_0 R^2$$
+  $$\implies J_0 = \frac{2I}{5\pi R^2}$$
+
+### 3.3. Ayudantía 9 Problema 4: Dependencia Angular
+- Cilindro interior radio $R_1$: $\vec{J}_1(\theta) = \alpha \sin^2\theta\,\hat{k}$. Cascarón exterior $R_1 < r < R_2$: $\vec{J}_2 = J_0(-\hat{k})$.
+- Corriente interior:
+  $$I_1 = \int_0^{R_1} r dr \int_0^{2\pi} \alpha \sin^2\theta d\theta = \frac{R_1^2}{2} \cdot \alpha \pi = \frac{\pi \alpha R_1^2}{2}$$
+- Corriente exterior: $I_2 = J_0 \pi (R_2^2 - R_1^2)$.
+- Condición de corrientes iguales y opuestas ($I_1 = I_2$):
+  $$\frac{\pi \alpha R_1^2}{2} = \pi J_0 (R_2^2 - R_1^2) \implies \alpha = \frac{2J_0 (R_2^2 - R_1^2)}{R_1^2}$$
 
 ---
 
-### Módulo 3: Ley de Ampère y Simetrías
-- **Pauta C3 Problema 1b:**
-  - $r \le R/2$: $B(r) = \frac{\mu_0 J_0 r}{2}\hat{\theta}$.
-  - $R/2 < r \le R$: $I_{enc}(r) = \pi J_0 (3r^2 - R^2/2) \implies B(r) = \frac{\mu_0 J_0}{2r}\left(3r^2 - \frac{R^2}{2}\right)\hat{\theta}$.
-  - Continuidad en $r = R/2$: $B(R/2^-) = \mu_0 J_0 R / 4$, $B(R/2^+) = \frac{\mu_0 J_0}{R}(3 R^2/4 - R^2/2) = \frac{\mu_0 J_0 R}{4}$. ¡Continuo!
-  - Continuidad en $r = R$: $B(R^-) = \frac{\mu_0 J_0}{2R}(3R^2 - R^2/2) = \frac{5}{4}\mu_0 J_0 R = \frac{\mu_0 I}{2\pi R}$. ¡Continuo!
-- **Toroide rectangular (Simulacro P1):**
-  - $B(r) = \frac{\mu_0 N I}{2\pi r}\hat{\phi}$ en $a < r < b$; cero fuera.
-  - Flujo por vuelta: $\Phi_1 = \int_a^b \frac{\mu_0 N I}{2\pi r} h dr = \frac{\mu_0 N I h}{2\pi} \ln(b/a)$.
-  - Inductancia mutua con cable axial: Flujo del cable a través de las $N$ vueltas: $M = \frac{N \mu_0 h}{2\pi}\ln(b/a)$. Verificado recíprocamente.
+## 4. MÓDULO 3: LEY DE AMPÈRE Y SIMETRÍAS
+
+### 4.1. Ayudantía 9 Problema 1: Cable Coaxial Asimétrico
+- Cilindro interior radio $R$, $\vec{J}_1 = J_0\hat{k}$.
+- Cascarón exterior $2R < r < 4R$, $\vec{J}_2 = 2J_0(-\hat{k})$.
+- Corrientes:
+  - $I_1 = J_0 \pi R^2$.
+  - $I_2 = 2J_0 \pi [(4R)^2 - (2R)^2] = 2J_0 \pi (16 - 4) R^2 = 24\pi J_0 R^2$.
+- **Campo en $r = 3R/2$ (aislante intermedio $R < r < 2R$):**
+  - $I_{enc} = I_1 = \pi J_0 R^2$.
+  - $\oint \vec{B}\cdot d\vec{l} = B(r) 2\pi r = \mu_0 \pi J_0 R^2 \implies B(3R/2) = \frac{\mu_0 \pi J_0 R^2}{2\pi(3R/2)} = \frac{\mu_0 J_0 R}{3}\hat{\theta}$.
+- **Campo en $r = 5R$ (exterior $r > 4R$):**
+  - $I_{enc} = I_1 - I_2 = \pi J_0 R^2 - 24\pi J_0 R^2 = -23\pi J_0 R^2$.
+  - $\vec{B}(5R) = \frac{\mu_0(-23\pi J_0 R^2)}{2\pi(5R)}\hat{\theta} = -\frac{23}{10}\mu_0 J_0 R\,\hat{\theta}$.
+
+### 4.2. Ayudantía 9 Problema 3: Superposición Fuera de Eje
+- **Cilindro macizo:** Eje en $\vec{r}_1 = -a\hat{\imath}$, radio $R < a$, densidad $\vec{J} = \beta r'\hat{k}$.
+  - Corriente total: $I_{cil} = \int_0^R (\beta r') 2\pi r' dr' = \frac{2\pi \beta R^3}{3}$.
+  - En el origen $O$ ($r = a > R$): el campo es el de una línea con corriente $I_{cil}$ en $(-a, 0)$.
+  - Vector posición desde el eje hacia el origen: $\vec{r} = a\hat{\imath}$.
+  - Dirección: $\hat{k}\times\hat{\imath} = +\hat{\jmath}$.
+  - $\vec{B}_1(O) = \frac{\mu_0 I_{cil}}{2\pi a}\hat{\jmath} = \frac{\mu_0 \beta R^3}{3a}\hat{\jmath}$.
+- **Cable infinito:** En $\vec{r}_2 = a(\hat{\imath} - \hat{\jmath}) = (a, -a, 0)$, corriente $I\hat{k}$.
+  - Vector desde el cable hacia el origen: $\vec{d} = -a\hat{\imath} + a\hat{\jmath}$, distancia $d = a\sqrt{2}$.
+  - Versor tangencial en el origen: $\hat{k} \times \left(\frac{-\hat{\imath}+\hat{\jmath}}{\sqrt{2}}\right) = \frac{-\hat{\jmath}-\hat{\imath}}{\sqrt{2}} = -\frac{\hat{\imath}+\hat{\jmath}}{\sqrt{2}}$.
+  - $\vec{B}_2(O) = \frac{\mu_0 I}{2\pi(a\sqrt{2})}\left(-\frac{\hat{\imath}+\hat{\jmath}}{\sqrt{2}}\right) = -\frac{\mu_0 I}{4\pi a}(\hat{\imath} + \hat{\jmath})$.
+- **Campo total en el origen:**
+  $$\vec{B}_{neto}(O) = -\frac{\mu_0 I}{4\pi a}\hat{\imath} + \left(\frac{\mu_0 \beta R^3}{3a} - \frac{\mu_0 I}{4\pi a}\right)\hat{\jmath}$$
+- **Condición para que solo tenga componente en $x$ ($B_y = 0$):**
+  $$\frac{\mu_0 \beta R^3}{3a} = \frac{\mu_0 I}{4\pi a} \implies \beta = \frac{3I}{4\pi R^3}$$
+
+### 4.3. Pauta C3 2026-1 Problema 1c: Comparación en $r = 3R/4$
+- **Caso Uniforme ($J' = I/\pi R^2$):**
+  $$I'_{enc} = J' \pi \left(\frac{3R}{4}\right)^2 = \frac{9}{16}I = \frac{9}{16}\left(\frac{5}{2}\pi J_0 R^2\right) = \frac{45}{32}\pi J_0 R^2$$
+  $$B_{unif}\left(\frac{3R}{4}\right) = \frac{\mu_0 I'_{enc}}{2\pi(3R/4)} = \frac{\mu_0 \frac{45}{32}\pi J_0 R^2}{\frac{3}{2}\pi R} = \frac{15}{16}\mu_0 J_0 R \approx 0.9375\,\mu_0 J_0 R$$
+- **Caso Escalonado ($J_0$ en $r \le R/2$ y $3J_0$ en $R/2 < r \le R$):**
+  $$I_{enc} = J_0 \pi \frac{R^2}{4} + 3J_0 \pi \left[\frac{9R^2}{16} - \frac{R^2}{4}\right] = \pi J_0 R^2 \left[\frac{4}{16} + \frac{15}{16}\right] = \frac{19}{16}\pi J_0 R^2$$
+  $$B_{esc}\left(\frac{3R}{4}\right) = \frac{\mu_0 \frac{19}{16}\pi J_0 R^2}{2\pi(3R/4)} = \frac{19}{24}\mu_0 J_0 R \approx 0.7917\,\mu_0 J_0 R$$
+- **Comparación:** $\frac{19}{24} \approx 0.792 < \frac{15}{16} \approx 0.938 \implies B_{esc} < B_{unif}$ en $r = 3R/4$.
+
+### 4.4. Simulacro C3 Problema 1: Toroide Ideal de Sección Rectangular
+- $a < r < b$, altura $h$, $N$ vueltas, corriente $I$.
+- Lazo circular de radio $r$: $\oint \vec{B}\cdot d\vec{l} = B(r) 2\pi r = \mu_0 N I \implies \vec{B}(r) = \frac{\mu_0 N I}{2\pi r}\hat{\phi}$ para $a < r < b$, y $\vec{B} = 0$ fuera.
+- Flujo sobre una vuelta: $\phi_1 = \int_a^b \frac{\mu_0 N I}{2\pi r} h dr = \frac{\mu_0 N I h}{2\pi}\ln(b/a)$.
+- Inductancia mutua con cable axial (corriente $I_c\hat{k}$):
+  El cable genera $\vec{B}_c = \frac{\mu_0 I_c}{2\pi r}\hat{\phi}$.
+  Flujo del cable sobre las $N$ vueltas: $\Phi = N \int_a^b \left(\frac{\mu_0 I_c}{2\pi r}\right) h dr = \frac{\mu_0 N I_c h}{2\pi}\ln(b/a)$.
+  $$M = \frac{\mu_0 N h}{2\pi}\ln\left(\frac{b}{a}\right)$$
 
 ---
 
-### Módulo 4: Flujo Magnético y Faraday-Lenz
-- **Espira alejándose de cable infinito (Simulacro P2):**
-  - $\Phi_B(t) = \int_{d(t)}^{d(t)+a} \frac{\mu_0 I}{2\pi x} b dx = \frac{\mu_0 I b}{2\pi} \ln\left(1 + \frac{a}{d_0 + vt}\right)$.
-  - fem inducida: $\varepsilon = -\frac{d\Phi_B}{dt} = \frac{\mu_0 I b v a}{2\pi (d_0+vt)(d_0+vt+a)}$.
-  - Sentido de Lenz: El flujo entrante $\otimes$ disminuye conforme la espira se aleja $\implies$ se induce corriente en sentido horario para reforzar el campo hacia adentro.
+## 5. MÓDULO 4: FLUJO MAGNÉTICO Y LEY DE FARADAY-LENZ
+
+### 5.1. Ayudantía 10 Problema 1: Espira con Campo Rotatorio
+- Espira cuadrada de lado $a$ en el plano $xy$.
+- Campo $\vec{B}(t) = B_0 \cos(k + \omega t)\hat{\imath} + B_0 \sin(k + \omega t)\hat{k}$.
+- Normal elegida: $\hat{n} = \hat{k}$ (perpendicular al plano de la espira).
+- Flujo: $\phi_B(t) = \vec{B}\cdot\hat{n} a^2 = B_0 a^2 \sin(k + \omega t)$.
+- fem inducida: $\varepsilon(t) = -\frac{d\phi_B}{dt} = -B_0 a^2 \omega \cos(k + \omega t)$.
+- Magnitud máxima: $|\varepsilon|_{max} = B_0 a^2 \omega$.
+
+### 5.2. Ayudantía 10 Problema 2: Espira Circular y Espira Cuadrada en su Centro
+- Espira circular de radio $R$, corriente $I(t) = I_0 e^{-t/\tau}$ antihoraria.
+- Espira cuadrada central de lado $a \ll R$.
+- Campo en el centro: $\vec{B} = \frac{\mu_0 I(t)}{2R}\hat{k}$ (saliente, $\odot$). Como $a \ll R$, es uniforme sobre el área $a^2$.
+- Flujo sobre la espira cuadrada (normal $\hat{n} = +\hat{k}$):
+  $$\phi_B(t) = \frac{\mu_0 I_0 a^2}{2R} e^{-t/\tau}$$
+- fem inducida:
+  $$\varepsilon(t) = -\frac{d\phi_B}{dt} = \frac{\mu_0 I_0 a^2}{2R\tau} e^{-t/\tau}$$
+- **Sentido por Lenz:** La corriente exterior disminuye $\implies$ el flujo saliente $\odot$ disminuye $\implies$ la espira cuadrada induce corriente en sentido **antihorario** para reforzar el flujo saliente original.
+
+### 5.3. Ayudantía 11 Problema 3: Campo Espacio-Temporal $\vec{B}(y,t) = \alpha y^2 e^{-\beta t}\hat{k}$
+- Rectángulo de base $L$ (en $x$) y altura $H$ (en $y$), lado inferior en $y = C$, luego $y \in [C, C+H]$.
+- Normal elegida: $\hat{n} = +\hat{k}$ (saliente, concordante con circulación antihoraria).
+- Flujo:
+  $$\phi_B(t) = \int_C^{C+H} (\alpha y^2 e^{-\beta t}) L dy = \frac{\alpha L}{3} \left[(C+H)^3 - C^3\right] e^{-\beta t}$$
+- fem inducida:
+  $$\varepsilon(t) = -\frac{d\phi_B}{dt} = \frac{\alpha \beta L}{3}\left[(C+H)^3 - C^3\right] e^{-\beta t}$$
+- **Sentido por Lenz:** El campo saliente ($\hat{k}$) decae en el tiempo ($e^{-\beta t}$) $\implies d\phi_B/dt < 0$. Para oponerse a la disminución, la corriente inducida debe reforzar el campo saliente $\odot \implies$ circula en **sentido antihorario**.
+
+### 5.4. Simulacro C3 Problema 2: Espira Alejándose de Cable Infinito
+- Cable en eje $y$ con corriente $I\hat{\jmath}$. Espira rectangular de lados $a$ (en $x$) y $b$ (en $y$) alejándose con $\vec{v} = v\hat{\imath}$. Posición $x \in [d(t), d(t)+a]$ con $d(t) = d_0 + vt$.
+- Campo magnético del cable: $\vec{B}(x) = \frac{\mu_0 I}{2\pi x}(-\hat{k})$ (entrante $\otimes$).
+- Normal elegida: $\hat{n} = -\hat{k}$ (entrante, concordante con circulación horaria).
+- Flujo magnético:
+  $$\phi_B(t) = \int_{d(t)}^{d(t)+a} \left(\frac{\mu_0 I}{2\pi x}\right) b dx = \frac{\mu_0 I b}{2\pi}\ln\left(\frac{d_0+vt+a}{d_0+vt}\right) = \frac{\mu_0 I b}{2\pi}\ln\left(1 + \frac{a}{d_0+vt}\right)$$
+- fem inducida ($\varepsilon = -d\phi_B/dt$):
+  $$\frac{d\phi_B}{dt} = \frac{\mu_0 I b}{2\pi} \frac{1}{1 + \frac{a}{d(t)}} \left(-\frac{a v}{d(t)^2}\right) = -\frac{\mu_0 I b v a}{2\pi d(t)(d(t)+a)}$$
+  $$\varepsilon(t) = -\frac{d\phi_B}{dt} = +\frac{\mu_0 I b v a}{2\pi (d_0+vt)(d_0+vt+a)}$$
+- **Sentido por Lenz:** Al alejarse, el campo entrante $\otimes$ se debilita $\implies$ el flujo entrante disminuye $\implies$ la corriente inducida genera campo entrante propio $\otimes \implies$ circula en **sentido horario**. Como $\hat{n}$ fue elegida entrante, el signo positivo de $\varepsilon$ coincide con circulación horaria.
 
 ---
 
-### Módulo 5: fem de Movimiento y Rieles
-- **Varilla cayendo por gravedad (Ayudantía 10 P3):**
-  - $\vec{B} = -B_0\hat{\jmath}$, varilla de largo $L$ cae en $-\hat{k}$ con velocidad $v(t)$.
-  - $\varepsilon = B_0 L v(t)$, corriente $i = \frac{B_0 L v}{R}$.
-  - Fuerza magnética de frenado: $F_m = i L B_0 = \frac{B_0^2 L^2 v}{R}$ dirigida hacia arriba.
-  - Ecuación de movimiento: $mg - \frac{B_0^2 L^2 v}{R} = m \frac{dv}{dt}$.
-  - Velocidad terminal ($a = 0$): $v_{term} = \frac{mgR}{B_0^2 L^2}$. Coherente en dimensiones y límites.
+## 6. MÓDULO 5: FEM DE MOVIMIENTO Y RIELES
+
+### 6.1. Ayudantía 10 Problema 3: Varilla en Rieles con Gravedad
+- Rieles paralelos verticales/inclinados separados por $L$, resistencia $R$, masa $m$.
+- Campo magnético: $\vec{B} = B_0(-\hat{\jmath})$ entrante al plano del circuito formado por rieles y varilla.
+- Posición de la varilla $x(t)$, velocidad $v(t) = \dot{x}$ hacia abajo ($+\hat{\imath}$).
+- Área enlazada: $A(t) = L x(t)$. Normal elegida entrante: $\hat{n} = -\hat{\jmath}$.
+- Flujo: $\phi_B(t) = B_0 L x(t)$.
+- fem inducida: $\varepsilon = -\frac{d\phi_B}{dt} = -B_0 L v(t)$. En magnitud $|\varepsilon| = B_0 L v$.
+- **Sentido por Lenz:** El flujo entrante aumenta a medida que la varilla cae $\implies$ la corriente inducida debe generar campo saliente $\odot$ para oponerse al aumento. Por regla de la mano derecha, la corriente circula en **sentido antihorario** (de izquierda a derecha a través de la varilla móvil).
+- Corriente inducida: $i(t) = \frac{B_0 L v(t)}{R}$.
+- Fuerza magnética de frenado:
+  $$\vec{F}_B = i\vec{L}\times\vec{B} = (i L \hat{k}) \times (-B_0 \hat{\jmath}) = +i L B_0 \hat{\imath} \quad (\text{opuesta a la velocidad, hacia arriba})$$
+  $$F_B = \frac{B_0^2 L^2 v}{R}$$
+- Ecuación de movimiento de Newton:
+  $$m\frac{dv}{dt} = mg - \frac{B_0^2 L^2}{R}v$$
+- Velocidad terminal ($dv/dt = 0$):
+  $$v_{term} = \frac{mg R}{B_0^2 L^2}$$
+- **Balance de potencias:**
+  - Potencia mecánica entregada por la gravedad: $P_{mec} = F_g v_{term} = mg v_{term} = \frac{m^2 g^2 R}{B_0^2 L^2}$.
+  - Potencia disipada por efecto Joule en la resistencia: $P_{Joule} = i^2 R = \left(\frac{B_0 L v_{term}}{R}\right)^2 R = \frac{B_0^2 L^2 v_{term}^2}{R} = \frac{m^2 g^2 R}{B_0^2 L^2}$.
+  - $P_{mec} = P_{Joule}$ confirma rigurosamente el principio de conservación de energía.
+
+### 6.2. Ayudantía 10 Problema 4: Carrito Conductor Entrando al Campo
+- Espira conductora de lado $a$, masa $m$, resistencia $R$, velocidad inicial $\vec{v}_0 = v_0\hat{\imath}$.
+- Entra a región $x > 0$ con campo saliente $\vec{B} = B_0\hat{k}$.
+- Longitud dentro del campo: $x(t)$. Área dentro del campo: $A(t) = a x(t)$.
+- Flujo saliente: $\phi_B(t) = B_0 a x(t)$ (con $\hat{n} = +\hat{k}$).
+- fem inducida: $\varepsilon = -\frac{d\phi_B}{dt} = -B_0 a v(t)$.
+- **Sentido por Lenz:** El flujo saliente $\odot$ aumenta al penetrar $\implies$ la corriente inducida debe generar campo entrante $\otimes \implies$ circula en **sentido horario**.
+- Corriente: $i(t) = \frac{B_0 a v(t)}{R}$.
+- Fuerza magnética sobre el lado que corta líneas de campo ($x = x(t)$):
+  La corriente en ese tramo va hacia $-y$ ($-\hat{\jmath}$):
+  $$\vec{F}_B = i(-a\hat{\jmath})\times(B_0\hat{k}) = -i a B_0\hat{\imath} = -\frac{B_0^2 a^2 v}{R}\hat{\imath}$$
+  ¡La fuerza magnética frena al carrito hacia la izquierda!
+- Ecuación diferencial:
+  $$m\frac{dv}{dt} = -\frac{B_0^2 a^2}{R}v \implies v(t) = v_0 e^{-t/\tau}, \quad \tau = \frac{m R}{B_0^2 a^2}$$
+- Distancia máxima de penetración (si la espira no entra completamente):
+  $$x_{max} = \int_0^\infty v(t) dt = v_0 \tau = \frac{m v_0 R}{B_0^2 a^2}$$
 
 ---
 
-### Módulo 6: Inductancia Mutua y Transformadores
-- **Solenoide y bobina cuadrada coaxial (Simulacro P3):**
-  - Como $L > 2a$, el campo magnético del solenoide es no nulo solo dentro del cilindro de radio $a$: $B = \mu_0 n I_1$.
-  - Todo el flujo que enlaza la bobina cuadrada proviene del área circular $\pi a^2$: $\Phi_{1 vuelta} = (\mu_0 n I_1)(\pi a^2)$.
-  - Flujo total sobre las $N$ espiras: $\Phi_{total} = N \mu_0 n \pi a^2 I_1$.
-  - Inductancia mutua: $M = \mu_0 n N \pi a^2$ (independiente de $L$ siempre que $L > 2a$).
+## 7. MÓDULO 6: INDUCTANCIA MUTUA Y TRANSFORMADORES
+
+### 7.1. Ayudantía 11 Problema 1: Bobinas Concéntricas
+- Solenoide interno radio $R$, $N_i$ espiras, largo $l$ ($n_i = N_i/l$). Solenoide externo radio $3R$, $N_e$ espiras, largo $l$.
+- Corriente en interno: $I_i(t) = I_0 \cos(\omega t)$ antihoraria.
+- Campo interno: $B_i = \mu_0 n_i I_i = \mu_0 \frac{N_i}{l}I_i$ para $r < R$, y $B_i = 0$ para $r > R$.
+- Flujo sobre UNA vuelta de la bobina externa ($r = 3R$):
+  $$\phi_1 = \iint_{r \le 3R} \vec{B}_i\cdot d\vec{A} = B_i (\pi R^2) = \mu_0 \frac{N_i}{l} \pi R^2 I_i$$
+  (El radio $3R$ no entra en el flujo porque no hay campo fuera de $R$).
+- Inductancia mutua:
+  $$M = \frac{N_e \phi_1}{I_i} = \mu_0 \frac{N_i N_e \pi R^2}{l}$$
+- fem inducida en la bobina exterior:
+  $$\varepsilon_e(t) = -M \frac{dI_i}{dt} = -M \frac{d}{dt}(I_0 \cos\omega t) = M I_0 \omega \sin(\omega t) = \mu_0 \frac{N_i N_e \pi R^2}{l} I_0 \omega \sin(\omega t)$$
+
+### 7.2. Ayudantía 11 Problema 2: Cable Infinito y Rectángulo Conductor
+- Cable con $I(t) = I_0 e^{-t/\tau}$. Rectángulo en $x \in [a, 2a]$, altura $b$.
+- $\phi_B(t) = \int_a^{2a} \frac{\mu_0 I(t)}{2\pi x} b dx = \frac{\mu_0 b \ln 2}{2\pi} I(t)$.
+- $M = \frac{\phi_B(t)}{I(t)} = \frac{\mu_0 b \ln 2}{2\pi}$.
+- fem inducida: $\varepsilon(t) = \frac{\mu_0 b \ln 2}{2\pi\tau} I_0 e^{-t/\tau}$ en **sentido horario**.
+
+### 7.3. Ayudantía 11 Problema 4: Solenoide con Espira Inclinada en Ángulo $\alpha$
+- Solenoide largo de radio $a$, densidad de vueltas $n$, campo interno $\vec{B} = \mu_0 n I \hat{z}$.
+- Espira de radio $b < a$ inclinada de modo que su vector normal forma ángulo $\alpha$ con $\hat{z}$.
+- Flujo sobre la espira: $\phi_B = \vec{B}\cdot\hat{n} (\pi b^2) = (\mu_0 n I)(\pi b^2) \cos\alpha$.
+- Inductancia mutua:
+  $$M = \frac{\phi_B}{I} = \mu_0 n \pi b^2 \cos\alpha$$
+- fem inducida con $I(t) = I_0 \sin(\omega t)$:
+  $$\varepsilon(t) = -M \frac{dI}{dt} = -M I_0 \omega \cos(\omega t) = -\mu_0 n \pi b^2 \cos\alpha\,I_0 \omega \cos(\omega t)$$
+
+### 7.4. Pauta C3 2026-1 Problema 2: Rollo con Espira Central Pequeña
+- Rollo plano de $N$ espiras de radio $R$. Espira central de radio $r \ll R$.
+- Campo en el centro: $B(t) = \frac{N \mu_0 I(t)}{2R}$.
+- Flujo en la pequeña espira: $\Phi_B = B (\pi r^2) = \frac{N \mu_0 \pi r^2}{2R} I(t)$.
+- Inductancia mutua: $M = \frac{N \mu_0 \pi r^2}{2R}$.
+- Corriente $I(t) = I_0$ para $t < 0$ y $I(t) = I_0 e^{-t/\tau}$ para $t \ge 0$.
+  - Para $t < 0$: $dI/dt = 0 \implies \varepsilon_{ind} = 0$.
+  - Para $t \ge 0$: $\varepsilon_{ind} = -M \frac{dI}{dt} = \frac{N \mu_0 \pi r^2 I_0}{2R\tau} e^{-t/\tau}$.
+  - Sentido por Lenz ($t \ge 0$): Flujo saliente disminuye $\implies$ corriente inducida en **sentido antihorario**.
+
+### 7.5. Ayudantía 11 Conceptual: Transformador Ideal
+- Relación de voltajes: $\frac{V_s}{V_p} = \frac{N_s}{N_p}$.
+- Corriente continua: Al ser $I_p = \text{cte}$, $d\phi_B/dt = 0 \implies V_s = 0$. Además, sin reactancia inductiva se quema el bobinado por sobrecorriente.
 
 ---
 
-### Módulo 8: Circuitos RC y RL
-- **Problema de la Pauta C3 (2026-1 P3):**
-  - $C = 5\,\mu\text{F}$, $R = 370\,\Omega$, $\mathcal{E} = 112\,\text{V}$.
-  - Igualdad de constantes de tiempo: $\tau_L = \tau_C \implies L/R = RC \implies L = R^2 C = (370)^2 \cdot 5\times 10^{-6} \approx 0.6845\text{ H}$.
-  - Corriente de régimen en posición 1: $I_{fuente} = \mathcal{E}/R = 112/370 \approx 0.3027\text{ A}$.
-  - Posición 2: $I_C(t) = \frac{\mathcal{E}}{R} e^{-t/RC} = 0.303 e^{-t/1.85\text{ ms}}\text{ A}$. $I_L(t) = \mathcal{E}/R = 0.303\text{ A}$ (constante porque sigue alimentado por la fuente). Verificado exactamente con la pauta.
+## 8. MÓDULO 7: AUTOINDUCTANCIA Y ENERGÍA MAGNÉTICA
+
+### 8.1. Solenoide Ideal
+- $B = \mu_0 n I$. Flujo en $N = n l$ espiras de área $A$: $\Phi = N (B A) = (n l)(\mu_0 n I A) = \mu_0 n^2 l A I$.
+- Autoinductancia:
+  $$L = \frac{\Phi}{I} = \mu_0 n^2 l A$$
+- fem autoinducida: $\varepsilon_L = -\frac{d\Phi}{dt} = -L \frac{di}{dt}$.
+- Energía magnética almacenada:
+  $$U_L = \int_0^I L i di = \frac{1}{2} L I^2$$
+- Densidad volumétrica de energía:
+  $$u_B = \frac{U_L}{l A} = \frac{\frac{1}{2}(\mu_0 n^2 l A) I^2}{l A} = \frac{(\mu_0 n I)^2}{2\mu_0} = \frac{B^2}{2\mu_0}$$
+
+### 8.2. Toroide Rectangular
+- $a < r < b$, altura $h$, $N$ vueltas: $B(r) = \frac{\mu_0 N I}{2\pi r}$.
+- Flujo total: $\Phi = N \int_a^b \frac{\mu_0 N I h}{2\pi r} dr = \frac{\mu_0 N^2 I h}{2\pi}\ln(b/a)$.
+- Autoinductancia:
+  $$L = \frac{\mu_0 N^2 h}{2\pi}\ln\left(\frac{b}{a}\right)$$
+- Energía por integral de volumen:
+  $$U_L = \iiint \frac{B^2}{2\mu_0} dV = \int_a^b \frac{1}{2\mu_0}\left(\frac{\mu_0 N I}{2\pi r}\right)^2 (2\pi r h dr) = \frac{\mu_0 N^2 I^2 h}{4\pi}\int_a^b \frac{dr}{r} = \frac{\mu_0 N^2 I^2 h}{4\pi}\ln\left(\frac{b}{a}\right) = \frac{1}{2} L I^2$$
 
 ---
 
-### Módulo 10: Maxwell y Síntesis Conceptual
-- **Paradoja del condensador y lazo $\Gamma$:**
-  - Superficie $S_1$ (disco plano): atravesada por la corriente de conducción $I(t) \implies \oint_\Gamma \vec{B}\cdot d\vec{l} = \mu_0 I(t)$.
-  - Superficie $S_2$ (bolsa entre placas): ninguna corriente de conducción la atraviesa ($I_{cond} = 0$). Sin Maxwell, daría $0$.
-  - Con el término de Maxwell: $\Phi_E = E A = \left(\frac{Q(t)}{\varepsilon_0 A}\right) A = \frac{Q(t)}{\varepsilon_0} \implies I_d = \varepsilon_0 \frac{d\Phi_E}{dt} = \frac{dQ}{dt} = I(t)$. Por tanto $\mu_0 I_d = \mu_0 I(t)$, resolviendo la paradoja idénticamente.
-- **Campo entre placas a distancia $r < R$:**
-  - Lazo circular de radio $r < R$: $\oint \vec{B}\cdot d\vec{l} = B(r) 2\pi r = \mu_0 \varepsilon_0 \frac{d}{dt}\left(E \cdot \pi r^2\right) = \mu_0 \varepsilon_0 \pi r^2 \frac{dE}{dt}$.
-  - Como $\frac{dE}{dt} = \frac{I(t)}{\varepsilon_0 \pi R^2} \implies B(r) 2\pi r = \mu_0 \pi r^2 \frac{I(t)}{\pi R^2} = \mu_0 I(t) \frac{r^2}{R^2} \implies B(r) = \frac{\mu_0 I(t) r}{2\pi R^2}$. Verificado.
+## 9. MÓDULO 8: CIRCUITOS TRANSIENTES RC Y RL
+
+### 9.1. Pauta C3 2026-1 Problema 3: Circuito con Interruptor de 2 Posiciones
+- $C = 5\,\mu\text{F}$, $R = 370\,\Omega$, $\mathcal{E} = 112\,\text{V}$.
+- **a) Igualdad de constantes $\tau_L = \tau_C$:**
+  $$\frac{L}{R} = RC \implies L = R^2 C = (370)^2 \cdot (5\times 10^{-6}) = 136900 \times 5\times 10^{-6} = 0.6845\text{ H}$$
+- **b) Régimen permanente en posición 1 ($t \to \infty$):**
+  - Condensador cargado $\implies$ circuito abierto ($I_C = 0$).
+  - Inductor en régimen permanente $\implies$ conductor ideal ($V_L = 0$).
+  - Corriente de la fuente: $I_{fuente} = \frac{\mathcal{E}}{R} = \frac{112}{370} \approx 0.3027\text{ A}$.
+- **c) Conmutación a posición 2:**
+  - Rama RC desconectada de la fuente: descarga con $q(0) = C\mathcal{E}$:
+    $$I_C(t) = \frac{\mathcal{E}}{R} e^{-t/RC} = \frac{112}{370} e^{-t/(1.85\times 10^{-3})} \approx 0.303 e^{-t/1.85\text{ ms}}\text{ A}$$
+  - Rama RL sigue conectada a la fuente $\implies$ permanece en su valor de régimen estacionario:
+    $$I_L(t) = \frac{\mathcal{E}}{R} = 0.303\text{ A}$$
+
+---
+
+## 10. MÓDULO 9: CIRCUITOS OSCILANTES LC Y RLC
+
+### 10.1. Circuito LC Libre
+- Ecuación: $-L\frac{d^2q}{dt^2} - \frac{q}{C} = 0 \implies \frac{d^2q}{dt^2} + \omega_0^2 q = 0$.
+- Frecuencia natural: $\omega_0 = \frac{1}{\sqrt{LC}}$.
+- Solución: $q(t) = Q_0 \cos(\omega_0 t)$, $i(t) = -\omega_0 Q_0 \sin(\omega_0 t)$.
+- Conservación de energía: $U_{tot} = \frac{q(t)^2}{2C} + \frac{1}{2}L i(t)^2 = \frac{Q_0^2}{2C} = \text{cte}$.
+
+### 10.2. Circuito RLC Serie y los Tres Regímenes
+- Ecuación diferencial del formulario:
+  $$-L\frac{d^2q}{dt^2} - R\frac{dq}{dt} - \frac{q}{C} = 0 \iff \frac{d^2q}{dt^2} + 2\alpha \frac{dq}{dt} + \omega_0^2 q = 0$$
+- Factor de amortiguamiento: $\alpha = \frac{R}{2L}$.
+- **1. Subamortiguado ($\alpha < \omega_0 \iff R < 2\sqrt{L/C}$):**
+  - Frecuencia amortiguada: $\omega' = \sqrt{\omega_0^2 - \alpha^2}$.
+  - Solución del formulario:
+    $$q(t) = Q_0 \frac{\omega_0}{\omega'} e^{-\alpha t} \cos\left(\omega' t - \arctan\left(\frac{\alpha}{\omega'}\right)\right)$$
+- **2. Críticamente amortiguado ($\alpha = \omega_0 \iff R = R_{crit} = 2\sqrt{L/C}$):**
+  - Retorno asintótico más rápido a cero sin sobrepaso oscilatorio.
+  - Solución: $q(t) = Q_0 (1 + \alpha t) e^{-\alpha t}$.
+- **3. Sobreamortiguado ($\alpha > \omega_0 \iff R > 2\sqrt{L/C}$):**
+  - Decaimiento puramente exponencial no oscilatorio con dos constantes de tiempo.
+
+---
+
+## 11. MÓDULO 10: MAXWELL Y SÍNTESIS CONCEPTUAL
+
+### 11.1. Paradoja de Ampère y Corriente de Desplazamiento
+- Ecuación corregida por Maxwell: $\oint_\Gamma \vec{B}\cdot d\vec{l} = \mu_0 (I_{cond} + I_d)$, con $I_d = \varepsilon_0 \frac{d\phi_E}{dt}$.
+- Condensador circular plano de radio $R$:
+  - Superficie $S_1$ (disco que corta el cable): $I_{cond} = I(t)$, $I_d = 0 \implies \oint_\Gamma \vec{B}\cdot d\vec{l} = \mu_0 I(t)$.
+  - Superficie $S_2$ (bolsa entre placas): $I_{cond} = 0$. $\phi_E = E A = \frac{Q(t)}{\varepsilon_0 A} A = \frac{Q(t)}{\varepsilon_0} \implies I_d = \varepsilon_0 \frac{d\phi_E}{dt} = \frac{dQ}{dt} = I(t)$.
+  - $\oint_\Gamma \vec{B}\cdot d\vec{l} = \mu_0 I_d = \mu_0 I(t)$. Ambas superficies dan exactamente el mismo resultado.
+- **Campo $B(r)$ entre placas ($r < R$):**
+  - Para un lazo de radio $r < R$: $\phi_E(r) = E (\pi r^2) = \frac{Q(t)}{\varepsilon_0 \pi R^2} (\pi r^2) = \frac{Q(t) r^2}{\varepsilon_0 R^2}$.
+  - $I_{d,enc} = \varepsilon_0 \frac{d\phi_E(r)}{dt} = I(t) \frac{r^2}{R^2}$.
+  - $\oint \vec{B}\cdot d\vec{l} = B(r) 2\pi r = \mu_0 I(t)\frac{r^2}{R^2} \implies \vec{B}(r) = \frac{\mu_0 I(t) r}{2\pi R^2}\hat{\theta}$.
+
+### 11.2. Pauta C3 Conceptual: Cocina de Inducción
+- **Condición del campo:** Debe ser alterno de alta frecuencia ($\partial\vec{B}/\partial t \neq 0$).
+- **Olla de acero:** Conductor metálico ferromagnético $\implies$ circulan fuertes corrientes de Foucault (Eddy currents) que disipan calor rápidamente por efecto Joule ($P = I^2 R$).
+- **Olla de greda:** Material cerámico aislante ($\rho \to \infty$) $\implies$ corrientes inducidas despreciables $\implies$ no calienta.
+
+---
+
+## 12. ESTADO DE VERIFICACIÓN ANALÍTICA
+
+### Verificado con SymPy (scripts/verificar.py)
+1. Integrales de corriente:
+   - Densidad escalonada: $I = \frac{5}{2}\pi J_0 R^2 \implies J_0 = \frac{2I}{5\pi R^2}$.
+   - Perfil parabólico: $I_T = \pi J_0 a^2$.
+   - Dependencia angular: $I = \frac{\pi \alpha R_1^2}{2}$.
+   - Perfil lineal cilíndrico: $I_{cil} = \frac{2\pi \beta R^3}{3}$.
+2. Integrales de campo y Ampère:
+   - Coaxial escalonado en $r = 3R/4$: $B_{esc} = \frac{19}{24}\mu_0 J_0 R$ vs $B_{unif} = \frac{15}{16}\mu_0 J_0 R$.
+   - Coaxial asimétrico: $B(3R/2) = \frac{\mu_0 J_0 R}{3}$, $B(5R) = -\frac{23}{10}\mu_0 J_0 R$.
+   - Superposición fuera de eje: $\beta = \frac{3I}{4\pi R^3}$.
+   - Toroide rectangular: $B(r) = \frac{\mu_0 N I}{2\pi r}$, $L = \frac{\mu_0 N^2 h}{2\pi}\ln(b/a)$.
+3. Flujos magnéticos y fem de Faraday:
+   - Espira alejándose de cable: $\phi_B(t) = \frac{\mu_0 I b}{2\pi}\ln\left(1 + \frac{a}{d_0+vt}\right)$, $\varepsilon(t) = \frac{\mu_0 I b v a}{2\pi (d_0+vt)(d_0+vt+a)}$.
+   - Rectángulo en $B(y,t) = \alpha y^2 e^{-\beta t}\hat{k}$: $\phi_B(t) = \frac{\alpha L}{3}[(C+H)^3 - C^3] e^{-\beta t}$, $\varepsilon(t) = \frac{\alpha \beta L}{3}[(C+H)^3 - C^3] e^{-\beta t}$.
+   - Cable y rectángulo: $\phi_B = \frac{\mu_0 b \ln 2}{2\pi} I$, $M = \frac{\mu_0 b \ln 2}{2\pi}$.
+   - Solenoide y espira inclinada: $\phi_B = \mu_0 n \pi b^2 \cos\alpha I$, $M = \mu_0 n \pi b^2 \cos\alpha$.
+   - Bobinas concéntricas: $M = \mu_0 \frac{N_i N_e \pi R^2}{l}$.
+   - Bobina y espira central: $M = \frac{N \mu_0 \pi r^2}{2R}$, $\varepsilon = \frac{N \mu_0 \pi r^2 I_0}{2R\tau} e^{-t/\tau}$.
+4. Rieles y dinámicas:
+   - Velocidad terminal: $v_{term} = \frac{mg R}{B_0^2 L^2}$, balance $P_{mec} = P_{Joule} = \frac{m^2 g^2 R}{B_0^2 L^2}$.
+   - Carrito frenado: $v(t) = v_0 e^{-t/\tau}$ con $\tau = \frac{m R}{B_0^2 a^2}$, penetración $x_{max} = \frac{m v_0 R}{B_0^2 a^2}$.
+5. Circuitos transientes y oscilantes:
+   - Igualdad $\tau_L = \tau_C \implies L = R^2 C = (370)^2(5\times 10^{-6}) = 0.6845\text{ H}$.
+   - Descarga RC: $I_C(t) = 0.303 e^{-t/1.85\text{ ms}}\text{ A}$.
+   - Oscilador RLC: verificación simbólica de que $q(t)$ del formulario satisface exactamente la ecuación diferencial $-L \ddot{q} - R \dot{q} - q/C = 0$.
+
+### Solo razonado, revisar a mano
+1. Argumentación termodinámica y molecular de por qué las pérdidas por histéresis magnética en el acero aumentan el rendimiento frente al aluminio en cocinas de inducción.
+2. Comportamiento en altas frecuencias del efecto pelicular real (Skin Depth $\delta = \sqrt{2/\omega\mu\sigma}$ continuo) frente al modelo escalonado aproximado propuesto por el equipo docente en la Pauta C3 2026-1.
+3. Tratamiento de los efectos de borde en la inductancia mutua para solenoides finitos cuando $l \approx 2R$.

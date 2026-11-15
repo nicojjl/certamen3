@@ -110,7 +110,7 @@ window.MODULE_DATA_MOD4 = {
     {
       id: 'm4_ex4',
       title: 'Espira Cuadrada con Campo de Inclinación Rotatoria',
-      level: 'intermediate',
+      level: 'certamen',
       source: 'Ayudantía 10 Problema 1',
       type: 'multiple_choice',
       statement: `
@@ -189,35 +189,40 @@ window.MODULE_DATA_MOD4 = {
     },
     {
       id: 'm4_ex6',
-      title: 'Espira Concéntrica y Corriente Exponencial',
+      title: 'Espira Circular con Espira Cuadrada Concéntrica',
       level: 'certamen',
-      source: 'Ayudantía 10 P2 / Pauta C3 P2',
+      source: 'Ayudantía 10 Problema 2',
       type: 'step_by_step',
       statement: `
-        Se tiene una bobina o espira circular grande de radio $R$ (con $N$ vueltas) por la que circula una corriente $I(t) = I_0 e^{-t/\\tau}$ ($t \\ge 0$) en sentido antihorario. En su centro se ubica una pequeña espira circular de radio $r \\ll R$.<br>
-        a) Calcule la fem inducida en la pequeña espira.<br>
-        b) Fundamente con Lenz el sentido de la corriente inducida.
+        Se tiene una espira circular de radio $R$ por la que circula una corriente $I(t) = I_0 e^{-t/\\tau}$ ($t > 0$) en sentido antihorario. En su centro se ubica una pequeña espira conductora cuadrada de lado $a$ ($a \\ll R$) coplanar con ella.<br>
+        a) Calcule el flujo magnético a través de la pequeña espira cuadrada.<br>
+        b) Calcule la fem inducida en la espira cuadrada.<br>
+        c) Fundamente con la Ley de Lenz el sentido de la corriente inducida.
       `,
       steps: [
         {
           title: 'Paso 1: Aproximación de campo uniforme en el centro',
           content: `
-            Como $r \\ll R$, el campo magnético producido por la espira exterior es prácticamente uniforme en toda el área de la pequeña espira central:
-            $$B(t) = \\frac{\\mu_0 I(t)}{2R}$$
-            Por la regla de la mano derecha, corriente antihoraria en el plano genera campo hacia arriba ($+\\hat{k}$).
+            En el centro de una espira circular de radio $R$ con corriente $I(t)$ antihoraria, el campo magnético apunta hacia arriba ($+\\hat{k}$) y vale:
+            $$B(t) = \\frac{\\mu_0 I(t)}{2R} = \\frac{\\mu_0 I_0}{2R} e^{-t/\\tau}$$
+            Dado que la espira central cuadrada tiene lado $a \\ll R$, la variación espacial del campo sobre su superficie es despreciable, por lo que podemos considerarlo rigurosamente uniforme sobre toda su área $A = a^2$.
           `
         },
         {
-          title: 'Paso 2: Flujo magnético sobre la espira pequeña',
+          title: 'Paso 2: Flujo magnético sobre la espira cuadrada',
           content: `
-            $$d\\vec{A} = dA\\,\\hat{k} \\implies \\phi_B(t) = B(t) \\cdot (\\pi r^2) = \\frac{\\mu_0 \\pi r^2}{2R} I(t) = \\frac{\\mu_0 \\pi r^2 I_0}{2R} e^{-t/\\tau}$$
+            Tomando como vector normal $\\hat{n} = +\\hat{k}$ (saliente, concordante con el campo):
+            $$\\phi_B(t) = \\iint_{\\text{cuadrado}} \\vec{B}\\cdot d\\vec{A} = B(t) \\cdot a^2 = \\frac{\\mu_0 a^2 I_0}{2R} e^{-t/\\tau}$$
           `
         },
         {
-          title: 'Paso 3: fem inducida y sentido de circulación',
+          title: 'Paso 3: fem inducida y sentido según Lenz',
           content: `
-            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -\\frac{\\mu_0 \\pi r^2 I_0}{2R} \\left(-\\frac{1}{\\tau} e^{-t/\\tau}\\right) = \\frac{\\mu_0 \\pi r^2 I_0}{2R\\tau} e^{-t/\\tau}$$
-            <strong>Sentido según Lenz:</strong> Para $t \\ge 0$, la corriente exterior decae, por lo que el flujo saliente disminuye. La fem inducida se opone a esta disminución creando un campo inducido en la misma dirección inicial (hacia afuera). Por tanto, la fem y la corriente inducida circulan en <strong>sentido antihorario</strong>.
+            Por la Ley de Faraday-Lenz:
+            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -\\frac{\\mu_0 a^2 I_0}{2R} \\left(-\\frac{1}{\\tau} e^{-t/\\tau}\\right) = \\frac{\\mu_0 a^2 I_0}{2R\\tau} e^{-t/\\tau}$$
+            <strong>Sentido según Lenz:</strong><br>
+            Para $t > 0$, la corriente exterior decae en el tiempo ($dI/dt < 0$), lo que produce una disminución del flujo magnético saliente ($\\odot$). Por el principio de Lenz, la corriente inducida debe generar un campo magnético que compense dicha disminución, es decir, un campo también saliente ($\\odot$).<br>
+            Por la regla de la mano derecha, para generar un campo hacia afuera, la corriente inducida en la espira cuadrada debe circular en <strong>sentido antihorario</strong>.
           `
         }
       ]
