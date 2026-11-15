@@ -203,21 +203,22 @@ window.MODULE_DATA_MOD10 = {
       source: 'Simulacro C3 Pregunta Conceptual c',
       type: 'step_by_step',
       statement: `
-        Entre las placas circulares de radio $R$ del condensador en proceso de carga con corriente $I(t)$, calcule el vector campo magnético a una distancia radial $r < R$ del eje central en función de $I(t), r$ y $R$.
+        Entre las placas circulares de radio $R$ del condensador en proceso de carga con corriente $I(t)$, calcule el vector campo magnético a una distancia radial $r < R$ del eje central en función de $I(t), r$ y $R$. Indique su orientación azimutal y su sentido relativo a $\\vec{E}$ y a $\\frac{\\partial\\vec{E}}{\\partial t}$.
       `,
       steps: [
         {
-          title: 'Paso 1: Elección de lazo amperiano coaxial',
+          title: 'Paso 1: Elección de lazo amperiano coaxial y orientación azimutal',
           content: `
-            Por la simetría cilíndrica del condensador circular y de las líneas axiales de $\\vec{E}$, el campo magnético inducido $\\vec{B}$ describe circunferencias azimutales centradas en el eje.<br>
-            Elegimos un lazo amperiano circular de radio $r < R$ en el plano perpendicular al eje entre las placas:
-            $$\\oint_\\Gamma \\vec{B} \\cdot d\\vec{l} = B(r) 2\\pi r$$
+            Por la simetría cilíndrica del condensador circular y de las líneas axiales de $\\vec{E}$, el campo magnético inducido $\\vec{B}$ es estrictamente <strong>azimutal</strong>, formando circunferencias cerradas concéntricas con el eje central del condensador:
+            $$\\vec{B}(r) = B(r)\\,\\hat{\\theta}$$
+            Elegimos un lazo amperiano circular $\\Gamma$ de radio $r < R$ en el plano perpendicular al eje entre las placas, orientado en sentido $+\\hat{\\theta}$:
+            $$\\oint_\\Gamma \\vec{B} \\cdot d\\vec{l} = \\oint_\\Gamma (B(r)\\,\\hat{\\theta}) \\cdot (r\\,d\\theta\\,\\hat{\\theta}) = B(r) 2\\pi r$$
           `
         },
         {
           title: 'Paso 2: Corriente de desplazamiento encerrada por el lazo de radio r',
           content: `
-            Como no hay corriente de conducción entre las placas ($I_{cond} = 0$), toda la circulación se debe a la corriente de desplazamiento.<br>
+            Como no hay corriente de conducción entre las placas ($I_{cond} = 0$), toda la circulación se debe a la corriente de desplazamiento de Maxwell.<br>
             El flujo eléctrico a través del círculo de radio $r$ es:
             $$\\phi_E(r) = E(t) \\cdot (\\pi r^2)$$
             La corriente de desplazamiento enlazada por el lazo es:
@@ -225,17 +226,20 @@ window.MODULE_DATA_MOD10 = {
           `
         },
         {
-          title: 'Paso 3: Relación con la corriente de carga total I(t) y despeje de B(r)',
+          title: 'Paso 3: Cálculo del campo B(r) y sentido relativo a E y dE/dt',
           content: `
             Recordando que $E(t) = \\frac{Q(t)}{\\varepsilon_0 \\pi R^2}$:
             $$\\frac{dE}{dt} = \\frac{1}{\\varepsilon_0 \\pi R^2} \\frac{dQ}{dt} = \\frac{I(t)}{\\varepsilon_0 \\pi R^2}$$
             Sustituyendo en la corriente de desplazamiento:
             $$I_{d, enl}(r) = \\varepsilon_0 (\\pi r^2) \\left( \\frac{I(t)}{\\varepsilon_0 \\pi R^2} \\right) = I(t) \\frac{r^2}{R^2}$$
-            Aplicando Ampère-Maxwell:
-            $$B(r) 2\\pi r = \\mu_0 I_{d, enl}(r) = \\mu_0 I(t) \\frac{r^2}{R^2}$$
-            Despejando $B(r)$:
-            $$B(r) = \\frac{\\mu_0 I(t) r}{2\\pi R^2}$$
-            <strong>Chequeo dimensional:</strong> En el borde $r = R$, $B(R) = \\frac{\\mu_0 I(t)}{2\\pi R}$, coincidiendo exactamente con el campo magnético en la superficie de un cable de radio $R$.
+            Aplicando la ley de Ampère-Maxwell:
+            $$B(r) 2\\pi r = \\mu_0 I_{d, enl}(r) = \\mu_0 I(t) \\frac{r^2}{R^2} \\implies \\vec{B}(r) = \\frac{\\mu_0 I(t) r}{2\\pi R^2}\\,\\hat{\\theta}$$
+            <br>
+            <strong>Sentido relativo a $\\vec{E}$ y a $\\frac{\\partial\\vec{E}}{\\partial t}$:**<br>
+            La densidad de corriente de desplazamiento es $\\vec{J}_d = \\varepsilon_0 \\frac{\\partial \\vec{E}}{\\partial t}$.<br>
+            • Si el condensador se está cargando ($I(t) > 0$), la placa positiva acumula carga y el campo eléctrico $\\vec{E}$ apunta hacia la placa negativa (supongamos en dirección $+\\hat{k}$). Como $\\vec{E}$ se intensifica, el vector derivada $\\frac{\\partial \\vec{E}}{\\partial t}$ apunta en el <strong>mismo sentido</strong> que $\\vec{E}$ ($+\\hat{k}$).<br>
+            • Por la regla de la mano derecha, apuntando el pulgar en la dirección de $\\frac{\\partial \\vec{E}}{\\partial t}$ ($+\\hat{k}$), los dedos se curvan en el sentido azimutal $+\\hat{\\theta}$. Por tanto, las líneas de $\\vec{B}$ forman anillos circulares en sentido azimutal alrededor de las líneas crecientes de $\\vec{E}$, exactamente análogo al campo magnético producido por un cable con corriente de conducción en $+\\hat{k}$.<br>
+            • Si el condensador se descargara ($I(t) < 0$), $\\frac{\\partial\\vec{E}}{\\partial t}$ sería antiparalelo a $\\vec{E}$, e invertiría el sentido de giro de $\\vec{B}$ a $-\\hat{\\theta}$.
           `
         }
       ]

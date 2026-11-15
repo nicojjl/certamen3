@@ -238,7 +238,7 @@ window.MODULE_DATA_MOD4 = {
       statement: `
         Un cable recto infinito sobre el eje $y$ transporta corriente $I$ hacia $+y$. Una espira rectangular de lados $a$ (en $x$) y $b$ (en $y$) y resistencia $R$ se aleja del cable con velocidad $\\vec{v} = v\\hat{\\imath}$. En el instante $t$, su lado más cercano está a distancia $d(t) = d_0 + vt$.<br>
         a) Determine el campo del cable a distancia $x$ y el flujo $\\phi_B(t)$ a través de la espira indicando el vector normal escogido.<br>
-        b) Determine la fem inducida $\\varepsilon_{ind}(t)$.<br>
+        b) Determine la fem inducida $\\varepsilon_{ind}(t)$ y justifique su signo según la normal elegida.<br>
         c) Indique el sentido de la corriente inducida fundamentado con Lenz y calcule su magnitud $I_{ind}(t)$.
       `,
       steps: [
@@ -247,8 +247,10 @@ window.MODULE_DATA_MOD4 = {
           content: `
             Por la Ley de Ampère, el campo magnético a distancia perpendicular $x > 0$ de un cable con corriente $I$ en $+\\hat{\\jmath}$ es:
             $$\\vec{B}(x) = -\\frac{\\mu_0 I}{2\\pi x}\\,\\hat{k} \\quad (\\text{entra a la página } \\otimes)$$
-            Escogemos el vector normal de la espira hacia adentro: $\\hat{n} = -\\hat{k}$.<br>
-            El diferencial de área es una franja de altura $b$ y ancho $dx$: $d\\vec{A} = b\\,dx(-\\hat{k})$.
+            <strong>Elección del vector normal $\\hat{n}$ y sentido de circulación positivo:</strong><br>
+            Escogemos el vector normal de la espira hacia adentro: $\\hat{n} = -\\hat{k}$ (concordante con las líneas de $\\vec{B}$).<br>
+            Por la regla de la mano derecha, un vector normal entrante ($-\\hat{k}$) define como sentido positivo de circulación el <strong>sentido horario</strong>.<br>
+            El diferencial de área es $d\\vec{A} = b\\,dx(-\\hat{k})$.
           `
         },
         {
@@ -256,25 +258,27 @@ window.MODULE_DATA_MOD4 = {
           content: `
             $$\\phi_B(t) = \\int_{d(t)}^{d(t)+a} \\left(-\\frac{\\mu_0 I}{2\\pi x}\\hat{k}\\right) \\cdot \\left(-b\\,dx\\hat{k}\\right) = \\frac{\\mu_0 I b}{2\\pi} \\int_{d(t)}^{d(t)+a} \\frac{dx}{x} = \\frac{\\mu_0 I b}{2\\pi} \\ln\\left(\\frac{d(t)+a}{d(t)}\\right)$$
             Sustituyendo $d(t) = d_0 + vt$:
-            $$\\phi_B(t) = \\frac{\\mu_0 I b}{2\\pi} \\ln\\left(1 + \\frac{a}{d_0 + vt}\\right)$$
+            $$\\phi_B(t) = \\frac{\\mu_0 I b}{2\\pi} \\ln\\left(1 + \\frac{a}{d_0 + vt}\\right) > 0$$
           `
         },
         {
-          title: 'Paso 3: Derivada temporal y fem inducida',
+          title: 'Paso 3: Derivada temporal, fem inducida y justificación del signo',
           content: `
             Derivamos respecto a $t$ recordando que $\\frac{d}{dt} d(t) = v$:
-            $$\\frac{d\\phi_B}{dt} = \\frac{\\mu_0 I b}{2\\pi} \\left( \\frac{1}{d(t)+a} - \\frac{1}{d(t)} \\right) \\frac{d(d)}{dt} = \\frac{\\mu_0 I b v}{2\\pi} \\left( \\frac{-a}{d(t)(d(t)+a)} \\right)$$
-            Por Faraday:
-            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = \\frac{\\mu_0 I b v a}{2\\pi (d_0 + vt)(d_0 + vt + a)}$$
+            $$\\frac{d\\phi_B}{dt} = \\frac{\\mu_0 I b}{2\\pi} \\left( \\frac{1}{d(t)+a} - \\frac{1}{d(t)} \\right) \\frac{d(d)}{dt} = -\\frac{\\mu_0 I b v a}{2\\pi d(t)(d(t)+a)} < 0$$
+            Como el flujo entrante disminuye a medida que la espira se aleja ($d\\phi_B/dt < 0$), por la Ley de Faraday:
+            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = +\\frac{\\mu_0 I b v a}{2\\pi (d_0 + vt)(d_0 + vt + a)} > 0$$
+            <strong>Justificación del signo:</strong> El resultado $\\varepsilon_{ind} > 0$ es estrictamente positivo porque concuerda con el sentido positivo de circulación asociado a la normal $\\hat{n} = -\\hat{k}$, que es el <strong>sentido horario</strong>.<br>
+            <em>Nota didáctica:</em> Si hubiésemos elegido $\\hat{n} = +\\hat{k}$ (saliente), el flujo habría sido negativo, su derivada positiva y la fem negativa ($\varepsilon < 0$), indicando formalmente que la corriente circula en sentido opuesto a la normal saliente (opuesto a antihorario), es decir, en sentido horario. El sentido físico real nunca depende de la convención de normal elegida.
           `
         },
         {
-          title: 'Paso 4: Sentido por Lenz y magnitud de corriente',
+          title: 'Paso 4: Sentido físico por Ley de Lenz y magnitud de corriente',
           content: `
-            Al alejarse la espira, el campo magnético entrante $\\otimes$ se debilita, por lo que el flujo entrante disminuye.<br>
-            Según la Ley de Lenz, la espira se opone a esta pérdida generando un campo inducido que también entre a la página ($\\otimes$).<br>
-            Por regla de la mano derecha, para generar campo entrante, la corriente inducida debe circular en <strong>sentido horario</strong>.<br>
-            Su magnitud es:
+            <strong>Argumento con Lenz:</strong> Al alejarse la espira con $\\vec{v} = v\\hat{\\imath}$, la intensidad del campo magnético entrante ($\\otimes$) decae como $1/x$, de modo que el flujo entrante a través de la espira disminuye.<br>
+            Por la Ley de Lenz, la corriente inducida debe oponerse a dicha disminución reforzando el flujo, lo que exige generar un campo inducido en la misma dirección entrante ($\\otimes$).<br>
+            Por la regla de la mano derecha, para generar campo entrante a la página, la corriente inducida debe circular en <strong>sentido horario</strong>.<br>
+            Por la Ley de Ohm, su magnitud es:
             $$I_{ind}(t) = \\frac{\\varepsilon_{ind}(t)}{R} = \\frac{\\mu_0 I b v a}{2\\pi R (d_0 + vt)(d_0 + vt + a)}$$
           `
         }

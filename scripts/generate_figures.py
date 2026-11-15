@@ -347,6 +347,15 @@ def fig_motional_emf_rails():
         for y_pos in [1.2, -1.4]:
             ax.text(x_pos, y_pos, r'$\otimes \vec{B}$', fontsize=11, color='#94a3b8', ha='center')
             
+    # Induced current arrows (counterclockwise)
+    ax.annotate('', xy=(0.5, 0.2), xytext=(-0.5, 0.2), arrowprops=dict(arrowstyle="->", lw=2.4, color='#b45309'))
+    ax.text(0, -0.05, r'$I_{ind}$ (hacia derecha)', fontsize=9.5, color='#b45309', ha='center', fontfamily='serif', fontweight='bold')
+    ax.annotate('', xy=(L/2, 1.4), xytext=(L/2, 0.8), arrowprops=dict(arrowstyle="->", lw=2, color='#b45309'))
+    ax.annotate('', xy=(-0.3, 2.0), xytext=(0.3, 2.0), arrowprops=dict(arrowstyle="->", lw=2, color='#b45309'))
+    ax.annotate('', xy=(-L/2, 0.8), xytext=(-L/2, 1.4), arrowprops=dict(arrowstyle="->", lw=2, color='#b45309'))
+    ax.text(0, 1.35, r'Giro antihorario ($I_{ind}$)', fontsize=10, color='#b45309', ha='center', fontfamily='serif', fontweight='bold')
+    ax.text(0, 0.95, r'$\odot \vec{B}_{ind}$ (Lenz opone a $\Delta\Phi > 0$)', fontsize=9, color='#0284c7', ha='center', fontfamily='serif')
+
     # Rail width L
     ax.annotate('', xy=(L/2, 2.3), xytext=(-L/2, 2.3), arrowprops=dict(arrowstyle="<->", lw=1.2, color='#333'))
     ax.text(0, 2.45, r'$L$', fontsize=11, ha='center', fontfamily='serif', fontweight='bold')

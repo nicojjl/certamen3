@@ -131,53 +131,60 @@ window.MODULE_DATA_MOD5 = {
       figureCaption: 'Varilla de masa $m$ y resistencia $R$ deslizándose bajo la gravedad sobre rieles paralelos.',
       statement: `
         Considere una varilla conductora de masa $m$ con resistencia $R$ que se desliza sin fricción por dos raíles paralelos separados por distancia $L$ por acción de la gravedad $\\vec{g} = -g\\hat{k}$. Se presenta un campo magnético uniforme $\\vec{B} = B_0(-\\hat{\\jmath})$. Entre la varilla y los raíles se forma un circuito cerrado.<br>
-        a) Calcule el flujo magnético a través de la espira en función de la posición $z(t)$.<br>
-        b) Determine la fem inducida en la espira.<br>
-        c) Determine la corriente inducida y su sentido.<br>
+        a) Calcule el flujo magnético a través de la espira en función de la posición $z(t)$, indicando el vector normal escogido.<br>
+        b) Determine la fem inducida en la espira y su signo respecto a la normal.<br>
+        c) Determine la corriente inducida y su sentido fundamentado rigurosamente con Lenz.<br>
         d) Determine la fuerza magnética inducida sobre la barra.<br>
         e) A través de la segunda ley de Newton cuando $\\vec{a} = \\vec{0}$, determine la velocidad terminal de la barra.
       `,
       steps: [
         {
-          title: 'Paso 1: Flujo magnético a través del circuito',
+          title: 'Paso 1: Elección de normal y flujo magnético a través del circuito',
           content: `
-            Orientamos el plano del circuito en el plano $xz$. El área delimitada por los rieles y la varilla en la posición $z(t)$ es un rectángulo de lados $L$ (en $x$) y $z(t)$ (en $z$):
+            Orientamos el plano del circuito en el plano $xz$. El área delimitada por los rieles y la varilla en la posición $z(t)$ es un rectángulo de lados $L$ (en $x$) y $z(t)$ (longitud caída en $z$):
             $$A(t) = L \\cdot z(t)$$
-            El vector normal al plano escogido es $\\hat{n} = -\\hat{\\jmath}$, paralelo a $\\vec{B} = -B_0\\hat{\\jmath}$:
-            $$\\phi_B(t) = \\vec{B} \\cdot \\vec{A} = (-B_0\\hat{\\jmath}) \\cdot (L z(t)(-\\hat{\\jmath})) = B_0 L z(t)$$
+            <strong>Elección del vector normal $\\hat{n}$ y convención de circulación:</strong><br>
+            Escogemos el vector normal al plano en dirección entrante a la página: $\\hat{n} = -\\hat{\\jmath}$, paralelo al campo magnético $\\vec{B} = -B_0\\hat{\\jmath}$.<br>
+            Por la regla de la mano derecha, un vector normal entrante ($-\\hat{\\jmath}$) define como sentido positivo de circulación el <strong>sentido horario</strong>.<br>
+            El flujo magnético es:
+            $$\\phi_B(t) = \\iint \\vec{B} \\cdot d\\vec{A} = (-B_0\\hat{\\jmath}) \\cdot (L z(t)(-\\hat{\\jmath})) = B_0 L z(t) > 0$$
           `
         },
         {
-          title: 'Paso 2: fem inducida por cambio de área (Faraday)',
+          title: 'Paso 2: fem inducida y análisis de signo',
           content: `
-            Aplicando la Ley de Faraday y recordando que $\\frac{dz}{dt} = v(t)$:
-            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -B_0 L \\frac{dz}{dt} = -B_0 L v(t)$$
-            Su magnitud es $|\\varepsilon_{ind}| = B_0 L v(t)$.
+            Al caer la varilla con velocidad $v(t) = \\frac{dz}{dt} > 0$, el área del circuito se expande y el flujo magnético entrante aumenta en el tiempo:
+            $$\\frac{d\\phi_B}{dt} = B_0 L \\frac{dz}{dt} = B_0 L v(t) > 0$$
+            Aplicando la Ley de Faraday-Lenz:
+            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -B_0 L v(t) < 0$$
+            <strong>Interpretación del signo de $\\varepsilon$:** Como $\\varepsilon_{ind}(t) < 0$, la fem actúa en sentido opuesto al sentido positivo asociado a la normal (opuesto al sentido horario), lo que indica formalmente que la circulación inducida es en <strong>sentido antihorario</strong>.
           `
         },
         {
-          title: 'Paso 3: Corriente inducida y sentido de circulación',
+          title: 'Paso 3: Corriente inducida y sentido físico por Ley de Lenz',
           content: `
-            Por Ley de Ohm:
+            Por la Ley de Ohm:
             $$i(t) = \\frac{|\\varepsilon_{ind}|}{R} = \\frac{B_0 L v(t)}{R}$$
-            <strong>Sentido según Lenz:</strong> A medida que la varilla cae, el área aumenta, por lo que el flujo entrante hacia $-\\hat{\\jmath}$ está creciendo. La corriente inducida debe generar un campo opuesto (hacia $+\\hat{\\jmath}$) para frenar el aumento. Por regla de la mano derecha, la corriente atraviesa la varilla de izquierda a derecha (en dirección $+\\hat{\\imath}$).
+            <strong>Sentido físico según Lenz:</strong><br>
+            A medida que la varilla cae, el flujo magnético entrante ($\\otimes$) aumenta continuamente. Según la Ley de Lenz, la espira debe oponerse a este incremento induciendo un campo magnético propio dirigido hacia afuera de la página ($\\odot$).<br>
+            Por la regla de la mano derecha (pulgar apuntando hacia afuera $\\odot$), los dedos indican que la corriente inducida debe circular en <strong>sentido antihorario</strong>.<br>
+            Esto significa que a través de la varilla móvil, la corriente circula de izquierda a derecha en dirección $+\\hat{\\imath}$, sube por el riel derecho, va hacia la izquierda por la conexión superior y baja por el riel izquierdo.
           `
         },
         {
-          title: 'Paso 4: Fuerza magnética sobre la varilla',
+          title: 'Paso 4: Fuerza magnética de frenado sobre la varilla',
           content: `
-            La fuerza de Lorentz sobre el elemento conductor de corriente $\\vec{L} = L\\hat{\\imath}$ es:
-            $$\\vec{F}_m = i (\\vec{L} \\times \\vec{B}) = \\left(\\frac{B_0 L v}{R}\\right) (L\\hat{\\imath} \\times (-B_0\\hat{\\jmath}))$$
-            Calculando el producto cruz: $\\hat{\\imath} \\times (-\\hat{\\jmath}) = -(\\hat{\\imath}\\times\\hat{\\jmath}) = -\\hat{k}$... pero como el eje $z$ apunta hacia arriba y la gravedad va hacia abajo ($-\\hat{k}$):
-            $$\\vec{F}_m = \\frac{B_0^2 L^2 v(t)}{R}\\,(+\\hat{k}) \\quad (\\text{hacia arriba, oponiéndose a la caída})$$
+            La fuerza de Lorentz sobre el elemento conductor móvil de longitud $\\vec{L} = L\\hat{\\imath}$ con corriente $i(t)$ es:
+            $$\\vec{F}_m = i (\\vec{L} \\times \\vec{B}) = \\left(\\frac{B_0 L v}{R}\\right) (L\\hat{\\imath} \\times (-B_0\\hat{\\jmath})) = -\\frac{B_0^2 L^2 v}{R}(\\hat{\\imath}\\times\\hat{\\jmath}) = -\\frac{B_0^2 L^2 v}{R}\\hat{k}$$
+            Como el eje vertical de caída apunta hacia abajo y la gravedad acelera la barra en dirección de caída, la fuerza magnética apunta verticalmente hacia arriba, actuando como una <strong>fuerza neta de frenado</strong> que se opone a la caída gravitatoria.
           `
         },
         {
           title: 'Paso 5: Segunda Ley de Newton y velocidad terminal',
           content: `
-            Escribimos la ecuación de movimiento en el eje vertical (con dirección hacia abajo positiva):
+            Escribimos la ecuación de movimiento en el eje vertical de caída:
             $$m \\frac{dv}{dt} = mg - F_m = mg - \\frac{B_0^2 L^2}{R} v$$
-            En el estado estacionario, la aceleración se anula ($a = \\frac{dv}{dt} = 0$):
+            En el régimen estacionario terminal, la aceleración se anula ($a = \\frac{dv}{dt} = 0$):
             $$mg - \\frac{B_0^2 L^2}{R} v_t = 0 \\implies v_t = \\frac{mgR}{B_0^2 L^2}$$
             <strong>Chequeo de unidades:</strong> $[mgR / (B^2 L^2)] = \\frac{\\text{N}\\cdot\\Omega}{\\text{T}^2\\cdot\\text{m}^2} = \\text{m/s}$. Correcto.
           `
@@ -192,23 +199,25 @@ window.MODULE_DATA_MOD5 = {
       type: 'step_by_step',
       statement: `
         Un carrito de masa $m$ formado por una espira conductora rectangular de ancho $a$ y resistencia $R$ se desplaza sin fricción con velocidad inicial $\\vec{v} = v_0\\hat{\\imath}$. Este ingresa a una región con campo magnético uniforme $\\vec{B} = B_0\\hat{k}$.<br>
-        a) Luego de que el carrito ingresa a la zona con campo, indique si se induce fem en sentido horario o antihorario y calcule su magnitud.<br>
+        a) Luego de que el carrito ingresa a la zona con campo, indique el vector normal elegido, el signo de la fem y si se induce en sentido horario o antihorario.<br>
         b) Determine la corriente inducida.<br>
-        c) Determine la fuerza inducida sobre la espira.
+        c) Determine la fuerza inducida sobre la espira y demuestre que siempre actúa como fuerza de frenado.
       `,
       steps: [
         {
-          title: 'Paso 1: Variación de flujo y sentido de la fem',
+          title: 'Paso 1: Elección de normal, variación de flujo y signo de la fem',
           content: `
-            Sea $x(t)$ la longitud del carrito que ha penetrado en la zona de campo magnético.<br>
+            Sea $x(t)$ la longitud del carrito que ha penetrado en la zona de campo magnético ($x \\in [0, a]$).<br>
             El área inmersa es $A(t) = a \\cdot x(t)$.<br>
-            El flujo magnético saliente ($\odot$) es:
-            $$\\phi_B(t) = B_0 a x(t)$$
-            Al ingresar, $x(t)$ aumenta con el tiempo ($\frac{dx}{dt} = v$), por lo que el flujo saliente $\\odot$ aumenta ($d\\phi_B/dt > 0$).<br>
-            Por la Ley de Lenz, la espira genera un campo inducido opuesto que entre al plano ($\\otimes$).<br>
-            Por la regla de la mano derecha, un campo entrante corresponde a una circulación en <strong>sentido horario</strong>.<br>
-            La magnitud de la fem inducida es:
-            $$|\\varepsilon_{ind}| = \\left| -\\frac{d\\phi_B}{dt} \\right| = B_0 a \\frac{dx}{dt} = B_0 a v(t)$$
+            <strong>Vector normal elegido $\\hat{n}$ y convención:</strong><br>
+            Escogemos $\\hat{n} = +\\hat{k}$ (apuntando hacia afuera de la página, en la dirección de $\\vec{B} = B_0\\hat{k}$). Por la regla de la mano derecha, un vector normal saliente define como sentido positivo de circulación el <strong>sentido antihorario</strong>.<br>
+            El flujo magnético es:
+            $$\\phi_B(t) = \\iint \\vec{B}\\cdot d\\vec{A} = (B_0\\hat{k})\\cdot(a x(t)\\hat{k}) = B_0 a x(t) > 0$$
+            Al ingresar, $x(t)$ crece con $\\frac{dx}{dt} = v > 0$, de modo que el flujo saliente aumenta: $\\frac{d\\phi_B}{dt} = B_0 a v > 0$.<br>
+            Por la Ley de Faraday-Lenz:
+            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -B_0 a v(t) < 0$$
+            <strong>Signo y sentido:</strong> Al resultar $\\varepsilon_{ind} < 0$, la corriente circula en sentido opuesto al positivo de la normal (opuesto al antihorario), es decir, en <strong>sentido horario</strong>.<br>
+            <strong>Fundamento con Lenz:</strong> El flujo saliente ($\odot$) está aumentando. Para contrarrestar este incremento, la espira induce un campo magnético propio hacia adentro ($\otimes$), lo que exige corriente en <strong>sentido horario</strong>.
           `
         },
         {
@@ -219,14 +228,16 @@ window.MODULE_DATA_MOD5 = {
           `
         },
         {
-          title: 'Paso 3: Fuerza magnética de frenado',
+          title: 'Paso 3: Fuerza magnética de frenado (siempre se opone al movimiento)',
           content: `
-            En el lado frontal del carrito (que está dentro del campo y lleva corriente hacia abajo, $-\\hat{\\jmath}$):
-            $$\\vec{F}_1 = i (\\vec{a} \\times \\vec{B}) = i (-a\\hat{\\jmath} \\times B_0\\hat{k}) = -i a B_0 (\\hat{\\jmath}\\times\\hat{k}) = -i a B_0\\,\\hat{\\imath}$$
-            Los lados horizontales superior e inferior sufren fuerzas magnéticas que se cancelan mutuamente entre sí.<br>
-            Sustituyendo la corriente $i(t)$:
+            Analizamos la fuerza de Lorentz $\\vec{F} = i (\\vec{L} \\times \\vec{B})$ en cada lado de la espira:<br>
+            • <strong>Lado frontal (líder):</strong> Está dentro del campo. Al circular en sentido horario, la corriente en este lado viaja hacia abajo ($-\\hat{\\jmath}$):
+            $$\\vec{F}_{frontal} = i (-a\\hat{\\jmath}) \\times (B_0\\hat{k}) = -i a B_0 (\\hat{\\jmath}\\times\\hat{k}) = -i a B_0\\,\\hat{\\imath}$$
+            • <strong>Lados superior e inferior:</strong> Transportan corrientes en sentidos opuestos ($+\\hat{\\imath}$ y $-\\hat{\\imath}$), por lo que sus fuerzas magnéticas verticales ($\pm \\hat{\\jmath}$) se anulan exactamente por simetría.<br>
+            • <strong>Lado posterior:</strong> Aún se encuentra fuera del campo magnético ($\vec{B} = 0$), por lo que no experimenta fuerza.<br><br>
+            Sustituyendo la corriente $i(t) = \\frac{B_0 a v(t)}{R}$, la fuerza neta total sobre la espira es:
             $$\\vec{F}_{neto} = -\\frac{B_0^2 a^2 v(t)}{R}\\,\\hat{\\imath}$$
-            La fuerza apunta en $-\\hat{\\imath}$, actuando como una fuerza neta de frenado que decelera el carrito según $m \\frac{dv}{dt} = -\\frac{B_0^2 a^2}{R} v$.
+            <strong>Demostración de frenado:</strong> Como $\\vec{v} = v\\hat{\\imath}$ con $v > 0$, la fuerza apunta en $-\\hat{\\imath}$ (opuesta al vector velocidad). Por lo tanto, <strong>la fuerza magnética actúa invariablemente como una fuerza de frenado</strong>, decelerando el carrito según $m \\frac{dv}{dt} = -\\frac{B_0^2 a^2}{R}v$.
           `
         }
       ]

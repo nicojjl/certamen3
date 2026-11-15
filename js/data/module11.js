@@ -219,19 +219,21 @@ window.MODULE_DATA_MOD11 = {
           `
         },
         {
-          title: 'Paso 2: Solución Oficial Inciso b (10 Puntos) - fem Inducida',
+          title: 'Paso 2: Solución Oficial Inciso b (10 Puntos) - fem Inducida y Signo',
           content: `
             Aplicando la Ley de Faraday $\\varepsilon_{ind} = -\\frac{d\\phi_B}{dt}$ y regla de la cadena con $\\frac{d}{dt}d(t) = v$:
-            $$\\frac{d\\phi_B}{dt} = \\frac{\\mu_0 I b}{2\\pi} \\frac{d}{dt} \\left[ \\ln(d(t)+a) - \\ln(d(t)) \\right] = \\frac{\\mu_0 I b}{2\\pi} \\left( \\frac{v}{d(t)+a} - \\frac{v}{d(t)} \\right) = \\frac{\\mu_0 I b v}{2\\pi} \\left( \\frac{-a}{d(t)(d(t)+a)} \\right)$$
+            $$\\frac{d\\phi_B}{dt} = \\frac{\\mu_0 I b}{2\\pi} \\frac{d}{dt} \\left[ \\ln(d(t)+a) - \\ln(d(t)) \\right] = \\frac{\\mu_0 I b}{2\\pi} \\left( \\frac{v}{d(t)+a} - \\frac{v}{d(t)} \\right) = -\\frac{\\mu_0 I b v a}{2\\pi d(t)(d(t)+a)} < 0$$
             Por lo tanto:
-            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = \\frac{\\mu_0 I b v a}{2\\pi (d_0 + vt)(d_0 + vt + a)}$$
+            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = +\\frac{\\mu_0 I b v a}{2\\pi (d_0 + vt)(d_0 + vt + a)} > 0$$
+            <strong>Justificación del signo según la normal:</strong><br>
+            Como escogimos $\\hat{n} = -\\hat{k}$ (entrante), la regla de la mano derecha asocia una circulación horaria al sentido positivo. El signo positivo obtenido ($\\varepsilon > 0$) significa que la fem induce circulación en sentido positivo de la normal, es decir, en <strong>sentido horario</strong>. Si hubiésemos elegido la normal saliente $+\\hat{k}$, la fem habría resultado negativa ($\varepsilon < 0$), lo que indica circulación contraria a la antihoraria, o sea, igualmente horaria.
             <div style="margin-top: 0.5rem; font-size: 0.9rem;">
               <strong>Autocalificación Inciso b:</strong>
               <select onchange="MODULE_DATA_MOD11.setScore('p2_b', this.value)" class="input-number" style="max-width: 140px;">
                 <option value="0">0 pts</option>
                 <option value="4">4 pts (Derivada planteada)</option>
                 <option value="7">7 pts (Regla de la cadena)</option>
-                <option value="10" selected>10 pts (fem simplificada exacta)</option>
+                <option value="10" selected>10 pts (fem simplificada exacta con justificación de signo)</option>
               </select>
             </div>
           `
@@ -396,13 +398,17 @@ window.MODULE_DATA_MOD11 = {
             Como el campo eléctrico es uniforme en el disco de radio $R$, la fracción de corriente de desplazamiento encerrada en el radio $r$ es la razón de áreas:
             $$I_{d, enl}(r) = I(t) \\frac{\\pi r^2}{\\pi R^2} = I(t) \\frac{r^2}{R^2}$$
             Igualando:
-            $$B(r) 2\\pi r = \\mu_0 I(t) \\frac{r^2}{R^2} \\implies B(r) = \\frac{\\mu_0 I(t) r}{2\\pi R^2}$$
+            $$B(r) 2\\pi r = \\mu_0 I(t) \\frac{r^2}{R^2} \\implies \\vec{B}(r) = \\frac{\\mu_0 I(t) r}{2\\pi R^2}\\,\\hat{\\theta}$$
+            <br>
+            <strong>Orientación azimutal y sentido relativo a $\\vec{E}$ y $\\frac{\\partial\\vec{E}}{\\partial t}$:**<br>
+            El campo magnético inducido es puramente <strong>azimutal</strong> (tangente a círculos concéntricos al eje).<br>
+            Durante la carga con $I(t) > 0$, el campo eléctrico $\\vec{E}$ apunta hacia la placa negativa ($+\\hat{k}$) y su magnitud aumenta, por lo que $\\frac{\\partial\\vec{E}}{\\partial t}$ apunta en la misma dirección $+\\hat{k}$. Por la regla de la mano derecha aplicada a $\\vec{J}_d = \\varepsilon_0 \\frac{\\partial\\vec{E}}{\\partial t}$, el campo magnético gira en sentido azimutal $+\\hat{\\theta}$, rodeando las líneas crecientes de campo eléctrico tal como lo haría alrededor de un alambre con corriente en $+\\hat{k}$.
             <div style="margin-top: 0.5rem; font-size: 0.9rem;">
               <strong>Autocalificación Inciso c:</strong>
               <select onchange="MODULE_DATA_MOD11.setScore('p4_c', this.value)" class="input-number" style="max-width: 140px;">
                 <option value="0">0 pts</option>
                 <option value="1">1 pt (Fracción de área)</option>
-                <option value="3" selected>3 pts (B(r) despejado con mu0 I r / 2 pi R^2)</option>
+                <option value="3" selected>3 pts (B(r) despejado con mu0 I r / 2 pi R^2 y sentido azimutal)</option>
               </select>
             </div>
           `
