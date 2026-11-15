@@ -95,8 +95,18 @@ def main():
             browser.close()
             sys.exit(1)
 
-        # Crear banco de pruebas en el DOM
+        # Desactivar transiciones CSS y crear banco de pruebas en el DOM
         page.evaluate("""() => {
+            const style = document.createElement('style');
+            style.id = 'disable-transitions-style';
+            style.innerHTML = `
+                *, *::before, *::after {
+                    transition: none !important;
+                    animation: none !important;
+                }
+            `;
+            document.head.appendChild(style);
+
             const bench = document.createElement('div');
             bench.id = 'contrast-test-bench';
             bench.style.position = 'fixed';
