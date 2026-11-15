@@ -125,7 +125,7 @@ window.MODULE_DATA_MOD6 = {
       source: 'Ayudantía 11 Problema 1',
       type: 'step_by_step',
       statement: `
-        Se cuenta con dos solenoides ideales concéntricos muy largos de longitud $l$. El solenoide interno tiene radio $R$ y $N_i$ vueltas, mientras que el externo tiene radio $3R$ y $N_e$ vueltas. Por la espira interna circula una corriente $I(t)$ en sentido antihorario.<br>
+        Se cuenta con dos solenoides ideales concéntricos muy largos de longitud común $l$ ($l \\gg 3R$). El solenoide interno tiene radio $R$, $N_i$ vueltas y densidad de espiras por unidad de longitud $n_i = N_i/l$. El solenoide externo tiene radio $3R$, $N_e$ vueltas y densidad $n_e = N_e/l$. Por la espira interna circula una corriente $I(t)$ en sentido antihorario.<br>
         a) Determine el flujo magnético sobre una vuelta del solenoide de radio $3R$.<br>
         b) Encuentre la inductancia mutua $M$ entre ambas bobinas.<br>
         c) Si la corriente interna varía según $I(t) = I_0 \\cos(\\omega t)$ con $I_0, \\omega > 0$, determine la fem inducida en el solenoide exterior en función del tiempo.
