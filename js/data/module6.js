@@ -258,45 +258,96 @@ window.MODULE_DATA_MOD6 = {
       source: 'Ayudantía 11 Problema 4',
       type: 'step_by_step',
       figure: 'img/mod6_solenoid_tilted_loop.svg',
-      figureCaption: 'Bobina muy larga y espira interior inclinada un ángulo $\\alpha$ medido respecto al eje longitudinal.',
+      figureCaption: 'Bobina muy larga y espira interior con ambos ángulos ilustrados: $\\alpha_{\\text{normal}}$ (entre eje longitudinal $z$ y normal $\\hat{n}$) y $\\alpha_{\\text{plano}}$ (entre eje longitudinal $z$ y el plano de la espira).',
       statement: `
-        Considere una bobina muy larga de radio $a$ y $n$ vueltas por unidad de largo. Al interior de la bobina, existe una espira circular de radio $b < a$ cuyo <em>plano</em> forma un ángulo $\\alpha$ con respecto al eje longitudinal de la bobina (tal como se ilustra en la figura de la Ayudantía 11).<br>
+        Considere una bobina muy larga de radio $a$ y $n$ vueltas por unidad de largo. Al interior de la bobina se ubica una espira circular de radio $b < a$ inclinada un ángulo $\\alpha$ respecto al eje longitudinal de la bobina.<br>
         a) Determine la inductancia mutua $M$ entre la bobina y la espira interior.<br>
-        b) Si por la bobina empieza a circular una corriente $I(t) = I_0 \\sin(\\omega t)$, determine la fem inducida en la espira en función del tiempo.
+        b) Si por la bobina empieza a circular una corriente $I(t) = I_0 \\sin(\\omega t)$, determine la fem inducida en la espira en función del tiempo.<br>
+        <div style="margin-top: 0.8rem; border-left: 4px solid #ea580c; background: var(--bg-tertiary); padding: 0.75rem 1rem; border-radius: 4px;">
+          <span class="level-badge badge-intermediate" style="background:#ea580c; color:#fff; font-weight:600; margin-bottom:0.4rem; display:inline-block;">⚠️ Convención a confirmar con el ayudante</span><br>
+          <em>Nota metodológica sobre el ángulo $\\alpha$:</em> En la literatura y problemas tipo UTFSM, la cota de inclinación $\\alpha$ puede definirse respecto a dos referencias geométricas distintas:<br>
+          1) <strong>Respecto al vector normal $\\hat{n}$</strong> a la espira (ángulo entre $\\vec{B}$ y $\\hat{n}$ es $\\alpha \\implies \\Phi_B \\propto \\cos\\alpha$).<br>
+          2) <strong>Respecto al plano de la espira</strong> (ángulo entre $\\vec{B}$ y el plano es $\\alpha \\implies$ ángulo con la normal es $90^\\circ - \\alpha \\implies \\Phi_B \\propto \\sin\\alpha$).<br>
+          Dado que el dibujo de referencia no explicita si la flecha acota el plano o la normal, se detallan a continuación <strong>ambas convenciones completas</strong> mediante el selector interactivo.
+        </div>
+        <div class="conv-selector-container" style="margin: 0.8rem 0; padding: 0.6rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem;">Seleccionar convención activa en la solución:</div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" id="btn-conv-normal" class="btn btn-sm btn-primary" onclick="window.switchAlphaConv('normal')" style="cursor: pointer;">
+              Convención 1: $\\alpha$ entre eje y normal $\\to \\cos\\alpha$
+            </button>
+            <button type="button" id="btn-conv-plano" class="btn btn-sm" onclick="window.switchAlphaConv('plano')" style="cursor: pointer;">
+              Convención 2: $\\alpha$ entre eje y plano de la espira $\\to \\sin\\alpha$
+            </button>
+          </div>
+        </div>
       `,
       steps: [
         {
-          title: 'Paso 1: Campo en el interior de la bobina y vector normal',
+          title: 'Paso 1: Campo en el interior de la bobina y orientación del vector normal',
           content: `
-            La bobina muy larga (solenoide ideal) de densidad de vueltas $n$ produce en su interior un campo magnético uniforme paralelo a su eje longitudinal:
+            La bobina muy larga (solenoide ideal) de densidad de vueltas $n$ produce en su interior un campo magnético uniforme orientado según su eje longitudinal:
             $$\\vec{B}(t) = \\mu_0 n I(t)\\,\\hat{z}$$
-            <strong>Definición del ángulo $\\alpha$ y orientación de la normal $\\hat{n}$:</strong><br>
-            En la figura del enunciado oficial, $\\alpha$ está acotado entre el eje longitudinal horizontal $\\hat{z}$ y el <em>plano</em> de la espira. Como el vector normal unitario $\\hat{n}$ es perpendicular al plano de la espira, el ángulo entre el campo $\\vec{B}$ y $\\hat{n}$ es el complemento $90^\\circ - \\alpha$. Por lo tanto:
-            $$\\vec{B}\\cdot\\hat{n} = B \\cos(90^\\circ - \\alpha) = B \\sin\\alpha$$
-            <em>Observación metodológica:</em> Si un problema alternativo define $\\alpha$ directamente como el ángulo entre el eje $\\hat{z}$ y el <em>vector normal</em> $\\hat{n}$, el factor sería $\\cos\\alpha$. Aquí respetamos rigurosamente la convención geométrica de la figura de la Ayudantía 11 ($\\,\\sin\\alpha$).
+            <div class="conv-view conv-normal-view">
+              <strong>Convención 1 ($\\alpha$ medido respecto al vector normal $\\hat{n}$):</strong><br>
+              El ángulo entre el campo magnético $\\vec{B}$ (a lo largo de $\\hat{z}$) y el vector normal unitario $\\hat{n}$ de la espira es directamente $\\theta = \\alpha$. Por lo tanto:
+              $$\\vec{B}\\cdot\\hat{n} = B \\cos\\alpha = \\mu_0 n I(t) \\cos\\alpha$$
+            </div>
+            <div class="conv-view conv-plano-view" style="display:none;">
+              <strong>Convención 2 ($\\alpha$ medido respecto al plano de la espira):</strong><br>
+              Si el ángulo entre el eje longitudinal $\\hat{z}$ y el plano de la espira circular es $\\alpha$, el ángulo entre $\\vec{B}$ y el vector normal $\\hat{n}$ (perpendicular al plano) es el complemento $\\theta = 90^\\circ - \\alpha$. Por lo tanto:
+              $$\\vec{B}\\cdot\\hat{n} = B \\cos(90^\\circ - \\alpha) = B \\sin\\alpha = \\mu_0 n I(t) \\sin\\alpha$$
+            </div>
           `
         },
         {
-          title: 'Paso 2: Flujo magnético e inductancia mutua M',
+          title: 'Paso 2: Flujo magnético a través de la espira e inductancia mutua M',
           content: `
-            El flujo magnético a través de la espira circular de área $A = \\pi b^2$ con vector normal $\\hat{n}$ es:
-            $$\\phi_B(t) = \\iint_{\\text{espira}} \\vec{B}\\cdot d\\vec{A} = (\\mu_0 n I(t)) (\\pi b^2) \\sin\\alpha = \\mu_0 n \\pi b^2 \\sin\\alpha\\,I(t)$$
-            Dado que la espira consta de una sola vuelta ($N_{\\text{espira}} = 1$), la inductancia mutua por definición es:
-            $$M = \\frac{\\phi_B(t)}{I(t)} = \\mu_0 n \\pi b^2 \\sin\\alpha$$
-            <strong>Casos límite de control:</strong><br>
-            • Si $\\alpha = 0^\\circ$ (plano de la espira paralelo al eje de la bobina): el campo magnético es rasante a la superficie de la espira, ningún flujo la atraviesa, $\\phi_B = 0$ y $M = 0$. Coincide con $\\sin(0^\\circ) = 0$.<br>
-            • Si $\\alpha = 90^\\circ$ (plano de la espira perpendicular al eje): el campo incide ortogonalmente sobre toda el área, el flujo es máximo $\\phi_B = (\\mu_0 n I)(\\pi b^2)$, y $M = \\mu_0 n \\pi b^2$. Coincide con $\\sin(90^\\circ) = 1$.
+            El área de la espira circular de radio $b$ es $A = \\pi b^2$. Para una sola vuelta ($N = 1$), el flujo magnético es $\\phi_B(t) = \\iint \\vec{B}\\cdot d\\vec{A} = (\\vec{B}\\cdot\\hat{n}) (\\pi b^2)$.
+            <div class="conv-view conv-normal-view">
+              <strong>Cálculo bajo Convención 1 ($\\cos\\alpha$):</strong><br>
+              $$\\phi_B(t) = (\\mu_0 n I(t) \\cos\\alpha)(\\pi b^2) = \\mu_0 n \\pi b^2 \\cos\\alpha\\,I(t)$$
+              Por definición de inductancia mutua $M = \\phi_B(t) / I(t)$:
+              $$M = \\mu_0 n \\pi b^2 \\cos\\alpha$$
+              <strong>Casos límite de control:</strong><br>
+              • $\\alpha = 0^\\circ$ (normal paralela al eje longitudinal): la espira está perpendicular a las líneas de campo $\\implies$ flujo máximo $\\phi_B = \\mu_0 n \\pi b^2 I$, $M = \\mu_0 n \\pi b^2$. Coincide con $\\cos(0^\\circ) = 1$.<br>
+              • $\\alpha = 90^\\circ$ (normal ortogonal al eje longitudinal): la espira queda paralela a las líneas de campo $\\implies$ flujo nulo $\\phi_B = 0$, $M = 0$. Coincide con $\\cos(90^\\circ) = 0$.
+            </div>
+            <div class="conv-view conv-plano-view" style="display:none;">
+              <strong>Cálculo bajo Convención 2 ($\\sin\\alpha$):</strong><br>
+              $$\\phi_B(t) = (\\mu_0 n I(t) \\sin\\alpha)(\\pi b^2) = \\mu_0 n \\pi b^2 \\sin\\alpha\\,I(t)$$
+              Por definición de inductancia mutua $M = \\phi_B(t) / I(t)$:
+              $$M = \\mu_0 n \\pi b^2 \\sin\\alpha$$
+              <strong>Casos límite de control:</strong><br>
+              • $\\alpha = 0^\\circ$ (plano de la espira paralelo al eje longitudinal): las líneas de campo son rasantes a la espira $\\implies$ flujo nulo $\\phi_B = 0$, $M = 0$. Coincide con $\\sin(0^\\circ) = 0$.<br>
+              • $\\alpha = 90^\\circ$ (plano de la espira perpendicular al eje longitudinal): flujo máximo $\\phi_B = \\mu_0 n \\pi b^2 I$, $M = \\mu_0 n \\pi b^2$. Coincide con $\\sin(90^\\circ) = 1$.
+            </div>
           `
         },
         {
-          title: 'Paso 3: fem inducida por Faraday-Lenz',
+          title: 'Paso 3: fem inducida por Faraday-Lenz y comparación general',
           content: `
-            Con la corriente de excitación $I(t) = I_0 \\sin(\\omega t)$, derivamos respecto al tiempo:
+            Con la corriente de excitación en la bobina $I(t) = I_0 \\sin(\\omega t)$, derivamos respecto al tiempo:
             $$\\frac{dI}{dt} = I_0 \\omega \\cos(\\omega t)$$
-            Por la ley de Faraday-Lenz:
-            $$\\varepsilon_{\\text{ind}}(t) = -M \\frac{dI}{dt} = -(\\mu_0 n \\pi b^2 \\sin\\alpha) I_0 \\omega \\cos(\\omega t) = -\\mu_0 n \\pi b^2 \\sin\\alpha\\,I_0 \\omega \\cos(\\omega t)$$
-            La magnitud instantánea de la fem inducida es:
-            $$|\\varepsilon_{\\text{ind}}(t)| = \\mu_0 n \\pi b^2 \\sin\\alpha\\,I_0 \\omega |\\cos(\\omega t)|$$
+            Por la ley de Faraday-Lenz ($\\varepsilon_{\\text{ind}}(t) = -M \\frac{dI}{dt}$):
+            <div class="conv-view conv-normal-view">
+              <strong>Resultado bajo Convención 1 ($\\cos\\alpha$):</strong><br>
+              $$\\varepsilon_{\\text{ind}}(t) = -(\\mu_0 n \\pi b^2 \\cos\\alpha) I_0 \\omega \\cos(\\omega t) = -\\mu_0 n \\pi b^2 \\cos\\alpha\\,I_0 \\omega \\cos(\\omega t)$$
+              Magnitud instantánea:
+              $$|\\varepsilon_{\\text{ind}}(t)| = \\mu_0 n \\pi b^2 \\cos\\alpha\\,I_0 \\omega |\\cos(\\omega t)|$$
+            </div>
+            <div class="conv-view conv-plano-view" style="display:none;">
+              <strong>Resultado bajo Convención 2 ($\\sin\\alpha$):</strong><br>
+              $$\\varepsilon_{\\text{ind}}(t) = -(\\mu_0 n \\pi b^2 \\sin\\alpha) I_0 \\omega \\cos(\\omega t) = -\\mu_0 n \\pi b^2 \\sin\\alpha\\,I_0 \\omega \\cos(\\omega t)$$
+              Magnitud instantánea:
+              $$|\\varepsilon_{\\text{ind}}(t)| = \\mu_0 n \\pi b^2 \\sin\\alpha\\,I_0 \\omega |\\cos(\\omega t)|$$
+            </div>
+            <div style="margin-top: 1rem; padding: 0.6rem 0.8rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 4px;">
+              <strong>Tabla comparativa de síntesis:</strong><br>
+              • <strong>Convención 1 ($\alpha$ entre eje y normal $\hat{n}$):</strong> $M = \mu_0 n \pi b^2 \cos\alpha$ ; $\\varepsilon(t) = -\mu_0 n \pi b^2 \cos\alpha\,I_0\omega\cos(\omega t)$<br>
+              • <strong>Convención 2 ($\alpha$ entre eje y plano espira):</strong> $M = \mu_0 n \pi b^2 \sin\alpha$ ; $\\varepsilon(t) = -\mu_0 n \pi b^2 \sin\alpha\,I_0\omega\cos(\omega t)$<br>
+              <em>Estrategia para el certamen:</em> Declara siempre explícitamente al inicio de tu desarrollo cuál es el vector normal unitario $\hat{n}$ que elegiste y el ángulo exacto $\\theta$ que forma con $\\vec{B}$.
+            </div>
           `
         }
       ]

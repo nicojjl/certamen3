@@ -306,5 +306,22 @@ const App = {
   }
 };
 
+window.switchAlphaConv = function(conv) {
+  const isNormal = conv === 'normal';
+  document.querySelectorAll('.conv-normal-view').forEach(el => el.style.display = isNormal ? 'block' : 'none');
+  document.querySelectorAll('.conv-plano-view').forEach(el => el.style.display = isNormal ? 'none' : 'block');
+  const btnN = document.getElementById('btn-conv-normal');
+  const btnP = document.getElementById('btn-conv-plano');
+  if (btnN && btnP) {
+    if (isNormal) {
+      btnN.className = 'btn btn-sm btn-primary';
+      btnP.className = 'btn btn-sm';
+    } else {
+      btnN.className = 'btn btn-sm';
+      btnP.className = 'btn btn-sm btn-primary';
+    }
+  }
+};
+
 window.App = App;
 document.addEventListener('DOMContentLoaded', () => App.init());

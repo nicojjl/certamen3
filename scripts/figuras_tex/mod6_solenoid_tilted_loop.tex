@@ -7,11 +7,12 @@
 \definecolor{figazul}{RGB}{2,132,199}
 \definecolor{figrojo}{RGB}{220,38,38}
 \definecolor{figverde}{RGB}{22,163,74}
+\definecolor{figmorado}{RGB}{124,58,237}
 
 \begin{document}
 \begin{tikzpicture}[>=Latex, line cap=round, line join=round]
   % Eje longitudinal z del solenoide (horizontal hacia la derecha)
-  \draw[->, thick] (-3.8, 0) -- (4.2, 0) node[right] {$z$};
+  \draw[->, thick] (-3.8, 0) -- (4.4, 0) node[right] {$z$};
   \draw[->, thick] (0, -2.4) -- (0, 2.8) node[above] {$y$};
   \node[below left] at (0,0) {$O$};
 
@@ -37,26 +38,37 @@
   \draw[<->, thick, color=figrojo] (-2.8, 0) -- (-2.8, 1.6) node[midway, left, color=figrojo, font=\small] {$a$};
   \draw[densely dotted, thin, color=figrojo] (-3.2, 0) -- (-2.8, 0);
 
-  % Espira interior de radio b = 1.0, inclinada ángulo \alpha = 35° respecto al eje z
-  % La traza del plano de la espira está a 35° respecto al eje horizontal
+  % Espira interior de radio b = 1.0, inclinada
+  % Orientación: plano a 35° respecto a la horizontal
   \begin{scope}[rotate=35]
     % Elipse que representa la espira circular vista en perspectiva
     \draw[ultra thick, color=figverde, fill=figverde!15] (0, 0) ellipse (1.0 and 0.35);
 
-    % Diámetro / cota de radio b de la espira
+    % Cota de radio b de la espira
     \draw[->, thick, color=figrojo] (0, 0) -- (1.0, 0);
     \node[above, color=figrojo, font=\footnotesize] at (0.5, 0) {$b$};
 
-    % Vector normal n_hat perpendicular al plano de la espira
-    \draw[->, thick, color=figverde] (0, 0) -- (0, 1.3) node[right, color=figverde, font=\small] {$\hat{n}$};
+    % Trazo auxiliar del plano de la espira
+    \draw[dashed, thin, color=figverde] (-1.4, 0) -- (1.4, 0);
   \end{scope}
 
-  % Arco del ángulo alpha entre el eje z (horizontal) y el plano de la espira (inclinado a 35°)
-  \draw[->, thick, color=figrojo] (1.2, 0) arc (0:35:1.2);
-  \node[right, color=figrojo, font=\small] at (17:1.35) {$\alpha$};
+  % Vector normal n_hat perpendicular al plano (a 35° + 90° = 125° o apuntando hacia +z a 55°)
+  % Normal con componente +z: ángulo 90° - 35° = 55°
+  \draw[->, very thick, color=figmorado] (0, 0) -- (55:1.5) node[above right, color=figmorado] {$\hat{n}$};
 
-  % Aclaración de convención
-  \node[below, font=\footnotesize, align=center] at (0, -2.1) {$\alpha$: \'angulo entre el eje longitudinal y el plano de la espira\\Flujo: $\Phi_B = B (\pi b^2) \sin\alpha$};
+  % Ángulo 1 (alpha_plano = 35°): entre eje horizontal z y el plano de la espira
+  \draw[->, thick, color=figrojo] (1.1, 0) arc (0:35:1.1);
+  \node[right, color=figrojo, font=\small] at (17:1.25) {$\alpha_{\text{plano}}$};
+
+  % Ángulo 2 (alpha_normal = 55° = 90° - alpha_plano): entre eje z y el vector normal n_hat
+  \draw[->, thick, color=figmorado] (0.7, 0) arc (0:55:0.7);
+  \node[right, color=figmorado, font=\small] at (42:0.85) {$\alpha_{\text{normal}}$};
+
+  % Aclaración de ambas convenciones
+  \node[below, font=\footnotesize, align=center] at (0, -2.0) {
+    $\alpha_{\text{plano}}$ (eje a plano espira): $\Phi_B = B A \cos(90^\circ - \alpha) = B A \sin\alpha_{\text{plano}}$ \\
+    $\alpha_{\text{normal}}$ (eje a normal $\hat{n}$): $\Phi_B = B A \cos\alpha_{\text{normal}}$
+  };
 
 \end{tikzpicture}
 \end{document}
