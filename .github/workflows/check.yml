@@ -9,7 +9,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    name: Verificación Analítica, Linter LaTeX, SVG y Renderizado KaTeX
+    name: Verificación Analítica, Linter LaTeX, SVG, KaTeX y Mutación
 
     steps:
       - name: Clonar repositorio
@@ -48,18 +48,29 @@ jobs:
           python scripts/verificar_numericos.py
           python -c "import json, sys; sys.path.insert(0, '.'); from scripts.verificar_numericos import NUMERICAL_REGISTRY; exp = json.load(open('scripts/esperados.json', encoding='utf-8')); actual = len(NUMERICAL_REGISTRY); expected = exp['ejercicios_numericos_total']; print(f'Ejercicios numéricos: {actual} / esperados: {expected}'); sys.exit(0 if actual == expected else 1)"
 
-      - name: 5. Iniciar Servidor HTTP Local
+      - name: 5. Ejecutar Suite de Pruebas de Mutación
+        run: |
+          python scripts/test_mutacion.py
+
+      - name: 6. Iniciar Servidor HTTP Local
         run: |
           python -m http.server 8080 &
           sleep 2
 
-      - name: 6. Ejecutar Auditoría KaTeX en Navegador (Playwright / Chromium Headless)
+      - name: 7. Ejecutar Auditoría KaTeX y DOM en Navegador (Playwright Headless)
         run: |
           python scripts/verify_browser_katex.py --port 8080
 
-      - name: 7. Subir Reporte de Verificación como Artefacto
+      - name: 8. Generar Tabla Resumen Automatizada en NOTAS_REVISION.md
+        run: |
+          python scripts/generar_resumen.py
+
+      - name: 9. Subir Reportes de Verificación como Artefactos
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: salida_verificar.txt
-          path: scripts/salida_verificar.txt
+          name: reportes-verificacion
+          path: |
+            scripts/salida_verificar.txt
+            scripts/salida_figuras.txt
+            scripts/reporte_browser.json
