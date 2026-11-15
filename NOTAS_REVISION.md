@@ -198,8 +198,13 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
   ¡La fuerza magnética frena al carrito hacia la izquierda!
 - Ecuación diferencial:
   $$m\frac{dv}{dt} = -\frac{B_0^2 a^2}{R}v \implies v(t) = v_0 e^{-t/\tau}, \quad \tau = \frac{m R}{B_0^2 a^2}$$
-- Distancia máxima de penetración (si la espira no entra completamente):
-  $$x_{max} = \int_0^\infty v(t) dt = v_0 \tau = \frac{m v_0 R}{B_0^2 a^2}$$
+- Distancia máxima de penetración (válida si el largo de la espira en avance $w > x_{\max}$):
+  $$m v \frac{dv}{dx} = -\frac{B_0^2 a^2}{R} v \implies m(v - v_0) = -\frac{B_0^2 a^2}{R} x \implies v(x) = v_0 - \frac{B_0^2 a^2}{m R} x$$
+  Haciendo $v = 0$:
+  $$x_{\max} = \frac{m v_0 R}{B_0^2 a^2}$$
+- **Condición geométrica y caso alternativo:**
+  - **Caso 1 ($w > x_{\max}$):** La espira se frena y se detiene completamente ($v = 0$) en $x = x_{\max}$ mientras aún está penetrando, quedando parcialmente inmersa.
+  - **Caso 2 ($w \le x_{\max}$):** La espira ingresa completamente al campo en $x = w$ antes de detenerse, con velocidad residual $v_f = v_0 - \frac{B_0^2 a^2 w}{m R} > 0$. Una vez dentro, el área inmersa es constante ($A = a \cdot w$), por lo que $\phi_B = \text{cte} \implies \varepsilon_{ind} = 0 \implies i = 0 \implies \vec{F}_B = \vec{0}$. Por el Principio de Inercia de Newton, el carrito continúa avanzando indefinidamente con velocidad constante $v_f$.
 
 ---
 
@@ -224,13 +229,24 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 - fem inducida: $\varepsilon(t) = \frac{\mu_0 b \ln 2}{2\pi\tau} I_0 e^{-t/\tau}$ en **sentido horario**.
 
 ### 7.3. Ayudantía 11 Problema 4: Solenoide con Espira Inclinada en Ángulo $\alpha$
-- Solenoide largo de radio $a$, densidad de vueltas $n$, campo interno $\vec{B} = \mu_0 n I \hat{z}$.
-- Espira de radio $b < a$ inclinada de modo que su vector normal forma ángulo $\alpha$ con $\hat{z}$.
-- Flujo sobre la espira: $\phi_B = \vec{B}\cdot\hat{n} (\pi b^2) = (\mu_0 n I)(\pi b^2) \cos\alpha$.
-- Inductancia mutua:
-  $$M = \frac{\phi_B}{I} = \mu_0 n \pi b^2 \cos\alpha$$
-- fem inducida con $I(t) = I_0 \sin(\omega t)$:
-  $$\varepsilon(t) = -M \frac{dI}{dt} = -M I_0 \omega \cos(\omega t) = -\mu_0 n \pi b^2 \cos\alpha\,I_0 \omega \cos(\omega t)$$
+- Solenoide largo de radio $a$, densidad de vueltas $n$, campo interno uniforme $\vec{B} = \mu_0 n I \hat{z}$.
+- Espira circular de radio $b < a$ centrada en el interior de la bobina.
+- **Distinción crucial de convención geométrica según la figura oficial del certamen:**
+  - **Convención de la figura oficial del PDF (ángulo entre eje y plano de la espira):** En el diagrama original de la Ayudantía 11, el arco $\alpha$ está acotado entre el eje longitudinal horizontal ($\hat{z}$) y el *plano* geométrico de la espira circular. Dado que la normal unitaria $\hat{n}$ es ortogonal a dicho plano, el ángulo entre $\vec{B}$ y $\hat{n}$ es el ángulo complementario: $\theta_n = 90^\circ - \alpha$.
+    - $\vec{B}\cdot\hat{n} = B \cos(90^\circ - \alpha) = B \sin\alpha$.
+    - Flujo magnético sobre la espira: $\phi_B(t) = (\mu_0 n I(t))(\pi b^2)\sin\alpha = \mu_0 n \pi b^2 \sin\alpha\,I(t)$.
+    - Inductancia mutua: $M = \frac{\phi_B(t)}{I(t)} = \mu_0 n \pi b^2 \sin\alpha$.
+    - fem inducida con $I(t) = I_0 \sin(\omega t)$:
+      $$\varepsilon(t) = -M \frac{dI}{dt} = -\mu_0 n \pi b^2 \sin\alpha\,I_0 \omega \cos(\omega t)$$
+    - *Chequeo de casos límite:*
+      - Si $\alpha = 0^\circ$ (espira paralela al eje longitudinal): las líneas de campo pasan rasantes a la espira, el flujo es cero y $M = 0$, coincidiendo con $\sin(0^\circ) = 0$.
+      - Si $\alpha = 90^\circ$ (espira ortogonal al eje longitudinal): el campo incide frontalmente, el flujo es máximo y $M = \mu_0 n \pi b^2$, coincidiendo con $\sin(90^\circ) = 1$.
+  - **Convención alternativa (ángulo entre eje y vector normal $\hat{n}$):** Si un texto define $\alpha$ como el ángulo entre el eje longitudinal $\hat{z}$ y el *vector normal* $\hat{n}$ de la espira:
+    - $\vec{B}\cdot\hat{n} = B \cos\alpha$.
+    - $\phi_B(t) = \mu_0 n \pi b^2 \cos\alpha\,I(t)$.
+    - $M = \mu_0 n \pi b^2 \cos\alpha$.
+    - $\varepsilon(t) = -\mu_0 n \pi b^2 \cos\alpha\,I_0 \omega \cos(\omega t)$.
+  - Ambas variantes han sido comprobadas con SymPy en `scripts/verificar.py`. La web presenta la convención de la figura oficial ($\sin\alpha$) con una nota aclaratoria sobre la convención alternativa ($\cos\alpha$).
 
 ### 7.4. Pauta C3 2026-1 Problema 2: Rollo con Espira Central Pequeña
 - Rollo plano de $N$ espiras de radio $R$. Espira central de radio $r \ll R$.
@@ -334,36 +350,96 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 
 ## 12. ESTADO DE VERIFICACIÓN ANALÍTICA
 
-### Verificado con SymPy (scripts/verificar.py)
-1. Integrales de corriente:
-   - Densidad escalonada: $I = \frac{5}{2}\pi J_0 R^2 \implies J_0 = \frac{2I}{5\pi R^2}$.
-   - Perfil parabólico: $I_T = \pi J_0 a^2$.
-   - Dependencia angular: $I = \frac{\pi \alpha R_1^2}{2}$.
-   - Perfil lineal cilíndrico: $I_{cil} = \frac{2\pi \beta R^3}{3}$.
-2. Integrales de campo y Ampère:
-   - Coaxial escalonado en $r = 3R/4$: $B_{esc} = \frac{19}{24}\mu_0 J_0 R$ vs $B_{unif} = \frac{15}{16}\mu_0 J_0 R$.
-   - Coaxial asimétrico: $B(3R/2) = \frac{\mu_0 J_0 R}{3}$, $B(5R) = -\frac{23}{10}\mu_0 J_0 R$.
-   - Superposición fuera de eje: $\beta = \frac{3I}{4\pi R^3}$.
-   - Toroide rectangular: $B(r) = \frac{\mu_0 N I}{2\pi r}$, $L = \frac{\mu_0 N^2 h}{2\pi}\ln(b/a)$.
-3. Flujos magnéticos y fem de Faraday:
-   - Espira alejándose de cable: $\phi_B(t) = \frac{\mu_0 I b}{2\pi}\ln\left(1 + \frac{a}{d_0+vt}\right)$, $\varepsilon(t) = \frac{\mu_0 I b v a}{2\pi (d_0+vt)(d_0+vt+a)}$.
-   - Rectángulo en $B(y,t) = \alpha y^2 e^{-\beta t}\hat{k}$: $\phi_B(t) = \frac{\alpha L}{3}[(C+H)^3 - C^3] e^{-\beta t}$, $\varepsilon(t) = \frac{\alpha \beta L}{3}[(C+H)^3 - C^3] e^{-\beta t}$.
-   - Cable y rectángulo: $\phi_B = \frac{\mu_0 b \ln 2}{2\pi} I$, $M = \frac{\mu_0 b \ln 2}{2\pi}$.
-   - Solenoide y espira inclinada: $\phi_B = \mu_0 n \pi b^2 \cos\alpha I$, $M = \mu_0 n \pi b^2 \cos\alpha$.
-   - Bobinas concéntricas: $M = \mu_0 \frac{N_i N_e \pi R^2}{l}$.
-   - Bobina y espira central: $M = \frac{N \mu_0 \pi r^2}{2R}$, $\varepsilon = \frac{N \mu_0 \pi r^2 I_0}{2R\tau} e^{-t/\tau}$.
-4. Rieles y dinámicas:
-   - Velocidad terminal: $v_{term} = \frac{mg R}{B_0^2 L^2}$, balance $P_{mec} = P_{Joule} = \frac{m^2 g^2 R}{B_0^2 L^2}$.
-   - Carrito frenado: $v(t) = v_0 e^{-t/\tau}$ con $\tau = \frac{m R}{B_0^2 a^2}$, penetración $x_{max} = \frac{m v_0 R}{B_0^2 a^2}$.
-5. Circuitos transientes y oscilantes:
-   - Igualdad $\tau_L = \tau_C \implies L = R^2 C = (370)^2(5\times 10^{-6}) = 0.6845\text{ H}$.
-   - Descarga RC: $I_C(t) = 0.303 e^{-t/1.85\text{ ms}}\text{ A}$.
-   - Oscilador RLC: verificación simbólica de que $q(t)$ del formulario satisface exactamente la ecuación diferencial $-L \ddot{q} - R \dot{q} - q/C = 0$.
+### 12.1. Salida Completa de Verificación SymPy (scripts/verificar.py)
+A continuación se transcribe la salida exacta y completa de la ejecución de `python scripts/verificar.py` en la terminal (código de salida `0`):
 
-### Solo razonado, revisar a mano
-1. Argumentación termodinámica y molecular de por qué las pérdidas por histéresis magnética en el acero aumentan el rendimiento frente al aluminio en cocinas de inducción.
-2. Comportamiento en altas frecuencias del efecto pelicular real (Skin Depth $\delta = \sqrt{2/\omega\mu\sigma}$ continuo) frente al modelo escalonado aproximado propuesto por el equipo docente en la Pauta C3 2026-1.
-3. Tratamiento de los efectos de borde en la inductancia mutua para solenoides finitos cuando $l \approx 2R$.
+```text
+======================================================================
+INICIANDO VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY
+======================================================================
+
+--- 1. Corrientes Totales por Integración ---
+[PASS] Pauta C3 P1a: Corriente escalonada I = (5/2)*pi*J0*R^2
+[PASS] Pauta C3 P1a: J0 despejado = 2*I / (5*pi*R^2)
+[PASS] Ayudantía 9 P2a: Corriente parabólica I_T = pi*J0*a^2
+[PASS] Ayudantía 9 P4: Corriente angular interior I_1 = (pi*alpha*R1^2)/2
+[PASS] Ayudantía 9 P4: alpha para I_1 = I_2
+[PASS] Ayudantía 9 P3: Corriente cilindro macizo I_cil = (2/3)*pi*beta*R^3
+[PASS] Ayudantía 9 P3: Condición By = 0 en origen -> beta = 3I / (4*pi*R^3)
+
+--- 2. Ley de Ampère y Continuidad de B(r) ---
+[PASS] Pauta C3 P1b: B en r = R/2 por izquierda
+[PASS] Pauta C3 P1b: Continuidad en r = R/2 (Reg1 = Reg2)
+[PASS] Pauta C3 P1b: Continuidad en r = R (Reg2 = Reg3)
+[PASS] Pauta C3 P1c: B escalonado en 3R/4 = (19/24)*mu0*J0*R
+[PASS] Pauta C3 P1c: B uniforme en 3R/4 = (15/16)*mu0*J0*R
+[PASS] Pauta C3 P1c: Desigualdad B_esc < B_unif
+[PASS] Ayudantía 9 P1b: B(3R/2) = (1/3)*mu0*J0*R
+[PASS] Ayudantía 9 P1: Corriente neta coaxial = -23*pi*J0*R^2
+[PASS] Ayudantía 9 P1c: B(5R) = -(23/10)*mu0*J0*R
+
+--- 3. Flujos con Logaritmos y Ley de Faraday ---
+[PASS] Simulacro P2: Flujo magnético logarítmico
+[PASS] Simulacro P2: fem inducida exacta
+[PASS] Simulacro P2: Límite t -> inf de phi = 0
+[PASS] Simulacro P2: Límite t -> inf de fem = 0
+[PASS] Simulacro P2: fem con v = 0 es nula
+[PASS] Simulacro P1: Flujo en 1 vuelta del toroide
+[PASS] Simulacro P1: Autoinductancia L del toroide
+[PASS] Simulacro P1: Equivalencia energía volumen vs (1/2)*L*I^2
+[PASS] Ayudantía 11 P2: Flujo cable-rectángulo = (mu0*b*ln(2)/(2*pi))*I
+[PASS] Ayudantía 11 P2: Inductancia mutua M = mu0*b*ln(2)/(2*pi)
+[PASS] Ayudantía 11 P3: Flujo con B(y,t)
+[PASS] Ayudantía 11 P3: fem inducida = (alpha*beta*L/3)*[(C+H)^3 - C^3]*e^(-beta*t)
+[PASS] Ayudantía 11 P4: Inductancia mutua (convención figura PDF: plano-eje -> sin(alpha))
+[PASS] Ayudantía 11 P4: fem inducida (figura PDF: sin(alpha))
+[PASS] Ayudantía 11 P4: Inductancia mutua (convención alternativa: normal-eje -> cos(alpha))
+
+--- 4. Dinámica de Rieles y Balance de Potencia ---
+[PASS] Ayudantía 10 P3: Balance exacto P_mec == P_Joule en v_term
+[PASS] Ayudantía 10 P4: Penetración x_max = m*v0*R / (B0^2 * a^2) si ancho w > x_max
+[PASS] Ayudantía 10 P4: Velocidad residual vf en x = w si ancho w <= x_max
+
+--- 5. Circuito RLC y Ecuación Diferencial Oficial ---
+[PASS] RLC Formulario: Condición inicial q(0) == Q0
+[PASS] RLC Formulario: Condición inicial i(0) == 0
+[PASS] RLC Formulario: Satisface d2q/dt2 + 2*alpha*dq/dt + omega0^2*q == 0
+
+--- 6. Circuito Transiente Conmutado (Pauta C3 P3) ---
+[PASS] Pauta C3 P3a: L = (370)^2 * 5e-6 = 0.6845 H
+[PASS] Pauta C3 P3b: Ifuente(inf) = 112 / 370 =~ 0.3027 A
+[PASS] Pauta C3 P3c: tau_RC = 1.85 ms
+
+======================================================================
+RESUMEN DE PRUEBAS SYMPY: 40/40 CORRECTAS
+======================================================================
+```
+
+---
+
+### 12.2. Tabla de Sentidos, Vectores Normales y Signos (Razonado a Mano)
+
+> [!NOTE]
+> La verificación de signos algebraicos según el vector normal elegido ($\hat{n}$) y la orientación física del sentido de circulación mediante la **Ley de Lenz** no puede ser automatizada con SymPy de forma geométrica tridimensional; por ende, se presenta a continuación la tabla de verificación formal **razonada a mano** para cada uno de los problemas clave de inducción.
+
+| Problema / Sistema | Campo Externo $\vec{B}_{\text{ext}}$ | Vector Normal $\hat{n}$ y Sentido (+) | Variación de Flujo $\frac{d\Phi_B}{dt}$ | Signo de fem $\varepsilon = -\frac{d\Phi_B}{dt}$ | Campo Inducido $\vec{B}_{\text{ind}}$ (Lenz) | Sentido Físico de Circulación (razonado a mano) | Comportamiento Dinámico / Comprobación Física |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Espira alejándose de cable infinito** *(Simulacro P2 / M4 P7)* | $\vec{B} = -\frac{\mu_0 I}{2\pi x}\hat{k}$ ($\otimes$, entrante al plano $xy$) | $\hat{n} = -\hat{k}$ ($\otimes$)<br>Sentido (+): **Horario** | **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues la distancia $x(t) = d_0 + vt$ crece y el campo se debilita. | $\varepsilon > 0$<br>(circula en sentido +) | $\vec{B}_{\text{ind}} = \otimes$ (entrante, busca compensar el flujo perdido) | **Horario** *(razonado a mano)* | Por la regla de la mano derecha, la corriente en la rama izquierda (más cercana al cable) sube ($+\hat{\jmath}$), sintiendo una fuerza magnética de atracción hacia el cable ($-\hat{\imath}$), frenando el alejamiento. |
+| **Varilla conductora en rieles verticales** *(Ayudantía 10 P3 / M5 P5)* | $\vec{B} = -B_0\hat{k}$ ($\otimes$, entrante uniforme) | $\hat{n} = -\hat{k}$ ($\otimes$)<br>Sentido (+): **Horario** | **Positiva** ($\frac{d\Phi_B}{dt} > 0$), pues al caer la varilla con velocidad $v$ hacia abajo, el área $A(y) = L y$ aumenta. | $\varepsilon < 0$<br>(circula en sentido opuesto al +) | $\vec{B}_{\text{ind}} = \odot$ (saliente, se opone al aumento de campo entrante) | **Antihorario** *(razonado a mano)* | La corriente inducida en la varilla fluye hacia la derecha ($+\hat{\imath}$). La fuerza magnética resultante es $\vec{F}_B = I_{\text{ind}}(L\hat{\imath})\times(-B_0\hat{k}) = +I_{\text{ind}}L B_0\hat{\jmath}$ (hacia arriba), frenando la caída hasta alcanzar la velocidad límite terminal $v_{term}$. |
+| **Carrito conductor entrando a zona con campo** *(Ayudantía 10 P4 / M5 P6)* | $\vec{B} = +B_0\hat{k}$ ($\odot$, saliente uniforme) | $\hat{n} = +\hat{k}$ ($\odot$)<br>Sentido (+): **Antihorario** | **Positiva** ($\frac{d\Phi_B}{dt} > 0$), pues penetra con velocidad $v$ aumentando el área inmersa ($dA/dt = a v > 0$). | $\varepsilon < 0$<br>(circula en sentido opuesto al +) | $\vec{B}_{\text{ind}} = \otimes$ (entrante, se opone al incremento de flujo saliente) | **Horario** *(razonado a mano)* | En el alambre frontal delantero inmerso, la corriente circula hacia abajo ($-\hat{\jmath}$). La fuerza magnética es $\vec{F}_B = I_{\text{ind}}(-a\hat{\jmath})\times(B_0\hat{k}) = -I_{\text{ind}}a B_0\hat{\imath}$ (hacia atrás): la fuerza siempre frena al móvil. |
+| **Cable infinito con $I(t) = I_0 e^{-t/\tau}$ y rectángulo** *(Ayudantía 11 P2 / M6 P6)* | $\vec{B} = -\frac{\mu_0 I(t)}{2\pi x}\hat{k}$ ($\otimes$, entrante al plano) | $\hat{n} = -\hat{k}$ ($\otimes$)<br>Sentido (+): **Horario** | **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues la corriente en el cable se extingue exponencialmente en el tiempo. | $\varepsilon > 0$<br>(circula en sentido +) | $\vec{B}_{\text{ind}} = \otimes$ (entrante, intenta sostener el campo que desaparece) | **Horario** *(razonado a mano)* | Por la regla de la mano derecha, pulgar hacia adentro ($\otimes$) induce circulación horaria, conforme al principio de inercia electromagnética de Lenz. |
+| **Rectángulo en campo dependiente $B(y,t) = \alpha y^2 e^{-\beta t}\hat{k}$** *(Ayudantía 11 P3 / M4 P8)* | $\vec{B} = +\alpha y^2 e^{-\beta t}\hat{k}$ ($\odot$, saliente espacial y temporal) | $\hat{n} = +\hat{k}$ ($\odot$)<br>Sentido (+): **Antihorario** | **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues el factor $e^{-\beta t}$ decae para todo punto del espacio. | $\varepsilon > 0$<br>(circula en sentido +) | $\vec{B}_{\text{ind}} = \odot$ (saliente, refuerza el flujo decreciente) | **Antihorario** *(razonado a mano)* | Pulgar hacia afuera ($\odot$) produce giro antihorario en los dedos, sosteniendo el flujo inductivo. |
+| **Rollo plano circular con pequeña espira concéntrica** *(Pauta C3 2026-1 P2 / M6 P7c)* | $\vec{B}(t) = +\frac{N\mu_0 I(t)}{2R}\hat{k}$ ($\odot$, saliente por corriente antihoraria) | $\hat{n} = +\hat{k}$ ($\odot$)<br>Sentido (+): **Antihorario** | Para $t < 0$: nula ($\frac{d\Phi_B}{dt} = 0$).<br>Para $t \ge 0$: **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues $I(t) = I_0 e^{-t/\tau}$ decae. | Para $t < 0$: $\varepsilon = 0$.<br>Para $t \ge 0$: $\varepsilon > 0$ (en sentido +). | Para $t < 0$: ninguna.<br>Para $t \ge 0$: $\vec{B}_{\text{ind}} = \odot$ (saliente, apoya al campo saliente externo en caída). | Para $t < 0$: **Sin fem**.<br>Para $t \ge 0$: **Antihorario** *(razonado a mano)* | La espira central busca contrarrestar la pérdida de flujo saliente inyectando líneas de campo propias en el mismo sentido original ($+\hat{k}$). |
+
+---
+
+### 12.3. Aspectos Conceptuales Razonados a Mano
+1. **Cocina de inducción (Pauta C3 Conceptual):**
+   - El fondo ferromagnético del sartén de acero concentra las líneas de campo alterno de alta frecuencia y disipa calor mediante corrientes de Foucault (efecto Joule $I^2 R$) y pérdidas por histéresis del ciclo ferromagnético. En contraste, la greda (cerámica dieléctrica) carece de electrones libres ($\rho \to \infty$), por lo que no se generan corrientes inducidas y no hay calentamiento apreciable.
+2. **Aproximación de modelo escalonado vs. efecto pelicular continuo (Pauta C3 P1):**
+   - En régimen senoidal real, la densidad de corriente decae exponencialmente desde la superficie hacia el eje según $J(r) \approx J_s e^{-(R-r)/\delta}$ con profundidad de penetración $\delta = \sqrt{2/(\omega \mu \sigma)}$. La pauta adopta un modelo escalonado discreto de dos capas concéntricas ($J_0$ y $3J_0$) para hacer el problema analíticamente soluble en el certamen sin recurrir a funciones de Bessel de orden cero.
+3. **Efectos de borde en inductancia mutua:**
+   - La fórmula $M = \mu_0 n N \pi a^2$ asume que el solenoide es infinitamente largo respecto a su diámetro ($l \gg 2a$). Para bobinas cortas, el factor de desmagnetización reduce el campo axial en los extremos a la mitad ($B_{borde} \approx \frac{1}{2}B_{centro}$), provocando un coeficiente de acoplamiento magnético $k < 1$.
 
 ---
 
