@@ -22,7 +22,7 @@ PATTERN_SINGLE_SLASH = re.compile(r"(?<!\\)\\([tbnrfvux][a-zA-Z]*)")
 PATTERN_OVERESCAPED = re.compile(r"\\{4,}")
 
 def lint_files():
-    data_dir = os.path.join(os.path.dirname(__file__), "..", "js", "data")
+    data_dir = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("DATA_DIR") or os.path.join(os.path.dirname(__file__), "..", "js", "data")
     js_files = sorted(glob.glob(os.path.join(data_dir, "*.js")))
     
     total_violations = 0

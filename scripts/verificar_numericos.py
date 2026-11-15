@@ -19,7 +19,7 @@ import sys
 import math
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BASE_DIR, 'js', 'data')
+DATA_DIR = os.environ.get("DATA_DIR") or (sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith('-') else os.path.join(BASE_DIR, 'js', 'data'))
 
 # Constantes físicas fundamentales
 MU_0 = 4.0 * math.pi * 1e-7      # H/m

@@ -32,7 +32,7 @@ if sys.stdout.encoding != 'utf-8':
         pass
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IMG_DIR = os.path.join(BASE_DIR, 'img')
+IMG_DIR = os.environ.get("IMG_DIR") or (sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith('-') else os.path.join(BASE_DIR, 'img'))
 TEX_DIR = os.path.join(BASE_DIR, 'scripts', 'figuras_tex')
 PREVIEW_DIR = os.path.join(IMG_DIR, '_preview')
 OUTPUT_REPORT = os.path.join(BASE_DIR, 'scripts', 'salida_figuras.txt')
