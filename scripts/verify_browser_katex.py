@@ -4,8 +4,9 @@ FIS120 / FIS12125 · Certamen 3 · UTFSM
 Script de Verificación de Renderizado KaTeX y Ausencia de Errores en Navegador
 Soporta recorrido interactivo exhaustivo con Playwright haciendo click en todos los
 botones de interacción ("Comprobar", "Mostrar Pista / Paso 1", "Mostrar Siguiente Paso",
-"Solución Completa Visible", "Mostrar Pauta Modelo", "Revelar Todo") y validación de
-0 errores de consola y 0 errores de KaTeX, con fallback a Headless Chrome CLI.
+"Solución Completa Visible", "Mostrar Pauta Modelo", "Revelar Todo"), pasada de revelado
+con ?reveal=all y App.revealAll(), confirmando con un test que todos los .step-box y
+.feedback-box queden visibles, y validando 0 errores de consola y 0 errores de KaTeX.
 """
 
 import os
@@ -71,9 +72,11 @@ def find_system_browser():
 
 def check_with_playwright(host, port, browser_path=None):
     """
-    Recorrido interactivo exhaustivo con Playwright:
-    Navega por todos los módulos, interactúa haciendo click en botones de pasos,
-    pistas, soluciones y comprobaciones, y valida ausencia total de errores.
+    Recorrido interactivo y de revelado exhaustivo con Playwright:
+    1. Recorre módulos interactuando con botones y opciones.
+    2. Abre con ?reveal=all e invoca App.revealAll().
+    3. Confirma que el 100% de .step-box y .feedback-box queden visibles.
+    4. Valida ausencia total de errores de consola y errores de KaTeX.
     """
     try:
         from playwright.sync_api import sync_playwright
@@ -124,14 +127,14 @@ def check_with_playwright(host, port, browser_path=None):
         page.on("pageerror", lambda err: page_errors.append(str(err)))
 
         for mod in MODULES:
+            # 1. Pasada interactiva: navegar al módulo estándar
             mod_url = f"http://{host}:{port}/#{mod}"
             try:
                 page.goto(mod_url, wait_until="networkidle", timeout=10000)
             except Exception:
                 page.goto(mod_url, timeout=10000)
-                page.wait_for_timeout(400)
+                page.wait_for_timeout(300)
 
-            # 1. Interactuar con todos los botones interactivos del módulo
             interaction_count = 0
             for round_idx in range(3):
                 buttons = page.locator("button").all()
@@ -156,38 +159,65 @@ def check_with_playwright(host, port, browser_path=None):
                             btn.click(timeout=1000)
                             clicked_any = True
                             interaction_count += 1
-                            page.wait_for_timeout(30)
+                            page.wait_for_timeout(25)
                     except Exception:
                         pass
                 if not clicked_any:
                     break
 
-            # 2. Hacer click en opciones interactivas
             options = page.locator(".option-item").all()
             for opt in options[:8]:
                 try:
                     if opt.is_visible():
-                        opt.click(timeout=400)
-                        page.wait_for_timeout(20)
+                        opt.click(timeout=300)
+                        page.wait_for_timeout(15)
                 except Exception:
                     pass
 
-            # 3. Revelar todo para verificar que no queden errores ocultos
+            # 2. Pasada de revelado: abrir con ?reveal=all y ejecutar App.revealAll()
+            reveal_url = f"http://{host}:{port}/?reveal=all#{mod}"
             try:
-                page.evaluate("""() => {
-                    if (window.App && window.App.revealAll) window.App.revealAll();
-                    if (window.renderMathInElement) renderMathInElement(document.body);
-                }""")
+                page.goto(reveal_url, wait_until="networkidle", timeout=10000)
             except Exception:
-                pass
+                page.goto(reveal_url, timeout=10000)
+                page.wait_for_timeout(300)
+
+            # Ejecutar App.revealAll() de acuerdo con la especificación exacta
+            page.evaluate("""() => {
+                if (typeof App !== 'undefined' && App.revealAll) App.revealAll();
+                if (window.renderMathInElement) renderMathInElement(document.body);
+            }""")
             page.wait_for_timeout(80)
 
-            # 4. Inspeccionar el DOM resultante
+            # 3. Test de visibilidad: confirmar que todos los .step-box y .feedback-box queden visibles
+            vis_check = page.evaluate("""() => {
+                const area = document.getElementById('main-content-area') || document.body;
+                const stepBoxes = Array.from(area.querySelectorAll('.step-box'));
+                const feedbackBoxes = Array.from(area.querySelectorAll('.feedback-box'));
+                
+                const hiddenSteps = stepBoxes.filter(el => {
+                    const style = window.getComputedStyle(el);
+                    return style.display === 'none' || style.visibility === 'hidden' || !el.classList.contains('visible');
+                });
+                
+                const hiddenFeedback = feedbackBoxes.filter(el => {
+                    const style = window.getComputedStyle(el);
+                    return style.display === 'none' || style.visibility === 'hidden' || !el.classList.contains('visible');
+                });
+                
+                return {
+                    totalSteps: stepBoxes.length,
+                    hiddenSteps: hiddenSteps.length,
+                    totalFeedback: feedbackBoxes.length,
+                    hiddenFeedback: hiddenFeedback.length
+                };
+            }""")
+
+            # 4. Inspeccionar el DOM resultante (fórmulas, errores KaTeX, comandos LaTeX sueltos)
             num_formulas = page.locator(".katex").count()
             katex_error_els = page.locator(".katex-error").all()
             num_katex_errors = len(katex_error_els)
 
-            # Extraer posibles comandos TeX no renderizados en texto visible fuera de fórmulas KaTeX
             stray_latex = page.evaluate("""() => {
                 const area = document.getElementById('main-content-area') || document.body;
                 const walker = document.createTreeWalker(
@@ -220,6 +250,10 @@ def check_with_playwright(host, port, browser_path=None):
                 failures.append(f"{num_katex_errors} errores KaTeX")
             if stray_latex and len(stray_latex) > 0:
                 failures.append(f"{len(stray_latex)} comandos LaTeX sueltos: {stray_latex[:3]}")
+            if vis_check['hiddenSteps'] > 0:
+                failures.append(f"{vis_check['hiddenSteps']}/{vis_check['totalSteps']} .step-box no visibles tras revealAll")
+            if vis_check['hiddenFeedback'] > 0:
+                failures.append(f"{vis_check['hiddenFeedback']}/{vis_check['totalFeedback']} .feedback-box no visibles tras revealAll")
             if console_errors:
                 failures.append(f"{len(console_errors)} errores de consola JS")
             if page_errors:
@@ -231,7 +265,8 @@ def check_with_playwright(host, port, browser_path=None):
                 for ce in console_errors[:3]:
                     print(f"       -> Consola: {ce}")
             else:
-                print(f"[OK]   {mod:5s}: 0 errores de consola | {num_formulas:3d} fórmulas renderizadas | {interaction_count} interacciones")
+                steps_info = f"{vis_check['totalSteps']} pasos y {vis_check['totalFeedback']} feedbacks visibles"
+                print(f"[OK]   {mod:5s}: 0 errores consola | {num_formulas:3d} fórmulas | {steps_info}")
 
             total_formulas += num_formulas
             total_modules += 1
@@ -247,7 +282,7 @@ def check_with_playwright(host, port, browser_path=None):
     }
 
 def check_with_chrome_cli(browser_bin, host, port):
-    """Fallback usando Chrome/Chromium en modo headless dump-dom."""
+    """Fallback usando Chrome/Chromium en modo headless dump-dom con ?reveal=all."""
     all_ok = True
     total_formulas = 0
     total_modules = 0
