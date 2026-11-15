@@ -26,6 +26,10 @@ const App = {
     this.setupEventListeners();
     this.updateHeaderStats();
 
+    // Render formulas in the formula drawer
+    const drawer = document.getElementById('formula-drawer');
+    if (drawer) this.renderMathInElement(drawer);
+
     // Check URL hash or default to mod0
     const hash = window.location.hash.replace('#', '');
     if (hash && this.modules.some(m => m.id === hash)) {
@@ -101,7 +105,15 @@ const App = {
     const container = document.getElementById('main-content-area');
     if (!container) return;
 
-    const dataObj = window[`MODULE_DATA_${modId.toUpperCase()}`];
+    let dataObj = window[`MODULE_DATA_${modId.toUpperCase()}`];
+    if (!dataObj) {
+      try {
+        dataObj = eval(`typeof MODULE_DATA_${modId.toUpperCase()} !== 'undefined' ? MODULE_DATA_${modId.toUpperCase()} : null`);
+      } catch (e) {
+        dataObj = null;
+      }
+    }
+
     if (!dataObj) {
       container.innerHTML = `
         <div class="theory-card">
@@ -210,9 +222,14 @@ const App = {
   },
 
   renderMathInElement(el) {
-    if (!el || typeof renderMathInElement !== 'function') return;
+    if (!el) return;
+    const renderFn = window.renderMathInElement || (typeof renderMathInElement === 'function' ? renderMathInElement : null);
+    if (!renderFn) {
+      setTimeout(() => this.renderMathInElement(el), 200);
+      return;
+    }
     try {
-      renderMathInElement(el, {
+      renderFn(el, {
         delimiters: [
           { left: '$$', right: '$$', display: true },
           { left: '$', right: '$', display: false },
