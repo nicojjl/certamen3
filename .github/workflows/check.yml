@@ -35,21 +35,18 @@ jobs:
       - name: 2. Validar Calidad y Formato de Figuras SVG (< 120 KB, XML, sin URLs)
         run: |
           python scripts/check_figures.py
+          python -c "import json, glob, sys; exp = json.load(open('scripts/esperados.json', encoding='utf-8')); actual = len(glob.glob('img/*.svg')); expected = exp['figuras_svg_total']; print(f'Figuras SVG obtenidas: {actual} / esperadas: {expected}'); sys.exit(0 if actual == expected else 1)"
 
-      - name: 3. Ejecutar Verificación Analítica SymPy y Validar Conteo Mínimo
+      - name: 3. Ejecutar Verificación Analítica SymPy y Validar Conteo Exacto
         run: |
           python scripts/verificar.py > scripts/salida_verificar.txt
           cat scripts/salida_verificar.txt
-          PASSED_COUNT=$(grep -c "\[PASS\]" scripts/salida_verificar.txt || true)
-          echo "Pruebas analíticas pasadas: $PASSED_COUNT"
-          if [ "$PASSED_COUNT" -lt 87 ]; then
-            echo "ERROR: Se esperaban al menos 87 pruebas [PASS], pero se obtuvieron $PASSED_COUNT"
-            exit 1
-          fi
+          python -c "import json, sys; exp = json.load(open('scripts/esperados.json', encoding='utf-8')); actual = open('scripts/salida_verificar.txt', encoding='utf-8').read().count('[PASS]'); expected = exp['verificar_sympy_pass']; print(f'Pruebas analíticas pasadas: {actual} / esperadas: {expected}'); sys.exit(0 if actual == expected else 1)"
 
       - name: 4. Ejecutar Verificación de Consistencia Numérica
         run: |
           python scripts/verificar_numericos.py
+          python -c "import json, sys; sys.path.insert(0, '.'); from scripts.verificar_numericos import NUMERICAL_REGISTRY; exp = json.load(open('scripts/esperados.json', encoding='utf-8')); actual = len(NUMERICAL_REGISTRY); expected = exp['ejercicios_numericos_total']; print(f'Ejercicios numéricos: {actual} / esperados: {expected}'); sys.exit(0 if actual == expected else 1)"
 
       - name: 5. Iniciar Servidor HTTP Local
         run: |
