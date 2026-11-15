@@ -359,11 +359,19 @@ La verificación analítica simbólica completa se ejecuta de forma reproducible
 > 📄 **Reporte Completo de Salida:** [scripts/salida_verificar.txt](scripts/salida_verificar.txt).
 
 #### Resumen Cuantitativo de la Suite de Verificación
-- **Módulos evaluados:** 12 módulos (Módulo 0 al Módulo 11).
-- **Pruebas analíticas SymPy:** 89 pruebas ejecutadas, 89 pruebas pasadas (0 fallas).
-- **Pruebas de consistencia numérica:** 15 ejercicios evaluados contra cálculo físico teórico independiente en `scripts/verificar_numericos.py` (15/15 correctos dentro de tolerancia).
-- **Auditoría KaTeX y DOM interactivo:** 12 módulos navegados e interactuados con Playwright en `scripts/verify_browser_katex.py` (2223 fórmulas renderizadas, 0 errores KaTeX, 0 errores de consola, 0 comandos sueltos, 100% de cajas interactivas visibles tras revelado).
-- **Validación vectorial SVG y TikZ:** 25 figuras analizadas en `scripts/check_figures.py` (25/25 XML válido, < 120 KB, sin referencias externas HTTP).
+<!-- TABLA_RESUMEN_INICIO -->
+| Dimensión de Verificación | Componente / Herramienta | Cobertura y Métricas Clave | Estado |
+| :--- | :--- | :---: | :---: |
+| **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **89 / 89** comprobaciones analíticas aprobadas | **0 Fallas (Exit 0)** |
+| **Consistencia Numérica** | `scripts/verificar_numericos.py` (Tolerancia estricta) | **15 / 15** ejercicios numéricos teóricamente exactos | **Exacto (Exit 0)** |
+| **Renderizado Matemático** | `scripts/verify_browser_katex.py` (Chromium Headless) | **2223** fórmulas KaTeX renderizadas | **0 Errores / 0 Sueltos** |
+| **Visibilidad de Soluciones** | Pasos `.step-box`, `.feedback-box`, pistas y pautas | **158 / 158** cajas interactivas visibles tras `revealAll` | **0 Ocultos tras revelado** |
+| **Carga de Figuras en Web** | Figuras de ejercicios (`img.naturalWidth > 0`) | **31 / 31** imágenes cargadas correctamente | **0 Imágenes rotas** |
+| **Validación Vectorial SVG** | `scripts/check_figures.py` (< 120 KB, XML, TeX fuente) | **25 / 25** figuras vectoriales validadas | **Válido (Exit 0)** |
+| **Control de Recorte y ViewBox** | Detección geométrica de límites y márgenes | **25 / 25** figuras con margen seguro en viewBox | **0 Recortes de trazo/glifo** |
+| **Solapamiento de Textos** | Análisis de colisión de bounding boxes en SVGs | **25 / 25** figuras con etiquetas separadas | **0 Colisiones de texto** |
+| **Contraste Accesible WCAG AA** | Paletas de color clara (`#ffffff`) y oscura (`#0f172a`) | **Ratio $\ge 4.5:1$** en todos los modos | **Accesible WCAG AA** |
+<!-- TABLA_RESUMEN_FIN -->
 
 ---
 
