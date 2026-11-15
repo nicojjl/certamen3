@@ -4,6 +4,7 @@ FIS120 / FIS12125 · Certamen 3 · UTFSM
 Script de Verificación Analítica Independiente con SymPy
 """
 
+import sys
 import sympy as sp
 
 def verify_all():
@@ -12,16 +13,21 @@ def verify_all():
     print("=" * 70)
     passed = 0
     total = 0
+    failures = []
 
     def check(name, expr1, expr2):
         nonlocal passed, total
         total += 1
-        if isinstance(expr1, bool) or isinstance(expr2, bool):
-            if expr1 == expr2:
+        is_b1 = isinstance(expr1, (bool, sp.logic.boolalg.BooleanAtom))
+        is_b2 = isinstance(expr2, (bool, sp.logic.boolalg.BooleanAtom))
+        if is_b1 or is_b2:
+            if bool(expr1) == bool(expr2):
                 print(f"[PASS] {name}")
                 passed += 1
             else:
-                print(f"[FAIL] {name}: {expr1} != {expr2}")
+                msg = f"[FAIL] {name}: {expr1} != {expr2}"
+                print(msg)
+                failures.append(msg)
             return
         try:
             diff = sp.simplify(expr1 - expr2)
@@ -31,13 +37,16 @@ def verify_all():
                 return
         except Exception:
             pass
-        if abs(float(expr1) - float(expr2)) < 1e-7:
-            print(f"[PASS] {name}")
-            passed += 1
-        else:
-            print(f"[FAIL] {name}: diferencia = {diff}")
-            print(f"       Obtenido: {expr1}")
-            print(f"       Esperado: {expr2}")
+        try:
+            if abs(float(expr1) - float(expr2)) < 1e-7:
+                print(f"[PASS] {name}")
+                passed += 1
+                return
+        except Exception:
+            pass
+        msg = f"[FAIL] {name}\n       Obtenido: {expr1}\n       Esperado: {expr2}"
+        print(msg)
+        failures.append(msg)
 
     # -------------------------------------------------------------
     # 1. CORRIENTES TOTALES POR INTEGRACIÓN
@@ -92,7 +101,7 @@ def verify_all():
     J_unif = sp.Rational(5, 2) * J0
     B_unif_val = (mu0 * J_unif * (sp.Rational(3, 4) * R)) / 2
     check("Pauta C3 P1c: B uniforme en 3R/4 = (15/16)*mu0*J0*R", B_unif_val, sp.Rational(15, 16) * mu0 * J0 * R)
-    check("Pauta C3 P1c: Desigualdad B_esc < B_unif", sp.Rational(19, 24) < sp.Rational(15, 16), True)
+    check("Pauta C3 P1c: Desigualdad B_esc < B_unif", bool(sp.Rational(19, 24) < sp.Rational(15, 16)), True)
 
     # 2.3 Ayudantía 9 P1: Coaxial asimétrico
     # Interior: J1 = J0 (z), Cascarón: 2R < r < 4R, J2 = 2J0 (-z)
@@ -157,15 +166,25 @@ def verify_all():
     # 3.5 Ayudantía 11 P4: Solenoide y espira inclinada ángulo alpha_ang
     alpha_ang = sp.symbols('alpha_ang', real=True)
     n_dens = sp.symbols('n_dens', positive=True)
-    phi_tilted = (mu0 * n_dens * I) * (sp.pi * b**2) * sp.cos(alpha_ang)
-    M_tilted = phi_tilted / I
-    check("Ayudantía 11 P4: Inductancia mutua espira inclinada", M_tilted, mu0 * n_dens * sp.pi * b**2 * sp.cos(alpha_ang))
+    # Convención de la figura oficial del PDF: alpha medido entre el eje longitudinal y el PLANO de la espira.
+    # El vector normal está a (90° - alpha), luego B·n = B*cos(90°-alpha) = B*sin(alpha):
+    phi_tilted_sin = (mu0 * n_dens * I) * (sp.pi * b**2) * sp.sin(alpha_ang)
+    M_tilted_sin = phi_tilted_sin / I
+    check("Ayudantía 11 P4: Inductancia mutua (convención figura PDF: plano-eje -> sin(alpha))", M_tilted_sin, mu0 * n_dens * sp.pi * b**2 * sp.sin(alpha_ang))
+    emf_tilted_sin = -sp.diff(phi_tilted_sin.subs(I, I0 * sp.sin(omega * t if 'omega' in locals() else sp.symbols('omega', positive=True) * t)), t)
+    omega_sym = sp.symbols('omega', positive=True)
+    phi_tilted_t = (mu0 * n_dens * I0 * sp.sin(omega_sym * t)) * (sp.pi * b**2) * sp.sin(alpha_ang)
+    check("Ayudantía 11 P4: fem inducida (figura PDF: sin(alpha))", -sp.diff(phi_tilted_t, t), -mu0 * n_dens * sp.pi * b**2 * sp.sin(alpha_ang) * I0 * omega_sym * sp.cos(omega_sym * t))
+    # Convención alternativa: si alpha fuese el ángulo entre el eje longitudinal y el VECTOR NORMAL de la espira:
+    phi_tilted_cos = (mu0 * n_dens * I) * (sp.pi * b**2) * sp.cos(alpha_ang)
+    M_tilted_cos = phi_tilted_cos / I
+    check("Ayudantía 11 P4: Inductancia mutua (convención alternativa: normal-eje -> cos(alpha))", M_tilted_cos, mu0 * n_dens * sp.pi * b**2 * sp.cos(alpha_ang))
 
     # -------------------------------------------------------------
     # 4. DINÁMICA DE RIELES Y BALANCE DE ENERGÍA
     # -------------------------------------------------------------
     print("\n--- 4. Dinámica de Rieles y Balance de Potencia ---")
-    m, g, B0, R_res, L_len = sp.symbols('m g B0 R_res L_len', positive=True)
+    m, g, B0, R_res, L_len, w_width = sp.symbols('m g B0 R_res L_len w_width', positive=True)
 
     # 4.1 Velocidad terminal
     v_t = m * g * R_res / (B0**2 * L_len**2)
@@ -177,10 +196,16 @@ def verify_all():
 
     # 4.2 Carrito conductor (Ayudantía 10 P4)
     tau_cart = m * R_res / (B0**2 * a**2)
-    v_cart = v0 = sp.symbols('v0', positive=True)
+    v0 = sp.symbols('v0', positive=True)
     v_t_cart = v0 * sp.exp(-t / tau_cart)
     x_stop = sp.integrate(v_t_cart, (t, 0, sp.oo))
-    check("Ayudantía 10 P4: Distancia máxima de penetración x_max = m*v0*R / (B0^2 * a^2)", x_stop, m * v0 * R_res / (B0**2 * a**2))
+    x_max_val = m * v0 * R_res / (B0**2 * a**2)
+    check("Ayudantía 10 P4: Penetración x_max = m*v0*R / (B0^2 * a^2) si ancho w > x_max", x_stop, x_max_val)
+    # Régimen complementario: si el ancho del carrito w <= x_max
+    # Al entrar completamente en x = w, la velocidad es vf = v0 - w / tau_cart > 0
+    # Estando totalmente dentro del campo B0 uniforme, dPhi/dt = 0 -> fem = 0 -> i = 0 -> F_B = 0 -> v = vf = cte
+    v_residual = v0 - (B0**2 * a**2 / (m * R_res)) * w_width
+    check("Ayudantía 10 P4: Velocidad residual vf en x = w si ancho w <= x_max", v_residual, v0 - w_width / tau_cart)
 
     # -------------------------------------------------------------
     # 5. CIRCUITOS RLC Y SOLUCIÓN DE ECUACIÓN DIFERENCIAL
@@ -237,8 +262,16 @@ def verify_all():
     check("Pauta C3 P3c: tau_RC = 1.85 ms", tau_RC, 1.85e-3)
 
     print("\n" + "=" * 70)
-    print(f"RESUMEN DE PRUEBAS SYMPY: {passed}/{total} CORRECTAS (100% EXITOSO)")
+    print(f"RESUMEN DE PRUEBAS SYMPY: {passed}/{total} CORRECTAS")
     print("=" * 70)
+
+    if failures:
+        print("\nRESUMEN DE FALLAS:")
+        for f in failures:
+            print(f)
+        sys.exit(1)
+    else:
+        sys.exit(0)
 
 if __name__ == '__main__':
     verify_all()
