@@ -1,0 +1,12 @@
+# LaTeX intermediate build artifacts
+*.aux
+*.dvi
+*.log
+*_raw.svg
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local figure inspection outputs
+scripts/inspeccion_png/

@@ -27,6 +27,7 @@ STYLE_HEADER = """<style>
     --fig-azul: #0284c7;
     --fig-rojo: #dc2626;
     --fig-verde: #16a34a;
+    --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -34,6 +35,7 @@ STYLE_HEADER = """<style>
       --fig-azul: #38bdf8;
       --fig-rojo: #f87171;
       --fig-verde: #4ade80;
+      --fig-morado: #c084fc;
     }
   }
   [data-theme="dark"] svg, .dark-mode svg {
@@ -41,6 +43,7 @@ STYLE_HEADER = """<style>
     --fig-azul: #38bdf8;
     --fig-rojo: #f87171;
     --fig-verde: #4ade80;
+    --fig-morado: #c084fc;
   }
 </style>"""
 
@@ -68,7 +71,7 @@ def compile_tikz(tex_name):
         return False
 
     # 2. dvisvgm -> svg
-    cmd_dvisvgm = ["dvisvgm", "--no-fonts", "-o", raw_svg_path, dvi_path]
+    cmd_dvisvgm = ["dvisvgm", "--no-fonts", "-O", "-d2", "-R", "-o", raw_svg_path, dvi_path]
     res_svg = subprocess.run(cmd_dvisvgm, cwd=TEX_DIR, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if res_svg.returncode != 0 or not os.path.exists(raw_svg_path):
         print(f"[FAIL dvisvgm] {base_name}: {res_svg.stderr}")
@@ -91,6 +94,12 @@ def compile_tikz(tex_name):
     # Verde -> var(--fig-verde, #16a34a)
     svg = re.sub(r'stroke=[\'\"](?:#16a34a|#009900|#388e3c)[\'\"]', 'stroke="var(--fig-verde, #16a34a)"', svg, flags=re.I)
     svg = re.sub(r'fill=[\'\"](?:#16a34a|#009900|#388e3c)[\'\"]', 'fill="var(--fig-verde, #16a34a)"', svg, flags=re.I)
+    # Morado -> var(--fig-morado, #7c3aed)
+    svg = re.sub(r'stroke=[\'\"](?:#7c3aed|#8b5cf6|#6d28d9)[\'\"]', 'stroke="var(--fig-morado, #7c3aed)"', svg, flags=re.I)
+    svg = re.sub(r'fill=[\'\"](?:#7c3aed|#8b5cf6|#6d28d9)[\'\"]', 'fill="var(--fig-morado, #7c3aed)"', svg, flags=re.I)
+
+    # Ensure root svg has fill="currentColor" so unstyled glyphs inherit theme color
+    svg = re.sub(r'<svg\s+', '<svg fill="currentColor" ', svg, count=1)
 
     # Insert <style> after <svg...>
     svg = re.sub(r'(<svg[^>]*>)', r'\1\n' + STYLE_HEADER, svg, count=1)
@@ -134,6 +143,7 @@ def render_inspection_pngs(svg_path, base_name):
     dark_svg = dark_svg.replace('var(--fig-azul, #0284c7)', '#38bdf8')
     dark_svg = dark_svg.replace('var(--fig-rojo, #dc2626)', '#f87171')
     dark_svg = dark_svg.replace('var(--fig-verde, #16a34a)', '#4ade80')
+    dark_svg = dark_svg.replace('var(--fig-morado, #7c3aed)', '#c084fc')
 
     doc_dark = pymupdf.open("svg", dark_svg.encode('utf-8'))
     pix_dark = doc_dark[0].get_pixmap(matrix=mat, alpha=True)
