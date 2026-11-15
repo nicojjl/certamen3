@@ -1,13 +1,266 @@
 /**
- * MÓDULO 5: FEM DE MOVIMIENTO Y RIELES
+ * MÓDULO 5: FEM DE MOVIMIENTO Y DINÁMICA DE CIRCUITOS
  * FIS120 / FIS12125 · UTFSM
  */
 
 const MODULE_DATA_MOD5 = {
   number: '5',
-  title: 'fem de Movimiento y Rieles',
-  description: 'Varilla conductora en rieles bajo gravedad, carrito ingresando a campo B y velocidad terminal.',
+  title: 'fem de Movimiento y Rieles con Gravedad',
+  description: 'Conductores móviles en campos magnéticos, fuerza de frenado de Lorentz, leyes de Newton aplicadas a circuitos, velocidad terminal y balance riguroso de potencia electromecánica.',
   hasInteractive: false,
-  theory: '<p>Cargando contenido detallado...</p>',
-  exercises: []
+  theory: `
+    <p>
+      Cuando un conductor se desplaza a través de un campo magnético, las cargas libres en su interior experimentan la fuerza magnética de Lorentz $\\vec{F} = q(\\vec{v}\\times\\vec{B})$. Esta fuerza separa las cargas creando una diferencia de potencial conocida como <strong>fem de movimiento</strong> (o motriz).
+    </p>
+
+    <div class="box-formula">
+      <strong>1. Expresiones Fundamentales (Formulario C3):</strong>
+      <p>
+        • <strong>fem de Movimiento:</strong>
+        $$\\varepsilon = \\oint (\\vec{v}\\times\\vec{B})\\cdot d\\vec{l} = B L v \\quad (\\text{cuando } \\vec{v} \\perp \\vec{B} \\perp \\vec{L})$$
+        • <strong>Corriente Inducida (Ley de Ohm):</strong>
+        $$i(t) = \\frac{\\varepsilon(t)}{R} = \\frac{B L v(t)}{R}$$
+        • <strong>Fuerza Magnética sobre el Conductor:</strong>
+        $$\\vec{F}_m = i(t) (\\vec{L}\\times\\vec{B}) = \\frac{B^2 L^2 v(t)}{R} \\quad (\\text{siempre opuesta a } \\vec{v})$$
+      </p>
+    </div>
+
+    <div class="figure-container">
+      <img src="img/mod5_motional_emf_rails.svg" alt="Varilla en rieles con gravedad">
+      <div class="figure-caption">Varilla en rieles verticales bajo la gravedad $\\vec{g}$ y campo uniforme $\\vec{B} = -B_0\\hat{\\jmath}$ (Ayudantía 10 P3).</div>
+    </div>
+
+    <div class="box-method">
+      <strong>2. Dinámica de Newton y Velocidad Terminal:</strong>
+      <p>
+        Para una varilla de masa $m$ que cae verticalmente sobre dos rieles conductores paralelos separados por distancia $L$ en presencia de un campo horizontal $\\vec{B}$:
+        $$\\sum F_z = m a = m \\frac{dv}{dt} = mg - F_m = mg - \\frac{B^2 L^2}{R} v$$
+        • Conforme la velocidad $v(t)$ aumenta, la fuerza magnética retardadora $F_m$ crece linealmente.
+        <br>• Cuando $F_m$ iguala exactamente al peso gravitacional ($a = 0$), la aceleración se anula y la varilla alcanza su <strong>velocidad terminal constante</strong>:
+        $$mg - \\frac{B^2 L^2}{R} v_t = 0 \\implies v_t = \\frac{mgR}{B^2 L^2}$$
+        <br>
+        <strong>Conservación y Balance de Potencia en Régimen Terminal:</strong>
+        La potencia suministrada por la gravedad es exactamente igual a la potencia eléctrica disipada por efecto Joule en la resistencia:
+        $$P_{mec} = F_{grav} \\cdot v_t = (mg) v_t = \\left(\\frac{B^2 L^2 v_t}{R}\\right) v_t = \\frac{B^2 L^2 v_t^2}{R} = i_t^2 R = P_{Joule}$$
+      </p>
+    </div>
+
+    <div class="box-warning">
+      <strong>Errores Frecuentes en el Certamen:</strong><br>
+      1. Asumir que la corriente o la velocidad son constantes desde el inicio: la varilla parte del reposo ($v=0, i=0$) y acelera transitoriamente según $v(t) = v_t(1 - e^{-t/\\tau_m})$ donde $\\tau_m = \\frac{mR}{B^2 L^2}$.<br>
+      2. Equivocar la dirección de la fuerza magnética $\\vec{F}_m = i(\\vec{L}\\times\\vec{B})$: por la Ley de Lenz y la conservación de la energía, la fuerza magnética SIEMPRE se opone al movimiento relativo (actúa como fricción electromagnética).
+    </div>
+  `,
+  exercises: [
+    {
+      id: 'm5_ex1',
+      title: 'fem Motriz en Conductor Móvil',
+      level: 'basic',
+      source: 'Fundamentos de fem Motriz',
+      type: 'multiple_choice',
+      statement: `
+        Una varilla de $L = 0.50\\text{ m}$ de longitud se desplaza con velocidad constante $v = 4.0\\text{ m/s}$ perpendicular a un campo magnético uniforme de $B = 0.60\\text{ T}$. ¿Cuál es la fem inducida entre sus extremos?
+      `,
+      options: [
+        '$1.20\\text{ V}$',
+        '$0.60\\text{ V}$',
+        '$2.40\\text{ V}$',
+        '$0.30\\text{ V}$'
+      ],
+      correctOption: 0,
+      explanation: `
+        Al ser los vectores mutuamente ortogonales:
+        $$\\varepsilon = B L v = 0.60\\text{ T} \\cdot 0.50\\text{ m} \\cdot 4.0\\text{ m/s} = 1.20\\text{ V}$$
+      `
+    },
+    {
+      id: 'm5_ex2',
+      title: 'Fuerza Magnética sobre Conductor',
+      level: 'basic',
+      source: 'Ley de Lorentz en Circuitos',
+      type: 'numerical',
+      statement: `
+        Por una varilla de longitud $L = 0.40\\text{ m}$ circula una corriente $I = 2.5\\text{ A}$. La varilla se encuentra en un campo magnético uniforme de $B = 0.80\\text{ T}$ perpendicular a ella. Calcule la magnitud de la fuerza magnética en Newtons.
+      `,
+      placeholder: 'Ej: 0.80',
+      units: 'N',
+      correctValue: 0.80,
+      tolerance: 0.03,
+      explanation: `
+        $$F_m = I L B = 2.5\\text{ A} \\cdot 0.40\\text{ m} \\cdot 0.80\\text{ T} = 0.80\\text{ N}$$
+      `
+    },
+    {
+      id: 'm5_ex3',
+      title: 'Efecto de la Resistencia en la Velocidad Terminal',
+      level: 'intermediate',
+      source: 'Dinámica de Rieles UTFSM',
+      type: 'true_false',
+      statement: `
+        En el sistema de rieles verticales con gravedad, si se reemplaza la varilla por otra del mismo peso y dimensiones pero con el doble de resistencia eléctrica ($2R$), la velocidad terminal alcanzada será el doble de la original.
+      `,
+      correct: true,
+      justification: `
+        Verdadero. La velocidad terminal viene dada por $v_t = \\frac{mgR}{B^2 L^2}$. Dado que $v_t$ es directamente proporcional a la resistencia $R$, si la resistencia se duplica, se requiere el doble de velocidad para que la fem $\\varepsilon = BLv_t$ induzca la misma corriente $i = mg / (BL)$ necesaria para equilibrar el peso.
+      `
+    },
+    {
+      id: 'm5_ex4',
+      title: 'Cálculo Numérico de Velocidad Terminal',
+      level: 'intermediate',
+      source: 'Ejercicios de Certamen FIS120',
+      type: 'numerical',
+      statement: `
+        Una varilla de masa $m = 0.050\\text{ kg}$ y resistencia $R = 2.0\\,\\Omega$ cae por rieles verticales separados $L = 0.25\\text{ m}$ bajo un campo $B = 0.50\\text{ T}$. Usando $g = 9.8\\text{ m/s}^2$, calcule la velocidad terminal $v_t$ en m/s.
+      `,
+      placeholder: 'Ej: 62.7',
+      units: 'm/s',
+      correctValue: 62.72,
+      tolerance: 0.03,
+      explanation: `
+        $$v_t = \\frac{mgR}{B^2 L^2} = \\frac{0.050 \\cdot 9.8 \\cdot 2.0}{(0.50)^2 \\cdot (0.25)^2} = \\frac{0.98}{0.25 \\cdot 0.0625} = \\frac{0.98}{0.015625} = 62.72\\text{ m/s}$$
+      `
+    },
+    {
+      id: 'm5_ex5',
+      title: 'Varilla en Rieles con Gravedad y Campo B₀(-ĵ)',
+      level: 'certamen',
+      source: 'Ayudantía 10 Problema 3',
+      type: 'step_by_step',
+      figure: 'img/mod5_motional_emf_rails.svg',
+      figureCaption: 'Varilla de masa $m$ y resistencia $R$ deslizándose bajo la gravedad sobre rieles paralelos.',
+      statement: `
+        Considere una varilla conductora de masa $m$ con resistencia $R$ que se desliza sin fricción por dos raíles paralelos separados por distancia $L$ por acción de la gravedad $\\vec{g} = -g\\hat{k}$. Se presenta un campo magnético uniforme $\\vec{B} = B_0(-\\hat{\\jmath})$. Entre la varilla y los raíles se forma un circuito cerrado.<br>
+        a) Calcule el flujo magnético a través de la espira en función de la posición $z(t)$.<br>
+        b) Determine la fem inducida en la espira.<br>
+        c) Determine la corriente inducida y su sentido.<br>
+        d) Determine la fuerza magnética inducida sobre la barra.<br>
+        e) A través de la segunda ley de Newton cuando $\\vec{a} = \\vec{0}$, determine la velocidad terminal de la barra.
+      `,
+      steps: [
+        {
+          title: 'Paso 1: Flujo magnético a través del circuito',
+          content: `
+            Orientamos el plano del circuito en el plano $xz$. El área delimitada por los rieles y la varilla en la posición $z(t)$ es un rectángulo de lados $L$ (en $x$) y $z(t)$ (en $z$):
+            $$A(t) = L \\cdot z(t)$$
+            El vector normal al plano escogido es $\\hat{n} = -\\hat{\\jmath}$, paralelo a $\\vec{B} = -B_0\\hat{\\jmath}$:
+            $$\\phi_B(t) = \\vec{B} \\cdot \\vec{A} = (-B_0\\hat{\\jmath}) \\cdot (L z(t)(-\\hat{\\jmath})) = B_0 L z(t)$$
+          `
+        },
+        {
+          title: 'Paso 2: fem inducida por cambio de área (Faraday)',
+          content: `
+            Aplicando la Ley de Faraday y recordando que $\\frac{dz}{dt} = v(t)$:
+            $$\\varepsilon_{ind}(t) = -\\frac{d\\phi_B}{dt} = -B_0 L \\frac{dz}{dt} = -B_0 L v(t)$$
+            Su magnitud es $|\\varepsilon_{ind}| = B_0 L v(t)$.
+          `
+        },
+        {
+          title: 'Paso 3: Corriente inducida y sentido de circulación',
+          content: `
+            Por Ley de Ohm:
+            $$i(t) = \\frac{|\\varepsilon_{ind}|}{R} = \\frac{B_0 L v(t)}{R}$$
+            <strong>Sentido según Lenz:</strong> A medida que la varilla cae, el área aumenta, por lo que el flujo entrante hacia $-\\hat{\\jmath}$ está creciendo. La corriente inducida debe generar un campo opuesto (hacia $+\\hat{\\jmath}$) para frenar el aumento. Por regla de la mano derecha, la corriente atraviesa la varilla de izquierda a derecha (en dirección $+\\hat{\\imath}$).
+          `
+        },
+        {
+          title: 'Paso 4: Fuerza magnética sobre la varilla',
+          content: `
+            La fuerza de Lorentz sobre el elemento conductor de corriente $\\vec{L} = L\\hat{\\imath}$ es:
+            $$\\vec{F}_m = i (\\vec{L} \\times \\vec{B}) = \\left(\\frac{B_0 L v}{R}\\right) (L\\hat{\\imath} \\times (-B_0\\hat{\\jmath}))$$
+            Calculando el producto cruz: $\\hat{\\imath} \\times (-\\hat{\\jmath}) = -(\\hat{\\imath}\\times\\hat{\\jmath}) = -\\hat{k}$... pero como el eje $z$ apunta hacia arriba y la gravedad va hacia abajo ($-\\hat{k}$):
+            $$\\vec{F}_m = \\frac{B_0^2 L^2 v(t)}{R}\\,(+\\hat{k}) \\quad (\\text{hacia arriba, oponiéndose a la caída})$$
+          `
+        },
+        {
+          title: 'Paso 5: Segunda Ley de Newton y velocidad terminal',
+          content: `
+            Escribimos la ecuación de movimiento en el eje vertical (con dirección hacia abajo positiva):
+            $$m \\frac{dv}{dt} = mg - F_m = mg - \\frac{B_0^2 L^2}{R} v$$
+            En el estado estacionario, la aceleración se anula ($a = \\frac{dv}{dt} = 0$):
+            $$mg - \\frac{B_0^2 L^2}{R} v_t = 0 \\implies v_t = \\frac{mgR}{B_0^2 L^2}$$
+            <strong>Chequeo de unidades:</strong> $[mgR / (B^2 L^2)] = \\frac{\\text{N}\\cdot\\Omega}{\\text{T}^2\\cdot\\text{m}^2} = \\text{m/s}$. Correcto.
+          `
+        }
+      ]
+    },
+    {
+      id: 'm5_ex6',
+      title: 'Carrito Conductor Ingresando a Campo Magnético',
+      level: 'certamen',
+      source: 'Ayudantía 10 Problema 4',
+      type: 'step_by_step',
+      statement: `
+        Un carrito de masa $m$ formado por una espira conductora rectangular de ancho $a$ y resistencia $R$ se desplaza sin fricción con velocidad inicial $\\vec{v} = v_0\\hat{\\imath}$. Este ingresa a una región con campo magnético uniforme $\\vec{B} = B_0\\hat{k}$.<br>
+        a) Luego de que el carrito ingresa a la zona con campo, indique si se induce fem en sentido horario o antihorario y calcule su magnitud.<br>
+        b) Determine la corriente inducida.<br>
+        c) Determine la fuerza inducida sobre la espira.
+      `,
+      steps: [
+        {
+          title: 'Paso 1: Variación de flujo y sentido de la fem',
+          content: `
+            Sea $x(t)$ la longitud del carrito que ha penetrado en la zona de campo magnético.<br>
+            El área inmersa es $A(t) = a \\cdot x(t)$.<br>
+            El flujo magnético saliente ($\odot$) es:
+            $$\\phi_B(t) = B_0 a x(t)$$
+            Al ingresar, $x(t)$ aumenta con el tiempo ($\frac{dx}{dt} = v$), por lo que el flujo saliente $\\odot$ aumenta ($d\\phi_B/dt > 0$).<br>
+            Por la Ley de Lenz, la espira genera un campo inducido opuesto que entre al plano ($\\otimes$).<br>
+            Por la regla de la mano derecha, un campo entrante corresponde a una circulación en <strong>sentido horario</strong>.<br>
+            La magnitud de la fem inducida es:
+            $$|\\varepsilon_{ind}| = \\left| -\\frac{d\\phi_B}{dt} \\right| = B_0 a \\frac{dx}{dt} = B_0 a v(t)$$
+          `
+        },
+        {
+          title: 'Paso 2: Corriente inducida en la espira',
+          content: `
+            Por la Ley de Ohm:
+            $$i(t) = \\frac{|\\varepsilon_{ind}|}{R} = \\frac{B_0 a v(t)}{R} \\quad (\\text{en sentido horario})$$
+          `
+        },
+        {
+          title: 'Paso 3: Fuerza magnética de frenado',
+          content: `
+            En el lado frontal del carrito (que está dentro del campo y lleva corriente hacia abajo, $-\\hat{\\jmath}$):
+            $$\\vec{F}_1 = i (\\vec{a} \\times \\vec{B}) = i (-a\\hat{\\jmath} \\times B_0\\hat{k}) = -i a B_0 (\\hat{\\jmath}\\times\\hat{k}) = -i a B_0\\,\\hat{\\imath}$$
+            Los lados horizontales superior e inferior sufren fuerzas magnéticas que se cancelan mutuamente entre sí.<br>
+            Sustituyendo la corriente $i(t)$:
+            $$\\vec{F}_{neto} = -\\frac{B_0^2 a^2 v(t)}{R}\\,\\hat{\\imath}$$
+            La fuerza apunta en $-\\hat{\\imath}$, actuando como una fuerza neta de frenado que decelera el carrito según $m \\frac{dv}{dt} = -\\frac{B_0^2 a^2}{R} v$.
+          `
+        }
+      ]
+    },
+    {
+      id: 'm5_ex7',
+      title: 'Balance de Potencia en la Velocidad Terminal',
+      level: 'certamen',
+      source: 'Teorema de Transporte y Energía',
+      type: 'conceptual',
+      statement: `
+        Demuestre analíticamente que cuando la varilla conductora en los rieles alcanza su velocidad terminal $v_t$, la tasa a la cual la gravedad realiza trabajo mecánico sobre la varilla es exactamente igual a la tasa a la cual se disipa energía térmica por efecto Joule en la resistencia $R$.
+      `,
+      modelAnswer: `
+        <strong>1. Potencia mecánica suministrada por la gravedad:</strong><br>
+        La fuerza gravitacional constante que tira de la varilla hacia abajo es $F_g = mg$. Cuando la varilla se desplaza a velocidad constante $v_t$, la potencia mecánica entregada al sistema es:
+        $$P_{mec} = \\vec{F}_g \\cdot \\vec{v}_t = mg \\cdot v_t$$
+        <br>
+        <strong>2. Potencia disipada por efecto Joule en la resistencia:</strong><br>
+        La corriente eléctrica inducida en régimen terminal es $i_t = \\frac{B L v_t}{R}$. La potencia eléctrica convertida en calor por efecto Joule es:
+        $$P_{Joule} = i_t^2 R = \\left(\\frac{B L v_t}{R}\\right)^2 R = \\frac{B^2 L^2 v_t^2}{R}$$
+        <br>
+        <strong>3. Demostración de igualdad:</strong><br>
+        En la velocidad terminal, la fuerza magnética equilibra al peso: $mg = \\frac{B^2 L^2 v_t}{R}$.<br>
+        Sustituyendo esta igualdad en la expresión de potencia mecánica:
+        $$P_{mec} = (mg) v_t = \\left(\\frac{B^2 L^2 v_t}{R}\\right) v_t = \\frac{B^2 L^2 v_t^2}{R} = P_{Joule}$$
+        Por lo tanto:
+        $$P_{mec} \\equiv P_{Joule}$$
+        Esto demuestra rigurosamente que no hay ganancia de energía cinética ($a=0$), sino una conversión termodinámica perfecta del 100% de la energía potencial gravitatoria en calor disipado en la resistencia.
+      `,
+      rubric: `
+        • 5 pts: Plantear y desarrollar analíticamente las expresiones de P_mec y P_Joule.<br>
+        • 5 pts: Usar la condición de equilibrio terminal para demostrar la identidad y explicar su significado físico.
+      `
+    }
+  ]
 };
