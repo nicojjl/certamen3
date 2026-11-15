@@ -198,16 +198,16 @@ window.MODULE_DATA_MOD5 = {
       source: 'Ayudantía 10 Problema 4',
       type: 'step_by_step',
       statement: `
-        Un carrito de masa $m$ formado por una espira conductora rectangular de ancho $a$ y resistencia $R$ se desplaza sin fricción con velocidad inicial $\\vec{v} = v_0\\hat{\\imath}$. Este ingresa a una región con campo magnético uniforme $\\vec{B} = B_0\\hat{k}$.<br>
+        Un carrito de masa $m$ formado por una espira conductora rectangular de ancho $a$ (en $y$) y largo $w$ (en $x$, dimensión en la dirección de avance) con resistencia $R$ se desplaza sin fricción con velocidad inicial $\\vec{v} = v_0\\hat{\\imath}$. Este ingresa a una región $x \\ge 0$ con campo magnético uniforme $\\vec{B} = B_0\\hat{k}$.<br>
         a) Luego de que el carrito ingresa a la zona con campo, indique el vector normal elegido, el signo de la fem y si se induce en sentido horario o antihorario.<br>
-        b) Determine la corriente inducida.<br>
-        c) Determine la fuerza inducida sobre la espira y demuestre que siempre actúa como fuerza de frenado.
+        b) Determine la corriente inducida y la fuerza magnética neta sobre la espira.<br>
+        c) Demuestre que la distancia de parada teórica mientras penetra es $x_{\\max} = \\frac{m v_0 R}{B_0^2 a^2}$. Aclare por qué esta expresión solo es válida si $w > x_{\\max}$ y explique detalladamente qué ocurre con la fem, la corriente y la velocidad si $w \\le x_{\\max}$ (cuando la espira queda totalmente inmersa en el campo).
       `,
       steps: [
         {
           title: 'Paso 1: Elección de normal, variación de flujo y signo de la fem',
           content: `
-            Sea $x(t)$ la longitud del carrito que ha penetrado en la zona de campo magnético ($x \\in [0, a]$).<br>
+            Sea $x(t)$ la longitud del carrito que ha penetrado en la zona de campo magnético mientras ingresa ($0 < x(t) \\le w$).<br>
             El área inmersa es $A(t) = a \\cdot x(t)$.<br>
             <strong>Vector normal elegido $\\hat{n}$ y convención:</strong><br>
             Escogemos $\\hat{n} = +\\hat{k}$ (apuntando hacia afuera de la página, en la dirección de $\\vec{B} = B_0\\hat{k}$). Por la regla de la mano derecha, un vector normal saliente define como sentido positivo de circulación el <strong>sentido antihorario</strong>.<br>
@@ -221,23 +221,56 @@ window.MODULE_DATA_MOD5 = {
           `
         },
         {
-          title: 'Paso 2: Corriente inducida en la espira',
+          title: 'Paso 2: Corriente inducida y fuerza magnética de frenado',
           content: `
-            Por la Ley de Ohm:
+            Por la Ley de Ohm, la magnitud de la corriente inducida es:
             $$i(t) = \\frac{|\\varepsilon_{ind}|}{R} = \\frac{B_0 a v(t)}{R} \\quad (\\text{en sentido horario})$$
-          `
-        },
-        {
-          title: 'Paso 3: Fuerza magnética de frenado (siempre se opone al movimiento)',
-          content: `
             Analizamos la fuerza de Lorentz $\\vec{F} = i (\\vec{L} \\times \\vec{B})$ en cada lado de la espira:<br>
             • <strong>Lado frontal (líder):</strong> Está dentro del campo. Al circular en sentido horario, la corriente en este lado viaja hacia abajo ($-\\hat{\\jmath}$):
             $$\\vec{F}_{frontal} = i (-a\\hat{\\jmath}) \\times (B_0\\hat{k}) = -i a B_0 (\\hat{\\jmath}\\times\\hat{k}) = -i a B_0\\,\\hat{\\imath}$$
             • <strong>Lados superior e inferior:</strong> Transportan corrientes en sentidos opuestos ($+\\hat{\\imath}$ y $-\\hat{\\imath}$), por lo que sus fuerzas magnéticas verticales ($\\\\pm \\hat{\\jmath}$) se anulan exactamente por simetría.<br>
-            • <strong>Lado posterior:</strong> Aún se encuentra fuera del campo magnético ($\\\\vec{B} = 0$), por lo que no experimenta fuerza.<br><br>
-            Sustituyendo la corriente $i(t) = \\frac{B_0 a v(t)}{R}$, la fuerza neta total sobre la espira es:
+            • <strong>Lado posterior:</strong> Mientras la espira está ingresando, este lado aún se encuentra fuera del campo magnético ($\\\\vec{B} = 0$), por lo que no experimenta fuerza.<br><br>
+            Sustituyendo la corriente $i(t)$, la fuerza neta total sobre la espira es:
             $$\\vec{F}_{neto} = -\\frac{B_0^2 a^2 v(t)}{R}\\,\\hat{\\imath}$$
-            <strong>Demostración de frenado:</strong> Como $\\vec{v} = v\\hat{\\imath}$ con $v > 0$, la fuerza apunta en $-\\hat{\\imath}$ (opuesta al vector velocidad). Por lo tanto, <strong>la fuerza magnética actúa invariablemente como una fuerza de frenado</strong>, decelerando el carrito según $m \\frac{dv}{dt} = -\\frac{B_0^2 a^2}{R}v$.
+            La fuerza apunta en $-\\hat{\\imath}$ (opuesta a la velocidad $\\vec{v} = v\\hat{\\imath}$), actuando como una <strong>fuerza neta de frenado</strong>.
+          `
+        },
+        {
+          title: 'Paso 3: Distancia máxima de penetración y condición geométrica w > x_max',
+          content: `
+            Aplicando la Segunda Ley de Newton durante la etapa de ingreso:
+            $$m \\frac{dv}{dt} = -\\frac{B_0^2 a^2}{R} v$$
+            Escribiendo $\\frac{dv}{dt} = v \\frac{dv}{dx}$:
+            $$m v \\frac{dv}{dx} = -\\frac{B_0^2 a^2}{R} v \\implies m \\frac{dv}{dx} = -\\frac{B_0^2 a^2}{R}$$
+            Integrando desde la entrada $x = 0$ con $v = v_0$ hasta una posición $x$ con velocidad $v(x)$:
+            $$m (v(x) - v_0) = -\\frac{B_0^2 a^2}{R} x \\implies v(x) = v_0 - \\frac{B_0^2 a^2}{m R} x$$
+            Si el carrito se detiene completamente ($v = 0$) antes de que la espira entre por completo, la distancia máxima de penetración es:
+            $$x_{\\max} = \\frac{m v_0 R}{B_0^2 a^2}$$
+            <strong>Condición geométrica obligatoria:</strong> Este resultado $x_{\\max}$ es físicamente válido <strong>única y exclusivamente si el largo del carrito es mayor que dicha distancia</strong>:
+            $$w > x_{\\max}$$
+            En este caso, la espira se detiene por completo mientras su borde posterior aún permanece fuera del campo magnético.
+          `
+        },
+        {
+          title: 'Paso 4: Caso alternativo si w <= x_max (Espira entra totalmente al campo)',
+          content: `
+            <strong>¿Qué ocurre si $w \\le x_{\\max}$?</strong><br>
+            Si el largo del carrito es menor o igual a la distancia de frenado ($w \\le x_{\\max}$), la espira no alcanza a detenerse durante la penetración y entra <strong>completamente</strong> a la región de campo en la posición $x = w$.<br><br>
+            En ese instante, su velocidad residual es estrictamente positiva:
+            $$v_f = v(w) = v_0 - \\frac{B_0^2 a^2 w}{m R} > 0$$
+            A partir de ese instante ($t > t_{ingreso}$), la espira completa viaja dentro del campo magnético uniforme $\\vec{B} = B_0\\hat{k}$:<br>
+            1. <strong>Flujo magnético constante:</strong> El área total inmersa ya no cambia ($A = a \\cdot w = \\text{cte}$), por lo que el flujo es invariante:
+            $$\\phi_B = B_0 a w = \\text{constante}$$
+            2. <strong>fem inducida nula:</strong>
+            $$\\varepsilon_{ind} = -\\frac{d\\phi_B}{dt} = 0$$
+            3. <strong>Corriente inducida nula:</strong>
+            $$i = \\frac{\\varepsilon_{ind}}{R} = 0$$
+            4. <strong>Fuerza magnética nula y velocidad constante:</strong><br>
+            Al no haber corriente inducida ($i = 0$), las fuerzas magnéticas en los cuatro lados son exactamente cero:
+            $$\\vec{F}_B = \\vec{0}$$
+            Por la <strong>Primera Ley de Newton (Principio de Inercia)</strong>, al cesar toda fuerza neta externa sobre el carrito, este <strong>continúa moviéndose indefinidamente hacia adelante con velocidad constante residual</strong>:
+            $$\\vec{v}(t) = v_f\\,\\hat{\\imath} = \\left(v_0 - \\frac{B_0^2 a^2 w}{m R}\\right)\\hat{\\imath} = \\text{constante}$$
+            ¡El carrito nunca se detiene, sino que atraviesa la región de campo a velocidad crucero!
           `
         }
       ]
