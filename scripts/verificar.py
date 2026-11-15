@@ -76,8 +76,9 @@ def verify_all():
     print("\n--- 2. Ley de Ampère y Continuidad de B(r) ---")
 
     # 2.1 Pauta C3 P1b: Continuidad en R/2 y R
+    r_prime = sp.symbols('r_prime', positive=True)
     B_reg1 = (mu0 * J0 * r) / 2
-    I_enc_reg2 = sp.integrate(J0 * 2 * sp.pi * r, (r, 0, R/2)) + sp.integrate(3*J0 * 2 * sp.pi * r, (r, R/2, r))
+    I_enc_reg2 = sp.integrate(J0 * 2 * sp.pi * r_prime, (r_prime, 0, R/2)) + sp.integrate(3*J0 * 2 * sp.pi * r_prime, (r_prime, R/2, r))
     B_reg2 = mu0 * I_enc_reg2 / (2 * sp.pi * r)
     check("Pauta C3 P1b: B en r = R/2 por izquierda", B_reg1.subs(r, R/2), mu0 * J0 * R / 4)
     check("Pauta C3 P1b: Continuidad en r = R/2 (Reg1 = Reg2)", sp.simplify(B_reg1.subs(r, R/2) - B_reg2.subs(r, R/2)), 0)
