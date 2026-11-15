@@ -31,7 +31,15 @@ def verify_all():
             return
         try:
             diff = sp.simplify(expr1 - expr2)
-            if diff == 0 or abs(float(diff)) < 1e-7:
+            if hasattr(diff, 'is_zero_matrix') and diff.is_zero_matrix:
+                print(f"[PASS] {name}")
+                passed += 1
+                return
+            if diff == 0:
+                print(f"[PASS] {name}")
+                passed += 1
+                return
+            if abs(float(diff)) < 1e-7:
                 print(f"[PASS] {name}")
                 passed += 1
                 return
@@ -193,6 +201,16 @@ def verify_all():
     i_ind = (B0 * L_len * v_t) / R_res
     P_joule = i_ind**2 * R_res
     check("Ayudantía 10 P3: Balance exacto P_mec == P_Joule en v_term", sp.simplify(P_mec - P_joule), 0)
+
+    # 4.1b Verificación vectorial con sp.Matrix.cross de la fuerza sobre la varilla:
+    # Ejes según PDF: x a la derecha (1,0,0), z hacia abajo (0,0,1), y saliente (0,1,0)
+    I_current = sp.symbols('I_current', positive=True)
+    vec_L_rod = sp.Matrix([L_len, 0, 0])
+    vec_B_rod = sp.Matrix([0, -B0, 0])
+    vec_F_rod = I_current * vec_L_rod.cross(vec_B_rod)
+    z_hat_down = sp.Matrix([0, 0, 1])
+    # -I * L * B0 * z_hat_down es un vector hacia arriba (-z)
+    check("Ayudantía 10 P3: Fuerza magnética F_B = -I*L*B0*z_hat (hacia arriba)", vec_F_rod, -I_current * L_len * B0 * z_hat_down)
 
     # 4.2 Carrito conductor (Ayudantía 10 P4)
     tau_cart = m * R_res / (B0**2 * a**2)

@@ -164,18 +164,21 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 ## 6. MÓDULO 5: FEM DE MOVIMIENTO Y RIELES
 
 ### 6.1. Ayudantía 10 Problema 3: Varilla en Rieles con Gravedad
-- Rieles paralelos verticales/inclinados separados por $L$, resistencia $R$, masa $m$.
-- Campo magnético: $\vec{B} = B_0(-\hat{\jmath})$ entrante al plano del circuito formado por rieles y varilla.
-- Posición de la varilla $x(t)$, velocidad $v(t) = \dot{x}$ hacia abajo ($+\hat{\imath}$).
-- Área enlazada: $A(t) = L x(t)$. Normal elegida entrante: $\hat{n} = -\hat{\jmath}$.
-- Flujo: $\phi_B(t) = B_0 L x(t)$.
-- fem inducida: $\varepsilon = -\frac{d\phi_B}{dt} = -B_0 L v(t)$. En magnitud $|\varepsilon| = B_0 L v$.
-- **Sentido por Lenz:** El flujo entrante aumenta a medida que la varilla cae $\implies$ la corriente inducida debe generar campo saliente $\odot$ para oponerse al aumento. Por regla de la mano derecha, la corriente circula en **sentido antihorario** (de izquierda a derecha a través de la varilla móvil).
+- Rieles paralelos verticales separados por distancia $L$, resistencia $R$, masa $m$.
+- Convención de ejes del PDF: eje $x$ hacia la derecha ($\hat{x}$), eje $z$ vertical hacia abajo ($\hat{z}$), eje $y$ perpendicular saliente de la página ($\hat{y}$, con $\hat{x}\times\hat{y}=\hat{z}$).
+- Campo magnético uniforme: $\vec{B} = -B_0\hat{\jmath}$ (entrante al plano $xz$ del circuito, $\otimes$).
+- Posición de caída de la varilla: $z(t)$, velocidad hacia abajo: $\vec{v}(t) = \dot{z}\hat{z} = v(t)\hat{z}$ (hacia abajo, $+z$).
+- Área enlazada en el plano $xz$: $A(t) = L z(t)$.
+- Vector normal elegido (entrante): $\hat{n} = -\hat{\jmath}$ ($\otimes$), con sentido (+) de circulación horario.
+- Flujo magnético: $\phi_B(t) = \vec{B}\cdot(A\hat{n}) = (-B_0\hat{\jmath})\cdot(L z(t)(-\hat{\jmath})) = B_0 L z(t) > 0$.
+- Variación de flujo: $\frac{d\phi_B}{dt} = B_0 L \dot{z} = B_0 L v(t) > 0$ (positiva, el flujo entrante aumenta al caer).
+- fem inducida: $\varepsilon = -\frac{d\phi_B}{dt} = -B_0 L v(t) < 0$ (signo negativo respecto a la normal $\implies$ circulación en **sentido antihorario**).
+- **Sentido por Lenz:** El flujo entrante $\otimes$ aumenta a medida que la varilla cae $\implies$ la corriente inducida genera campo saliente $\odot$ ($+B_{ind}\hat{\jmath}$) para oponerse al aumento $\implies$ por regla de la mano derecha, circula en **sentido antihorario** (de izquierda a derecha a través de la varilla móvil: $\vec{L} = L\hat{x}$).
 - Corriente inducida: $i(t) = \frac{B_0 L v(t)}{R}$.
-- Fuerza magnética de frenado:
-  $$\vec{F}_B = i\vec{L}\times\vec{B} = (i L \hat{k}) \times (-B_0 \hat{\jmath}) = +i L B_0 \hat{\imath} \quad (\text{opuesta a la velocidad, hacia arriba})$$
-  $$F_B = \frac{B_0^2 L^2 v}{R}$$
-- Ecuación de movimiento de Newton:
+- Fuerza magnética de Lorentz sobre la varilla (verificada con SymPy `sp.Matrix.cross`):
+  $$\vec{F}_B = i\vec{L}\times\vec{B} = (i L \hat{x}) \times (-B_0 \hat{\jmath}) = -i L B_0 (\hat{x}\times\hat{\jmath}) = -i L B_0 \hat{z} = -\frac{B_0^2 L^2 v}{R}\hat{z}$$
+  Como $\hat{z}$ apunta hacia abajo, $-\hat{z}$ apunta **hacia arriba**, actuando como fuerza retardadora de frenado que se opone directamente al peso gravitatorio $m\vec{g} = mg\hat{z}$.
+- Ecuación de movimiento de Newton en el eje $z$:
   $$m\frac{dv}{dt} = mg - \frac{B_0^2 L^2}{R}v$$
 - Velocidad terminal ($dv/dt = 0$):
   $$v_{term} = \frac{mg R}{B_0^2 L^2}$$
@@ -397,6 +400,7 @@ INICIANDO VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY
 
 --- 4. Dinámica de Rieles y Balance de Potencia ---
 [PASS] Ayudantía 10 P3: Balance exacto P_mec == P_Joule en v_term
+[PASS] Ayudantía 10 P3: Fuerza magnética F_B = -I*L*B0*z_hat (hacia arriba)
 [PASS] Ayudantía 10 P4: Penetración x_max = m*v0*R / (B0^2 * a^2) si ancho w > x_max
 [PASS] Ayudantía 10 P4: Velocidad residual vf en x = w si ancho w <= x_max
 
@@ -411,7 +415,7 @@ INICIANDO VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY
 [PASS] Pauta C3 P3c: tau_RC = 1.85 ms
 
 ======================================================================
-RESUMEN DE PRUEBAS SYMPY: 40/40 CORRECTAS
+RESUMEN DE PRUEBAS SYMPY: 41/41 CORRECTAS
 ======================================================================
 ```
 
@@ -425,7 +429,7 @@ RESUMEN DE PRUEBAS SYMPY: 40/40 CORRECTAS
 | Problema / Sistema | Campo Externo $\vec{B}_{\text{ext}}$ | Vector Normal $\hat{n}$ y Sentido (+) | Variación de Flujo $\frac{d\Phi_B}{dt}$ | Signo de fem $\varepsilon = -\frac{d\Phi_B}{dt}$ | Campo Inducido $\vec{B}_{\text{ind}}$ (Lenz) | Sentido Físico de Circulación (razonado a mano) | Comportamiento Dinámico / Comprobación Física |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Espira alejándose de cable infinito** *(Simulacro P2 / M4 P7)* | $\vec{B} = -\frac{\mu_0 I}{2\pi x}\hat{k}$ ($\otimes$, entrante al plano $xy$) | $\hat{n} = -\hat{k}$ ($\otimes$)<br>Sentido (+): **Horario** | **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues la distancia $x(t) = d_0 + vt$ crece y el campo se debilita. | $\varepsilon > 0$<br>(circula en sentido +) | $\vec{B}_{\text{ind}} = \otimes$ (entrante, busca compensar el flujo perdido) | **Horario** *(razonado a mano)* | Por la regla de la mano derecha, la corriente en la rama izquierda (más cercana al cable) sube ($+\hat{\jmath}$), sintiendo una fuerza magnética de atracción hacia el cable ($-\hat{\imath}$), frenando el alejamiento. |
-| **Varilla conductora en rieles verticales** *(Ayudantía 10 P3 / M5 P5)* | $\vec{B} = -B_0\hat{k}$ ($\otimes$, entrante uniforme) | $\hat{n} = -\hat{k}$ ($\otimes$)<br>Sentido (+): **Horario** | **Positiva** ($\frac{d\Phi_B}{dt} > 0$), pues al caer la varilla con velocidad $v$ hacia abajo, el área $A(y) = L y$ aumenta. | $\varepsilon < 0$<br>(circula en sentido opuesto al +) | $\vec{B}_{\text{ind}} = \odot$ (saliente, se opone al aumento de campo entrante) | **Antihorario** *(razonado a mano)* | La corriente inducida en la varilla fluye hacia la derecha ($+\hat{\imath}$). La fuerza magnética resultante es $\vec{F}_B = I_{\text{ind}}(L\hat{\imath})\times(-B_0\hat{k}) = +I_{\text{ind}}L B_0\hat{\jmath}$ (hacia arriba), frenando la caída hasta alcanzar la velocidad límite terminal $v_{term}$. |
+| **Varilla conductora en rieles verticales** *(Ayudantía 10 P3 / M5 P5)* | $\vec{B} = -B_0\hat{\jmath}$ ($\otimes$, entrante al plano $xz$, con $x$ a la derecha, $z$ hacia abajo e $y$ saliente) | $\hat{n} = -\hat{\jmath}$ ($\otimes$)<br>Sentido (+): **Horario** | **Positiva** ($\frac{d\Phi_B}{dt} = B_0 L v > 0$), pues al caer la varilla con velocidad $\vec{v} = v\hat{z}$ hacia abajo, el área $A(z) = L z$ aumenta. | $\varepsilon = -B_0 L v < 0$<br>(circula en sentido opuesto al +, antihorario) | $\vec{B}_{\text{ind}} = \odot = +B_{ind}\hat{\jmath}$ (saliente, se opone al aumento de campo entrante) | **Antihorario** *(razonado a mano)* | La corriente en la varilla fluye hacia la derecha ($+\hat{x}$). La fuerza magnética resultante es $\vec{F}_B = I(L\hat{x})\times(-B_0\hat{\jmath}) = -I L B_0\hat{z}$ (hacia arriba, pues $\hat{z}$ apunta hacia abajo y $-\hat{z}$ apunta hacia arriba), frenando la caída hasta alcanzar la velocidad límite terminal $v_{term} = \frac{mgR}{B_0^2 L^2}$. |
 | **Carrito conductor entrando a zona con campo** *(Ayudantía 10 P4 / M5 P6)* | $\vec{B} = +B_0\hat{k}$ ($\odot$, saliente uniforme) | $\hat{n} = +\hat{k}$ ($\odot$)<br>Sentido (+): **Antihorario** | **Positiva** ($\frac{d\Phi_B}{dt} > 0$), pues penetra con velocidad $v$ aumentando el área inmersa ($dA/dt = a v > 0$). | $\varepsilon < 0$<br>(circula en sentido opuesto al +) | $\vec{B}_{\text{ind}} = \otimes$ (entrante, se opone al incremento de flujo saliente) | **Horario** *(razonado a mano)* | En el alambre frontal delantero inmerso, la corriente circula hacia abajo ($-\hat{\jmath}$). La fuerza magnética es $\vec{F}_B = I_{\text{ind}}(-a\hat{\jmath})\times(B_0\hat{k}) = -I_{\text{ind}}a B_0\hat{\imath}$ (hacia atrás): la fuerza siempre frena al móvil. |
 | **Cable infinito con $I(t) = I_0 e^{-t/\tau}$ y rectángulo** *(Ayudantía 11 P2 / M6 P6)* | $\vec{B} = -\frac{\mu_0 I(t)}{2\pi x}\hat{k}$ ($\otimes$, entrante al plano) | $\hat{n} = -\hat{k}$ ($\otimes$)<br>Sentido (+): **Horario** | **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues la corriente en el cable se extingue exponencialmente en el tiempo. | $\varepsilon > 0$<br>(circula en sentido +) | $\vec{B}_{\text{ind}} = \otimes$ (entrante, intenta sostener el campo que desaparece) | **Horario** *(razonado a mano)* | Por la regla de la mano derecha, pulgar hacia adentro ($\otimes$) induce circulación horaria, conforme al principio de inercia electromagnética de Lenz. |
 | **Rectángulo en campo dependiente $B(y,t) = \alpha y^2 e^{-\beta t}\hat{k}$** *(Ayudantía 11 P3 / M4 P8)* | $\vec{B} = +\alpha y^2 e^{-\beta t}\hat{k}$ ($\odot$, saliente espacial y temporal) | $\hat{n} = +\hat{k}$ ($\odot$)<br>Sentido (+): **Antihorario** | **Negativa** ($\frac{d\Phi_B}{dt} < 0$), pues el factor $e^{-\beta t}$ decae para todo punto del espacio. | $\varepsilon > 0$<br>(circula en sentido +) | $\vec{B}_{\text{ind}} = \odot$ (saliente, refuerza el flujo decreciente) | **Antihorario** *(razonado a mano)* | Pulgar hacia afuera ($\odot$) produce giro antihorario en los dedos, sosteniendo el flujo inductivo. |
