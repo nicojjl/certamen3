@@ -413,6 +413,68 @@ def fig_mutual_solenoid_square():
     fig.savefig(os.path.join(IMG_DIR, 'mod6_mutual_solenoid_square.svg'), format='svg', transparent=True)
     plt.close(fig)
 
+def fig_solenoid_tilted_loop():
+    # Long solenoid with tilted circular loop inside (Ayudantia 11 P4)
+    fig, ax = plt.subplots(figsize=(6.8, 4.2), dpi=150)
+    setup_ax(ax)
+
+    # Solenoid cylinder outline
+    ax.plot([-3.0, 3.0], [1.7, 1.7], color='#334155', lw=2)
+    ax.plot([-3.0, 3.0], [-1.7, -1.7], color='#334155', lw=2)
+    # Radius a dimension
+    ax.annotate('', xy=(-2.6, 1.7), xytext=(-2.6, 0), arrowprops=dict(arrowstyle='<->', lw=1.2, color='#64748b'))
+    ax.text(-2.45, 0.85, r'$a$', fontsize=11, color='#64748b', fontfamily='serif', fontweight='bold', va='center')
+
+    # Turns of solenoid
+    for x in np.linspace(-2.8, 2.8, 15):
+        ax.plot([x - 0.15, x + 0.15], [-1.7, 1.7], color='#cbd5e1', lw=1.2, linestyle=':')
+
+    # Axis z (horizontal)
+    ax.plot([-3.2, 3.2], [0, 0], color='#475569', lw=1.2, linestyle='--')
+    ax.annotate('', xy=(3.3, 0), xytext=(3.1, 0), arrowprops=dict(arrowstyle='->', lw=1.5, color='#475569'))
+    ax.text(3.4, 0, r'$\hat{z}$ (eje)', fontsize=11, color='#475569', fontfamily='serif', va='center')
+
+    # Magnetic field B inside
+    for y_b in [-1.1, 1.1]:
+        ax.annotate('', xy=(1.5, y_b), xytext=(-1.5, y_b), arrowprops=dict(arrowstyle='->', lw=1.5, color='#0284c7'))
+    ax.text(0, 1.25, r'$\vec{B} = \mu_0 n I \hat{z}$', fontsize=11, color='#0284c7', fontfamily='serif', fontweight='bold', ha='center')
+
+    # Tilted loop of radius b
+    alpha_deg = 36
+    alpha_rad = np.radians(alpha_deg)
+    b = 1.25
+    ell = patches.Ellipse((0, 0), 2*b, 2*b*0.4, angle=alpha_deg, fill=True, facecolor='#fef3c7', edgecolor='#d97706', lw=2.5, zorder=5)
+    ax.add_patch(ell)
+
+    # Line along major axis (plane of loop)
+    dx = b * np.cos(alpha_rad)
+    dy = b * np.sin(alpha_rad)
+    ax.plot([-dx*1.2, dx*1.2], [-dy*1.2, dy*1.2], color='#b45309', lw=1.5, linestyle='-.', zorder=6)
+    ax.text(dx*1.2 + 0.1, dy*1.2 + 0.05, r'Plano de la espira (radio $b$)', fontsize=10, color='#b45309', fontfamily='serif', fontweight='bold')
+
+    # Normal vector n_hat (perpendicular to plane of loop, angle = alpha_deg + 90 = 126 deg)
+    norm_angle_deg = alpha_deg + 90
+    norm_rad = np.radians(norm_angle_deg)
+    nx = 1.1 * np.cos(norm_rad)
+    ny = 1.1 * np.sin(norm_rad)
+    ax.annotate('', xy=(nx, ny), xytext=(0, 0), arrowprops=dict(arrowstyle='->', lw=2, color='#dc2626'), zorder=7)
+    ax.text(nx - 0.35, ny + 0.1, r'$\hat{n}$', fontsize=12, color='#dc2626', fontfamily='serif', fontweight='bold')
+
+    # Arc for angle alpha between z axis (angle 0) and loop plane (angle alpha_deg)
+    arc_alpha = patches.Arc((0, 0), 1.5, 1.5, angle=0, theta1=0, theta2=alpha_deg, color='#d97706', lw=1.8, zorder=6)
+    ax.add_patch(arc_alpha)
+    ax.text(0.9, 0.25, r'$\alpha$', fontsize=12, color='#d97706', fontfamily='serif', fontweight='bold')
+
+    # Arc / explanatory text
+    ax.text(0, -1.2, r'Ángulo entre $\vec{B}$ y plano = $\alpha \quad \Rightarrow \quad$ Ángulo entre $\vec{B}$ y $\hat{n} = 90^\circ - \alpha$', fontsize=9.5, color='#1e293b', fontfamily='serif', ha='center', bbox=dict(boxstyle='round,pad=0.3', facecolor='#f1f5f9', edgecolor='#cbd5e1'))
+    ax.text(0, -1.95, r'$\Phi_B = B A \cos(90^\circ - \alpha) = \mu_0 n I (\pi b^2) \sin\alpha \quad \Rightarrow \quad M = \mu_0 n \pi b^2 \sin\alpha$', fontsize=10, color='#0f766e', fontfamily='serif', fontweight='bold', ha='center')
+
+    ax.set_xlim(-3.4, 3.8)
+    ax.set_ylim(-2.3, 2.0)
+    plt.tight_layout()
+    fig.savefig(os.path.join(IMG_DIR, 'mod6_solenoid_tilted_loop.svg'), format='svg', transparent=True)
+    plt.close(fig)
+
 # -------------------------------------------------------------
 # Module 8: Circuit with 2-position switch (Pauta C3 P3)
 # -------------------------------------------------------------
@@ -534,6 +596,7 @@ if __name__ == '__main__':
     fig_faraday_moving_loop()
     fig_motional_emf_rails()
     fig_mutual_solenoid_square()
+    fig_solenoid_tilted_loop()
     fig_circuit_pauta()
     fig_maxwell_capacitor()
     print("All SVGs generated successfully in", IMG_DIR)

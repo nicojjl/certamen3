@@ -253,38 +253,46 @@ window.MODULE_DATA_MOD6 = {
       level: 'certamen',
       source: 'Ayudantía 11 Problema 4',
       type: 'step_by_step',
+      figure: 'img/mod6_solenoid_tilted_loop.svg',
+      figureCaption: 'Bobina muy larga y espira interior inclinada un ángulo $\\alpha$ medido respecto al eje longitudinal.',
       statement: `
-        Considere una bobina muy larga de radio $a$ y $n$ vueltas por unidad de largo. Al interior de la bobina, existe una espira de radio $b < a$ cuyo vector normal forma un ángulo $\\alpha$ con respecto al eje longitudinal de la bobina.<br>
+        Considere una bobina muy larga de radio $a$ y $n$ vueltas por unidad de largo. Al interior de la bobina, existe una espira circular de radio $b < a$ cuyo <em>plano</em> forma un ángulo $\\alpha$ con respecto al eje longitudinal de la bobina (tal como se ilustra en la figura de la Ayudantía 11).<br>
         a) Determine la inductancia mutua $M$ entre la bobina y la espira interior.<br>
-        b) Si por la bobina circula una corriente $I(t) = I_0 \\sin(\\omega t)$, determine la fem inducida en la espira en función del tiempo.
+        b) Si por la bobina empieza a circular una corriente $I(t) = I_0 \\sin(\\omega t)$, determine la fem inducida en la espira en función del tiempo.
       `,
       steps: [
         {
           title: 'Paso 1: Campo en el interior de la bobina y vector normal',
           content: `
-            La bobina muy larga (solenoide ideal) de densidad de vueltas $n$ produce en su interior un campo magnético uniforme paralelo a su eje:
+            La bobina muy larga (solenoide ideal) de densidad de vueltas $n$ produce en su interior un campo magnético uniforme paralelo a su eje longitudinal:
             $$\\vec{B}(t) = \\mu_0 n I(t)\\,\\hat{z}$$
-            La espira de radio $b$ está inclinada un ángulo $\\alpha$ respecto al eje $\\hat{z}$, por lo que su vector normal unitario satisface $\\hat{n}\\cdot\\hat{z} = \\cos\\alpha$.
+            <strong>Definición del ángulo $\\alpha$ y orientación de la normal $\\hat{n}$:</strong><br>
+            En la figura del enunciado oficial, $\\alpha$ está acotado entre el eje longitudinal horizontal $\\hat{z}$ y el <em>plano</em> de la espira. Como el vector normal unitario $\\hat{n}$ es perpendicular al plano de la espira, el ángulo entre el campo $\\vec{B}$ y $\\hat{n}$ es el complemento $90^\\circ - \\alpha$. Por lo tanto:
+            $$\\vec{B}\\cdot\\hat{n} = B \\cos(90^\\circ - \\alpha) = B \\sin\\alpha$$
+            <em>Observación metodológica:</em> Si un problema alternativo define $\\alpha$ directamente como el ángulo entre el eje $\\hat{z}$ y el <em>vector normal</em> $\\hat{n}$, el factor sería $\\cos\\alpha$. Aquí respetamos rigurosamente la convención geométrica de la figura de la Ayudantía 11 ($\\,\\sin\\alpha$).
           `
         },
         {
           title: 'Paso 2: Flujo magnético e inductancia mutua M',
           content: `
-            El flujo magnético a través de la espira circular de área $A = \\pi b^2$ es:
-            $$\\phi_B(t) = \\iint_{\\text{espira}} \\vec{B}\\cdot d\\vec{A} = (\\mu_0 n I(t)) (\\pi b^2) \\cos\\alpha = \\mu_0 n \\pi b^2 \\cos\\alpha\\,I(t)$$
-            Dado que la espira consta de una sola vuelta ($N_{espira} = 1$), la inductancia mutua es:
-            $$M = \\frac{\\phi_B(t)}{I(t)} = \\mu_0 n \\pi b^2 \\cos\\alpha$$
-            Note que para $\\alpha = 0^\\circ$ el acoplamiento es máximo ($M = \\mu_0 n \\pi b^2$), mientras que para $\\alpha = 90^\\circ$ la espira es paralela al campo y el acoplamiento es nulo ($M = 0$).
+            El flujo magnético a través de la espira circular de área $A = \\pi b^2$ con vector normal $\\hat{n}$ es:
+            $$\\phi_B(t) = \\iint_{\\text{espira}} \\vec{B}\\cdot d\\vec{A} = (\\mu_0 n I(t)) (\\pi b^2) \\sin\\alpha = \\mu_0 n \\pi b^2 \\sin\\alpha\\,I(t)$$
+            Dado que la espira consta de una sola vuelta ($N_{\\text{espira}} = 1$), la inductancia mutua por definición es:
+            $$M = \\frac{\\phi_B(t)}{I(t)} = \\mu_0 n \\pi b^2 \\sin\\alpha$$
+            <strong>Casos límite de control:</strong><br>
+            • Si $\\alpha = 0^\\circ$ (plano de la espira paralelo al eje de la bobina): el campo magnético es rasante a la superficie de la espira, ningún flujo la atraviesa, $\\phi_B = 0$ y $M = 0$. Coincide con $\\sin(0^\\circ) = 0$.<br>
+            • Si $\\alpha = 90^\\circ$ (plano de la espira perpendicular al eje): el campo incide ortogonalmente sobre toda el área, el flujo es máximo $\\phi_B = (\\mu_0 n I)(\\pi b^2)$, y $M = \\mu_0 n \\pi b^2$. Coincide con $\\sin(90^\\circ) = 1$.
           `
         },
         {
           title: 'Paso 3: fem inducida por Faraday-Lenz',
           content: `
-            Con $I(t) = I_0 \\sin(\\omega t)$, derivamos respecto al tiempo:
+            Con la corriente de excitación $I(t) = I_0 \\sin(\\omega t)$, derivamos respecto al tiempo:
             $$\\frac{dI}{dt} = I_0 \\omega \\cos(\\omega t)$$
-            Por la ley de Faraday:
-            $$\\varepsilon_{ind}(t) = -M \\frac{dI}{dt} = -(\\mu_0 n \\pi b^2 \\cos\\alpha) I_0 \\omega \\cos(\\omega t) = -\\mu_0 n \\pi b^2 \\cos\\alpha\\,I_0 \\omega \\cos(\\omega t)$$
-            La magnitud de la fem inducida es $|\\varepsilon_{ind}(t)| = \\mu_0 n \\pi b^2 \\cos\\alpha\\,I_0 \\omega |\\cos(\\omega t)|$.
+            Por la ley de Faraday-Lenz:
+            $$\\varepsilon_{\\text{ind}}(t) = -M \\frac{dI}{dt} = -(\\mu_0 n \\pi b^2 \\sin\\alpha) I_0 \\omega \\cos(\\omega t) = -\\mu_0 n \\pi b^2 \\sin\\alpha\\,I_0 \\omega \\cos(\\omega t)$$
+            La magnitud instantánea de la fem inducida es:
+            $$|\\varepsilon_{\\text{ind}}(t)| = \\mu_0 n \\pi b^2 \\sin\\alpha\\,I_0 \\omega |\\cos(\\omega t)|$$
           `
         }
       ]
