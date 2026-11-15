@@ -289,6 +289,8 @@ window.MODULE_DATA_MOD3 = {
       level: 'certamen',
       source: 'Ayudantía 9 Problema 3',
       type: 'step_by_step',
+      figure: 'img/mod2_ayud9_p3_superposicion.svg',
+      figureCaption: 'Superposición en el plano $xy$ entre cilindro con $\\vec{J} = \\beta r\\hat{k}$ y cable en $(a, -a)$ (Ayudantía 9 P3).',
       statement: `
         Un cilindro conductor macizo infinito de radio $R$ transporta $\\vec{J}(r) = \\beta r\\hat{k}$ con $\\beta > 0$. Su eje atraviesa el plano $xy$ en $\\vec{r}_1 = -a\\,\\hat{\\imath}$ (con $a > R$). Además, un cable conductor infinito transporta corriente $I$ y atraviesa el plano $xy$ en $\\vec{r}_2 = a(\\hat{\\imath} - \\hat{\\jmath})$.<br>
         a) Determine el vector campo $\\vec{B}$ en el origen $O$ debido al cilindro.<br>

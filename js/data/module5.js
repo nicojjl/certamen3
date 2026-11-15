@@ -197,6 +197,8 @@ window.MODULE_DATA_MOD5 = {
       level: 'certamen',
       source: 'Ayudantía 10 Problema 4',
       type: 'step_by_step',
+      figure: 'img/mod5_ayud10_p4_carrito.svg',
+      figureCaption: 'Carrito conductor rectangular de masa $m$ ingresando con velocidad inicial $\\vec{v}_0$ a campo $\\vec{B}_0\\hat{k}$ (Ayudantía 10 P4).',
       statement: `
         Un carrito de masa $m$ formado por una espira conductora rectangular de ancho $a$ (en $y$) y largo $w$ (en $x$, dimensión en la dirección de avance) con resistencia $R$ se desplaza sin fricción con velocidad inicial $\\vec{v} = v_0\\hat{\\imath}$. Este ingresa a una región $x \\ge 0$ con campo magnético uniforme $\\vec{B} = B_0\\hat{k}$.<br>
         a) Luego de que el carrito ingresa a la zona con campo, indique el vector normal elegido, el signo de la fem y si se induce en sentido horario o antihorario.<br>

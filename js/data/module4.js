@@ -113,6 +113,8 @@ window.MODULE_DATA_MOD4 = {
       level: 'certamen',
       source: 'Ayudantía 10 Problema 1',
       type: 'multiple_choice',
+      figure: 'img/mod4_ayud10_p1_rotating.svg',
+      figureCaption: 'Espira cuadrada centrada en el origen bajo campo magnético rotatorio (Ayudantía 10 P1).',
       statement: `
         Una espira cuadrada de lado $a$ situada en el plano $xy$ está bajo un campo de magnitud constante $B_0$ cuyo ángulo de elevación respecto al plano $xy$ varía según $\\phi(t) = k + \\omega t$. ¿Cuál es el valor máximo de la fem inducida $|\\varepsilon_{ind}|$?
       `,
@@ -139,6 +141,8 @@ window.MODULE_DATA_MOD4 = {
       level: 'certamen',
       source: 'Ayudantía 11 Problema 3',
       type: 'step_by_step',
+      figure: 'img/mod4_ayud11_p3_spacetime.svg',
+      figureCaption: 'Rectángulo conductor en campo espacio-temporal $\\vec{B}(y,t) = \\alpha y^2 e^{-\\beta t}\\hat{k}$ (Ayudantía 11 P3).',
       statement: `
         En una región del espacio hay un campo magnético dado por:
         $$\\vec{B}(y,t) = \\alpha y^2 e^{-\\beta t}\\,\\hat{k}$$
@@ -193,6 +197,8 @@ window.MODULE_DATA_MOD4 = {
       level: 'certamen',
       source: 'Ayudantía 10 Problema 2',
       type: 'step_by_step',
+      figure: 'img/mod4_ayud10_p2_concentric.svg',
+      figureCaption: 'Espira circular de radio $R$ con corriente $I(t)$ y espira cuadrada central de lado $a \\ll R$ (Ayudantía 10 P2).',
       statement: `
         Se tiene una espira circular de radio $R$ por la que circula una corriente $I(t) = I_0 e^{-t/\\tau}$ ($t > 0$) en sentido antihorario. En su centro se ubica una pequeña espira conductora cuadrada de lado $a$ ($a \\ll R$) coplanar con ella.<br>
         a) Calcule el flujo magnético a través de la pequeña espira cuadrada.<br>
