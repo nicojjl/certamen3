@@ -354,7 +354,7 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 ## 12. ESTADO DE VERIFICACIÓN ANALÍTICA
 
 ### 12.1. Salida Completa de Verificación SymPy (scripts/verificar.py)
-A continuación se transcribe la salida exacta y completa de la ejecución de `python scripts/verificar.py` en la terminal (código de salida `0`):
+A continuación se transcribe la salida exacta y completa generada mediante `python scripts/verificar.py > scripts/salida_verificar.txt` (código de salida `0`, 45/45 pruebas correctas):
 
 ```text
 ======================================================================
