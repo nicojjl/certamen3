@@ -472,7 +472,7 @@ def verify_all():
     with open(OUTPUT_PATH, 'w', encoding='utf-8', newline='\n') as f_out:
         f_out.write('\n'.join(lines_buffer) + '\n')
 
-    print(f"\n[INFO] Archivo escrito exitosamente en UTF-8 sin BOM: {OUTPUT_PATH}")
+    print(f"\n[INFO] Archivo escrito exitosamente en UTF-8 sin BOM: scripts/salida_verificar.txt")
 
     if failures:
         sys.exit(1)

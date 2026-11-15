@@ -27,9 +27,9 @@ STYLE_HEADER = """<style>
   :root {
     color: #1f2937;
     fill: currentColor;
-    --fig-azul: #0284c7;
+    --fig-azul: #0369a1;
     --fig-rojo: #dc2626;
-    --fig-verde: #16a34a;
+    --fig-verde: #15803d;
     --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
@@ -89,12 +89,12 @@ def compile_tikz(tex_name):
     # Reemplazo de colores para adaptabilidad CSS clara/oscura
     svg = re.sub(r'stroke=[\'\"]#000(?:000)?[\'\"]', 'stroke="currentColor"', svg)
     svg = re.sub(r'fill=[\'\"]#000(?:000)?[\'\"]', 'fill="currentColor"', svg)
-    svg = re.sub(r'stroke=[\'\"](?:#0284c7|#0077cc|#0000ff|#1976d2)[\'\"]', 'stroke="var(--fig-azul, #0284c7)"', svg, flags=re.I)
-    svg = re.sub(r'fill=[\'\"](?:#0284c7|#0077cc|#0000ff|#1976d2)[\'\"]', 'fill="var(--fig-azul, #0284c7)"', svg, flags=re.I)
+    svg = re.sub(r'stroke=[\'\"](?:#0369a1|#0284c7|#0077cc|#0000ff|#1976d2)[\'\"]', 'stroke="var(--fig-azul, #0369a1)"', svg, flags=re.I)
+    svg = re.sub(r'fill=[\'\"](?:#0369a1|#0284c7|#0077cc|#0000ff|#1976d2)[\'\"]', 'fill="var(--fig-azul, #0369a1)"', svg, flags=re.I)
     svg = re.sub(r'stroke=[\'\"](?:#dc2626|#cc0000|#ff0000|#d32f2f)[\'\"]', 'stroke="var(--fig-rojo, #dc2626)"', svg, flags=re.I)
     svg = re.sub(r'fill=[\'\"](?:#dc2626|#cc0000|#ff0000|#d32f2f)[\'\"]', 'fill="var(--fig-rojo, #dc2626)"', svg, flags=re.I)
-    svg = re.sub(r'stroke=[\'\"](?:#16a34a|#009900|#388e3c)[\'\"]', 'stroke="var(--fig-verde, #16a34a)"', svg, flags=re.I)
-    svg = re.sub(r'fill=[\'\"](?:#16a34a|#009900|#388e3c)[\'\"]', 'fill="var(--fig-verde, #16a34a)"', svg, flags=re.I)
+    svg = re.sub(r'stroke=[\'\"](?:#15803d|#16a34a|#009900|#388e3c)[\'\"]', 'stroke="var(--fig-verde, #15803d)"', svg, flags=re.I)
+    svg = re.sub(r'fill=[\'\"](?:#15803d|#16a34a|#009900|#388e3c)[\'\"]', 'fill="var(--fig-verde, #15803d)"', svg, flags=re.I)
     svg = re.sub(r'stroke=[\'\"](?:#7c3aed|#8b5cf6|#6d28d9)[\'\"]', 'stroke="var(--fig-morado, #7c3aed)"', svg, flags=re.I)
     svg = re.sub(r'fill=[\'\"](?:#7c3aed|#8b5cf6|#6d28d9)[\'\"]', 'fill="var(--fig-morado, #7c3aed)"', svg, flags=re.I)
 
@@ -142,9 +142,9 @@ def render_inspection_pngs(svg_path, base_name):
         dark_svg = f.read()
     dark_svg = dark_svg.replace('color: #1f2937;', 'color: #f8fafc;')
     dark_svg = dark_svg.replace('currentColor', '#f8fafc')
-    dark_svg = dark_svg.replace('var(--fig-azul, #0284c7)', '#38bdf8')
+    dark_svg = dark_svg.replace('var(--fig-azul, #0369a1)', '#38bdf8')
     dark_svg = dark_svg.replace('var(--fig-rojo, #dc2626)', '#f87171')
-    dark_svg = dark_svg.replace('var(--fig-verde, #16a34a)', '#4ade80')
+    dark_svg = dark_svg.replace('var(--fig-verde, #15803d)', '#4ade80')
     dark_svg = dark_svg.replace('var(--fig-morado, #7c3aed)', '#c084fc')
 
     doc_dark = pymupdf.open("svg", dark_svg.encode('utf-8'))

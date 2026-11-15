@@ -5,9 +5,9 @@
   :root {
     color: #1f2937;
     fill: currentColor;
-    --fig-azul: #0284c7;
+    --fig-azul: #0369a1;
     --fig-rojo: #dc2626;
-    --fig-verde: #16a34a;
+    --fig-verde: #15803d;
     --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
@@ -192,10 +192,10 @@
 <use x='68.42' y='24.93' xlink:href='#g1-0'/>
 <use x='75' y='24.93' xlink:href='#g3-97'/>
 </g>
-<path d='m68.42 24.93v-35.99' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m68.42-17.14c-.19 .75-1.26 4.03-2.43 6.08h4.85c-1.16-2.05-2.23-5.34-2.42-6.08z' fill="var(--fig-azul, #0284c7)"/>
-<path d='m68.42-17.14c-.19 .75-1.26 4.03-2.43 6.08h4.85c-1.16-2.05-2.23-5.34-2.42-6.08z' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
-<g fill="var(--fig-azul, #0284c7)">
+<path d='m68.42 24.93v-35.99' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
+<path d='m68.42-17.14c-.19 .75-1.26 4.03-2.43 6.08h4.85c-1.16-2.05-2.23-5.34-2.42-6.08z' fill="var(--fig-azul, #0369a1)"/>
+<path d='m68.42-17.14c-.19 .75-1.26 4.03-2.43 6.08h4.85c-1.16-2.05-2.23-5.34-2.42-6.08z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
+<g fill="var(--fig-azul, #0369a1)">
 <g transform='translate(-59.18 -41.74)'>
 <use x='70.02' y='22.41' xlink:href='#g6-126'/>
 <use x='68.42' y='24.93' xlink:href='#g6-66'/>

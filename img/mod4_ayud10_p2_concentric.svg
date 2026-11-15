@@ -5,9 +5,9 @@
   :root {
     color: #1f2937;
     fill: currentColor;
-    --fig-azul: #0284c7;
+    --fig-azul: #0369a1;
     --fig-rojo: #dc2626;
-    --fig-verde: #16a34a;
+    --fig-verde: #15803d;
     --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
@@ -56,20 +56,20 @@
 <g stroke-miterlimit='10'>
 <path d='m17.53 96.9v-158.74' stroke='#bfbfbf' stroke-width='.4' stroke-dasharray='2.99 2.99'/>
 <path d='m79.89 17.53c0-34.44-27.92-62.36-62.36-62.36s-62.36 27.92-62.36 62.36s27.92 62.36 62.36 62.36s62.36-27.92 62.36-62.36z' stroke="currentColor" stroke-width='1.2'/>
-<path d='m71.54-13.65c-6.4-11.08-16.05-19.93-19.16-21.38' stroke="var(--fig-azul, #0284c7)" stroke-width='1.59'/>
+<path d='m71.54-13.65c-6.4-11.08-16.05-19.93-19.16-21.38' stroke="var(--fig-azul, #0369a1)" stroke-width='1.59'/>
 </g>
 </g>
-<path d='m46.87-37.6c.6 .48 3.12 2.84 4.48 4.76l2.05-4.39c-2.35 .19-5.78-.23-6.53-.37z' fill="var(--fig-azul, #0284c7)"/>
-<path d='m46.87-37.6c.6 .48 3.12 2.84 4.48 4.76l2.05-4.39c-2.35 .19-5.78-.23-6.53-.37z' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
-<g fill="var(--fig-azul, #0284c7)" transform='translate(30.47 -60.64)'>
+<path d='m46.87-37.6c.6 .48 3.12 2.84 4.48 4.76l2.05-4.39c-2.35 .19-5.78-.23-6.53-.37z' fill="var(--fig-azul, #0369a1)"/>
+<path d='m46.87-37.6c.6 .48 3.12 2.84 4.48 4.76l2.05-4.39c-2.35 .19-5.78-.23-6.53-.37z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
+<g fill="var(--fig-azul, #0369a1)" transform='translate(30.47 -60.64)'>
 <use x='17.53' y='17.53' xlink:href='#g4-73'/>
 </g>
-<path d='m-36.48-13.65c-6.4 11.08-9.23 23.87-8.93 27.29' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m-44.88 19.7c.12-.76 .9-4.12 1.88-6.27l-4.83 .43c1.34 1.94 2.69 5.12 2.95 5.84z' fill="var(--fig-azul, #0284c7)"/>
-<path d='m-44.88 19.7c.12-.76 .9-4.12 1.88-6.27l-4.83 .43c1.34 1.94 2.69 5.12 2.95 5.84z' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
-<path d='m17.53 79.89c12.8 0 25.29-3.94 28.1-5.91' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m50.61 70.5c-.72 .27-4.02 1.28-6.37 1.5l2.78 3.97c1.01-2.13 3.09-4.89 3.59-5.47z' fill="var(--fig-azul, #0284c7)"/>
-<path d='m50.61 70.5c-.72 .27-4.02 1.28-6.37 1.5l2.78 3.97c1.01-2.13 3.09-4.89 3.59-5.47z' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
+<path d='m-36.48-13.65c-6.4 11.08-9.23 23.87-8.93 27.29' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
+<path d='m-44.88 19.7c.12-.76 .9-4.12 1.88-6.27l-4.83 .43c1.34 1.94 2.69 5.12 2.95 5.84z' fill="var(--fig-azul, #0369a1)"/>
+<path d='m-44.88 19.7c.12-.76 .9-4.12 1.88-6.27l-4.83 .43c1.34 1.94 2.69 5.12 2.95 5.84z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
+<path d='m17.53 79.89c12.8 0 25.29-3.94 28.1-5.91' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
+<path d='m50.61 70.5c-.72 .27-4.02 1.28-6.37 1.5l2.78 3.97c1.01-2.13 3.09-4.89 3.59-5.47z' fill="var(--fig-azul, #0369a1)"/>
+<path d='m50.61 70.5c-.72 .27-4.02 1.28-6.37 1.5l2.78 3.97c1.01-2.13 3.09-4.89 3.59-5.47z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='1.59' stroke-miterlimit='10' stroke-linecap='round'/>
 <path d='m17.53 17.53l-39.73-39.73' stroke="var(--fig-rojo, #dc2626)" fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m-25.4-25.4c.3 .49 1.47 2.77 1.95 4.46l2.5-2.5c-1.68-.48-3.96-1.66-4.46-1.95z' fill="var(--fig-rojo, #dc2626)"/>
 <path d='m-25.4-25.4c.3 .49 1.47 2.77 1.95 4.46l2.5-2.5c-1.68-.48-3.96-1.66-4.46-1.95z' stroke="var(--fig-rojo, #dc2626)" fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round'/>
@@ -78,9 +78,9 @@
 </g>
 <path d='m3.36 31.71v-28.35h28.35v28.35z' fill='#d9edf7'/>
 <path d='m3.36 31.71v-28.35h28.35v28.35z' stroke="currentColor" fill='none' stroke-width='1.2' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m20.93 17.53c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z' stroke="var(--fig-azul, #0284c7)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m19.03 17.53c0-.82-.67-1.49-1.5-1.49s-1.49 .67-1.49 1.49s.67 1.5 1.49 1.5s1.5-.67 1.5-1.5z' fill="var(--fig-azul, #0284c7)"/>
-<g fill="var(--fig-azul, #0284c7)" transform='translate(4.94 -4.94)'>
+<path d='m20.93 17.53c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
+<path d='m19.03 17.53c0-.82-.67-1.49-1.5-1.49s-1.49 .67-1.49 1.49s.67 1.5 1.49 1.5s1.5-.67 1.5-1.5z' fill="var(--fig-azul, #0369a1)"/>
+<g fill="var(--fig-azul, #0369a1)" transform='translate(4.94 -4.94)'>
 <use x='18.9' y='15.52' xlink:href='#g1-126'/>
 <use x='17.53' y='17.53' xlink:href='#g1-66'/>
 </g>

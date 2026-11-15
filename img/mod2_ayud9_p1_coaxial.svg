@@ -5,9 +5,9 @@
   :root {
     color: #1f2937;
     fill: currentColor;
-    --fig-azul: #0284c7;
+    --fig-azul: #0369a1;
     --fig-rojo: #dc2626;
-    --fig-verde: #16a34a;
+    --fig-verde: #15803d;
     --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
@@ -78,7 +78,7 @@
 </g>
 <path d='m47.3 53.09c0-2.35-1.91-4.25-4.25-4.25s-4.25 1.91-4.25 4.25s1.9 4.25 4.25 4.25s4.25-1.9 4.25-4.25z' stroke="currentColor" fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m44.46 53.09c0-.79-.63-1.42-1.42-1.42s-1.42 .63-1.42 1.42s.64 1.42 1.42 1.42s1.42-.64 1.42-1.42z'/>
-<g fill="var(--fig-azul, #0284c7)" transform='translate(-16.73 -10.3)'>
+<g fill="var(--fig-azul, #0369a1)" transform='translate(-16.73 -10.3)'>
 <use x='44.41' y='51.07' xlink:href='#g1-126'/>
 <use x='43.04' y='53.09' xlink:href='#g1-74'/>
 <use x='47.67' y='54.2' xlink:href='#g2-49'/>
@@ -148,8 +148,8 @@
 <use x='43.04' y='53.09' xlink:href='#g3-52'/>
 <use x='47.28' y='53.09' xlink:href='#g1-82'/>
 </g>
-<path d='m77.06 53.09c0-18.79-15.23-34.02-34.02-34.02s-34.02 15.23-34.02 34.02s15.23 34.02 34.02 34.02s34.02-15.23 34.02-34.02z' stroke="var(--fig-verde, #16a34a)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
-<g fill="var(--fig-verde, #16a34a)">
+<path d='m77.06 53.09c0-18.79-15.23-34.02-34.02-34.02s-34.02 15.23-34.02 34.02s15.23 34.02 34.02 34.02s34.02-15.23 34.02-34.02z' stroke="var(--fig-verde, #15803d)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<g fill="var(--fig-verde, #15803d)">
 <g transform='translate(20.53 -35.63)'>
 <use x='43.04' y='53.09' xlink:href='#g4-114'/>
 <use x='48.6' y='53.09' xlink:href='#g5-61'/>
@@ -161,8 +161,8 @@
 <use x='61.54' y='53.09' xlink:href='#g4-82'/>
 </g>
 </g>
-<path d='m147.93 53.09c0-57.93-46.96-104.88-104.88-104.88s-104.88 46.96-104.88 104.88s46.96 104.88 104.88 104.88s104.88-46.96 104.88-104.88z' stroke="var(--fig-verde, #16a34a)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
-<g fill="var(--fig-verde, #16a34a)" transform='translate(-10.62 -108.4)'>
+<path d='m147.93 53.09c0-57.93-46.96-104.88-104.88-104.88s-104.88 46.96-104.88 104.88s46.96 104.88 104.88 104.88s104.88-46.96 104.88-104.88z' stroke="var(--fig-verde, #15803d)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<g fill="var(--fig-verde, #15803d)" transform='translate(-10.62 -108.4)'>
 <use x='43.04' y='53.09' xlink:href='#g4-114'/>
 <use x='48.6' y='53.09' xlink:href='#g5-61'/>
 <use x='55.75' y='53.09' xlink:href='#g5-53'/>

@@ -1,0 +1,46 @@
+===========================================================================
+AUDITORÍA VISUAL AUTOMÁTICA Y VALIDACIÓN VECTORIAL DE FIGURAS SVG
+===========================================================================
+
+--- Comprobación de Ratios de Contraste WCAG AA (Mínimo 4.5:1) ---
+  [Modo Claro]  Texto estándar  (#1f2937 vs #ffffff): 14.68:1 -> [PASS]
+  [Modo Claro]  Azul acento     (#0369a1 vs #ffffff):  5.93:1 -> [PASS]
+  [Modo Claro]  Rojo acento     (#dc2626 vs #ffffff):  4.83:1 -> [PASS]
+  [Modo Claro]  Verde acento    (#15803d vs #ffffff):  5.02:1 -> [PASS]
+  [Modo Claro]  Morado acento   (#7c3aed vs #ffffff):  5.70:1 -> [PASS]
+  [Modo Oscuro] Texto estándar  (#f8fafc vs #0f172a): 17.06:1 -> [PASS]
+  [Modo Oscuro] Azul acento     (#38bdf8 vs #0f172a):  8.33:1 -> [PASS]
+  [Modo Oscuro] Rojo acento     (#f87171 vs #0f172a):  6.45:1 -> [PASS]
+  [Modo Oscuro] Verde acento    (#4ade80 vs #0f172a): 10.25:1 -> [PASS]
+  [Modo Oscuro] Morado acento   (#c084fc vs #0f172a):  6.76:1 -> [PASS]
+
+--- Comprobación Geométrica, Renderizado PNG y Control de Recorte por Figura ---
+[PASS] mod0_coords.svg                   ( 16.2 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (10 textos)
+[PASS] mod0_cross_product.svg            ( 13.6 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (5 textos)
+[PASS] mod10_maxwell_capacitor.svg       ( 62.9 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (13 textos)
+[PASS] mod1_sim2_geometry.svg            ( 29.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
+[PASS] mod1_wire_bfield.svg              ( 30.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (5 textos)
+[PASS] mod2_ayud9_p1_coaxial.svg         ( 19.4 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (6 textos)
+[PASS] mod2_ayud9_p3_superposicion.svg   ( 42.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
+[PASS] mod2_ayud9_p4_angular.svg         ( 29.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (7 textos)
+[PASS] mod2_coaxial_stepped.svg          ( 23.9 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (6 textos)
+[PASS] mod2_j_profiles.svg               ( 28.1 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (10 textos)
+[PASS] mod3_toroid_simulacro.svg         ( 26.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (13 textos)
+[PASS] mod4_ayud10_p1_rotating.svg       ( 27.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
+[PASS] mod4_ayud10_p2_concentric.svg     ( 14.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (6 textos)
+[PASS] mod4_ayud11_p3_spacetime.svg      ( 24.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
+[PASS] mod4_faraday_moving_loop.svg      ( 24.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (10 textos)
+[PASS] mod5_ayud10_p4_carrito.svg        ( 27.2 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
+[PASS] mod5_motional_emf_rails.svg       ( 18.1 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (8 textos)
+[PASS] mod6_ayud11_p1_solenoids.svg      ( 18.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (9 textos)
+[PASS] mod6_ayud11_p2_wire_rect.svg      ( 29.5 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (10 textos)
+[PASS] mod6_mutual_solenoid_square.svg   ( 29.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (12 textos)
+[PASS] mod6_pauta_p2_rollo.svg           ( 32.3 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (8 textos)
+[PASS] mod6_solenoid_tilted_loop.svg     ( 39.8 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (11 textos)
+[PASS] mod6_transformador.svg            ( 40.4 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (5 textos)
+[PASS] mod8_switch_circuit.svg           ( 19.7 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (20 textos)
+[PASS] mod9_rlc_circuit.svg              ( 39.0 KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes (6 textos)
+
+===========================================================================
+RESUMEN AUDITORÍA DE FIGURAS: 25/25 CORRECTAS (0 FALLAS)
+===========================================================================

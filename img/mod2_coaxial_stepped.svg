@@ -5,9 +5,9 @@
   :root {
     color: #1f2937;
     fill: currentColor;
-    --fig-azul: #0284c7;
+    --fig-azul: #0369a1;
     --fig-rojo: #dc2626;
-    --fig-verde: #16a34a;
+    --fig-verde: #15803d;
     --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
@@ -122,8 +122,8 @@
 <use x='74.88' y='6.39' xlink:href='#g3-74'/>
 <use x='79.96' y='7.39' xlink:href='#g4-48'/>
 </g>
-<path d='m121.3 6.39c0-28.18-22.84-51.02-51.02-51.02s-51.03 22.84-51.03 51.02s22.84 51.03 51.03 51.03s51.02-22.84 51.02-51.03z' stroke="var(--fig-verde, #16a34a)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
-<g fill="var(--fig-verde, #16a34a)" transform='translate(54.54 2.72)'>
+<path d='m121.3 6.39c0-28.18-22.84-51.02-51.02-51.02s-51.03 22.84-51.03 51.02s22.84 51.03 51.03 51.03s51.02-22.84 51.02-51.03z' stroke="var(--fig-verde, #15803d)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='2.99 2.99'/>
+<g fill="var(--fig-verde, #15803d)" transform='translate(54.54 2.72)'>
 <use x='70.27' y='6.39' xlink:href='#g2-76'/>
 <use x='75.56' y='6.39' xlink:href='#g2-97'/>
 <use x='79.79' y='6.39' xlink:href='#g2-122'/>

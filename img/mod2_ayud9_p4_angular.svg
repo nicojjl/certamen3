@@ -5,9 +5,9 @@
   :root {
     color: #1f2937;
     fill: currentColor;
-    --fig-azul: #0284c7;
+    --fig-azul: #0369a1;
     --fig-rojo: #dc2626;
-    --fig-verde: #16a34a;
+    --fig-verde: #15803d;
     --fig-morado: #7c3aed;
   }
   @media (prefers-color-scheme: dark) {
@@ -106,7 +106,7 @@
 <path d='m63.18 63.64c0-.63-.51-1.13-1.13-1.13s-1.14 .51-1.14 1.13s.51 1.13 1.14 1.13s1.13-.5 1.13-1.13z'/>
 <path d='m97.52 63.64c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z' stroke="currentColor" fill='none' stroke-width='.8' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m95.25 63.64c0-.63-.51-1.13-1.13-1.13s-1.14 .51-1.14 1.13s.51 1.13 1.14 1.13s1.13-.5 1.13-1.13z'/>
-<g fill="var(--fig-azul, #0284c7)" transform='translate(-31.93 -4.22)'>
+<g fill="var(--fig-azul, #0369a1)" transform='translate(-31.93 -4.22)'>
 <use x='79.45' y='45.59' xlink:href='#g3-126'/>
 <use x='78.08' y='47.61' xlink:href='#g3-74'/>
 <use x='82.71' y='48.71' xlink:href='#g4-49'/>

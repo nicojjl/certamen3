@@ -39,9 +39,10 @@
   --font-mono: 'Computer Modern Typewriter', Consolas, Menlo, Monaco, monospace;
 
   /* Figuras Certamen */
-  --fig-azul: #0284c7;
+  --fig-azul: #0369a1;
   --fig-rojo: #dc2626;
-  --fig-verde: #16a34a;
+  --fig-verde: #15803d;
+  --fig-morado: #7c3aed;
 }
 
 [data-theme="dark"] {
@@ -78,6 +79,7 @@
   --fig-azul: #38bdf8;
   --fig-rojo: #f87171;
   --fig-verde: #4ade80;
+  --fig-morado: #c084fc;
 }
 
 /* Reset básico y base */
