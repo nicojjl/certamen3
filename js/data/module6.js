@@ -124,6 +124,8 @@ window.MODULE_DATA_MOD6 = {
       level: 'certamen',
       source: 'Ayudantía 11 Problema 1',
       type: 'step_by_step',
+      figure: 'img/mod6_ayud11_p1_solenoids.svg',
+      figureCaption: 'Dos solenoides concéntricos ideales de radios $R$ y $3R$ (Ayudantía 11 P1).',
       statement: `
         Se cuenta con dos solenoides ideales concéntricos muy largos de longitud común $l$ ($l \\gg 3R$). El solenoide interno tiene radio $R$, $N_i$ vueltas y densidad de espiras por unidad de longitud $n_i = N_i/l$. El solenoide externo tiene radio $3R$, $N_e$ vueltas y densidad $n_e = N_e/l$. Por la espira interna circula una corriente $I(t)$ en sentido antihorario.<br>
         a) Determine el flujo magnético sobre una vuelta del solenoide de radio $3R$.<br>
@@ -166,6 +168,8 @@ window.MODULE_DATA_MOD6 = {
       level: 'certamen',
       source: 'Ayudantía 11 Problema 2',
       type: 'step_by_step',
+      figure: 'img/mod6_ayud11_p2_wire_rect.svg',
+      figureCaption: 'Cable recto infinito con corriente variable y espira rectangular a distancia $a$ (Ayudantía 11 P2).',
       statement: `
         Considere un alambre conductor muy delgado e infinito con corriente variable $I(t) = I_0 e^{-t/\\tau}$ ($t > 0$). Un rectángulo conductor de lados $a$ (en $x$) y $b$ (en $y$) está fijo sobre el plano $xy$ a una distancia $a$ del cable (ubicado entre $x = a$ y $x = 2a$).<br>
         a) Obtenga el flujo magnético a través del rectángulo.<br>
@@ -303,6 +307,8 @@ window.MODULE_DATA_MOD6 = {
       level: 'certamen',
       source: 'Pauta C3 2026-1 Problema 2',
       type: 'step_by_step',
+      figure: 'img/mod6_pauta_p2_rollo.svg',
+      figureCaption: 'Rollo plano de $N$ vueltas de radio $R$ con espira circular concéntrica de radio $r \\ll R$ (Pauta C3 P2).',
       statement: `
         Con un conductor aislado se fabrica un rollo plano de $N$ vueltas circulares de radio $R$ sobre una mesa. En torno a su centro se ubica una pequeña espira circular de radio $r \\ll R$. Por el rollo circula una corriente $I(t)$ en sentido antihorario.<br>
         a) Encuentre una expresión para la inductancia mutua $M$ del sistema formado por el rollo y la pequeña espira.<br>
@@ -348,6 +354,8 @@ window.MODULE_DATA_MOD6 = {
       level: 'certamen',
       source: 'Ayudantía 11 Problema Conceptual 1',
       type: 'conceptual',
+      figure: 'img/mod6_transformador.svg',
+      figureCaption: 'Transformador ideal con núcleo ferromagnético cerrado y devanados $N_p$ y $N_s$ (Ayudantía 11 Conceptual 1).',
       statement: `
         Un transformador ideal cuenta con dos bobinas enrolladas en un núcleo ferromagnético (primaria con $N_p$ y secundaria con $N_s$).<br>
         a) ¿Cómo se relaciona el voltaje de la bobina primaria y la secundaria?<br>
