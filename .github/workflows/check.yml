@@ -1,0 +1,45 @@
+name: Integración Continua y Verificación Física
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    name: Verificación Analítica, Linter LaTeX y Renderizado KaTeX
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: '**/requirements.txt'
+
+      - name: Instalar dependencias Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install sympy pymupdf pillow
+
+      - name: 1. Ejecutar Linter de Sintaxis y Escapes LaTeX
+        run: |
+          python scripts/lint_latex.py
+
+      - name: 2. Ejecutar Verificación Analítica SymPy (45 pruebas oficiales)
+        run: |
+          python scripts/verificar.py
+
+      - name: 3. Iniciar Servidor HTTP Local
+        run: |
+          python -m http.server 8080 &
+          sleep 2
+
+      - name: 4. Ejecutar Auditoría KaTeX en Navegador (Chrome Headless, Reveal=All)
+        run: |
+          python scripts/verify_browser_katex.py --port 8080
