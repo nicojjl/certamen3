@@ -263,12 +263,13 @@ window.MODULE_DATA_MOD6 = {
         Considere una bobina muy larga de radio $a$ y $n$ vueltas por unidad de largo. Al interior de la bobina se ubica una espira circular de radio $b < a$ inclinada un ángulo $\\alpha$ respecto al eje longitudinal de la bobina.<br>
         a) Determine la inductancia mutua $M$ entre la bobina y la espira interior.<br>
         b) Si por la bobina empieza a circular una corriente $I(t) = I_0 \\sin(\\omega t)$, determine la fem inducida en la espira en función del tiempo.<br>
+        <em><strong>Aviso para la evaluación:</strong> Confirmar con el ayudante qué convención usa el curso.</em><br>
         <div style="margin-top: 0.8rem; border-left: 4px solid #ea580c; background: var(--bg-tertiary); padding: 0.75rem 1rem; border-radius: 4px;">
-          <span class="level-badge badge-intermediate" style="background:#ea580c; color:#fff; font-weight:600; margin-bottom:0.4rem; display:inline-block;">⚠️ Convención a confirmar con el ayudante</span><br>
+          <span class="level-badge badge-intermediate" style="background:#ea580c; color:#fff; font-weight:600; margin-bottom:0.4rem; display:inline-block;">⚠️ Confirmar con el ayudante qué convención usa el curso</span><br>
           <em>Nota metodológica sobre el ángulo $\\alpha$:</em> En la literatura y problemas tipo UTFSM, la cota de inclinación $\\alpha$ puede definirse respecto a dos referencias geométricas distintas:<br>
           1) <strong>Respecto al vector normal $\\hat{n}$</strong> a la espira (ángulo entre $\\vec{B}$ y $\\hat{n}$ es $\\alpha \\implies \\Phi_B \\propto \\cos\\alpha$).<br>
           2) <strong>Respecto al plano de la espira</strong> (ángulo entre $\\vec{B}$ y el plano es $\\alpha \\implies$ ángulo con la normal es $90^\\circ - \\alpha \\implies \\Phi_B \\propto \\sin\\alpha$).<br>
-          Dado que el dibujo de referencia no explicita si la flecha acota el plano o la normal, se detallan a continuación <strong>ambas convenciones completas</strong> mediante el selector interactivo.
+          Dado que el dibujo de referencia no explicita con certeza si la flecha acota el plano o la normal, se detallan a continuación <strong>ambas convenciones completas</strong> mediante el selector interactivo.
         </div>
         <div class="conv-selector-container" style="margin: 0.8rem 0; padding: 0.6rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color);">
           <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem;">Seleccionar convención activa en la solución:</div>
