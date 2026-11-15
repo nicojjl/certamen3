@@ -9,7 +9,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    name: Verificación Analítica, Linter LaTeX y Renderizado KaTeX
+    name: Verificación Analítica, Linter LaTeX, SVG y Renderizado KaTeX
 
     steps:
       - name: Clonar repositorio
@@ -25,21 +25,44 @@ jobs:
       - name: Instalar dependencias Python
         run: |
           python -m pip install --upgrade pip
-          pip install sympy pymupdf pillow
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
 
       - name: 1. Ejecutar Linter de Sintaxis y Escapes LaTeX
         run: |
           python scripts/lint_latex.py
 
-      - name: 2. Ejecutar Verificación Analítica SymPy (45 pruebas oficiales)
+      - name: 2. Validar Calidad y Formato de Figuras SVG (< 120 KB, XML, sin URLs)
         run: |
-          python scripts/verificar.py
+          python scripts/check_figures.py
 
-      - name: 3. Iniciar Servidor HTTP Local
+      - name: 3. Ejecutar Verificación Analítica SymPy y Validar Conteo Mínimo
+        run: |
+          python scripts/verificar.py > scripts/salida_verificar.txt
+          cat scripts/salida_verificar.txt
+          PASSED_COUNT=$(grep -c "\[PASS\]" scripts/salida_verificar.txt || true)
+          echo "Pruebas analíticas pasadas: $PASSED_COUNT"
+          if [ "$PASSED_COUNT" -lt 87 ]; then
+            echo "ERROR: Se esperaban al menos 87 pruebas [PASS], pero se obtuvieron $PASSED_COUNT"
+            exit 1
+          fi
+
+      - name: 4. Ejecutar Verificación de Consistencia Numérica
+        run: |
+          python scripts/verificar_numericos.py
+
+      - name: 5. Iniciar Servidor HTTP Local
         run: |
           python -m http.server 8080 &
           sleep 2
 
-      - name: 4. Ejecutar Auditoría KaTeX en Navegador (Chrome Headless, Reveal=All)
+      - name: 6. Ejecutar Auditoría KaTeX en Navegador (Playwright / Chromium Headless)
         run: |
           python scripts/verify_browser_katex.py --port 8080
+
+      - name: 7. Subir Reporte de Verificación como Artefacto
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: salida_verificar.txt
+          path: scripts/salida_verificar.txt
