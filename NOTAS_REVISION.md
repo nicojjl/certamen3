@@ -364,3 +364,31 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 1. Argumentación termodinámica y molecular de por qué las pérdidas por histéresis magnética en el acero aumentan el rendimiento frente al aluminio en cocinas de inducción.
 2. Comportamiento en altas frecuencias del efecto pelicular real (Skin Depth $\delta = \sqrt{2/\omega\mu\sigma}$ continuo) frente al modelo escalonado aproximado propuesto por el equipo docente en la Pauta C3 2026-1.
 3. Tratamiento de los efectos de borde en la inductancia mutua para solenoides finitos cuando $l \approx 2R$.
+
+---
+
+## 13. ERRORES ENCONTRADOS Y CORREGIDOS
+
+1. **Rotulación de Simulacro P2 vs. Ejercicio Original de Arco y Segmento:**
+   - *Error anterior:* En el Módulo 1 y versiones iniciales de las notas, el ejercicio de superposición de arco circular y segmento rectilíneo finito estaba rotulado como "Problema 2 Simulacros C3 UTFSM".
+   - *Corrección:* El verdadero Problema 2 del simulacro oficial es la espira rectangular que se aleja con velocidad constante $v$ de un cable infinito con corriente. Se reclasificó el ejercicio del arco y segmento como `Ejercicio original (no oficial)` y se ubicó el Problema 2 oficial en el Módulo 4 (`m4_ex7`) y en el Módulo 11 (`m11_prob2`).
+
+2. **Geometría de Bobinas Concéntricas en Ayudantía 11 P1:**
+   - *Error anterior:* Se modelaba como dos espiras planas en un mismo plano mediante aproximación de campo central.
+   - *Corrección:* El enunciado oficial especifica "dos espiras ideales concéntricas muy largas" (solenoides ideales concéntricos de longitud $l$). Se corrigió la deducción rigurosa del flujo concatenado $\phi_1 = \mu_0 \frac{N_i}{l}\pi R^2 I$ y la inductancia mutua $M = \mu_0 \frac{N_i N_e \pi R^2}{l}$ en el Módulo 6 (`m6_ex5`) y en las notas de revisión.
+
+3. **Geometría de la Pequeña Espira Central en Ayudantía 10 P2 vs Pauta C3 P2:**
+   - *Error anterior:* Se mezclaban en un solo ejercicio la espira central cuadrada de Ayudantía 10 P2 y la espira circular con corriente constante previa $t < 0$ de Pauta C3 P2.
+   - *Corrección:* Se separaron explícitamente: en Módulo 4 (`m4_ex6`) se modela fielmente la espira cuadrada de lado $a \ll R$ con $A = a^2$ de la Ayudantía 10 P2, y en Módulo 6 (`m6_ex7c`) se incorporó el problema completo de la Pauta C3 2026-1 P2 (rollo plano de $N$ vueltas con espira circular de radio $r \ll R$ y corriente $I(t)$ para $t < 0$ y $t \ge 0$).
+
+4. **Incorporación de la Espira Inclinada en Ángulo $\alpha$ (Ayudantía 11 P4):**
+   - *Error anterior:* No existía un ejercicio interactivo específico para la bobina larga con espira inclinada en ángulo $\alpha$ respecto al eje longitudinal.
+   - *Corrección:* Se creó `m6_ex7b` en el Módulo 6 con la deducción analítica de $M = \mu_0 n \pi b^2 \cos\alpha$ y la fem inducida correspondiente.
+
+5. **Explicitud en Convenciones de Vector Normal y Signo en Faraday-Lenz:**
+   - *Error anterior:* Varias soluciones calculaban directamente $|\varepsilon| = d\phi/dt$ sin explicitar el vector normal $\hat{n}$, el signo algebraico de $\varepsilon$ ni el sentido de circulación asociado.
+   - *Corrección:* Se explicitó en todos los problemas de Faraday-Lenz el vector normal elegido, el sentido positivo de circulación por regla de la mano derecha, el signo de $\varepsilon = -d\phi/dt$ y la justificación física de Lenz.
+
+6. **Escapes de Caracteres en Strings de JavaScript y KaTeX:**
+   - *Error anterior:* Caracteres como `\frac`, `\odot`, `\otimes`, `\varepsilon`, `\pm`, `\vec`, `\Omega` dentro de template literals de JavaScript se escribían con barra simple, provocando que JS los interpretara como secuencias de escape nativas (`\f` form-feed, `\v` vertical tab), generando errores de renderizado de KaTeX (ej. 2 errores en Módulo 4).
+   - *Corrección:* Se estandarizó el doble escape `\\frac`, `\\odot`, `\\otimes`, `\\varepsilon`, `\\pm`, `\\vec`, `\\Omega` en todos los archivos de datos JS, logrando 0 errores de KaTeX en los 12 módulos.
