@@ -356,13 +356,13 @@ Este documento recopila las deducciones analíticas completas, convenciones de s
 ### 12.1. Salida de Verificación SymPy (scripts/verificar.py)
 La verificación analítica simbólica completa se ejecuta de forma reproducible e independiente mediante el script `scripts/verificar.py`. La salida detallada con el registro de las 87 pruebas unitarias exitosas (87/87 [PASS], exit code 0) se encuentra almacenada y disponible en el archivo de texto dedicado:
 
-> 📄 **Reporte Completo de Salida:** [scripts/salida_verificar.txt](file:///d:/ALGORITMICA/fis120-certamen3/scripts/salida_verificar.txt) (o ruta relativa de repositorio: [scripts/salida_verificar.txt](scripts/salida_verificar.txt)).
+> 📄 **Reporte Completo de Salida:** [scripts/salida_verificar.txt](scripts/salida_verificar.txt).
 
 #### Resumen Cuantitativo de la Suite de Verificación
 - **Módulos evaluados:** 12 módulos (Módulo 0 al Módulo 11).
-- **Pruebas analíticas SymPy:** 87 pruebas ejecutadas, 87 pruebas pasadas (0 fallas).
+- **Pruebas analíticas SymPy:** 89 pruebas ejecutadas, 89 pruebas pasadas (0 fallas).
 - **Pruebas de consistencia numérica:** 15 ejercicios evaluados contra cálculo físico teórico independiente en `scripts/verificar_numericos.py` (15/15 correctos dentro de tolerancia).
-- **Auditoría KaTeX y DOM interactivo:** 12 módulos navegados e interactuados con Playwright en `scripts/verify_browser_katex.py` (2052 fórmulas renderizadas, 0 errores KaTeX, 0 errores de consola, 0 comandos sueltos).
+- **Auditoría KaTeX y DOM interactivo:** 12 módulos navegados e interactuados con Playwright en `scripts/verify_browser_katex.py` (2223 fórmulas renderizadas, 0 errores KaTeX, 0 errores de consola, 0 comandos sueltos, 100% de cajas interactivas visibles tras revelado).
 - **Validación vectorial SVG y TikZ:** 25 figuras analizadas en `scripts/check_figures.py` (25/25 XML válido, < 120 KB, sin referencias externas HTTP).
 
 ---
