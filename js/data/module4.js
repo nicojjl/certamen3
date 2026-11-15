@@ -53,7 +53,7 @@ window.MODULE_DATA_MOD4 = {
       id: 'm4_ex1',
       title: 'fem con Flujo Armónico en el Tiempo',
       level: 'basic',
-      source: 'Fundamentos de Inducción',
+      source: 'Ejercicio original (no oficial)',
       type: 'multiple_choice',
       statement: `
         El flujo magnético a través de una bobina de $N = 50\\text{ vueltas}$ varía según la función $\\phi_B(t) = 0.040 \\cos(100\\pi t)\\text{ Wb}$. ¿Cuál es la magnitud máxima de la fem inducida en la bobina?
@@ -76,7 +76,7 @@ window.MODULE_DATA_MOD4 = {
       id: 'm4_ex2',
       title: 'fem Inducida en Espira Cuadrada con Campo Lineal',
       level: 'basic',
-      source: 'Ejercicios de Clase UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Una espira cuadrada conductora de lado $L = 0.20\\text{ m}$ y resistencia $R = 4.0\\,\\Omega$ está orientada perpendicularmente a un campo magnético uniforme que disminuye a razón constante $\\frac{dB}{dt} = -0.50\\text{ T/s}$. Calcule la corriente inducida $I_{ind}$ en miliamperios (mA).
@@ -97,7 +97,7 @@ window.MODULE_DATA_MOD4 = {
       id: 'm4_ex3',
       title: 'Aplicación Directa de la Regla de Lenz',
       level: 'intermediate',
-      source: 'Preguntas Conceptuales FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         Si un campo magnético uniforme saliente del plano de la página ($\odot$) está disminuyendo con el tiempo, la corriente inducida en una espira en dicho plano circulará en sentido antihorario.
@@ -231,7 +231,7 @@ window.MODULE_DATA_MOD4 = {
       id: 'm4_ex7',
       title: 'Espira Alejándose de Cable Recto Infinito',
       level: 'certamen',
-      source: 'Simulacro Certamen 3 Problema 2',
+      source: 'Simulacro C3 Problema 2',
       type: 'step_by_step',
       figure: 'img/mod4_faraday_moving_loop.svg',
       figureCaption: 'Cable recto infinito con corriente $+I\\hat{\\jmath}$ y espira alejándose con $\\vec{v} = v\\hat{\\imath}$.',

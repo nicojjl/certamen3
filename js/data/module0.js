@@ -69,7 +69,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex1',
       title: 'Producto Cruz de Versores Canónicos',
       level: 'basic',
-      source: 'Repaso Teórico UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'multiple_choice',
       statement: `
         Un electrón se mueve en la dirección $+x$ (versor $\\hat{\\imath}$) en una región con campo magnético uniforme apuntando en la dirección $+y$ (versor $\\hat{\\jmath}$). ¿Hacia qué dirección apunta la fuerza magnética $\\vec{F} = q(\\vec{v}\\times\\vec{B})$ sobre el electrón?
@@ -92,7 +92,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex2',
       title: 'Flujo Vectorial con Producto Punto',
       level: 'basic',
-      source: 'Fundamentos FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Un campo magnético uniforme de magnitud $B = 0.50\\text{ T}$ atraviesa un plano rectangular de lados $a = 0.20\\text{ m}$ y $b = 0.30\\text{ m}$. Si el vector normal a la superficie forma un ángulo $\\theta = 60^\\circ$ con las líneas de campo $\\vec{B}$, calcule el flujo magnético $\\phi_B$ a través del rectángulo.
@@ -111,7 +111,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex3',
       title: 'Anticonmutatividad y Orientación de Lazos',
       level: 'intermediate',
-      source: 'Concepto Ampère UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         Si invertimos el sentido en que recorremos un lazo amperiano cerrado $\\Gamma$ (de sentido antihorario a sentido horario), la circulación magnética $\\oint_\\Gamma \\vec{B}\\cdot d\\vec{l}$ cambia de signo.
@@ -127,7 +127,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex4',
       title: 'Análisis Dimensional de la Permeabilidad Magnética',
       level: 'intermediate',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         A partir de la Ley de Biot-Savart $dB = \\frac{\\mu_0}{4\\pi} \\frac{I dl \\sin\\theta}{r^2}$ y sabiendo que la fuerza de Lorentz es $F = qvB = I L B$, ¿cuál de las siguientes combinaciones representa dimensionalmente a $\\mu_0$?
@@ -150,7 +150,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex5',
       title: 'Jacobiano en Integrales de Sección Circular',
       level: 'intermediate',
-      source: 'Cálculo Vectorial para Física',
+      source: 'Ejercicio original (no oficial)',
       type: 'multiple_choice',
       statement: `
         En un cable cilíndrico de radio $R$, se desea calcular la corriente total $I = \\iint \\vec{J}\\cdot d\\vec{A}$ donde $\\vec{J} = J(r)\\,\\hat{k}$. ¿Cuál es la expresión correcta para el diferencial de área $d\\vec{A}$ en el plano transversal perpendicular a $\\hat{k}$?
@@ -170,7 +170,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex6',
       title: 'Equivalencia Dimensional de las Constantes de Tiempo',
       level: 'certamen',
-      source: 'Pauta C3 2026-1 / Formulario',
+      source: 'Pauta C3 2026-1 / Formulario C3 (oficial)',
       type: 'conceptual',
       statement: `
         Demuestre mediante análisis dimensional riguroso a partir de las leyes fundamentales del formulario (Ley de Ohm $V=IR$, definición de capacitancia $Q=CV$ y fem de autoinductancia $\\varepsilon_L = -L\\frac{di}{dt}$) que tanto $\\tau_C = RC$ como $\\tau_L = \\frac{L}{R}$ tienen unidades de tiempo (segundos).
@@ -198,7 +198,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex7',
       title: 'Circulación Vectorial sobre Trayectoria Circular',
       level: 'certamen',
-      source: 'Método Ampère UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'step_by_step',
       statement: `
         Considere un campo vectorial en el plano $xy$ dado en coordenadas cilíndricas por $\\vec{F} = \\frac{K}{r}\\,\\hat{\\theta}$, donde $K$ es una constante. Calcule la integral de línea $\\oint_\\Gamma \\vec{F}\\cdot d\\vec{l}$ a lo largo de una circunferencia de radio $R$ centrada en el origen, recorrida en sentido antihorario.
@@ -239,7 +239,7 @@ window.MODULE_DATA_MOD0 = {
       id: 'm0_ex8',
       title: 'Comportamiento Asintótico de Integrales del Formulario',
       level: 'intermediate',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         El formulario oficial incluye la integral $\\int \\frac{1}{(a^2 + x^2)^{3/2}} dx = \\frac{x}{a^2\\sqrt{x^2 + a^2}}$. Al evaluar esta integral para un cable recto muy largo que se extiende desde $x = -L$ hasta $x = +L$ cuando $L \\to \\infty$, ¿cuál es el valor de $\\int_{-\\infty}^{+\\infty} \\frac{1}{(a^2 + x^2)^{3/2}} dx$?

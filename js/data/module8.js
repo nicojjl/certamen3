@@ -86,7 +86,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex1',
       title: 'Comportamiento Asintótico de Elementos Reactivos',
       level: 'basic',
-      source: 'Pauta C3 Problema 3b',
+      source: 'Pauta C3 2026-1 Problema 3b',
       type: 'multiple_choice',
       statement: `
         Tras mantener conectado un circuito con corriente continua durante un tiempo muy largo ($t \\to \\infty$), ¿cómo se modelan respectivamente un capacitor ideal y un inductor ideal?
@@ -106,7 +106,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex2',
       title: 'Cálculo de Constante de Tiempo RC',
       level: 'basic',
-      source: 'Pauta C3 Problema 3c',
+      source: 'Pauta C3 2026-1 Problema 3c',
       type: 'numerical',
       statement: `
         En la rama RC del Problema 3 de la Pauta Oficial C3, se tienen los valores $R = 370\\,\\Omega$ y $C = 5.0\\,\\mu\\text{F} = 5.0 \\times 10^{-6}\\text{ F}$. Calcule la constante de tiempo $\\tau_C$ en milisegundos (ms).
@@ -123,7 +123,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex3',
       title: 'Voltaje en Capacitor en un Tiempo t = tau',
       level: 'intermediate',
-      source: 'Propiedades Exponenciales Formulario',
+      source: 'Formulario C3 (oficial)',
       type: 'true_false',
       statement: `
         Durante el proceso de carga de un capacitor a través de una resistencia desde una fuente de voltaje $\\mathcal{E}$, en el instante $t = \\tau_C = RC$ el voltaje en el capacitor ha alcanzado aproximadamente el $63.2\\%$ del voltaje de la fuente.
@@ -140,7 +140,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex4',
       title: 'Condición de Igualdad de Constantes tau_L = tau_C',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Problema 3a',
+      source: 'Pauta C3 2026-1 Problema 3a',
       type: 'step_by_step',
       figure: 'img/mod8_switch_circuit.svg',
       figureCaption: 'Circuito con interruptor en posición 1: capacitor se carga e inductor se energiza.',
@@ -177,7 +177,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex5',
       title: 'Corriente Saliendo de la Fuente en Régimen Permanente (t -> inf)',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Problema 3b',
+      source: 'Pauta C3 2026-1 Problema 3b',
       type: 'step_by_step',
       statement: `
         Se mantiene la configuración de contacto con el terminal 1 por un tiempo muy largo ($t \\to \\infty$). Encuentre la corriente total que sale de la fuente. Use $\\mathcal{E} = 112\\text{ [V]}$ y $R = 370\\,\\Omega$.
@@ -214,7 +214,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex6',
       title: 'Conmutación a Posición 2: Corrientes Ic(t) e IL(t)',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Problema 3c',
+      source: 'Pauta C3 2026-1 Problema 3c',
       type: 'step_by_step',
       figure: 'img/mod8_switch_circuit.svg',
       figureCaption: 'Interruptor en posición 2: rama RC se desconecta de la fuente; rama RL sigue alimentada.',
@@ -257,7 +257,7 @@ window.MODULE_DATA_MOD8 = {
       id: 'm8_ex7',
       title: 'Continuidad de Corriente vs. Voltaje en Conmutaciones',
       level: 'certamen',
-      source: 'Concepto Clave Pauta C3',
+      source: 'Pauta C3 2026-1 Problema 3 (Conceptual)',
       type: 'conceptual',
       statement: `
         En el circuito del problema anterior, ¿cuál es el voltaje en la resistencia $R$ de la rama RC inmediatamente antes ($t=0^-$) e inmediatamente después ($t=0^+$) de cambiar el interruptor a la posición 2? Explique por qué el voltaje sí puede cambiar instantáneamente.

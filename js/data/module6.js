@@ -52,7 +52,7 @@ window.MODULE_DATA_MOD6 = {
       id: 'm6_ex1',
       title: 'Unidades y Naturaleza de la Inductancia Mutua',
       level: 'basic',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         La inductancia mutua $M$ entre dos bobinas mide el grado de acoplamiento geométrico. ¿Cuál de las siguientes unidades del SI es equivalente al Henrio $[\\text{H}]$?
@@ -73,7 +73,7 @@ window.MODULE_DATA_MOD6 = {
       id: 'm6_ex2',
       title: 'fem Inducida por Acoplamiento Mutuo',
       level: 'basic',
-      source: 'Cálculo Directo Formulario',
+      source: 'Formulario C3 (oficial)',
       type: 'numerical',
       statement: `
         Dos bobinas acopladas tienen una inductancia mutua de $M = 0.35\\text{ H}$. Si la corriente en la bobina primaria cambia a una tasa constante de $\\frac{dI_1}{dt} = 60.0\\text{ A/s}$, calcule la magnitud de la fem inducida en la bobina secundaria en voltios.
@@ -90,7 +90,7 @@ window.MODULE_DATA_MOD6 = {
       id: 'm6_ex3',
       title: 'Universalidad del Teorema de Reciprocidad',
       level: 'intermediate',
-      source: 'Teoría Electromagnética UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         El coeficiente de inductancia mutua entre dos conductores cumple siempre $M_{12} = M_{21}$, sin importar que un conductor sea infinitamente largo y el otro sea una diminuta espira cerrada de forma irregular.
@@ -104,7 +104,7 @@ window.MODULE_DATA_MOD6 = {
       id: 'm6_ex4',
       title: 'Voltaje en Transformador Reductor',
       level: 'intermediate',
-      source: 'Transformadores Ideales',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Un transformador ideal reductor tiene un devanado primario de $N_p = 800\\text{ vueltas}$ y un secundario de $N_s = 40\\text{ vueltas}$. Si se alimenta con un voltaje alterno eficaz de $V_p = 220.0\\text{ V}$, calcule el voltaje eficaz en el secundario $V_s$ en voltios.
@@ -203,7 +203,7 @@ window.MODULE_DATA_MOD6 = {
       id: 'm6_ex7',
       title: 'Solenoide Coaxial con Bobina Cuadrada Exterior',
       level: 'certamen',
-      source: 'Simulacro Certamen 3 Problema 3',
+      source: 'Simulacro C3 Problema 3',
       type: 'step_by_step',
       figure: 'img/mod6_mutual_solenoid_square.svg',
       figureCaption: 'Solenoide de radio $a$ y bobina cuadrada coaxial de $N$ espiras de lado $L > 2a$.',
@@ -293,7 +293,7 @@ window.MODULE_DATA_MOD6 = {
       id: 'm6_ex7c',
       title: 'Rollo Circular con Espira Central Pequeña y Decaimiento Exponencial',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Problema 2',
+      source: 'Pauta C3 2026-1 Problema 2',
       type: 'step_by_step',
       statement: `
         Con un conductor aislado se fabrica un rollo plano de $N$ vueltas circulares de radio $R$ sobre una mesa. En torno a su centro se ubica una pequeña espira circular de radio $r \\ll R$. Por el rollo circula una corriente $I(t)$ en sentido antihorario.<br>

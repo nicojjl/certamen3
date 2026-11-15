@@ -56,7 +56,7 @@ window.MODULE_DATA_MOD5 = {
       id: 'm5_ex1',
       title: 'fem Motriz en Conductor Móvil',
       level: 'basic',
-      source: 'Fundamentos de fem Motriz',
+      source: 'Ejercicio original (no oficial)',
       type: 'multiple_choice',
       statement: `
         Una varilla de $L = 0.50\\text{ m}$ de longitud se desplaza con velocidad constante $v = 4.0\\text{ m/s}$ perpendicular a un campo magnético uniforme de $B = 0.60\\text{ T}$. ¿Cuál es la fem inducida entre sus extremos?
@@ -77,7 +77,7 @@ window.MODULE_DATA_MOD5 = {
       id: 'm5_ex2',
       title: 'Fuerza Magnética sobre Conductor',
       level: 'basic',
-      source: 'Ley de Lorentz en Circuitos',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Por una varilla de longitud $L = 0.40\\text{ m}$ circula una corriente $I = 2.5\\text{ A}$. La varilla se encuentra en un campo magnético uniforme de $B = 0.80\\text{ T}$ perpendicular a ella. Calcule la magnitud de la fuerza magnética en Newtons.
@@ -94,7 +94,7 @@ window.MODULE_DATA_MOD5 = {
       id: 'm5_ex3',
       title: 'Efecto de la Resistencia en la Velocidad Terminal',
       level: 'intermediate',
-      source: 'Dinámica de Rieles UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         En el sistema de rieles verticales con gravedad, si se reemplaza la varilla por otra del mismo peso y dimensiones pero con el doble de resistencia eléctrica ($2R$), la velocidad terminal alcanzada será el doble de la original.
@@ -108,7 +108,7 @@ window.MODULE_DATA_MOD5 = {
       id: 'm5_ex4',
       title: 'Cálculo Numérico de Velocidad Terminal',
       level: 'intermediate',
-      source: 'Ejercicios de Certamen FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Una varilla de masa $m = 0.050\\text{ kg}$ y resistencia $R = 2.0\\,\\Omega$ cae por rieles verticales separados $L = 0.25\\text{ m}$ bajo un campo $B = 0.50\\text{ T}$. Usando $g = 9.8\\text{ m/s}^2$, calcule la velocidad terminal $v_t$ en m/s.
@@ -235,7 +235,7 @@ window.MODULE_DATA_MOD5 = {
       id: 'm5_ex7',
       title: 'Balance de Potencia en la Velocidad Terminal',
       level: 'certamen',
-      source: 'Teorema de Transporte y Energía',
+      source: 'Ejercicio original (no oficial)',
       type: 'conceptual',
       statement: `
         Demuestre analíticamente que cuando la varilla conductora en los rieles alcanza su velocidad terminal $v_t$, la tasa a la cual la gravedad realiza trabajo mecánico sobre la varilla es exactamente igual a la tasa a la cual se disipa energía térmica por efecto Joule en la resistencia $R$.

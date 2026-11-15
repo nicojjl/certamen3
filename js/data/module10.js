@@ -74,7 +74,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex1',
       title: 'Identificación de las Ecuaciones de Maxwell',
       level: 'basic',
-      source: 'Simulacro C3 Conceptual a',
+      source: 'Simulacro C3 Pregunta Conceptual a',
       type: 'multiple_choice',
       statement: `
         ¿Cuál de las siguientes ecuaciones de Maxwell formaliza la inexistencia de monopolos magnéticos aislados en la naturaleza?
@@ -94,7 +94,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex2',
       title: 'Cálculo de Corriente de Desplazamiento',
       level: 'basic',
-      source: 'Fundamentos de Ondas EM',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Entre las placas de un condensador circular plano de área $A = 0.050\\text{ m}^2$, el campo eléctrico uniforme varía a una tasa constante de $\\frac{dE}{dt} = 2.0 \\times 10^{11}\\text{ V/(m}\\cdot\\text{s)}$. Sabiendo que $\\varepsilon_0 = 8.854 \\times 10^{-12}\\text{ F/m}$, calcule la corriente de desplazamiento $I_d$ en amperios.
@@ -111,7 +111,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex3',
       title: 'Monopolos Magnéticos y Líneas de B',
       level: 'intermediate',
-      source: 'Conceptos de Campo Magnético',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         Si en el futuro se descubriera experimentalmente un monopolo magnético (una partícula con carga magnética neta $q_m$), la ecuación $\\oiint \\vec{B}\\cdot d\\vec{A} = 0$ tendría que modificarse para igualar a $\\mu_0 q_{m,enc}$, de forma análoga a la ley de Gauss electrostática.
@@ -125,7 +125,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex4',
       title: 'Campo Magnético Inducido entre Placas de Condensador',
       level: 'intermediate',
-      source: 'Simulacro C3 Conceptual c',
+      source: 'Simulacro C3 Pregunta Conceptual c',
       type: 'multiple_choice',
       statement: `
         Durante la carga de un condensador de placas circulares de radio $R$ mediante corriente $I(t)$, ¿cuál es la dependencia radial del campo magnético $B(r)$ en la región entre las placas para $r < R$?
@@ -148,7 +148,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex5',
       title: 'Resolución de la Paradoja de Ampère en el Condensador',
       level: 'certamen',
-      source: 'Simulacro Certamen 3 Pregunta Conceptual b',
+      source: 'Simulacro C3 Pregunta Conceptual b',
       type: 'step_by_step',
       figure: 'img/mod10_maxwell_capacitor.svg',
       figureCaption: 'Lazo $\\Gamma$ alrededor del cable: disco plano $S_1$ vs bolsa entre placas $S_2$.',
@@ -200,7 +200,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex6',
       title: 'Campo B(r) entre Placas para r < R',
       level: 'certamen',
-      source: 'Simulacro Certamen 3 Pregunta Conceptual c',
+      source: 'Simulacro C3 Pregunta Conceptual c',
       type: 'step_by_step',
       statement: `
         Entre las placas circulares de radio $R$ del condensador en proceso de carga con corriente $I(t)$, calcule el vector campo magnético a una distancia radial $r < R$ del eje central en función de $I(t), r$ y $R$.
@@ -244,7 +244,7 @@ window.MODULE_DATA_MOD10 = {
       id: 'm10_ex7',
       title: 'Cocina de Inducción: Olla de Acero vs. Olla de Greda',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Pregunta Conceptual',
+      source: 'Pauta C3 2026-1 Pregunta Conceptual',
       type: 'conceptual',
       statement: `
         Una cocina de inducción calienta los recipientes mediante el uso de un campo magnético. Si se dispone de dos ollas de tamaño similar: una olla de acero y una olla de greda tradicional, ambas contienen la misma cantidad de agua inicialmente a igual temperatura.<br>

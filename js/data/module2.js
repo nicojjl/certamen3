@@ -63,7 +63,7 @@ window.MODULE_DATA_MOD2 = {
       id: 'm2_ex1',
       title: 'Corriente en un Conductor Homogéneo',
       level: 'basic',
-      source: 'Fundamentos de Conducción',
+      source: 'Ejercicio original (no oficial)',
       type: 'multiple_choice',
       statement: `
         Un cable de cobre cilíndrico de radio $R = 1.0\\text{ mm}$ transporta una densidad de corriente uniforme de magnitud $J = 3.0 \\times 10^6\\text{ A/m}^2$. ¿Cuál es la corriente total $I$ que atraviesa el cable?
@@ -102,7 +102,7 @@ window.MODULE_DATA_MOD2 = {
       id: 'm2_ex3',
       title: 'Distribución Radial de Corriente en Conductor Macizo',
       level: 'intermediate',
-      source: 'Concepto Densidad UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         Si un cilindro conductor macizo de radio $R$ transporta una corriente con densidad $J(r) = C r^2$ ($C > 0$), la mitad exterior del cable ($R/2 < r \\le R$) transporta exactamente 15 veces más corriente que la mitad interior ($0 \\le r \\le R/2$).
@@ -165,7 +165,7 @@ window.MODULE_DATA_MOD2 = {
       id: 'm2_ex6',
       title: 'Efecto Pelicular Escalonado: Determinación de J₀',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Problema 1a',
+      source: 'Pauta C3 2026-1 Problema 1a',
       type: 'step_by_step',
       figure: 'img/mod2_coaxial_stepped.svg',
       figureCaption: 'Sección transversal del conductor: $J_0$ para $r \\le R/2$ y $3J_0$ para $R/2 < r \\le R$.',
@@ -254,7 +254,7 @@ window.MODULE_DATA_MOD2 = {
       id: 'm2_ex8',
       title: 'Efecto Pelicular en Telecomunicaciones',
       level: 'certamen',
-      source: 'Pauta C3 Problema 1 Conceptual',
+      source: 'Pauta C3 2026-1 Problema 1 (Conceptual)',
       type: 'conceptual',
       statement: `
         ¿Por qué en aplicaciones de alta frecuencia (como radiofrecuencia o telecomunicaciones) la corriente tiende a concentrarse en la superficie del conductor (efecto pelicular) en lugar de distribuirse uniformemente?

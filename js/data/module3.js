@@ -58,7 +58,7 @@ window.MODULE_DATA_MOD3 = {
       id: 'm3_ex1',
       title: 'Campo en el Interior de un Solenoide',
       level: 'basic',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         Un solenoide ideal muy largo tiene $n = 800\\text{ vueltas/m}$ y transporta una corriente constante de $I = 2.5\\text{ A}$. ¿Cuál es la magnitud del campo magnético uniforme en su interior?
@@ -79,7 +79,7 @@ window.MODULE_DATA_MOD3 = {
       id: 'm3_ex2',
       title: 'Campo en el Interior de Conductor Homogéneo',
       level: 'basic',
-      source: 'Ley de Ampère Estándar',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Un cable conductor cilíndrico macizo de radio $R = 4.0\\text{ cm} = 0.040\\text{ m}$ transporta una corriente total uniforme de $I = 16.0\\text{ A}$. Calcule la magnitud del campo magnético $B$ a una distancia $r = 2.0\\text{ cm} = 0.020\\text{ m}$ de su eje (en $r = R/2$).
@@ -101,7 +101,7 @@ window.MODULE_DATA_MOD3 = {
       id: 'm3_ex3',
       title: 'Apantallamiento en Cable Coaxial',
       level: 'intermediate',
-      source: 'Principios de Coaxial',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         En un cable coaxial donde el conductor interior transporta una corriente $+I$ y el conductor exterior transporta una corriente de retorno $-I$, el campo magnético en cualquier punto exterior al cable ($r > R_{ext}$) es exactamente nulo.
@@ -196,7 +196,7 @@ window.MODULE_DATA_MOD3 = {
       id: 'm3_ex6',
       title: 'Cable Coaxial Escalonado: Campo en las Tres Regiones',
       level: 'certamen',
-      source: 'Pauta Certamen 3 2026-1 Problema 1b,c',
+      source: 'Pauta C3 2026-1 Problema 1b,c',
       type: 'step_by_step',
       figure: 'img/mod2_coaxial_stepped.svg',
       figureCaption: 'Sección del cable: Región 1 ($r \\le R/2$), Región 2 ($R/2 < r \\le R$) y Región 3 ($r > R$).',
@@ -244,7 +244,7 @@ window.MODULE_DATA_MOD3 = {
       id: 'm3_ex7',
       title: 'Toroide Ideal de Sección Rectangular',
       level: 'certamen',
-      source: 'Simulacro Certamen 3 Problema 1a',
+      source: 'Simulacro C3 Problema 1a',
       type: 'step_by_step',
       figure: 'img/mod3_toroid_simulacro.svg',
       figureCaption: 'Toroide de radio interno $a$, radio externo $b$ y altura $h$ con $N$ vueltas.',

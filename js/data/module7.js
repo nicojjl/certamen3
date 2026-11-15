@@ -49,7 +49,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex1',
       title: 'Autoinductancia de Solenoide Ideal',
       level: 'basic',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         Un solenoide ideal de longitud $l = 0.50\\text{ m}$ y radio $r = 0.020\\text{ m}$ tiene $n = 1000\\text{ vueltas/m}$. ¿Cuál es su autoinductancia $L$?
@@ -71,7 +71,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex2',
       title: 'Energía Almacenada en Inductor',
       level: 'basic',
-      source: 'Cálculo Directo Formulario',
+      source: 'Formulario C3 (oficial)',
       type: 'numerical',
       statement: `
         Un inductor de $L = 0.80\\text{ H}$ conduce una corriente constante de $I = 3.0\\text{ A}$. Calcule la energía magnética almacenada $U_L$ en Joules.
@@ -88,7 +88,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex3',
       title: 'Dependencia Cuadrática de Vueltas',
       level: 'intermediate',
-      source: 'Propiedades de Escala UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         Si duplicamos el número de vueltas por metro $n$ en un solenoide manteniendo fijas su longitud y radio, la autoinductancia $L$ se cuadruplica ($4L$).
@@ -102,7 +102,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex4',
       title: 'fem Inducida en Apertura Brusca de Circuito',
       level: 'intermediate',
-      source: 'Transitorios en Inductores',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Un inductor de $L = 0.40\\text{ H}$ transporta inicialmente una corriente de $2.0\\text{ A}$. Si al abrir un interruptor la corriente cae linealmente a cero en un intervalo de $\\Delta t = 4.0\\text{ ms} = 0.0040\\text{ s}$, calcule la magnitud de la fem autoinducida $|\\varepsilon_L|$ en voltios.
@@ -120,7 +120,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex5',
       title: 'Autoinductancia de un Toroide de Sección Rectangular',
       level: 'certamen',
-      source: 'Simulacro C3 Problema 1 / Controles',
+      source: 'Simulacro C3 Problema 1',
       type: 'step_by_step',
       figure: 'img/mod3_toroid_simulacro.svg',
       figureCaption: 'Toroide rectangular: radio interno $a$, externo $b$, altura $h$ y $N$ espiras.',
@@ -158,7 +158,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex6',
       title: 'Equivalencia de Energía Magnética: Integral de Volumen',
       level: 'certamen',
-      source: 'Teoría de Energía Electromagnética',
+      source: 'Ejercicio original (no oficial)',
       type: 'step_by_step',
       statement: `
         Demuestre que la energía acumulada en el toroide de sección rectangular obtenida mediante la integral volumétrica de la densidad de energía magnética $U = \\iiint \\frac{B^2}{2\\mu_0} dV$ coincide idénticamente con la fórmula de circuito $U = \\frac{1}{2} L I^2$.
@@ -197,7 +197,7 @@ window.MODULE_DATA_MOD7 = {
       id: 'm7_ex7',
       title: 'Condición de Continuidad de la Corriente en Inductores',
       level: 'certamen',
-      source: 'Fundamentos de Circuitos FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'conceptual',
       statement: `
         Explique por qué la corriente que circula por un inductor ideal debe ser continua en el tiempo ($i(0^+) = i(0^-)$) al conmutar un interruptor en un circuito, mientras que el voltaje en los terminales del inductor sí puede experimentar un salto brusco.

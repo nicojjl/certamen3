@@ -63,7 +63,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex1',
       title: 'Campo en el Centro de una Espira Circular',
       level: 'basic',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         Por una espira circular plana de radio $R = 5.0\\text{ cm}$ circula una corriente $I = 2.0\\text{ A}$ en sentido antihorario vista desde arriba (plano $xy$). ¿Cuál es el vector campo magnético $\\vec{B}$ en el centro exacto de la espira?
@@ -85,7 +85,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex2',
       title: 'Campo a Distancia de un Cable Recto Infinito',
       level: 'basic',
-      source: 'Ejercicios Tipo Control FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Un cable recto muy largo transporta una corriente de $I = 15.0\\text{ A}$. Calcule la magnitud del campo magnético $B$ a una distancia radial de $r = 6.0\\text{ cm} = 0.060\\text{ m}$ del cable.
@@ -103,7 +103,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex3',
       title: 'Contribución de Tramos Radiales',
       level: 'intermediate',
-      source: 'Criterio Biot-Savart UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         En un circuito formado por dos arcos concéntricos unidos por dos segmentos rectilíneos radiales dirigidos hacia el centro de curvatura $O$, el campo magnético total en $O$ depende únicamente de los arcos circulares, ya que los segmentos radiales no producen campo en dicho punto.
@@ -117,7 +117,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex4',
       title: 'Campo de un Cuarto de Circunferencia',
       level: 'intermediate',
-      source: 'Ayudantía / Pautas FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'multiple_choice',
       statement: `
         Un conductor fino transporta una corriente $I$ y forma un arco correspondiente a un cuarto de circunferencia de radio $R$ ubicado en el plano $xy$ con centro en el origen. ¿Cuál es la magnitud del campo magnético producido en el origen $O$?
@@ -138,7 +138,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex5',
       title: 'Punto de Campo Neto Nulo entre Dos Cables Paralelos',
       level: 'intermediate',
-      source: 'Superposición Magnética',
+      source: 'Ejercicio original (no oficial)',
       type: 'numerical',
       statement: `
         Dos cables rectos paralelos e infinitos están separados por una distancia $d = 30.0\\text{ cm}$. El cable 1 transporta una corriente $I_1 = 4.0\\text{ A}$ y el cable 2 transporta $I_2 = 8.0\\text{ A}$, ambas en el mismo sentido hacia $+z$. ¿A qué distancia del cable 1 (a lo largo del segmento que une ambos cables) el campo magnético neto se anula?
@@ -160,7 +160,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex6',
       title: 'Superposición: Arco Circular y Segmento Finito Paralelo a z',
       level: 'certamen',
-      source: 'Problema 2 Simulacros C3 UTFSM',
+      source: 'Ejercicio original (no oficial)',
       type: 'step_by_step',
       figure: 'img/mod1_sim2_geometry.svg',
       figureCaption: 'Configuración: Arco de radio $R$ en 4to cuadrante + segmento recto de longitud $4R$ en $x=2R, y=0$.',
@@ -215,7 +215,7 @@ window.MODULE_DATA_MOD1 = {
       id: 'm1_ex7',
       title: 'Biot-Savart vs. Ley de Ampère: Criterio de Selección',
       level: 'certamen',
-      source: 'Criterio Conceptual Certamen 3',
+      source: 'Ejercicio original (no oficial)',
       type: 'conceptual',
       statement: `
         Explique detalladamente bajo qué circunstancias un estudiante está OBLIGADO a utilizar la Ley de Biot-Savart para determinar el campo magnético en lugar de la Ley de Ampère, y por qué la Ley de Ampère no es útil en dichas situaciones a pesar de ser siempre válida formalmente.

@@ -71,7 +71,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex1',
       title: 'Frecuencia de Oscilación Natural en Circuito LC',
       level: 'basic',
-      source: 'Formulario C3',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         Un circuito LC ideal contiene un inductor de $L = 2.0\\text{ mH} = 2.0 \\times 10^{-3}\\text{ H}$ y un capacitor de $C = 5.0\\,\\mu\\text{F} = 5.0 \\times 10^{-6}\\text{ F}$. ¿Cuál es la frecuencia angular natural de oscilación $\\omega_0$?
@@ -91,7 +91,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex2',
       title: 'Cálculo de Resistencia Crítica',
       level: 'basic',
-      source: 'Condición Crítica Formulario',
+      source: 'Formulario C3 (oficial)',
       type: 'numerical',
       statement: `
         Para un circuito RLC serie con $L = 0.20\\text{ H}$ y $C = 5.0\\,\\mu\\text{F} = 5.0 \\times 10^{-6}\\text{ F}$, calcule el valor exacto de la resistencia $R_{crit}$ en ohmios para que el circuito esté críticamente amortiguado.
@@ -109,7 +109,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex3',
       title: 'Conservación de Energía en Circuito LC Libre',
       level: 'intermediate',
-      source: 'Física Térmica y Electromagnetismo',
+      source: 'Ejercicio original (no oficial)',
       type: 'true_false',
       statement: `
         En un circuito LC ideal libre (sin resistencia $R = 0$), cuando la carga en el capacitor es exactamente la mitad de su valor máximo ($q(t) = Q_0/2$), el $75\\%$ de la energía total del circuito reside en forma de energía magnética en el inductor.
@@ -126,7 +126,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex4',
       title: 'Identificación de Régimen RLC',
       level: 'intermediate',
-      source: 'Ejercicios de Certamen FIS120',
+      source: 'Formulario C3 (oficial)',
       type: 'multiple_choice',
       statement: `
         Un circuito RLC serie cuenta con $L = 1.0\\text{ H}$, $C = 1.0\\,\\mu\\text{F}$ y $R = 3000\\,\\Omega$. ¿Bajo qué régimen opera el circuito?
@@ -149,7 +149,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex5',
       title: 'Oscilador LC: Corriente y Reparto de Energía al 50%',
       level: 'certamen',
-      source: 'Problemas Tipo Control FIS120',
+      source: 'Ejercicio original (no oficial)',
       type: 'step_by_step',
       statement: `
         Un circuito LC ideal tiene capacitancia $C$ e inductancia $L$. En $t = 0$, el capacitor tiene una carga inicial $Q_0$ y la corriente es nula ($i(0) = 0$).<br>
@@ -194,7 +194,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex6',
       title: 'Cálculo Completo de Circuito RLC Subamortiguado',
       level: 'certamen',
-      source: 'Pautas de Certamen UTFSM',
+      source: 'Pauta Certamen / Formulario C3 (oficial)',
       type: 'step_by_step',
       statement: `
         Considere un circuito RLC serie con $L = 0.50\\text{ H}$, $C = 2.0\\,\\mu\\text{F} = 2.0 \\times 10^{-6}\\text{ F}$ y $R = 200\\,\\Omega$. En $t = 0$, el capacitor tiene carga $Q_0 = 40.0\\,\\mu\\text{C}$ y no circula corriente.<br>
@@ -238,7 +238,7 @@ window.MODULE_DATA_MOD9 = {
       id: 'm9_ex7',
       title: 'Importancia del Amortiguamiento Crítico en Ingeniería',
       level: 'certamen',
-      source: 'Aplicaciones Conceptuales de Física',
+      source: 'Ejercicio original (no oficial)',
       type: 'conceptual',
       statement: `
         ¿Por qué en el diseño de instrumentos de medición analógicos (como galvanómetros o agujas de velocímetro) y en sistemas de amortiguación de vehículos se busca calibrar el sistema en el régimen <em>críticamente amortiguado</em> en lugar del subamortiguado o sobreamortiguado?
