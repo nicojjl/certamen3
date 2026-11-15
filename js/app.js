@@ -177,8 +177,8 @@ const App = {
     // Render KaTeX math
     this.renderMathInElement(container);
 
-    // Inline SVGs for seamless dark/light mode CSS styling
-    this.inlineSVGs(container);
+    // Keep native <img> tags for figures to support naturalWidth validation and vector rendering
+    // this.inlineSVGs(container);
 
     // Initialize interactive widget if any
     if (dataObj.hasInteractive) {
@@ -342,6 +342,14 @@ const App = {
         sidebar.classList.toggle('open');
       });
     }
+
+    // Hash change router support
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && hash !== this.currentModuleId && this.modules.some(m => m.id === hash)) {
+        this.loadModule(hash);
+      }
+    });
   }
 };
 

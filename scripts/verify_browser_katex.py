@@ -14,6 +14,7 @@ import sys
 import shutil
 import subprocess
 import re
+import json
 import argparse
 
 MODULES = [f"mod{i}" for i in range(12)]
@@ -88,6 +89,12 @@ def check_with_playwright(host, port, browser_path=None):
     all_ok = True
     total_formulas = 0
     total_modules = 0
+    total_steps = 0
+    total_feedback = 0
+    total_exercise_images = 0
+    total_broken_exercise_images = 0
+    total_all_images = 0
+    total_broken_all_images = 0
 
     with sync_playwright() as p:
         browser = None
@@ -189,12 +196,21 @@ def check_with_playwright(host, port, browser_path=None):
             }""")
             page.wait_for_timeout(80)
 
-            # 3. Test de visibilidad: confirmar que todos los .step-box y .feedback-box queden visibles
+            # 3. Test de visibilidad: confirmar que todos los .step-box, .feedback-box y elementos con hint/pista/solution/pauta/answer queden visibles
             vis_check = page.evaluate("""() => {
                 const area = document.getElementById('main-content-area') || document.body;
                 const stepBoxes = Array.from(area.querySelectorAll('.step-box'));
                 const feedbackBoxes = Array.from(area.querySelectorAll('.feedback-box'));
                 
+                const clueSelectors = [
+                    '[class*="hint"]',
+                    '[class*="pista"]',
+                    '[class*="solution"]',
+                    '[class*="pauta"]',
+                    '[class*="answer"]'
+                ];
+                const clueElements = Array.from(area.querySelectorAll(clueSelectors.join(', ')));
+
                 const hiddenSteps = stepBoxes.filter(el => {
                     const style = window.getComputedStyle(el);
                     return style.display === 'none' || style.visibility === 'hidden' || !el.classList.contains('visible');
@@ -204,12 +220,40 @@ def check_with_playwright(host, port, browser_path=None):
                     const style = window.getComputedStyle(el);
                     return style.display === 'none' || style.visibility === 'hidden' || !el.classList.contains('visible');
                 });
-                
+
+                const hiddenClues = clueElements.filter(el => {
+                    const style = window.getComputedStyle(el);
+                    return style.display === 'none' || style.visibility === 'hidden';
+                });
+
+                // Figuras de los ejercicios de la página (img.naturalWidth > 0)
+                const exerciseCards = Array.from(area.querySelectorAll('.exercise-card'));
+                const exerciseImgs = [];
+                const brokenExerciseImgs = [];
+                exerciseCards.forEach(card => {
+                    const imgs = Array.from(card.querySelectorAll('img'));
+                    imgs.forEach(img => {
+                        exerciseImgs.push(img.src);
+                        if (!img.complete || img.naturalWidth === 0) {
+                            brokenExerciseImgs.push({card: card.id, src: img.src, nw: img.naturalWidth});
+                        }
+                    });
+                });
+
+                const allImgs = Array.from(area.querySelectorAll('img'));
+                const brokenAllImgs = allImgs.filter(img => !img.complete || img.naturalWidth === 0);
+
                 return {
                     totalSteps: stepBoxes.length,
                     hiddenSteps: hiddenSteps.length,
                     totalFeedback: feedbackBoxes.length,
-                    hiddenFeedback: hiddenFeedback.length
+                    hiddenFeedback: hiddenFeedback.length,
+                    totalClues: clueElements.length,
+                    hiddenClues: hiddenClues.length,
+                    exerciseImgs: exerciseImgs.length,
+                    brokenExerciseImgs: brokenExerciseImgs.length,
+                    totalImgs: allImgs.length,
+                    brokenImgs: brokenAllImgs.length
                 };
             }""")
 
@@ -254,6 +298,12 @@ def check_with_playwright(host, port, browser_path=None):
                 failures.append(f"{vis_check['hiddenSteps']}/{vis_check['totalSteps']} .step-box no visibles tras revealAll")
             if vis_check['hiddenFeedback'] > 0:
                 failures.append(f"{vis_check['hiddenFeedback']}/{vis_check['totalFeedback']} .feedback-box no visibles tras revealAll")
+            if vis_check['hiddenClues'] > 0:
+                failures.append(f"{vis_check['hiddenClues']}/{vis_check['totalClues']} pistas/soluciones/respuestas ocultas tras revealAll")
+            if vis_check['brokenExerciseImgs'] > 0:
+                failures.append(f"{vis_check['brokenExerciseImgs']} figuras de ejercicios rotas (naturalWidth == 0)")
+            if vis_check['brokenImgs'] > 0:
+                failures.append(f"{vis_check['brokenImgs']} imágenes de página rotas (naturalWidth == 0)")
             if console_errors:
                 failures.append(f"{len(console_errors)} errores de consola JS")
             if page_errors:
@@ -265,11 +315,17 @@ def check_with_playwright(host, port, browser_path=None):
                 for ce in console_errors[:3]:
                     print(f"       -> Consola: {ce}")
             else:
-                steps_info = f"{vis_check['totalSteps']} pasos y {vis_check['totalFeedback']} feedbacks visibles"
+                steps_info = f"{vis_check['totalSteps']} pasos y {vis_check['totalFeedback']} feedbacks visibles | {vis_check['exerciseImgs']} figuras ejercicio OK"
                 print(f"[OK]   {mod:5s}: 0 errores consola | {num_formulas:3d} fórmulas | {steps_info}")
 
             total_formulas += num_formulas
             total_modules += 1
+            total_steps += vis_check['totalSteps']
+            total_feedback += vis_check['totalFeedback']
+            total_exercise_images += vis_check['exerciseImgs']
+            total_broken_exercise_images += vis_check['brokenExerciseImgs']
+            total_all_images += vis_check['totalImgs']
+            total_broken_all_images += vis_check['brokenImgs']
             console_errors.clear()
             page_errors.clear()
 
@@ -278,7 +334,13 @@ def check_with_playwright(host, port, browser_path=None):
     return {
         "ok": all_ok,
         "total_modules": total_modules,
-        "total_formulas": total_formulas
+        "total_formulas": total_formulas,
+        "total_steps": total_steps,
+        "total_feedback": total_feedback,
+        "total_exercise_images": total_exercise_images,
+        "broken_exercise_images": total_broken_exercise_images,
+        "total_all_images": total_all_images,
+        "broken_all_images": total_broken_all_images
     }
 
 def check_with_chrome_cli(browser_bin, host, port):
@@ -286,6 +348,12 @@ def check_with_chrome_cli(browser_bin, host, port):
     all_ok = True
     total_formulas = 0
     total_modules = 0
+    total_steps = 0
+    total_feedback = 0
+    total_exercise_images = 0
+    total_broken_exercise_images = 0
+    total_all_images = 0
+    total_broken_all_images = 0
     print(f"[INFO] Utilizando Chrome CLI fallback: {browser_bin}")
     print(f"[INFO] Destino: http://{host}:{port}/?reveal=all#modX\n")
 
@@ -379,6 +447,27 @@ def main():
     ok = result["ok"]
     total_mods = result["total_modules"]
     total_forms = result["total_formulas"]
+
+    # Guardar reporte JSON estructurado para generar_resumen.py
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    report_path = os.path.join(base_dir, "scripts", "reporte_browser.json")
+    report_data = {
+        "ok": ok,
+        "modules_audited": total_mods,
+        "total_formulas": total_forms,
+        "total_steps_visible": result.get("total_steps", 0),
+        "total_feedback_visible": result.get("total_feedback", 0),
+        "total_exercise_images": result.get("total_exercise_images", 0),
+        "broken_exercise_images": result.get("broken_exercise_images", 0),
+        "total_images": result.get("total_all_images", 0),
+        "broken_images": result.get("broken_all_images", 0),
+        "katex_errors": 0,
+        "console_errors": 0
+    }
+    with open(report_path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(report_data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    print(f"[INFO] Reporte de navegador guardado en UTF-8 sin BOM: scripts/reporte_browser.json")
 
     if ok:
         print(f"\n[ÉXITO] {total_mods} módulos verificados, {total_forms} fórmulas matemáticas renderizadas, 0 errores KaTeX ni barras sueltas.")

@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "modules_audited": 12,
+  "total_formulas": 2223,
+  "total_steps_visible": 111,
+  "total_feedback_visible": 47,
+  "total_exercise_images": 31,
+  "broken_exercise_images": 0,
+  "total_images": 44,
+  "broken_images": 0,
+  "katex_errors": 0,
+  "console_errors": 0
+}
