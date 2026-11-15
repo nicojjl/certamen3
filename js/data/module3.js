@@ -119,6 +119,8 @@ window.MODULE_DATA_MOD3 = {
       level: 'certamen',
       source: 'Ayudantía 9 Problema 1b,c',
       type: 'multiple_choice',
+      figure: 'img/mod2_ayud9_p1_coaxial.svg',
+      figureCaption: 'Cable coaxial con conductor central de radio $R$ y cascarón exterior entre $2R$ y $4R$ (Ayudantía 9 Problema 1).',
       statement: `
         Un cable coaxial tiene un conductor interior macizo de radio $R$ con densidad uniforme $\\vec{J}_1 = J_0\\hat{k}$ y un conductor exterior entre radios $2R$ y $4R$ con densidad $\\vec{J}_2 = 2J_0(-\\hat{k})$. ¿Cuáles son los campos magnéticos $\\vec{B}$ en el aislante intermedio $r = \\frac{3R}{2}$ y en el exterior $r = 5R$?
       `,

@@ -123,6 +123,8 @@ window.MODULE_DATA_MOD2 = {
       level: 'intermediate',
       source: 'Ayudantía 9 Problema 1a',
       type: 'multiple_choice',
+      figure: 'img/mod2_ayud9_p1_coaxial.svg',
+      figureCaption: 'Cable coaxial con conductor central de radio $R$ y cascarón exterior entre $2R$ y $4R$ (Ayudantía 9 Problema 1).',
       statement: `
         Un cable coaxial tiene un conductor exterior hueco con radio interno $2R$ y radio externo $4R$, transportando una densidad de corriente uniforme $\\vec{J}_2 = 2J_0(-\\hat{k})$. ¿Cuál es la magnitud de la corriente total $I_2$ que circula por este casquete exterior?
       `,
@@ -146,6 +148,8 @@ window.MODULE_DATA_MOD2 = {
       level: 'intermediate',
       source: 'Ayudantía 9 Problema 3',
       type: 'multiple_choice',
+      figure: 'img/mod2_ayud9_p3_superposicion.svg',
+      figureCaption: 'Cilindro macizo de radio $R$ centrado en $(-a, 0)$ y cable infinito en $(a, -a)$ (Ayudantía 9 Problema 3).',
       statement: `
         Un cilindro conductor macizo de radio $R$ transporta una densidad de corriente $\\vec{J}(r) = \\beta r\\hat{k}$ con $\\beta > 0$. ¿Cuál es la corriente total encerrada por el cilindro?
       `,
@@ -209,6 +213,8 @@ window.MODULE_DATA_MOD2 = {
       level: 'certamen',
       source: 'Ayudantía 9 Problema 4a,b',
       type: 'step_by_step',
+      figure: 'img/mod2_ayud9_p4_angular.svg',
+      figureCaption: 'Cilindro interior con $J_1(\\theta) = \\alpha\\sin^2\\theta\\,\\hat{k}$ y cascarón exterior con $\\vec{J}_2 = J_0(-\\hat{k})$ (Ayudantía 9 Problema 4).',
       statement: `
         Se cuenta con un cable coaxial muy largo con un cilindro interior de radio $R_1$ y un cascarón exterior de radio externo $R_2$ (radio interno $R_1$). El cilindro interior cuenta con una densidad no uniforme $\\vec{J}_1(\\theta) = \\alpha \\sin^2(\\theta)\\,\\hat{k}$. El cascarón exterior cuenta con una densidad uniforme $\\vec{J}_2 = J_0(-\\hat{k})$.<br>
         a) Determine la corriente total $I_1$ del cilindro interior.<br>

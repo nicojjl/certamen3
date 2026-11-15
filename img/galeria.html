@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de Figuras Oficiales · FIS120 Certamen 3 · UTFSM</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css">
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #1e3a8a;
+      --accent-light: #eff6ff;
+      --fig-azul: #0284c7;
+      --fig-rojo: #dc2626;
+      --fig-verde: #16a34a;
+    }
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-light: #172554;
+      --fig-azul: #38bdf8;
+      --fig-rojo: #f87171;
+      --fig-verde: #4ade80;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Computer Modern Serif', 'Latin Modern Roman', Georgia, serif;
+      background: var(--bg-primary);
+      color: var(--text-main);
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    header {
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .header-info h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .header-info p { font-size: 0.95rem; color: var(--text-muted); }
+    .theme-toggle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.55rem 1.1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-toggle:hover { background: var(--border-color); }
+    main { max-width: 1200px; margin: 0 auto; }
+    .group-section { margin-bottom: 3.5rem; }
+    .group-title {
+      font-size: 1.35rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--accent);
+    }
+    .figures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.8rem;
+    }
+    .figure-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      font-size: 0.8rem;
+    }
+    .fig-badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      font-weight: 700;
+      font-family: monospace;
+    }
+    .fig-source { color: var(--text-muted); font-style: italic; }
+    .fig-title { font-size: 1.05rem; margin-bottom: 0.8rem; font-weight: 600; }
+    .preview-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 1rem;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+    }
+    .fig-preview { max-width: 100%; max-height: 260px; height: auto; display: block; }
+    .fig-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; flex-grow: 1; }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.6rem;
+    }
+    .card-footer code { color: var(--text-muted); font-size: 0.8rem; }
+    .view-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .view-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-info">
+      <h1>Galería de Figuras Oficiales TikZ · Certamen 3</h1>
+      <p>FIS120 / FIS12125 · UTFSM · Renderizado vectorial nativo con tipografía Computer Modern</p>
+    </div>
+    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">☾ Alternar Modo Oscuro</button>
+  </header>
+
+  <main>
+    
+      <section class="group-section">
+        <h2 class="group-title">Módulos 0–2: Fundamentos y Fuentes de Campo</h2>
+        <div class="figures-grid">
+          
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod0_coords</span>
+            <span class="fig-source">Módulo 0 Teoría (Repaso Vectorial)</span>
+          </div>
+          <h3 class="fig-title">Coordenadas Cilíndricas y Versores Canónicos</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod0_coords.svg" alt="Coordenadas Cilíndricas y Versores Canónicos" loading="lazy">
+          </div>
+          <p class="fig-desc">Punto P(r, θ, z), versores r̂, θ̂, k̂ y relaciones algebraicas de producto cruz.</p>
+          <div class="card-footer">
+            <code>img/mod0_coords.svg</code>
+            <a class="view-link" href="mod0_coords.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod0_cross_product</span>
+            <span class="fig-source">Módulo 0 Teoría (Repaso Vectorial)</span>
+          </div>
+          <h3 class="fig-title">Producto Cruz y Regla de la Mano Derecha</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod0_cross_product.svg" alt="Producto Cruz y Regla de la Mano Derecha" loading="lazy">
+          </div>
+          <p class="fig-desc">Vectores A, B, ángulo θ y vector ortogonal C = A × B.</p>
+          <div class="card-footer">
+            <code>img/mod0_cross_product.svg</code>
+            <a class="view-link" href="mod0_cross_product.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod1_wire_bfield</span>
+            <span class="fig-source">Módulo 1 Teoría (Biot-Savart)</span>
+          </div>
+          <h3 class="fig-title">Campo Magnético de Cable Infinito y Circulación Azimutal</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod1_wire_bfield.svg" alt="Campo Magnético de Cable Infinito y Circulación Azimutal" loading="lazy">
+          </div>
+          <p class="fig-desc">Líneas de campo concéntricas, vector B(r) = (μ₀I / 2πr)θ̂ y regla de la mano derecha.</p>
+          <div class="card-footer">
+            <code>img/mod1_wire_bfield.svg</code>
+            <a class="view-link" href="mod1_wire_bfield.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod1_sim2_geometry</span>
+            <span class="fig-source">Módulo 1 Ejercicio 6 (Ejercicio original no oficial)</span>
+          </div>
+          <h3 class="fig-title">Superposición: Arco Circular y Segmento Finito Paralelo a z</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod1_sim2_geometry.svg" alt="Superposición: Arco Circular y Segmento Finito Paralelo a z" loading="lazy">
+          </div>
+          <p class="fig-desc">Arco de radio R en plano xy (4to cuadrante) y segmento rectilíneo de longitud 4R en x=2R.</p>
+          <div class="card-footer">
+            <code>img/mod1_sim2_geometry.svg</code>
+            <a class="view-link" href="mod1_sim2_geometry.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod2_j_profiles</span>
+            <span class="fig-source">Módulo 2 Teoría (Densidad de Corriente)</span>
+          </div>
+          <h3 class="fig-title">Perfiles de Densidad de Corriente J(r)</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod2_j_profiles.svg" alt="Perfiles de Densidad de Corriente J(r)" loading="lazy">
+          </div>
+          <p class="fig-desc">Comparación de perfiles: Uniforme (J₀), Parabólico 2J₀(1 - r²/a²) y Escalonado (J₀ y 3J₀).</p>
+          <div class="card-footer">
+            <code>img/mod2_j_profiles.svg</code>
+            <a class="view-link" href="mod2_j_profiles.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod2_coaxial_stepped</span>
+            <span class="fig-source">Pauta C3 2026-1 Problema 1 / Módulo 2 Ex 6 / Módulo 3 Ex 6</span>
+          </div>
+          <h3 class="fig-title">Efecto Pelicular Escalonado: Secciones r ≤ R/2 y R/2 < r ≤ R</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod2_coaxial_stepped.svg" alt="Efecto Pelicular Escalonado: Secciones r ≤ R/2 y R/2 < r ≤ R" loading="lazy">
+          </div>
+          <p class="fig-desc">Cilindro con densidad escalonada J₀ y 3J₀, radios R/2 y R, corriente saliente ⊙.</p>
+          <div class="card-footer">
+            <code>img/mod2_coaxial_stepped.svg</code>
+            <a class="view-link" href="mod2_coaxial_stepped.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod2_ayud9_p1_coaxial</span>
+            <span class="fig-source">Ayudantía 9 Problema 1 / Módulo 2 Ex 4 / Módulo 3 Ex 4</span>
+          </div>
+          <h3 class="fig-title">Cable Coaxial Asimétrico (Radios R, 2R, 4R)</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod2_ayud9_p1_coaxial.svg" alt="Cable Coaxial Asimétrico (Radios R, 2R, 4R)" loading="lazy">
+          </div>
+          <p class="fig-desc">Núcleo interior J₁ = J₀k̂ (⊙), aislante intermedio y cascarón exterior J₂ = 2J₀(-k̂) (⊗).</p>
+          <div class="card-footer">
+            <code>img/mod2_ayud9_p1_coaxial.svg</code>
+            <a class="view-link" href="mod2_ayud9_p1_coaxial.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod2_ayud9_p3_superposicion</span>
+            <span class="fig-source">Ayudantía 9 Problema 3 / Módulo 2 Ex 5</span>
+          </div>
+          <h3 class="fig-title">Superposición Fuera de Eje: Cilindro Desplazado y Cable Infinito</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod2_ayud9_p3_superposicion.svg" alt="Superposición Fuera de Eje: Cilindro Desplazado y Cable Infinito" loading="lazy">
+          </div>
+          <p class="fig-desc">Cilindro macizo en (-a, 0) con J = βr' y cable infinito en (a, -a) con punto de observación en el origen O.</p>
+          <div class="card-footer">
+            <code>img/mod2_ayud9_p3_superposicion.svg</code>
+            <a class="view-link" href="mod2_ayud9_p3_superposicion.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod2_ayud9_p4_angular</span>
+            <span class="fig-source">Ayudantía 9 Problema 4 / Módulo 2 Ex 7</span>
+          </div>
+          <h3 class="fig-title">Densidad con Dependencia Angular J₁(θ) = α sin²θ k̂ y Cascarón</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod2_ayud9_p4_angular.svg" alt="Densidad con Dependencia Angular J₁(θ) = α sin²θ k̂ y Cascarón" loading="lazy">
+          </div>
+          <p class="fig-desc">Cilindro interior R₁ con variación angular y cascarón exterior R₂ con densidad uniforme J₀(⊗).</p>
+          <div class="card-footer">
+            <code>img/mod2_ayud9_p4_angular.svg</code>
+            <a class="view-link" href="mod2_ayud9_p4_angular.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        </div>
+      </section>
+        
+      <section class="group-section">
+        <h2 class="group-title">Módulos 3–5: Ampère, Faraday y fem de Movimiento</h2>
+        <div class="figures-grid">
+          
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod3_toroid_simulacro</span>
+            <span class="fig-source">Simulacro C3 Problema 1 / Módulo 3 Ex 7 / Módulo 7 Ex 5 / Módulo 11 P1</span>
+          </div>
+          <h3 class="fig-title">Toroide Ideal Rectangular (Vista Superior y Corte Transversal rz)</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod3_toroid_simulacro.svg" alt="Toroide Ideal Rectangular (Vista Superior y Corte Transversal rz)" loading="lazy">
+          </div>
+          <p class="fig-desc">Radios a y b, altura h, N espiras, campo azimutal B y cable axial morado con corriente Ic.</p>
+          <div class="card-footer">
+            <code>img/mod3_toroid_simulacro.svg</code>
+            <a class="view-link" href="mod3_toroid_simulacro.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod4_faraday_moving_loop</span>
+            <span class="fig-source">Simulacro C3 Problema 2 / Módulo 4 Ex 7 / Módulo 11 P2</span>
+          </div>
+          <h3 class="fig-title">Espira Rectangular Alejándose de Cable Recto Infinito</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod4_faraday_moving_loop.svg" alt="Espira Rectangular Alejándose de Cable Recto Infinito" loading="lazy">
+          </div>
+          <p class="fig-desc">Cable infinito en eje y con corriente I, espira de lados a × b con velocidad v y distancia d(t).</p>
+          <div class="card-footer">
+            <code>img/mod4_faraday_moving_loop.svg</code>
+            <a class="view-link" href="mod4_faraday_moving_loop.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod4_ayud10_p1_rotating</span>
+            <span class="fig-source">Ayudantía 10 Problema 1 / Módulo 4 Ex 5</span>
+          </div>
+          <h3 class="fig-title">Espira Cuadrada en Campo Magnético Rotatorio</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod4_ayud10_p1_rotating.svg" alt="Espira Cuadrada en Campo Magnético Rotatorio" loading="lazy">
+          </div>
+          <p class="fig-desc">Espira de lado a en plano xy y campo B con ángulo de elevación variable ϕ(t) = k + ωt.</p>
+          <div class="card-footer">
+            <code>img/mod4_ayud10_p1_rotating.svg</code>
+            <a class="view-link" href="mod4_ayud10_p1_rotating.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod4_ayud10_p2_concentric</span>
+            <span class="fig-source">Ayudantía 10 Problema 2 / Módulo 4 Ex 6</span>
+          </div>
+          <h3 class="fig-title">Espira Circular con Espira Cuadrada Concéntrica en su Centro</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod4_ayud10_p2_concentric.svg" alt="Espira Circular con Espira Cuadrada Concéntrica en su Centro" loading="lazy">
+          </div>
+          <p class="fig-desc">Espira circular de radio R con corriente I(t) y pequeña espira cuadrada central de lado a << R.</p>
+          <div class="card-footer">
+            <code>img/mod4_ayud10_p2_concentric.svg</code>
+            <a class="view-link" href="mod4_ayud10_p2_concentric.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod4_ayud11_p3_spacetime</span>
+            <span class="fig-source">Ayudantía 11 Problema 3 / Módulo 4 Ex 8</span>
+          </div>
+          <h3 class="fig-title">Rectángulo Conductor en Campo Espacial y Temporal B(y,t) con ⊙</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod4_ayud11_p3_spacetime.svg" alt="Rectángulo Conductor en Campo Espacial y Temporal B(y,t) con ⊙" loading="lazy">
+          </div>
+          <p class="fig-desc">Campo B(y,t) = αy² e^(-βt) k̂ sobre rectángulo H × L con lado inferior ubicado en y = C.</p>
+          <div class="card-footer">
+            <code>img/mod4_ayud11_p3_spacetime.svg</code>
+            <a class="view-link" href="mod4_ayud11_p3_spacetime.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod5_motional_emf_rails</span>
+            <span class="fig-source">Ayudantía 10 Problema 3 / Módulo 5 Teoría y Ex 5</span>
+          </div>
+          <h3 class="fig-title">Varilla Conductora en Rieles Verticales con Gravedad y Campo Entrante</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod5_motional_emf_rails.svg" alt="Varilla Conductora en Rieles Verticales con Gravedad y Campo Entrante" loading="lazy">
+          </div>
+          <p class="fig-desc">Rieles verticales separados distancia L, varilla de masa m cayendo bajo gravedad g, campo B entrante ⊗.</p>
+          <div class="card-footer">
+            <code>img/mod5_motional_emf_rails.svg</code>
+            <a class="view-link" href="mod5_motional_emf_rails.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod5_ayud10_p4_carrito</span>
+            <span class="fig-source">Ayudantía 10 Problema 4 / Módulo 5 Ex 6</span>
+          </div>
+          <h3 class="fig-title">Carrito Conductor Ingresando a Región con Campo Magnético Uniforme</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod5_ayud10_p4_carrito.svg" alt="Carrito Conductor Ingresando a Región con Campo Magnético Uniforme" loading="lazy">
+          </div>
+          <p class="fig-desc">Carrito de masa m, ancho a, largo w y velocidad inicial v₀ ingresando a zona con B₀k̂ (⊙).</p>
+          <div class="card-footer">
+            <code>img/mod5_ayud10_p4_carrito.svg</code>
+            <a class="view-link" href="mod5_ayud10_p4_carrito.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        </div>
+      </section>
+        
+      <section class="group-section">
+        <h2 class="group-title">Módulos 6–8: Inductancia Mutua, Autoinductancia y Transientes</h2>
+        <div class="figures-grid">
+          
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod6_mutual_solenoid_square</span>
+            <span class="fig-source">Simulacro C3 Problema 3 / Módulo 6 Teoría y Ex 7 / Módulo 11 P3</span>
+          </div>
+          <h3 class="fig-title">Solenoide Coaxial con Bobina Cuadrada Exterior</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod6_mutual_solenoid_square.svg" alt="Solenoide Coaxial con Bobina Cuadrada Exterior" loading="lazy">
+          </div>
+          <p class="fig-desc">Solenoide ideal de radio a rodeado por bobina cuadrada coaxial de N espiras y lado L > 2a.</p>
+          <div class="card-footer">
+            <code>img/mod6_mutual_solenoid_square.svg</code>
+            <a class="view-link" href="mod6_mutual_solenoid_square.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod6_ayud11_p1_solenoids</span>
+            <span class="fig-source">Ayudantía 11 Problema 1 / Módulo 6 Ex 5</span>
+          </div>
+          <h3 class="fig-title">Dos Solenoides Concéntricos Ideales Muy Largos (R y 3R)</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod6_ayud11_p1_solenoids.svg" alt="Dos Solenoides Concéntricos Ideales Muy Largos (R y 3R)" loading="lazy">
+          </div>
+          <p class="fig-desc">Bobina interior de radio R y Ni vueltas con corriente I(t), bobina exterior de radio 3R y Ne vueltas.</p>
+          <div class="card-footer">
+            <code>img/mod6_ayud11_p1_solenoids.svg</code>
+            <a class="view-link" href="mod6_ayud11_p1_solenoids.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod6_ayud11_p2_wire_rect</span>
+            <span class="fig-source">Ayudantía 11 Problema 2 / Módulo 6 Ex 6</span>
+          </div>
+          <h3 class="fig-title">Alambre Infinito con Corriente Exponencial y Rectángulo Conductor</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod6_ayud11_p2_wire_rect.svg" alt="Alambre Infinito con Corriente Exponencial y Rectángulo Conductor" loading="lazy">
+          </div>
+          <p class="fig-desc">Cable sobre eje y con I(t) = I₀ e^(-t/τ) y espira rectangular de lados a × b a distancia a del cable.</p>
+          <div class="card-footer">
+            <code>img/mod6_ayud11_p2_wire_rect.svg</code>
+            <a class="view-link" href="mod6_ayud11_p2_wire_rect.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod6_solenoid_tilted_loop</span>
+            <span class="fig-source">Ayudantía 11 Problema 4 / Módulo 6 Ex 7b</span>
+          </div>
+          <h3 class="fig-title">Bobina Larga con Espira Inclinada en Ángulo α</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod6_solenoid_tilted_loop.svg" alt="Bobina Larga con Espira Inclinada en Ángulo α" loading="lazy">
+          </div>
+          <p class="fig-desc">Solenoide de radio a y espira circular de radio b inclinada ángulo α entre eje longitudinal y plano de la espira.</p>
+          <div class="card-footer">
+            <code>img/mod6_solenoid_tilted_loop.svg</code>
+            <a class="view-link" href="mod6_solenoid_tilted_loop.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod6_pauta_p2_rollo</span>
+            <span class="fig-source">Pauta C3 2026-1 Problema 2 / Módulo 6 Ex 7c</span>
+          </div>
+          <h3 class="fig-title">Rollo Plano Circular con Pequeña Espira Concéntrica Central</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod6_pauta_p2_rollo.svg" alt="Rollo Plano Circular con Pequeña Espira Concéntrica Central" loading="lazy">
+          </div>
+          <p class="fig-desc">Rollo plano de N vueltas de radio R sobre una mesa con pequeña espira circular concéntrica de radio r << R.</p>
+          <div class="card-footer">
+            <code>img/mod6_pauta_p2_rollo.svg</code>
+            <a class="view-link" href="mod6_pauta_p2_rollo.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod6_transformador</span>
+            <span class="fig-source">Ayudantía 11 Conceptual 1 / Módulo 6 Ex 8</span>
+          </div>
+          <h3 class="fig-title">Transformador Ideal con Núcleo Ferromagnético Cerrado</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod6_transformador.svg" alt="Transformador Ideal con Núcleo Ferromagnético Cerrado" loading="lazy">
+          </div>
+          <p class="fig-desc">Núcleo ferromagnético toroidal cuadrado, devanado primario Np y devanado secundario Ns.</p>
+          <div class="card-footer">
+            <code>img/mod6_transformador.svg</code>
+            <a class="view-link" href="mod6_transformador.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod8_switch_circuit</span>
+            <span class="fig-source">Pauta C3 2026-1 Problema 3 / Módulo 8 Teoría y Ex 4, 6</span>
+          </div>
+          <h3 class="fig-title">Circuito Transiente con Interruptor de 2 Posiciones (R, C, L, ε)</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod8_switch_circuit.svg" alt="Circuito Transiente con Interruptor de 2 Posiciones (R, C, L, ε)" loading="lazy">
+          </div>
+          <p class="fig-desc">Fuente de fem ε, resistencia R, interruptor de 2 posiciones, rama superior con C y rama inferior con L y R.</p>
+          <div class="card-footer">
+            <code>img/mod8_switch_circuit.svg</code>
+            <a class="view-link" href="mod8_switch_circuit.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        </div>
+      </section>
+        
+      <section class="group-section">
+        <h2 class="group-title">Módulos 9–11: Oscilaciones RLC, Maxwell y Síntesis Final</h2>
+        <div class="figures-grid">
+          
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod9_rlc_circuit</span>
+            <span class="fig-source">Formulario C3 Oficial / Módulo 9 Ex 6</span>
+          </div>
+          <h3 class="fig-title">Circuito RLC Serie Oscilante (Régimen Amortiguado)</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod9_rlc_circuit.svg" alt="Circuito RLC Serie Oscilante (Régimen Amortiguado)" loading="lazy">
+          </div>
+          <p class="fig-desc">Circuito serie con inductor L, resistencia R, capacitor C, carga q(t) y corriente i(t).</p>
+          <div class="card-footer">
+            <code>img/mod9_rlc_circuit.svg</code>
+            <a class="view-link" href="mod9_rlc_circuit.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        <div class="figure-card">
+          <div class="card-header">
+            <span class="fig-badge">mod10_maxwell_capacitor</span>
+            <span class="fig-source">Simulacro C3 Pregunta Conceptual / Módulo 10 Teoría y Ex 5 / Módulo 11 P4</span>
+          </div>
+          <h3 class="fig-title">Condensador Circular de Maxwell y Corriente de Desplazamiento</h3>
+          <div class="preview-box">
+            <img class="fig-preview" src="mod10_maxwell_capacitor.svg" alt="Condensador Circular de Maxwell y Corriente de Desplazamiento" loading="lazy">
+          </div>
+          <p class="fig-desc">Vistas lateral y frontal: placas circulares radio R, lazo amperiano Γ, disco plano S₁ y bolsa interior S₂.</p>
+          <div class="card-footer">
+            <code>img/mod10_maxwell_capacitor.svg</code>
+            <a class="view-link" href="mod10_maxwell_capacitor.svg" target="_blank">Abrir SVG ↗</a>
+          </div>
+        </div>
+            
+        </div>
+      </section>
+        
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const cur = html.getAttribute('data-theme') || 'light';
+      const target = cur === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      document.getElementById('theme-btn').innerText = target === 'dark' ? '☀ Modo Claro' : '☾ Modo Oscuro';
+      // Inline SVGs or trigger currentColor recalculation
+      inlineAllSVGs();
+    }
+
+    function inlineAllSVGs() {
+      document.querySelectorAll('.preview-box').forEach(box => {
+        const img = box.querySelector('img');
+        if (!img) return;
+        const src = img.getAttribute('src');
+        if (!src) return;
+        fetch(src)
+          .then(r => r.text())
+          .then(svg => {
+            const div = document.createElement('div');
+            div.innerHTML = svg;
+            const svgEl = div.querySelector('svg');
+            if (svgEl) {
+              svgEl.classList.add('fig-preview');
+              img.replaceWith(svgEl);
+            }
+          })
+          .catch(() => {});
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-btn').innerText = '☀ Modo Claro';
+      }
+      inlineAllSVGs();
+    });
+  </script>
+</body>
+</html>

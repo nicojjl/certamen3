@@ -82,8 +82,8 @@ const UIComponents = {
     }
 
     const figureHtml = ex.figure ? `
-      <div class="figure-container">
-        <img src="${ex.figure}" alt="Figura ejercicio ${index + 1}">
+      <div class="figure-container" data-svg-src="${ex.figure}">
+        <img class="svg-figure" src="${ex.figure}" alt="Figura ejercicio ${index + 1}">
         ${ex.figureCaption ? `<div class="figure-caption">${ex.figureCaption}</div>` : ''}
       </div>
     ` : '';

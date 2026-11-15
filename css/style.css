@@ -37,6 +37,11 @@
   --code-bg: #f3f4f6;
   --font-serif: 'Computer Modern Serif', 'Latin Modern Roman', 'KaTeX_Main', Georgia, 'Times New Roman', serif;
   --font-mono: 'Computer Modern Typewriter', Consolas, Menlo, Monaco, monospace;
+
+  /* Figuras Certamen */
+  --fig-azul: #0284c7;
+  --fig-rojo: #dc2626;
+  --fig-verde: #16a34a;
 }
 
 [data-theme="dark"] {
@@ -68,6 +73,11 @@
   --danger-border: #b91c1c;
 
   --code-bg: #0b1120;
+
+  /* Figuras Certamen (Modo Oscuro) */
+  --fig-azul: #38bdf8;
+  --fig-rojo: #f87171;
+  --fig-verde: #4ade80;
 }
 
 /* Reset básico y base */

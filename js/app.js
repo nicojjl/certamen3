@@ -172,6 +172,9 @@ const App = {
     // Render KaTeX math
     this.renderMathInElement(container);
 
+    // Inline SVGs for seamless dark/light mode CSS styling
+    this.inlineSVGs(container);
+
     // Initialize interactive widget if any
     if (dataObj.hasInteractive) {
       if (modId === 'mod3') {
@@ -241,6 +244,38 @@ const App = {
     } catch (e) {
       console.warn('KaTeX rendering error:', e);
     }
+  },
+
+  inlineSVGs(container) {
+    if (!container) return;
+    const figureBoxes = container.querySelectorAll('.figure-container[data-svg-src], .figure-container');
+    figureBoxes.forEach(box => {
+      const img = box.querySelector('img');
+      const src = box.getAttribute('data-svg-src') || (img ? img.getAttribute('src') : null);
+      if (!src || !src.endsWith('.svg')) return;
+
+      fetch(src)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+          return res.text();
+        })
+        .then(svgText => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(svgText, 'image/svg+xml');
+          const svgEl = doc.querySelector('svg');
+          if (svgEl) {
+            svgEl.classList.add('inlined-svg');
+            svgEl.setAttribute('role', 'img');
+            const currentImg = box.querySelector('img');
+            if (currentImg) {
+              currentImg.replaceWith(svgEl);
+            }
+          }
+        })
+        .catch(() => {
+          // Fallback silencioso: <img> permanece visible
+        });
+    });
   },
 
   setupEventListeners() {
