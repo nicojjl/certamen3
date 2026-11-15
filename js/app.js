@@ -1,0 +1,258 @@
+/**
+ * FIS120 / FIS12125 · CERTAMEN 3
+ * Controlador principal de la aplicación
+ */
+
+const App = {
+  currentModuleId: 'mod0',
+  modules: [
+    { id: 'mod0', title: '0. Repaso Matemático y Conceptual', icon: '0' },
+    { id: 'mod1', title: '1. Biot-Savart y Campo de Cables', icon: '1' },
+    { id: 'mod2', title: '2. Densidad de Corriente J(r)', icon: '2' },
+    { id: 'mod3', title: '3. Ley de Ampère y Simetrías', icon: '3' },
+    { id: 'mod4', title: '4. Flujo Magnético y Faraday-Lenz', icon: '4' },
+    { id: 'mod5', title: '5. fem de Movimiento y Rieles', icon: '5' },
+    { id: 'mod6', title: '6. Inductancia Mutua y Transformadores', icon: '6' },
+    { id: 'mod7', title: '7. Autoinductancia y Energía Magnética', icon: '7' },
+    { id: 'mod8', title: '8. Circuitos Transientes RC y RL', icon: '8' },
+    { id: 'mod9', title: '9. Circuitos Oscilantes LC y RLC', icon: '9' },
+    { id: 'mod10', title: '10. Maxwell y Síntesis Conceptual', icon: '10' },
+    { id: 'mod11', title: '11. SIMULACRO FINAL CERTAMEN 3', icon: '★' },
+  ],
+
+  init() {
+    this.initTheme();
+    this.renderSidebar();
+    this.setupEventListeners();
+    this.updateHeaderStats();
+
+    // Check URL hash or default to mod0
+    const hash = window.location.hash.replace('#', '');
+    if (hash && this.modules.some(m => m.id === hash)) {
+      this.loadModule(hash);
+    } else {
+      this.loadModule('mod0');
+    }
+  },
+
+  initTheme() {
+    const savedTheme = localStorage.getItem('fis120_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    }
+    this.updateThemeButton();
+  },
+
+  toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const target = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', target);
+    localStorage.setItem('fis120_theme', target);
+    this.updateThemeButton();
+    // Redraw any active interactive canvas
+    window.dispatchEvent(new Event('resize'));
+  },
+
+  updateThemeButton() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const btn = document.getElementById('theme-toggle-btn');
+    if (btn) {
+      btn.innerHTML = current === 'dark' ? '☀ Modo Claro' : '☾ Modo Oscuro';
+    }
+  },
+
+  renderSidebar() {
+    const list = document.getElementById('nav-module-list');
+    if (!list) return;
+
+    list.innerHTML = this.modules.map(m => {
+      const isCompleted = StorageManager.isModuleCompleted(m.id);
+      return `
+        <li class="nav-module-item ${m.id === this.currentModuleId ? 'active' : ''}" 
+            onclick="App.loadModule('${m.id}')" id="nav-item-${m.id}">
+          <div>
+            <span class="nav-module-num">${m.icon}.</span>
+            <span>${m.title.split('. ')[1] || m.title}</span>
+          </div>
+          <span class="nav-module-status" id="nav-status-${m.id}">${isCompleted ? '✓' : ''}</span>
+        </li>
+      `;
+    }).join('');
+  },
+
+  loadModule(modId) {
+    this.currentModuleId = modId;
+    window.location.hash = modId;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update active in sidebar
+    document.querySelectorAll('.nav-module-item').forEach(el => el.classList.remove('active'));
+    const activeNav = document.getElementById(`nav-item-${modId}`);
+    if (activeNav) activeNav.classList.add('active');
+
+    // Close mobile sidebar if open
+    const sidebar = document.getElementById('app-sidebar');
+    if (sidebar) sidebar.classList.remove('open');
+
+    // Render module content
+    const container = document.getElementById('main-content-area');
+    if (!container) return;
+
+    const dataObj = window[`MODULE_DATA_${modId.toUpperCase()}`];
+    if (!dataObj) {
+      container.innerHTML = `
+        <div class="theory-card">
+          <h2>Módulo en preparación</h2>
+          <p>El contenido de este módulo se está cargando o estará disponible a la brevedad.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const isCompleted = StorageManager.isModuleCompleted(modId);
+
+    let html = `
+      <div class="module-header">
+        <div class="module-meta">FIS120 / FIS12125 · Certamen 3 · Módulo ${dataObj.number}</div>
+        <h1>${dataObj.title}</h1>
+        <p class="module-description">${dataObj.description}</p>
+      </div>
+
+      <section class="theory-card">
+        <h3>1. Resumen Teórico y Ecuaciones Fundamentales</h3>
+        <div>${dataObj.theory}</div>
+      </section>
+    `;
+
+    // Interactive widget container if defined
+    if (dataObj.hasInteractive) {
+      html += `<div id="interactive-slot-${modId}"></div>`;
+    }
+
+    // Exercises section
+    html += `
+      <section class="exercises-section">
+        <h2>2. Ejercicios Prácticos y Nivel Certamen</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Resuelve los ejercicios en orden progresivo. Tus respuestas e intentos se guardan automáticamente.
+        </p>
+        ${dataObj.exercises.map((ex, idx) => UIComponents.renderExercise(ex, idx)).join('')}
+      </section>
+
+      <div class="module-completion-footer">
+        <div class="completion-info">
+          <strong>¿Completaste el estudio de este módulo?</strong><br>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">
+            Marca este módulo para registrar tu progreso hacia el Certamen 3.
+          </span>
+        </div>
+        <button class="btn ${isCompleted ? 'btn-primary' : ''}" id="btn-complete-mod" onclick="App.toggleCompleteCurrentModule()">
+          ${isCompleted ? '✓ Módulo Completado' : 'Marcar como Completado'}
+        </button>
+      </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Render KaTeX math
+    this.renderMathInElement(container);
+
+    // Initialize interactive widget if any
+    if (dataObj.hasInteractive) {
+      if (modId === 'mod3') {
+        InteractiveSimulators.initAmpereProfile(`interactive-slot-${modId}`);
+      } else if (modId === 'mod8') {
+        InteractiveSimulators.initTransientPlot(`interactive-slot-${modId}`);
+      } else if (modId === 'mod9') {
+        InteractiveSimulators.initRLCRegimes(`interactive-slot-${modId}`);
+      }
+      this.renderMathInElement(document.getElementById(`interactive-slot-${modId}`));
+    }
+  },
+
+  toggleCompleteCurrentModule() {
+    const isCompleted = StorageManager.isModuleCompleted(this.currentModuleId);
+    StorageManager.setModuleCompleted(this.currentModuleId, !isCompleted);
+
+    const btn = document.getElementById('btn-complete-mod');
+    if (btn) {
+      if (!isCompleted) {
+        btn.classList.add('btn-primary');
+        btn.textContent = '✓ Módulo Completado';
+      } else {
+        btn.classList.remove('btn-primary');
+        btn.textContent = 'Marcar como Completado';
+      }
+    }
+
+    const navStatus = document.getElementById(`nav-status-${this.currentModuleId}`);
+    if (navStatus) {
+      navStatus.textContent = !isCompleted ? '✓' : '';
+    }
+
+    this.updateHeaderStats();
+  },
+
+  updateHeaderStats() {
+    const stats = StorageManager.getTotalStats();
+    const percent = Math.round((stats.completedModules / this.modules.length) * 100);
+
+    const fill = document.getElementById('progress-bar-fill');
+    if (fill) fill.style.width = `${percent}%`;
+
+    const label = document.getElementById('stats-indicator');
+    if (label) {
+      label.textContent = `${stats.solved} ejercicios resueltos · ${stats.completedModules}/${this.modules.length} módulos`;
+    }
+  },
+
+  renderMathInElement(el) {
+    if (!el || typeof renderMathInElement !== 'function') return;
+    try {
+      renderMathInElement(el, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {
+      console.warn('KaTeX rendering error:', e);
+    }
+  },
+
+  setupEventListeners() {
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) themeBtn.addEventListener('click', () => this.toggleTheme());
+
+    const formulaBtn = document.getElementById('formula-toggle-btn');
+    const drawer = document.getElementById('formula-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    const closeBtn = document.getElementById('drawer-close-btn');
+
+    function toggleFormula() {
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+
+    if (formulaBtn) formulaBtn.addEventListener('click', toggleFormula);
+    if (overlay) overlay.addEventListener('click', toggleFormula);
+    if (closeBtn) closeBtn.addEventListener('click', toggleFormula);
+
+    const sidebarToggle = document.getElementById('sidebar-toggle-btn');
+    const sidebar = document.getElementById('app-sidebar');
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+  }
+};
+
+window.App = App;
+document.addEventListener('DOMContentLoaded', () => App.init());
