@@ -169,6 +169,11 @@ const App = {
 
     container.innerHTML = html;
 
+    // Check debug parameter to reveal all solutions, hints and steps
+    if (window.location.href.includes('reveal=all')) {
+      this.revealAll(container);
+    }
+
     // Render KaTeX math
     this.renderMathInElement(container);
 
@@ -222,6 +227,37 @@ const App = {
     if (label) {
       label.textContent = `${stats.solved} ejercicios resueltos · ${stats.completedModules}/${this.modules.length} módulos`;
     }
+  },
+
+  revealAll(container) {
+    if (!container) container = document.getElementById('main-content-area');
+    if (!container) return;
+
+    // 1. Revelar todos los pasos ocultos
+    container.querySelectorAll('.step-box').forEach(el => el.classList.add('visible'));
+
+    // 2. Revelar retroalimentacion y explicaciones de alternativas / numericos
+    container.querySelectorAll('.feedback-box').forEach(fb => {
+      fb.classList.add('visible');
+      const raw = fb.getAttribute('data-explanation') || fb.getAttribute('data-justification') || '';
+      if (raw && !fb.innerHTML.trim()) {
+        try {
+          fb.innerHTML = `<strong>Solución / Explicación:</strong> ${decodeURIComponent(raw)}`;
+        } catch (e) {
+          fb.innerHTML = `<strong>Solución / Explicación:</strong> ${raw}`;
+        }
+      }
+    });
+
+    // 3. Revelar todas las ramas de convenciones alternativas
+    container.querySelectorAll('.conv-plano-view, .conv-normal-view').forEach(el => {
+      el.style.display = 'block';
+    });
+
+    // 4. Actualizar botones de revelar
+    container.querySelectorAll('.step-controls button').forEach(btn => {
+      btn.textContent = 'Solución Completa Visible';
+    });
   },
 
   renderMathInElement(el) {

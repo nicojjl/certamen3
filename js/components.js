@@ -133,7 +133,7 @@ const UIComponents = {
       <div class="options-list" id="opts-${ex.id}">
         ${optionsHtml}
       </div>
-      <div class="feedback-box ${feedbackType} ${feedbackVisible}" id="feedback-${ex.id}">
+      <div class="feedback-box ${feedbackType} ${feedbackVisible}" id="feedback-${ex.id}" data-explanation="${encodeURIComponent(ex.explanation || '')}">
         ${isSolved ? `<strong>${selectedIdx === ex.correctOption ? '¡Correcto!' : 'Incorrecto.'}</strong> ${ex.explanation}` : ''}
       </div>
     `;
@@ -178,7 +178,7 @@ const UIComponents = {
         <span>${ex.units || ''}</span>
         <button class="btn btn-primary btn-sm" onclick="UIComponents.handleCheckNumerical('${ex.id}', ${ex.correctValue}, ${ex.tolerance || 0.03})">Comprobar</button>
       </div>
-      <div class="feedback-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}">
+      <div class="feedback-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}" data-explanation="${encodeURIComponent(ex.explanation || '')}">
         ${isSolved ? `<strong>${state.isCorrect ? '¡Correcto!' : 'Revisa tus cálculos.'}</strong> Valor esperado: ${ex.correctValue} ${ex.units || ''}.<br>${ex.explanation}` : ''}
       </div>
     `;
@@ -231,7 +231,7 @@ const UIComponents = {
           <span><strong>Falso</strong></span>
         </div>
       </div>
-      <div class="feedback-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}">
+      <div class="feedback-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}" data-justification="${encodeURIComponent(ex.justification || '')}">
         ${isSolved ? `<strong>${state.isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${ex.justification}` : ''}
       </div>
     `;

@@ -19,10 +19,10 @@ const InteractiveSimulators = {
           <div class="widget-control-item">
             <label><strong>Distribución $J(r)$:</strong></label>
             <select id="ampere-dist-select" class="input-number" style="max-width: 220px; font-size: 0.85rem;">
-              <option value="uniform">Uniforme: $J = J_0$</option>
-              <option value="parabolic">Parabólica: $2J_0(1 - r^2/R^2)$</option>
-              <option value="linear">Lineal: $\\beta r$</option>
-              <option value="stepped">Escalonada: $J_0 / 3J_0$ (Efecto pelicular)</option>
+              <option value="uniform">Uniforme: J = J₀</option>
+              <option value="parabolic">Parabólica: 2J₀(1 - r²/R²)</option>
+              <option value="linear">Lineal: β r</option>
+              <option value="stepped">Escalonada: J₀ / 3J₀ (Efecto pelicular)</option>
             </select>
           </div>
           <div class="widget-control-item">
@@ -171,10 +171,10 @@ const InteractiveSimulators = {
           <div class="widget-control-item">
             <label><strong>Circuito:</strong></label>
             <select id="transient-type" class="input-number" style="max-width: 200px; font-size: 0.85rem;">
-              <option value="rc_charge">Carga RC: $q(t) = Q_{\\max}(1 - e^{-t/RC})$</option>
-              <option value="rc_discharge">Descarga RC: $q(t) = Q_0 e^{-t/RC}$</option>
-              <option value="rl_growth">Conexión RL: $i(t) = I_{\\max}(1 - e^{-(R/L)t})$</option>
-              <option value="rl_decay">Desconexión RL: $i(t) = I_0 e^{-(R/L)t}$</option>
+              <option value="rc_charge">Carga RC: q(t) = Q_max (1 - e^(-t/RC))</option>
+              <option value="rc_discharge">Descarga RC: q(t) = Q₀ e^(-t/RC)</option>
+              <option value="rl_growth">Conexión RL: i(t) = I_max (1 - e^(-(R/L)t))</option>
+              <option value="rl_decay">Desconexión RL: i(t) = I₀ e^(-(R/L)t)</option>
             </select>
           </div>
           <div class="widget-control-item">
