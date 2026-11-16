@@ -284,17 +284,17 @@ def validate_all_figures():
             log(f"[PASS] {fname:33} ({size_kb:5.1f} KB) | PNG claro/oscuro OK | 0 recortes | 0 solapes ({text_count} textos)")
             passed += 1
 
-    log("\n" + "=" * 75)
-    log(f"RESUMEN AUDITORÍA DE FIGURAS: {passed}/{total} CORRECTAS (0 FALLAS)")
-    log("=" * 75)
-    log("\n--- Contadores de Auditoría Vectorial y Accesibilidad ---")
-    log(f"TOTAL_FIGURAS: {passed}/{total}")
-    log(f"RECORTE: {recorte_passed}/{total}")
-    log(f"SOLAPAMIENTO: {solapamiento_passed}/{total}")
-    log(f"CONTRASTE: {contrast_passed}/{contrast_total}")
-    log(f"RATIO_MIN_CONTRASTE: {min_palette_ratio:.2f}:1")
+    # 8. Comprobar figuras requeridas a partir de scripts/figuras_tex/
+    if os.path.exists(TEX_DIR):
+        for tpath in sorted(glob.glob(os.path.join(TEX_DIR, "*.tex"))):
+            bname = os.path.splitext(os.path.basename(tpath))[0]
+            expected_svg = f"{bname}.svg"
+            if not os.path.exists(os.path.join(IMG_DIR, expected_svg)):
+                msg = f"[FAIL] Figura requerida no encontrada en img/: {expected_svg}"
+                log(msg)
+                failures.append(msg)
 
-    # Validación contra scripts/esperados.json
+    # 9. Validación contra scripts/esperados.json
     esperados_path = os.path.join(BASE_DIR, 'scripts', 'esperados.json')
     if os.path.exists(esperados_path):
         try:
@@ -308,6 +308,17 @@ def validate_all_figures():
                 failures.append(msg)
         except Exception as e:
             log(f"[WARN] No se pudo leer {esperados_path}: {e}")
+
+    num_failures = len(failures)
+    log("\n" + "=" * 75)
+    log(f"RESUMEN AUDITORÍA DE FIGURAS: {passed}/{total} CORRECTAS ({num_failures} FALLAS)")
+    log("=" * 75)
+    log("\n--- Contadores de Auditoría Vectorial y Accesibilidad ---")
+    log(f"TOTAL_FIGURAS: {passed}/{total}")
+    log(f"RECORTE: {recorte_passed}/{total}")
+    log(f"SOLAPAMIENTO: {solapamiento_passed}/{total}")
+    log(f"CONTRASTE: {contrast_passed}/{contrast_total}")
+    log(f"RATIO_MIN_CONTRASTE: {min_palette_ratio:.2f}:1")
 
     # Escribir reporte en UTF-8 sin BOM
     with open(OUTPUT_REPORT, 'w', encoding='utf-8', newline='\n') as f:
