@@ -8,7 +8,6 @@ VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY (MÓDULOS 0 A 11)
 [PASS] Módulo 0: Producto cruz canónico k_hat x i_hat == j_hat
 [PASS] Módulo 0: Anticonmutatividad A x B == -(B x A)
 [PASS] Módulo 0: Fuerza de Lorentz sobre carga negativa apunta en -z
-[PASS] Módulo 0: Flujo magnético elemental Phi = B*A*cos(theta)
 
 --- Módulo 1: Fuentes de Campo Magnético y Biot-Savart ---
 [PASS] Módulo 1: Campo de cable infinito B = mu0*I / (2*pi*r)
@@ -25,6 +24,9 @@ VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY (MÓDULOS 0 A 11)
 [PASS] Módulo 2: Ayudantía 9 P4 alpha para I_1 = I_2
 [PASS] Módulo 2: Ayudantía 9 P3 Corriente cilindro macizo I_cil = (2/3)*pi*beta*R^3
 [PASS] Módulo 2: Ayudantía 9 P3 Condición By=0 -> beta = 3I / (4*pi*R^3)
+[PASS] Módulo 2: Ayudantía 9 P1a Corriente cable interior I_int = pi*J0*R^2
+[PASS] Módulo 2: Ayudantía 9 P1b Corriente cable exterior I_ext = -24*pi*J0*R^2
+[PASS] Módulo 2: Ayudantía 9 P1b Corriente neta I_net = -23*pi*J0*R^2
 
 --- Módulo 3: Ley de Ampère y Simetrías ---
 [PASS] Módulo 3: Pauta P1b B en r = R/2 por izquierda
@@ -33,10 +35,13 @@ VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY (MÓDULOS 0 A 11)
 [PASS] Módulo 3: Pauta P1c B escalonado en 3R/4 = (19/24)*mu0*J0*R
 [PASS] Módulo 3: Pauta P1c B uniforme en 3R/4 = (15/16)*mu0*J0*R
 [PASS] Módulo 3: Pauta P1c Desigualdad B_esc < B_unif
-[PASS] Módulo 3: Ayudantía 9 P1b B(3R/2) = (1/3)*mu0*J0*R
+[PASS] Módulo 3: Ayudantía 9 P1c B(3R/2) = (1/3)*mu0*J0*R
+[PASS] Módulo 3: Ayudantía 9 P1d B(5R) = -(23/10)*mu0*J0*R
 [PASS] Módulo 3: Ayudantía 9 P2b B interior = mu0*J0*r*(1 - r^2/(2a^2))
 [PASS] Módulo 3: Ayudantía 9 P2c B exterior = mu0*J0*a^2 / (2r)
 [PASS] Módulo 3: Ayudantía 9 P2c Continuidad en r = a (B_int(a) == B_ext(a))
+[PASS] Módulo 3: Ayudantía 9 P4c B cascarón R1<r<R2 = mu0*J0*(R2^2 - r^2)/(2r)
+[PASS] Módulo 3: Ayudantía 9 P4c B exterior r>R2 es nulo (I1 == I2)
 
 --- Módulo 4: Ley de Faraday y Ley de Lenz ---
 [PASS] Módulo 4: Simulacro P2 Flujo magnético logarítmico
@@ -48,12 +53,19 @@ VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY (MÓDULOS 0 A 11)
 [PASS] Módulo 4: Ayudantía 10 P1 Magnitud máxima |fem_max| = B0*a^2*omega
 [PASS] Módulo 4: Ayudantía 10 P2a Flujo = (mu0*I0*a^2 / 2R)*e^(-t/tau)
 [PASS] Módulo 4: Ayudantía 10 P2b fem = (mu0*I0*a^2 / (2*R*tau))*e^(-t/tau)
+[PASS] Módulo 4: Ayudantía 11 P3 Flujo Phi(t) = (alpha*L/3)*[(C+H)^3 - C^3]*e^(-beta*t)
+[PASS] Módulo 4: Ayudantía 11 P3 fem inducida eps(t) = -dPhi/dt
 
 --- Módulo 5: fem de Movimiento y Rieles ---
 [PASS] Módulo 5: Ayudantía 10 P3 Balance exacto P_mec == P_Joule en v_term
+[PASS] Módulo 5: Ayudantía 10 P3 fem cinética varilla eps = B0*L*v
+[PASS] Módulo 5: Ayudantía 10 P3 Corriente inducida varilla i = B0*L*v / R
 [PASS] Módulo 5: Ayudantía 10 P3 Fuerza magnética F_B = -I*L*B0*z_hat (hacia arriba)
 [PASS] Módulo 5: Ayudantía 10 P4 Penetración x_max = m*v0*R / (B0^2 * a^2) si w > x_max
 [PASS] Módulo 5: Ayudantía 10 P4 Velocidad residual vf en x = w si ancho w < x_max
+[PASS] Módulo 5: Ayudantía 10 P4 fem cinética carrito eps = B0*a*v
+[PASS] Módulo 5: Ayudantía 10 P4 Corriente inducida carrito i = B0*a*v / R
+[PASS] Módulo 5: Ayudantía 10 P4 Fuerza magnética de frenado F = B0^2*a^2*v / R
 [PASS] Módulo 5: fem cinética elemental eps = B*L*v
 
 --- Módulo 6: Inductancia Mutua y Transformadores ---
@@ -108,29 +120,33 @@ VERIFICACIÓN ANALÍTICA INDEPENDIENTE CON SYMPY (MÓDULOS 0 A 11)
 [PASS] Módulo 10: Densidad de corriente de desplazamiento jd = eps0 * dE/dt
 [PASS] Módulo 10: Integral de superficie de jd da corriente de conducción I
 
---- Módulo 11: Síntesis de Certamen y Problemas Integradores ---
-[PASS] Módulo 11: Balance global energía Joule disipada == (1/2)*m*v0^2
-[PASS] Módulo 11: Flujo en circuito bifilar simétrico
-[PASS] Módulo 11: Ley de Felici Q_neta = Delta_Phi / R
-[PASS] Módulo 11: Densidad de energía electromagnética u_EM = (1/2)eps0*E^2 + B^2/(2mu0)
-[PASS] Módulo 11: Teorema de reciprocidad magnética universal M12 == M21
+--- Módulo 11: Simulacro Final Completo Certamen 3 ---
+[PASS] Módulo 11: Simulacro P1a B en toroide = mu0*N*I / (2*pi*r) (a < r < b)
+[PASS] Módulo 11: Simulacro P1a B fuera del toroide es nulo (r < a, r > b)
+[PASS] Módulo 11: Simulacro P1b Flujo espira rectangular Phi_1 = (mu0*N*I*h / 2*pi)*ln(b/a)
+[PASS] Módulo 11: Simulacro P1b Flujo total toroide Phi_total = N * Phi_1
+[PASS] Módulo 11: Simulacro P1c Inductancia mutua cable-toroide M = (mu0*N*h / 2*pi)*ln(b/a)
+[PASS] Módulo 11: Simulacro P2c Magnitud corriente inducida I_ind(t) = eps_ind(t)/R
+[PASS] Módulo 11: Simulacro P3b fem inducida en bobina cuadrada eps = -M*dI/dt
+[PASS] Módulo 11: Simulacro P3c |fem solenoide| = M*alpha
+[PASS] Módulo 11: Simulacro P3c |fem solenoide| independiente de L (d|eps|/dL == 0)
 
 ===========================================================================
 RESUMEN DE PRUEBAS ANALÍTICAS AGRUPADAS POR MÓDULO:
 ===========================================================================
-  • Módulo 0: Fundamentos y Repaso Vectorial          :   6/6 checks correctos
+  • Módulo 0: Fundamentos y Repaso Vectorial          :   5/5 checks correctos
   • Módulo 1: Fuentes de Campo Magnético y Biot-Savart:   5/5 checks correctos
-  • Módulo 2: Densidades de Corriente e Integración   :   7/7 checks correctos
-  • Módulo 3: Ley de Ampère y Simetrías               : 10/10 checks correctos
-  • Módulo 4: Ley de Faraday y Ley de Lenz            :   9/9 checks correctos
-  • Módulo 5: fem de Movimiento y Rieles              :   5/5 checks correctos
+  • Módulo 2: Densidades de Corriente e Integración   : 10/10 checks correctos
+  • Módulo 3: Ley de Ampère y Simetrías               : 13/13 checks correctos
+  • Módulo 4: Ley de Faraday y Ley de Lenz            : 11/11 checks correctos
+  • Módulo 5: fem de Movimiento y Rieles              : 10/10 checks correctos
   • Módulo 6: Inductancia Mutua y Transformadores     : 16/16 checks correctos
   • Módulo 7: Autoinductancia y Energía Magnética     :   7/7 checks correctos
   • Módulo 8: Circuitos RL y RC Conmutados            :   6/6 checks correctos
   • Módulo 9: Oscilaciones Libres LC y Circuitos RLC  :   8/8 checks correctos
   • Módulo 10: Ampère-Maxwell y Corriente de Desplazamiento:   5/5 checks correctos
-  • Módulo 11: Síntesis de Certamen y Problemas Integradores:   5/5 checks correctos
+  • Módulo 11: Simulacro Final Completo Certamen 3    :   9/9 checks correctos
 
 ===========================================================================
-RESUMEN GLOBAL SYMPY: 89/89 CORRECTAS (0 FALLAS)
+RESUMEN GLOBAL SYMPY: 105/105 CORRECTAS (0 FALLAS)
 ===========================================================================

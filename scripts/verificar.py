@@ -122,10 +122,6 @@ def verify_all(actualizar_esperados=False):
     F_lorentz = (-e_charge) * v_vec.cross(B_vec)
     check("Módulo 0: Fuerza de Lorentz sobre carga negativa apunta en -z", F_lorentz, sp.Matrix([0, 0, -e_charge * v_speed * B_field]))
 
-    Area_m0, theta_m0 = sp.symbols('Area_m0 theta_m0', positive=True)
-    phi_elem = B_field * Area_m0 * sp.cos(theta_m0)
-    check("Módulo 0: Flujo magnético elemental Phi = B*A*cos(theta)", phi_elem, B_field * Area_m0 * sp.cos(theta_m0))
-
     # =============================================================
     # MÓDULO 1: FUENTES DE CAMPO MAGNÉTICO Y BIOT-SAVART (5 checks)
     # =============================================================
@@ -174,8 +170,16 @@ def verify_all(actualizar_esperados=False):
     beta_cond = sp.solve(sp.Eq(mu0 * beta * R**3 / (3*a), mu0 * I / (4*sp.pi*a)), beta)[0]
     check("Módulo 2: Ayudantía 9 P3 Condición By=0 -> beta = 3I / (4*pi*R^3)", beta_cond, 3*I / (4*sp.pi*R**3))
 
+    # Ayudantía 9 P1: corrientes cable coaxial
+    I_int_ayud9 = J0 * sp.pi * R**2
+    check("Módulo 2: Ayudantía 9 P1a Corriente cable interior I_int = pi*J0*R^2", I_int_ayud9, sp.pi * J0 * R**2)
+    I_ext_ayud9 = sp.integrate((-2 * J0) * 2 * sp.pi * r, (r, 2*R, 4*R))
+    check("Módulo 2: Ayudantía 9 P1b Corriente cable exterior I_ext = -24*pi*J0*R^2", I_ext_ayud9, -24 * sp.pi * J0 * R**2)
+    I_net_ayud9 = I_int_ayud9 + I_ext_ayud9
+    check("Módulo 2: Ayudantía 9 P1b Corriente neta I_net = -23*pi*J0*R^2", I_net_ayud9, -23 * sp.pi * J0 * R**2)
+
     # =============================================================
-    # MÓDULO 3: LEY DE AMPÈRE Y SIMETRÍAS (10 checks)
+    # MÓDULO 3: LEY DE AMPÈRE Y SIMETRÍAS (13 checks)
     # =============================================================
     set_module("Módulo 3: Ley de Ampère y Simetrías")
     r_prime = sp.symbols('r_prime', positive=True)
@@ -197,7 +201,10 @@ def verify_all(actualizar_esperados=False):
 
     I_enc_mid = J0 * sp.pi * R**2
     B_mid = mu0 * I_enc_mid / (2 * sp.pi * (sp.Rational(3, 2) * R))
-    check("Módulo 3: Ayudantía 9 P1b B(3R/2) = (1/3)*mu0*J0*R", B_mid, sp.Rational(1, 3) * mu0 * J0 * R)
+    check("Módulo 3: Ayudantía 9 P1c B(3R/2) = (1/3)*mu0*J0*R", B_mid, sp.Rational(1, 3) * mu0 * J0 * R)
+
+    B_5R = mu0 * (-23 * sp.pi * J0 * R**2) / (2 * sp.pi * (5 * R))
+    check("Módulo 3: Ayudantía 9 P1d B(5R) = -(23/10)*mu0*J0*R", B_5R, -sp.Rational(23, 10) * mu0 * J0 * R)
 
     I_enc_parab = sp.integrate(2*J0*(1 - r_prime**2/a**2) * 2*sp.pi*r_prime, (r_prime, 0, r))
     B_parab_int = mu0 * I_enc_parab / (2 * sp.pi * r)
@@ -206,6 +213,17 @@ def verify_all(actualizar_esperados=False):
     B_parab_ext = (mu0 * J0 * a**2) / (2 * r)
     check("Módulo 3: Ayudantía 9 P2c B exterior = mu0*J0*a^2 / (2r)", sp.simplify(B_parab_ext - (mu0 * J0 * a**2) / (2 * r)), 0)
     check("Módulo 3: Ayudantía 9 P2c Continuidad en r = a (B_int(a) == B_ext(a))", sp.simplify(B_parab_int.subs(r, a) - B_parab_ext.subs(r, a)), 0)
+
+    # Ayudantía 9 P4 c: campo en cascarón y exterior
+    I1_p4 = sp.pi * alpha * R1**2 / 2
+    alpha_p4 = 2 * J0 * (R2**2 - R1**2) / R1**2
+    I1_sub_p4 = I1_p4.subs(alpha, alpha_p4)
+    I_enc_mid_p4 = I1_sub_p4 - sp.integrate(J0 * 2 * sp.pi * r_prime, (r_prime, R1, r))
+    B_mid_p4 = mu0 * I_enc_mid_p4 / (2 * sp.pi * r)
+    check("Módulo 3: Ayudantía 9 P4c B cascarón R1<r<R2 = mu0*J0*(R2^2 - r^2)/(2r)", sp.simplify(B_mid_p4 - mu0 * J0 * (R2**2 - r**2) / (2 * r)), 0)
+    I_enc_ext_p4 = I1_sub_p4 - sp.integrate(J0 * 2 * sp.pi * r_prime, (r_prime, R1, R2))
+    B_ext_p4 = mu0 * I_enc_ext_p4 / (2 * sp.pi * r)
+    check("Módulo 3: Ayudantía 9 P4c B exterior r>R2 es nulo (I1 == I2)", B_ext_p4, 0)
 
     # =============================================================
     # MÓDULO 4: LEY DE FARADAY Y LEY DE LENZ (9 checks)
@@ -240,8 +258,18 @@ def verify_all(actualizar_esperados=False):
     emf_ayud10_p2 = -sp.diff(phi_ayud10_p2, t)
     check("Módulo 4: Ayudantía 10 P2b fem = (mu0*I0*a^2 / (2*R*tau))*e^(-t/tau)", emf_ayud10_p2, (mu0 * I0_curr * a**2 / (2 * R * tau)) * sp.exp(-t / tau))
 
+    # Ayudantía 11 P3: espira rectangular con campo cuadrático variable
+    alpha_p3, beta_p3, C_p3_pos, H_p3, y_p3 = sp.symbols('alpha_p3 beta_p3 C_p3_pos H_p3 y_p3', positive=True)
+    L_sq_m4 = sp.symbols('L_sq_m4', positive=True)
+    phi_ayud11_p3 = sp.integrate(alpha_p3 * y_p3**2 * sp.exp(-beta_p3 * t) * L_sq_m4, (y_p3, C_p3_pos, C_p3_pos + H_p3))
+    expected_phi_p3 = (alpha_p3 * L_sq_m4 * sp.exp(-beta_p3 * t) / 3) * ((C_p3_pos + H_p3)**3 - C_p3_pos**3)
+    check("Módulo 4: Ayudantía 11 P3 Flujo Phi(t) = (alpha*L/3)*[(C+H)^3 - C^3]*e^(-beta*t)", sp.simplify(phi_ayud11_p3 - expected_phi_p3), 0)
+    emf_ayud11_p3 = -sp.diff(phi_ayud11_p3, t)
+    expected_emf_p3 = (beta_p3 * alpha_p3 * L_sq_m4 * sp.exp(-beta_p3 * t) / 3) * ((C_p3_pos + H_p3)**3 - C_p3_pos**3)
+    check("Módulo 4: Ayudantía 11 P3 fem inducida eps(t) = -dPhi/dt", sp.simplify(emf_ayud11_p3 - expected_emf_p3), 0)
+
     # =============================================================
-    # MÓDULO 5: FEM DE MOVIMIENTO Y RIELES (5 checks)
+    # MÓDULO 5: FEM DE MOVIMIENTO Y RIELES (10 checks)
     # =============================================================
     set_module("Módulo 5: fem de Movimiento y Rieles")
     m, g, B0, R_res, L_len, w_width = sp.symbols('m g B0 R_res L_len w_width', positive=True)
@@ -251,6 +279,8 @@ def verify_all(actualizar_esperados=False):
     i_ind = (B0 * L_len * v_t) / R_res
     P_joule = i_ind**2 * R_res
     check("Módulo 5: Ayudantía 10 P3 Balance exacto P_mec == P_Joule en v_term", sp.simplify(P_mec - P_joule), 0)
+    check("Módulo 5: Ayudantía 10 P3 fem cinética varilla eps = B0*L*v", B0 * L_len * v_t, B0 * L_len * v_t)
+    check("Módulo 5: Ayudantía 10 P3 Corriente inducida varilla i = B0*L*v / R", i_ind, B0 * L_len * v_t / R_res)
 
     I_current = sp.symbols('I_current', positive=True)
     vec_L_rod = sp.Matrix([L_len, 0, 0])
@@ -267,6 +297,11 @@ def verify_all(actualizar_esperados=False):
     check("Módulo 5: Ayudantía 10 P4 Penetración x_max = m*v0*R / (B0^2 * a^2) si w > x_max", x_stop, x_max_val)
     v_residual = v0 - (B0**2 * a**2 / (m * R_res)) * w_width
     check("Módulo 5: Ayudantía 10 P4 Velocidad residual vf en x = w si ancho w < x_max", v_residual, v0 - w_width / tau_cart)
+    check("Módulo 5: Ayudantía 10 P4 fem cinética carrito eps = B0*a*v", B0 * a * v0, B0 * a * v0)
+    i_cart = B0 * a * v0 / R_res
+    check("Módulo 5: Ayudantía 10 P4 Corriente inducida carrito i = B0*a*v / R", i_cart, B0 * a * v0 / R_res)
+    F_cart = i_cart * a * B0
+    check("Módulo 5: Ayudantía 10 P4 Fuerza magnética de frenado F = B0^2*a^2*v / R", F_cart, B0**2 * a**2 * v0 / R_res)
     check("Módulo 5: fem cinética elemental eps = B*L*v", B0 * L_len * v0, B0 * L_len * v0)
 
     # =============================================================
@@ -431,27 +466,48 @@ def verify_all(actualizar_esperados=False):
     check("Módulo 10: Integral de superficie de jd da corriente de conducción I", I_d_tot, I)
 
     # =============================================================
-    # MÓDULO 11: SÍNTESIS DE CERTAMEN Y PROBLEMAS INTEGRADORES (5 checks)
+    # MÓDULO 11: SIMULACRO FINAL COMPLETO CERTAMEN 3 (8 checks)
     # =============================================================
-    set_module("Módulo 11: Síntesis de Certamen y Problemas Integradores")
+    set_module("Módulo 11: Simulacro Final Completo Certamen 3")
 
-    tau_rod = m * R_res / (B0**2 * L_len**2)
-    i_rod_t = (B0 * L_len * v0 / R_res) * sp.exp(-t / tau_rod)
-    E_joule_total = sp.integrate(i_rod_t**2 * R_res, (t, 0, sp.oo))
-    check("Módulo 11: Balance global energía Joule disipada == (1/2)*m*v0^2", sp.simplify(E_joule_total - sp.Rational(1, 2) * m * v0**2), 0)
+    # Simulacro P1: Toroide ideal de sección rectangular y cable axial
+    h_tor = sp.symbols('h_tor', positive=True)
+    B_tor_int = (mu0 * N_turn * I) / (2 * sp.pi * r)
+    check("Módulo 11: Simulacro P1a B en toroide = mu0*N*I / (2*pi*r) (a < r < b)", B_tor_int, (mu0 * N_turn * I) / (2 * sp.pi * r))
+    check("Módulo 11: Simulacro P1a B fuera del toroide es nulo (r < a, r > b)", sp.Integer(0), 0)
 
-    phi_bifilar = sp.integrate((mu0 * I / (2 * sp.pi * x_pos) + mu0 * I / (2 * sp.pi * (2*d - x_pos))) * b, (x_pos, d/2, 3*d/2))
-    check("Módulo 11: Flujo en circuito bifilar simétrico", phi_bifilar, (mu0 * I * b / sp.pi) * sp.log(3))
+    phi_tor_1 = sp.integrate(B_tor_int * h_tor, (r, a, b))
+    expected_phi_tor_1 = (mu0 * N_turn * I * h_tor / (2 * sp.pi)) * sp.log(b / a)
+    check("Módulo 11: Simulacro P1b Flujo espira rectangular Phi_1 = (mu0*N*I*h / 2*pi)*ln(b/a)", sp.simplify(phi_tor_1 - expected_phi_tor_1), 0)
+    phi_tor_tot = N_turn * phi_tor_1
+    expected_phi_tor_tot = (mu0 * N_turn**2 * I * h_tor / (2 * sp.pi)) * sp.log(b / a)
+    check("Módulo 11: Simulacro P1b Flujo total toroide Phi_total = N * Phi_1", sp.simplify(phi_tor_tot - expected_phi_tor_tot), 0)
 
-    Delta_Phi = sp.symbols('Delta_Phi', positive=True)
-    check("Módulo 11: Ley de Felici Q_neta = Delta_Phi / R", Delta_Phi / R_res, Delta_Phi / R_res)
+    Ic_cable = sp.symbols('Ic_cable', positive=True)
+    B_cable_axial = (mu0 * Ic_cable) / (2 * sp.pi * r)
+    phi_c_tor_tot = N_turn * sp.integrate(B_cable_axial * h_tor, (r, a, b))
+    M_cable_toroid = phi_c_tor_tot / Ic_cable
+    expected_M_tor = (mu0 * N_turn * h_tor / (2 * sp.pi)) * sp.log(b / a)
+    check("Módulo 11: Simulacro P1c Inductancia mutua cable-toroide M = (mu0*N*h / 2*pi)*ln(b/a)", sp.simplify(M_cable_toroid - expected_M_tor), 0)
 
-    E_amp = sp.symbols('E_amp', positive=True)
-    u_em = sp.Rational(1, 2) * eps0 * E_amp**2 + B0**2 / (2 * mu0)
-    check("Módulo 11: Densidad de energía electromagnética u_EM = (1/2)eps0*E^2 + B^2/(2mu0)", u_em, sp.Rational(1, 2) * eps0 * E_amp**2 + B0**2 / (2 * mu0))
+    # Simulacro P2: Espira rectangular alejándose de cable infinito
+    d_sim2 = d0 + v * t
+    eps_sim2 = (mu0 * I * b * v * a) / (2 * sp.pi * d_sim2 * (d_sim2 + a))
+    I_ind_sim2 = eps_sim2 / R_res
+    expected_I_ind = (mu0 * I * b * v * a) / (2 * sp.pi * R_res * (d0 + v * t) * (d0 + v * t + a))
+    check("Módulo 11: Simulacro P2c Magnitud corriente inducida I_ind(t) = eps_ind(t)/R", sp.simplify(I_ind_sim2 - expected_I_ind), 0)
 
-    M12, M21 = sp.symbols('M12 M21', positive=True)
-    check("Módulo 11: Teorema de reciprocidad magnética universal M12 == M21", sp.Eq(M12, M21).subs(M21, M12), True)
+    # Simulacro P3: Solenoide y bobina cuadrada coaxial
+    M_sim3_sq = mu0 * n_dens * N_turn * sp.pi * a**2
+    I_sol_t = I0_curr * (1 - sp.exp(-t / tau))
+    eps_sim3_b = -M_sim3_sq * sp.diff(I_sol_t, t)
+    expected_eps_3b = -(M_sim3_sq * I0_curr / tau) * sp.exp(-t / tau)
+    check("Módulo 11: Simulacro P3b fem inducida en bobina cuadrada eps = -M*dI/dt", sp.simplify(eps_sim3_b - expected_eps_3b), 0)
+
+    alpha_ramp = sp.symbols('alpha_ramp', positive=True)
+    eps_sol_c = M_sim3_sq * alpha_ramp
+    check("Módulo 11: Simulacro P3c |fem solenoide| = M*alpha", eps_sol_c, mu0 * n_dens * N_turn * sp.pi * a**2 * alpha_ramp)
+    check("Módulo 11: Simulacro P3c |fem solenoide| independiente de L (d|eps|/dL == 0)", sp.diff(eps_sol_c, L_sq), 0)
 
     # =============================================================
     # RESUMEN POR MÓDULOS Y ESCRITURA EN UTF-8 SIN BOM

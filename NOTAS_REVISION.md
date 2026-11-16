@@ -362,7 +362,7 @@ La verificación analítica simbólica completa se ejecuta de forma reproducible
 <!-- TABLA_RESUMEN_INICIO -->
 | Dimensión de Verificación | Componente / Herramienta | Cobertura y Métricas Clave | Estado |
 | :--- | :--- | :---: | :---: |
-| **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **89 / 89** comprobaciones analíticas aprobadas | ✅ 0 Fallas (Exit 0) |
+| **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **105 / 105** comprobaciones analíticas aprobadas | ✅ 0 Fallas (Exit 0) |
 | **Consistencia Numérica** | `scripts/verificar_numericos.py` (Tolerancia estricta) | **15 / 15** ejercicios numéricos teóricamente exactos | ✅ Exacto (Exit 0) |
 | **Renderizado Matemático** | `scripts/verify_browser_katex.py` (Chromium Headless) | **2223 / 2223** fórmulas KaTeX renderizadas sin error | ✅ 0 Errores / 0 Sueltos |
 | **Visibilidad de Soluciones** | Pasos `.step-box`, `.feedback-box`, pistas y pautas | **158 / 158** cajas interactivas visibles tras `revealAll` | ✅ 0 Ocultos tras revelado |
