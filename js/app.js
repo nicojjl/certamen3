@@ -280,6 +280,40 @@ const App = {
         ],
         throwOnError: false
       });
+
+      // Renderizar fórmulas con sintaxis o llaves malformadas que auto-render omitió
+      if (window.katex) {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        const nodesToFix = [];
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          if (node.parentElement && node.parentElement.closest('.katex, .katex-error, script, style, svg, math')) continue;
+          if (/\$\$[\s\S]+?\$\$/.test(node.nodeValue) || /\$[^$]+?\$/.test(node.nodeValue)) {
+            nodesToFix.push(node);
+          }
+        }
+        nodesToFix.forEach(node => {
+          const parent = node.parentElement;
+          if (!parent) return;
+          let html = node.nodeValue.replace(/\$\$([\s\S]+?)\$\$/g, (match, tex) => {
+            try {
+              return window.katex.renderToString(tex, { throwOnError: false, displayMode: true });
+            } catch (err) {
+              return `<span class="katex-error" title="${err.message}">${tex}</span>`;
+            }
+          });
+          html = html.replace(/\$([^$]+?)\$/g, (match, tex) => {
+            try {
+              return window.katex.renderToString(tex, { throwOnError: false, displayMode: false });
+            } catch (err) {
+              return `<span class="katex-error" title="${err.message}">${tex}</span>`;
+            }
+          });
+          const span = document.createElement('span');
+          span.innerHTML = html;
+          parent.replaceChild(span, node);
+        });
+      }
     } catch (e) {
       console.warn('KaTeX rendering error:', e);
     }

@@ -16,8 +16,8 @@ import glob
 import re
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IMG_DIR = os.path.join(BASE_DIR, 'img')
-PREVIEW_DIR = os.path.join(IMG_DIR, '_preview')
+IMG_DIR = os.environ.get('IMG_DIR', os.path.join(BASE_DIR, 'img'))
+PREVIEW_DIR = os.environ.get('PREVIEW_DIR', os.path.join(IMG_DIR, '_preview'))
 
 def relative_luminance(r, g, b):
     def ch(c):

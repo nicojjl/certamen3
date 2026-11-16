@@ -289,7 +289,7 @@ def check_with_playwright(host, port, browser_path=None, modules=None):
                     NodeFilter.SHOW_TEXT,
                     {
                         acceptNode(node) {
-                            if (node.parentElement && node.parentElement.closest('.katex, script, style, svg, math')) {
+                            if (node.parentElement && node.parentElement.closest('.katex, .katex-error, script, style, svg, math')) {
                                 return NodeFilter.FILTER_REJECT;
                             }
                             return NodeFilter.FILTER_ACCEPT;

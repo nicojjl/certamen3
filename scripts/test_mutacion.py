@@ -143,7 +143,7 @@ def run_mutation_c():
         output = res.stdout + res.stderr
         has_fail_code = res.returncode != 0
         has_fail_tag = "[FAIL]" in output
-        has_fig_name = "mod0_cross_product.svg" in output or "24" in output
+        has_fig_name = "mod0_cross_product.svg" in output
 
         if has_fail_code and has_fail_tag and has_fig_name:
             print(f"  [PASS] Mutación C detectada exitosamente: exit {res.returncode}, contiene '[FAIL]' y 'mod0_cross_product.svg'")
@@ -193,12 +193,13 @@ def run_mutation_d():
             return False
 
 def run_mutation_e():
-    """(e) Introducir \frac{ sin cerrar en module0.js -> verify_browser_katex.py debe fallar con [FAIL]."""
+    """(e) Introducir \\frac{ sin cerrar en module0.js -> verify_browser_katex.py debe fallar con [FAIL] y error KaTeX."""
     print("\n--- Ejecutando Mutación E: \\frac{ sin cerrar en module0.js ---")
     
     target_file = os.path.join(BASE_DIR, 'js', 'data', 'module0.js')
     backup_file = target_file + '.bak'
-    cmd = [PYTHON_EXE, os.path.join(BASE_DIR, 'scripts', 'verify_browser_katex.py'), '--module', 'mod0', '--no-report']
+    port = int(os.environ.get("PORT", "8080"))
+    cmd = [PYTHON_EXE, os.path.join(BASE_DIR, 'scripts', 'verify_browser_katex.py'), '--port', str(port), '--module', 'mod0', '--no-report']
 
     # 1. Línea base
     if not run_baseline(cmd, name="Mutación E Línea Base"):
@@ -210,9 +211,10 @@ def run_mutation_e():
         with open(target_file, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Inyectar \frac{ sin cerrar en una fórmula KaTeX visible de mod0
+        # Inyectar $$\frac{1}{ sin cerrar para que el archivo contenga \frac y cause error real en KaTeX
         mutated_content = content.replace("$$", "$$\\frac{1}{", 1)
         assert mutated_content != content, "No se pudo inyectar \\frac{ sin cerrar en module0.js"
+        assert r"\frac" in mutated_content, "El archivo mutado debe contener \\frac"
 
         with open(target_file, 'w', encoding='utf-8') as f:
             f.write(mutated_content)
@@ -221,14 +223,15 @@ def run_mutation_e():
         output = res.stdout + res.stderr
         has_fail_code = res.returncode != 0
         has_fail_tag = "[FAIL]" in output
-        has_katex_indication = "KaTeX" in output or "mod0" in output
+        has_katex = bool(re.search(r'katex', output, re.IGNORECASE))
+        has_katex_error = bool(re.search(r'[1-9]\d*\s+errores\s+katex', output, re.IGNORECASE))
 
-        if has_fail_code and has_fail_tag and has_katex_indication:
-            print(f"  [PASS] Mutación E detectada exitosamente: exit {res.returncode}, contiene '[FAIL]' y 'errores KaTeX'")
+        if has_fail_code and has_fail_tag and has_katex and has_katex_error:
+            print(f"  [PASS] Mutación E detectada exitosamente: exit {res.returncode}, detectó error real de KaTeX en [mod0]")
             return True
         else:
-            print(f"  [FAIL] Mutación E NO cumplió criterios: code={res.returncode}, tag={has_fail_tag}")
-            print(output[:300])
+            print(f"  [FAIL] Mutación E NO cumplió criterios: code={res.returncode}, tag={has_fail_tag}, katex={has_katex}, error={has_katex_error}")
+            print(output[:400])
             return False
     finally:
         if os.path.exists(backup_file):
@@ -275,6 +278,54 @@ def run_mutation_f():
             print(output[:300])
             return False
 
+def run_mutation_g():
+    """(g) Cambiar color de trazo de un SVG a color fijo (#000000) -> verify_figures_contrast.py debe fallar en modo oscuro."""
+    print("\n--- Ejecutando Mutación G: trazo negro fijo (#000000) en mod0_coords.svg ---")
+    port = int(os.environ.get("PORT", "8080"))
+    base_cmd = [PYTHON_EXE, os.path.join(BASE_DIR, 'scripts', 'verify_figures_contrast.py'), str(port)]
+
+    # 1. Línea base
+    if not run_baseline(base_cmd, name="Mutación G Línea Base"):
+        return False
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        temp_img = os.path.join(tmpdir, 'img')
+        temp_preview = os.path.join(tmpdir, '_preview')
+        shutil.copytree(os.path.join(BASE_DIR, 'img'), temp_img)
+
+        target_svg = os.path.join(temp_img, 'mod0_coords.svg')
+        with open(target_svg, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Mutar un trazo a color fijo #000000
+        mutated_content = re.sub(r'stroke="var\(--fig-azul[^"]*\)"', 'stroke="#000000"', content, count=1)
+        if mutated_content == content:
+            mutated_content = content.replace('stroke="currentColor"', 'stroke="#000000"', 1)
+        assert mutated_content != content, "No se pudo mutar el trazo en mod0_coords.svg"
+
+        with open(target_svg, 'w', encoding='utf-8') as f:
+            f.write(mutated_content)
+
+        env = os.environ.copy()
+        env['IMG_DIR'] = temp_img
+        env['PREVIEW_DIR'] = temp_preview
+        res = subprocess.run(base_cmd, env=env, cwd=BASE_DIR, capture_output=True, text=True, encoding='utf-8', errors='ignore')
+
+        output = res.stdout + res.stderr
+        has_fail_code = res.returncode != 0
+        has_fail_tag = "[FAIL]" in output
+        has_fig_name = "mod0_coords.svg" in output
+        has_dark_mode = "DARK" in output.upper()
+        has_contrast_fail = ("contraste insuficiente" in output.lower() or "3:1" in output)
+
+        if has_fail_code and has_fail_tag and has_fig_name and has_dark_mode and has_contrast_fail:
+            print(f"  [PASS] Mutación G detectada exitosamente: exit {res.returncode}, detectó trazo fijo #000000 con fallo de contraste en modo oscuro")
+            return True
+        else:
+            print(f"  [FAIL] Mutación G NO cumplió criterios: code={res.returncode}, tag={has_fail_tag}, fig={has_fig_name}, dark={has_dark_mode}, contrast={has_contrast_fail}")
+            print(output[:400])
+            return False
+
 def main():
     print("=" * 75)
     print("SUITE INTEGRAL DE PRUEBAS DE MUTACIÓN (MUTATION TESTING)")
@@ -286,7 +337,8 @@ def main():
         "C (borrado de figura en img/)": run_mutation_c(),
         "D (escape cuádruple en LaTeX)": run_mutation_d(),
         "E (fórmula KaTeX malformada en JS)": run_mutation_e(),
-        "F (parámetro de statement alterado)": run_mutation_f()
+        "F (parámetro de statement alterado)": run_mutation_f(),
+        "G (trazo negro #000000 en modo oscuro)": run_mutation_g()
     }
 
     print("\n" + "=" * 75)
