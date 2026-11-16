@@ -100,13 +100,13 @@
 <path d='m69.32-9.09c0-1.88-1.52-3.4-3.4-3.4s-3.4 1.52-3.4 3.4s1.52 3.4 3.4 3.4s3.4-1.52 3.4-3.4z' stroke="var(--fig-azul, #0369a1)" fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
 <path d='m67.52-9.09c0-.88-.72-1.59-1.59-1.59s-1.59 .71-1.59 1.59s.72 1.59 1.59 1.59s1.59-.71 1.59-1.59z' fill="var(--fig-azul, #0369a1)"/>
 <path d='m-21.67 24.93c0-1.72-1.39-3.12-3.12-3.12s-3.12 1.39-3.12 3.12s1.39 3.12 3.12 3.12s3.12-1.39 3.12-3.12z' stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m-23.39 24.93c0-.77-.63-1.39-1.39-1.39s-1.39 .63-1.39 1.39s.63 1.39 1.39 1.39s1.39-.63 1.39-1.39z' fill='#80c1e3'/>
+<path d='m-23.39 24.93c0-.77-.63-1.39-1.39-1.39s-1.39 .63-1.39 1.39s.63 1.39 1.39 1.39s1.39-.63 1.39-1.39z' fill="var(--fig-azul, #0369a1)"/>
 <path d='m-21.67-3.42c0-1.72-1.39-3.12-3.12-3.12s-3.12 1.39-3.12 3.12s1.39 3.12 3.12 3.12s3.12-1.39 3.12-3.12z' stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m-23.39-3.42c0-.77-.63-1.39-1.39-1.39s-1.39 .63-1.39 1.39s.63 1.39 1.39 1.39s1.39-.63 1.39-1.39z' fill='#80c1e3'/>
+<path d='m-23.39-3.42c0-.77-.63-1.39-1.39-1.39s-1.39 .63-1.39 1.39s.63 1.39 1.39 1.39s1.39-.63 1.39-1.39z' fill="var(--fig-azul, #0369a1)"/>
 <path d='m97.39 24.93c0-1.72-1.39-3.12-3.12-3.12s-3.12 1.39-3.12 3.12s1.4 3.12 3.12 3.12s3.12-1.39 3.12-3.12z' stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m95.66 24.93c0-.77-.63-1.39-1.4-1.39s-1.39 .63-1.39 1.39s.62 1.39 1.39 1.39s1.4-.63 1.4-1.39z' fill='#80c1e3'/>
+<path d='m95.66 24.93c0-.77-.63-1.39-1.4-1.39s-1.39 .63-1.39 1.39s.62 1.39 1.39 1.39s1.4-.63 1.4-1.39z' fill="var(--fig-azul, #0369a1)"/>
 <path d='m97.39-3.42c0-1.72-1.39-3.12-3.12-3.12s-3.12 1.39-3.12 3.12s1.4 3.12 3.12 3.12s3.12-1.39 3.12-3.12z' stroke='var(--fig-azul, #0369a1)' fill='none' stroke-width='.4' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<path d='m95.66-3.42c0-.77-.63-1.39-1.4-1.39s-1.39 .63-1.39 1.39s.62 1.39 1.39 1.39s1.4-.63 1.4-1.39z' fill='#80c1e3'/>
+<path d='m95.66-3.42c0-.77-.63-1.39-1.4-1.39s-1.39 .63-1.39 1.39s.62 1.39 1.39 1.39s1.4-.63 1.4-1.39z' fill="var(--fig-azul, #0369a1)"/>
 <g fill="var(--fig-azul, #0369a1)" transform='translate(38.03 -113.48)'>
 <use x='-37.48' y='79.36' xlink:href='#g0-126'/>
 <use x='-38.96' y='81.62' xlink:href='#g0-66'/>

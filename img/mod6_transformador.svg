@@ -113,7 +113,7 @@
 <g id='page1'>
 <path d='m15.16 54.4v-113.39h147.4v113.39zm34.02-28.34v-56.7h79.37v56.7z' fill='#e6e6e6' fill-rule='evenodd'/>
 <path d='m15.16 54.4v-113.39h147.4v113.39zm34.02-28.34v-56.7h79.37v56.7z' stroke="currentColor" fill='none' stroke-width='1.2' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/>
-<g fill='#999' transform='translate(-48.25 -36.25)'>
+<g fill='currentColor' transform='translate(-48.25 -36.25)'>
 <use x='88.86' y='-2.29' xlink:href='#g7-78'/>
 <use x='96.75' y='-2.29' xlink:href='#g7-19'/>
 <use x='96.47' y='-2.29' xlink:href='#g7-117'/>

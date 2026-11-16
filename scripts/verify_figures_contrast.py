@@ -148,7 +148,7 @@ def main():
 
                 page.wait_for_timeout(60)
 
-                # Inspección de trazos y colores calculados en el DOM
+                # Inspección de trazos, rellenos y colores calculados en el DOM
                 eval_result = page.evaluate("""() => {
                     const card = document.getElementById('test-card');
                     const cont = document.getElementById('test-container');
@@ -158,35 +158,61 @@ def main():
                     const svg = cont.querySelector('svg');
                     if (!svg) return { error: 'No svg element found' };
 
-                    const shapes = Array.from(svg.querySelectorAll('path, line, polyline, polygon, circle, rect, ellipse'));
-                    const results = [];
+                    // 1. Textos y glifos tipográficos (text, tspan, use)
+                    const textElements = Array.from(svg.querySelectorAll('text, tspan, use'));
+                    const texts = [];
+                    textElements.forEach((el, i) => {
+                        const style = window.getComputedStyle(el);
+                        const fill = style.fill;
+                        const stroke = style.stroke;
+                        const opacity = parseFloat(style.opacity) || 1;
+                        if (opacity <= 0) return;
+                        
+                        const color = (fill && fill !== 'none') ? fill : stroke;
+                        if (!color || color === 'none') return;
 
-                    shapes.forEach((shape, i) => {
+                        texts.push({
+                            index: i,
+                            tag: el.tagName,
+                            html: el.outerHTML.substring(0, 100),
+                            color: color,
+                            text: el.textContent || el.getAttribute('xlink:href') || ''
+                        });
+                    });
+
+                    // 2. Gráficos (path, line, polyline, polygon, circle, rect, ellipse) fuera de defs
+                    const allShapes = Array.from(svg.querySelectorAll('path, line, polyline, polygon, circle, rect, ellipse'));
+                    const shapes = [];
+                    allShapes.forEach((shape, i) => {
+                        if (shape.closest('defs')) return; // Evitar definiciones de glifos en <defs>
                         const style = window.getComputedStyle(shape);
                         const stroke = style.stroke;
+                        const fill = style.fill;
                         const strokeWidth = parseFloat(style.strokeWidth) || 0;
                         const opacity = parseFloat(style.opacity) || 1;
+                        if (opacity <= 0) return;
 
-                        if (!stroke || stroke === 'none' || strokeWidth <= 0 || opacity <= 0) {
-                            return;
-                        }
+                        const hasStroke = stroke && stroke !== 'none' && strokeWidth > 0;
+                        const hasFill = fill && fill !== 'none';
 
-                        results.push({
+                        if (!hasStroke && !hasFill) return;
+
+                        shapes.push({
                             index: i,
                             tag: shape.tagName,
-                            d: shape.getAttribute('d') ? shape.getAttribute('d').substring(0, 40) : '',
                             html: shape.outerHTML.substring(0, 100),
-                            stroke: stroke,
+                            stroke: hasStroke ? stroke : null,
                             strokeWidth: strokeWidth,
-                            cardBg: cardBg,
-                            contBg: contBg
+                            fill: hasFill ? fill : null,
+                            isFilledSymbol: !hasStroke && hasFill
                         });
                     });
 
                     return {
                         cardBg,
                         contBg,
-                        shapes: results
+                        texts,
+                        shapes
                     };
                 }""")
 
@@ -198,28 +224,74 @@ def main():
                 cont_bg_rgb = parse_css_rgb(eval_result['contBg'])
                 bg_rgb = card_bg_rgb or cont_bg_rgb or (255, 255, 255)
 
-                shapes = eval_result.get('shapes', [])
-                for s in shapes:
-                    stroke_rgb = parse_css_rgb(s['stroke'])
-                    if not stroke_rgb:
+                # A. Comprobación de TEXTOS: exige al menos 4.5:1
+                texts = eval_result.get('texts', [])
+                for t in texts:
+                    t_rgb = parse_css_rgb(t['color'])
+                    if not t_rgb:
                         continue
 
-                    # Comprobación 1: stroke igual al fondo
-                    if stroke_rgb == bg_rgb:
+                    if t_rgb == bg_rgb:
                         fig_failures.append(
-                            f"[{theme.upper()}] Trazo de <{s['tag']}> idéntico al fondo {eval_result['cardBg']} ({s['stroke']})"
+                            f"[{theme.upper()}] Texto <{t['tag']}> idéntico al fondo {eval_result['cardBg']} ({t['color']})"
                         )
                         continue
 
-                    # Comprobación 2: ratio de contraste < 3:1
-                    cr = contrast_ratio(stroke_rgb, bg_rgb)
+                    cr = contrast_ratio(t_rgb, bg_rgb)
                     if cr < min_contrast_observed:
                         min_contrast_observed = cr
 
-                    if cr < 3.0:
+                    if cr < 4.5:
                         fig_failures.append(
-                            f"[{theme.upper()}] Trazo de <{s['tag']}> {s.get('html')} (stroke: {s['stroke']}, rgb: {stroke_rgb}) con contraste insuficiente ({cr:.2f}:1 < 3:1) vs fondo {eval_result['cardBg']}"
+                            f"[{theme.upper()}] Texto <{t['tag']}> {t.get('text')} (color: {t['color']}, rgb: {t_rgb}) con contraste insuficiente ({cr:.2f}:1 < 4.5:1) vs fondo {eval_result['cardBg']}"
                         )
+
+                # B. Comprobación de GRÁFICOS: exige al menos 3.0:1
+                shapes = eval_result.get('shapes', [])
+                for s in shapes:
+                    # Comprobación de trazo (stroke)
+                    if s['stroke']:
+                        stroke_rgb = parse_css_rgb(s['stroke'])
+                        if stroke_rgb:
+                            if stroke_rgb == bg_rgb:
+                                fig_failures.append(
+                                    f"[{theme.upper()}] Trazo de <{s['tag']}> idéntico al fondo {eval_result['cardBg']} ({s['stroke']})"
+                                )
+                                continue
+
+                            cr = contrast_ratio(stroke_rgb, bg_rgb)
+                            if cr < min_contrast_observed:
+                                min_contrast_observed = cr
+
+                            if cr < 3.0:
+                                fig_failures.append(
+                                    f"[{theme.upper()}] Trazo de <{s['tag']}> {s.get('html')} (stroke: {s['stroke']}, rgb: {stroke_rgb}) con contraste insuficiente ({cr:.2f}:1 < 3:1) vs fondo {eval_result['cardBg']}"
+                                )
+
+                    # Comprobación de símbolos rellenos sólidos (flechas, marcadores, etc.)
+                    if s['isFilledSymbol'] and s['fill']:
+                        fill_rgb = parse_css_rgb(s['fill'])
+                        if fill_rgb:
+                            fill_lum = relative_luminance(*fill_rgb)
+                            # Máscaras de fondo y lavados pasteles en modo claro son decorativos
+                            is_background_wash = (theme == 'light' and fill_lum >= 0.50)
+                            if is_background_wash:
+                                continue
+
+                            if fill_rgb == bg_rgb:
+                                fig_failures.append(
+                                    f"[{theme.upper()}] Relleno de símbolo <{s['tag']}> idéntico al fondo {eval_result['cardBg']} ({s['fill']})"
+                                )
+                                continue
+
+                            cr = contrast_ratio(fill_rgb, bg_rgb)
+                            if cr < min_contrast_observed:
+                                min_contrast_observed = cr
+
+                            if cr < 3.0:
+                                fig_failures.append(
+                                    f"[{theme.upper()}] Relleno de símbolo <{s['tag']}> {s.get('html')} (fill: {s['fill']}, rgb: {fill_rgb}) con contraste insuficiente ({cr:.2f}:1 < 3:1) vs fondo {eval_result['cardBg']}"
+                                )
 
                 # Tomar captura de pantalla en img/_preview/
                 preview_file = os.path.join(PREVIEW_DIR, f"{fbase}_{theme}.png")
