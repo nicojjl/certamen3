@@ -133,7 +133,7 @@ const UIComponents = {
       <div class="options-list" id="opts-${ex.id}">
         ${optionsHtml}
       </div>
-      <div class="feedback-box ${feedbackType} ${feedbackVisible}" id="feedback-${ex.id}" data-explanation="${encodeURIComponent(ex.explanation || '')}">
+      <div class="feedback-box solution-box ${feedbackType} ${feedbackVisible}" id="feedback-${ex.id}" data-explanation="${encodeURIComponent(ex.explanation || '')}">
         ${isSolved ? `<strong>${selectedIdx === ex.correctOption ? '¡Correcto!' : 'Incorrecto.'}</strong> ${ex.explanation}` : ''}
       </div>
     `;
@@ -156,7 +156,7 @@ const UIComponents = {
 
     const fb = document.getElementById(`feedback-${exId}`);
     if (fb) {
-      fb.className = `feedback-box visible ${isCorrect ? 'feedback-success' : 'feedback-error'}`;
+      fb.className = `feedback-box solution-box visible ${isCorrect ? 'feedback-success' : 'feedback-error'}`;
       fb.innerHTML = `<strong>${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${fb.getAttribute('data-explanation') || ''}`;
     }
     
@@ -178,7 +178,7 @@ const UIComponents = {
         <span>${ex.units || ''}</span>
         <button class="btn btn-primary btn-sm" onclick="UIComponents.handleCheckNumerical('${ex.id}', ${ex.correctValue}, ${ex.tolerance || 0.03})">Comprobar</button>
       </div>
-      <div class="feedback-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}" data-explanation="${encodeURIComponent(ex.explanation || '')}">
+      <div class="feedback-box solution-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}" data-explanation="${encodeURIComponent(ex.explanation || '')}">
         ${isSolved ? `<strong>${state.isCorrect ? '¡Correcto!' : 'Revisa tus cálculos.'}</strong> Valor esperado: ${ex.correctValue} ${ex.units || ''}.<br>${ex.explanation}` : ''}
       </div>
     `;
@@ -205,7 +205,7 @@ const UIComponents = {
     StorageManager.setExerciseState(exId, { solved: true, userValue: val, isCorrect });
 
     if (fb) {
-      fb.className = `feedback-box visible ${isCorrect ? 'feedback-success' : 'feedback-error'}`;
+      fb.className = `feedback-box solution-box visible ${isCorrect ? 'feedback-success' : 'feedback-error'}`;
       fb.innerHTML = `<strong>${isCorrect ? '¡Excelente!' : 'Cálculo inexacto.'}</strong> Valor objetivo: ${correctVal}. Error relativo: ${(relError*100).toFixed(1)}% (tolerancia: ${(tolerance*100).toFixed(0)}%).<br>${fb.getAttribute('data-explanation') || ''}`;
     }
 
@@ -231,7 +231,7 @@ const UIComponents = {
           <span><strong>Falso</strong></span>
         </div>
       </div>
-      <div class="feedback-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}" data-justification="${encodeURIComponent(ex.justification || '')}">
+      <div class="feedback-box solution-box ${isSolved ? (state.isCorrect ? 'feedback-success visible' : 'feedback-error visible') : ''}" id="feedback-${ex.id}" data-justification="${encodeURIComponent(ex.justification || '')}">
         ${isSolved ? `<strong>${state.isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${ex.justification}` : ''}
       </div>
     `;
@@ -252,7 +252,7 @@ const UIComponents = {
 
     const fb = document.getElementById(`feedback-${exId}`);
     if (fb) {
-      fb.className = `feedback-box visible ${isCorrect ? 'feedback-success' : 'feedback-error'}`;
+      fb.className = `feedback-box solution-box visible ${isCorrect ? 'feedback-success' : 'feedback-error'}`;
       fb.innerHTML = `<strong>${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${fb.getAttribute('data-justification') || ''}`;
     }
 
@@ -274,7 +274,7 @@ const UIComponents = {
           ${isRevealed ? 'Ocultar Pauta Modelo' : 'Mostrar Pauta Modelo y Rúbrica'}
         </button>
       </div>
-      <div class="step-box ${isRevealed ? 'visible' : ''}" id="box-${ex.id}">
+      <div class="step-box pauta-box model-solution ${isRevealed ? 'visible' : ''}" id="box-${ex.id}">
         <div class="step-box-title">Respuesta Modelo y Criterios Oficiales:</div>
         <div>${ex.modelAnswer}</div>
         ${ex.rubric ? `
@@ -305,8 +305,9 @@ const UIComponents = {
 
     ex.steps.forEach((step, idx) => {
       const isVisible = currentStep >= idx;
+      const typeClass = (idx === 0) ? 'pista-box' : 'solution-step';
       stepsHtml += `
-        <div class="step-box ${isVisible ? 'visible' : ''}" id="step-${ex.id}-${idx}">
+        <div class="step-box ${typeClass} ${isVisible ? 'visible' : ''}" id="step-${ex.id}-${idx}">
           <div class="step-box-title">${step.title}</div>
           <div>${step.content}</div>
         </div>

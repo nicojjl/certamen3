@@ -203,20 +203,15 @@ def check_with_playwright(host, port, browser_path=None, modules=None):
             }""")
             page.wait_for_timeout(80)
 
-            # 3. Test de visibilidad: confirmar que todos los .step-box, .feedback-box y elementos con hint/pista/solution/pauta/answer queden visibles
+            # 3. Test de visibilidad: confirmar que todos los .step-box, .feedback-box y pistas/pautas (.pista-box, .pauta-box) queden visibles
             vis_check = page.evaluate("""() => {
                 const area = document.getElementById('main-content-area') || document.body;
                 const stepBoxes = Array.from(area.querySelectorAll('.step-box'));
                 const feedbackBoxes = Array.from(area.querySelectorAll('.feedback-box'));
+                const pistaBoxes = Array.from(area.querySelectorAll('.pista-box'));
+                const pautaBoxes = Array.from(area.querySelectorAll('.pauta-box'));
                 
-                const clueSelectors = [
-                    '[class*="hint"]',
-                    '[class*="pista"]',
-                    '[class*="solution"]',
-                    '[class*="pauta"]',
-                    '[class*="answer"]'
-                ];
-                const clueElements = Array.from(area.querySelectorAll(clueSelectors.join(', ')));
+                const clueElements = pistaBoxes.concat(pautaBoxes);
 
                 const hiddenSteps = stepBoxes.filter(el => {
                     const style = window.getComputedStyle(el);
@@ -230,7 +225,7 @@ def check_with_playwright(host, port, browser_path=None, modules=None):
 
                 const hiddenClues = clueElements.filter(el => {
                     const style = window.getComputedStyle(el);
-                    return style.display === 'none' || style.visibility === 'hidden';
+                    return style.display === 'none' || style.visibility === 'hidden' || !el.classList.contains('visible');
                 });
 
                 // Figuras SVG ininlineadas de las tarjetas de ejercicio
@@ -327,8 +322,10 @@ def check_with_playwright(host, port, browser_path=None, modules=None):
                 failures.append(f"{vis_check['hiddenSteps']}/{vis_check['totalSteps']} .step-box no visibles tras revealAll")
             if vis_check['hiddenFeedback'] > 0:
                 failures.append(f"{vis_check['hiddenFeedback']}/{vis_check['totalFeedback']} .feedback-box no visibles tras revealAll")
+            if vis_check['totalClues'] == 0:
+                failures.append("0 pistas/pautas encontradas en el DOM")
             if vis_check['hiddenClues'] > 0:
-                failures.append(f"{vis_check['hiddenClues']}/{vis_check['totalClues']} pistas/soluciones/respuestas ocultas tras revealAll")
+                failures.append(f"{vis_check['hiddenClues']}/{vis_check['totalClues']} pistas/pautas ocultas tras revealAll")
             if vis_check['brokenExerciseFigures'] > 0:
                 failures.append(f"{vis_check['brokenExerciseFigures']} figuras SVG de ejercicio rotas (width <= 0 o sin trazo)")
             if num_console_errs > 0:
@@ -342,7 +339,7 @@ def check_with_playwright(host, port, browser_path=None, modules=None):
                 for ce in console_errors[:3]:
                     print(f"       -> Consola: {ce}")
             else:
-                steps_info = f"{vis_check['totalSteps']} pasos y {vis_check['totalFeedback']} feedbacks visibles | {vis_check['exerciseFigures']} figuras SVG OK"
+                steps_info = f"{vis_check['totalSteps']} pasos ({vis_check['totalClues']} pistas/pautas) y {vis_check['totalFeedback']} feedbacks visibles | {vis_check['exerciseFigures']} figuras SVG OK"
                 print(f"[OK]   {mod:5s}: 0 errores consola | {num_formulas:3d} fórmulas | {steps_info}")
 
             total_formulas += num_formulas
@@ -441,9 +438,20 @@ def check_with_chrome_cli(browser_bin, host, port):
         stray_double_slash = re.findall(r'\\\\', clean_text)
         num_stray = len(stray_latex) + len(stray_double_slash)
 
+        pistas = len(re.findall(r'class="[^"]*\bpista-box\b', dom))
+        pautas = len(re.findall(r'class="[^"]*\bpauta-box\b', dom))
+        steps = len(re.findall(r'class="[^"]*\bstep-box\b', dom))
+        feedback = len(re.findall(r'class="[^"]*\bfeedback-box\b', dom))
+        clues_in_mod = pistas + pautas
+        total_clues += clues_in_mod
+        total_steps += steps
+        total_feedback += feedback
+
         failures = []
         if num_formulas == 0:
             failures.append("0 fórmulas renderizadas")
+        if clues_in_mod == 0:
+            failures.append("0 pistas/pautas encontradas en el DOM")
         if num_errors > 0:
             failures.append(f"{num_errors} errores KaTeX")
         if num_stray > 0:
@@ -519,16 +527,16 @@ def main():
     hidden_clues = result.get("total_hidden_clues", 0)
     broken_figures = result.get("broken_exercise_figures", 0)
 
-    # Falla si alguno de los contadores de error o elementos ocultos es mayor a 0
-    if (katex_errors > 0 or console_errors > 0 or page_errors > 0 or
-        stray_latex > 0 or hidden_steps > 0 or hidden_feedback > 0 or
-        hidden_clues > 0 or broken_figures > 0):
-        ok = False
-
     total_steps = result.get("total_steps", 0)
     total_feedback = result.get("total_feedback", 0)
     total_clues = result.get("total_clues", 0)
     total_figures = result.get("total_exercise_figures", 0)
+
+    # Falla si alguno de los contadores de error o elementos ocultos es mayor a 0, o si total_clues == 0
+    if (katex_errors > 0 or console_errors > 0 or page_errors > 0 or
+        stray_latex > 0 or hidden_steps > 0 or hidden_feedback > 0 or
+        hidden_clues > 0 or broken_figures > 0 or total_clues == 0):
+        ok = False
 
     # Guardar reporte JSON estructurado para generar_resumen.py si no está silenciado
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

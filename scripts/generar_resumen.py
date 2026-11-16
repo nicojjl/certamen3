@@ -101,6 +101,8 @@ def generar_tabla():
     visible_steps = b_data["visible_steps"]
     total_fb = b_data["total_feedback"]
     visible_fb = b_data["visible_feedback"]
+    total_clues = b_data.get("total_clues", 0)
+    visible_clues = b_data.get("visible_clues", 0)
     cajas_total = total_steps + total_fb
     cajas_visibles = visible_steps + visible_fb
 
@@ -129,7 +131,7 @@ def generar_tabla():
     estado_sympy = "✅ 0 Fallas (Exit 0)" if (sympy_pass == sympy_total and sympy_total > 0) else f"❌ {sympy_total - sympy_pass} Fallas"
     estado_numericos = "✅ Exacto (Exit 0)" if (num_registrados == num_total and num_total > 0) else f"❌ Discrepancia ({num_registrados}/{num_total})"
     estado_formulas = "✅ 0 Errores / 0 Sueltos" if (katex_errors == 0 and stray_latex == 0 and total_formulas > 0) else f"❌ {katex_errors} Errores KaTeX"
-    estado_cajas = "✅ 0 Ocultos tras revelado" if (cajas_visibles == cajas_total and cajas_total > 0) else f"❌ {cajas_total - cajas_visibles} Ocultos"
+    estado_cajas = "✅ 0 Ocultos tras revelado" if (cajas_visibles == cajas_total and cajas_total > 0 and (total_clues == 0 or visible_clues == total_clues)) else f"❌ {cajas_total - cajas_visibles} Ocultos"
     estado_figs_web = "✅ 0 Figuras rotas" if (valid_ex_figs == total_ex_figs and total_ex_figs > 0) else f"❌ {total_ex_figs - valid_ex_figs} Rotas"
     estado_figs_svg = "✅ Válido (Exit 0)" if (fig_pass == fig_total and fig_total > 0) else f"❌ {fig_total - fig_pass} Fallas"
     estado_recorte = "✅ 0 Recortes de trazo/glifo" if (recorte_pass == recorte_total and recorte_total > 0) else f"❌ {recorte_total - recorte_pass} Recortes"
@@ -141,7 +143,7 @@ def generar_tabla():
 | **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **{sympy_pass} / {sympy_total}** comprobaciones analíticas aprobadas | {estado_sympy} |
 | **Consistencia Numérica** | `scripts/verificar_numericos.py` (Tolerancia estricta) | **{num_registrados} / {num_total}** ejercicios numéricos teóricamente exactos | {estado_numericos} |
 | **Renderizado Matemático** | `scripts/verify_browser_katex.py` (Chromium Headless) | **{formulas_validas} / {total_formulas}** fórmulas KaTeX renderizadas sin error | {estado_formulas} |
-| **Visibilidad de Soluciones** | Pasos `.step-box`, `.feedback-box`, pistas y pautas | **{cajas_visibles} / {cajas_total}** cajas interactivas visibles tras `revealAll` | {estado_cajas} |
+| **Visibilidad de Soluciones** | Pasos `.step-box` ({visible_clues} pistas/pautas), retroalimentación `.feedback-box` | **{cajas_visibles} / {cajas_total}** cajas interactivas visibles tras `revealAll` | {estado_cajas} |
 | **Carga de Figuras en Web** | Figuras de ejercicios (inlined `<svg>` en DOM) | **{valid_ex_figs} / {total_ex_figs}** figuras validadas con `width > 0` y trazo | {estado_figs_web} |
 | **Validación Vectorial SVG** | `scripts/check_figures.py` (< 120 KB, XML, TeX fuente) | **{fig_pass} / {fig_total}** figuras vectoriales validadas | {estado_figs_svg} |
 | **Control de Recorte y ViewBox** | Detección geométrica de límites y márgenes | **{recorte_pass} / {recorte_total}** figuras con margen seguro en viewBox | {estado_recorte} |

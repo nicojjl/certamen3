@@ -365,7 +365,7 @@ La verificación analítica simbólica completa se ejecuta de forma reproducible
 | **Pruebas Analíticas SymPy** | `scripts/verificar.py` (Módulos 0 a 11) | **105 / 105** comprobaciones analíticas aprobadas | ✅ 0 Fallas (Exit 0) |
 | **Consistencia Numérica** | `scripts/verificar_numericos.py` (Tolerancia estricta) | **15 / 15** ejercicios numéricos teóricamente exactos | ✅ Exacto (Exit 0) |
 | **Renderizado Matemático** | `scripts/verify_browser_katex.py` (Chromium Headless) | **2223 / 2223** fórmulas KaTeX renderizadas sin error | ✅ 0 Errores / 0 Sueltos |
-| **Visibilidad de Soluciones** | Pasos `.step-box`, `.feedback-box`, pistas y pautas | **158 / 158** cajas interactivas visibles tras `revealAll` | ✅ 0 Ocultos tras revelado |
+| **Visibilidad de Soluciones** | Pasos `.step-box` (42 pistas/pautas), retroalimentación `.feedback-box` | **158 / 158** cajas interactivas visibles tras `revealAll` | ✅ 0 Ocultos tras revelado |
 | **Carga de Figuras en Web** | Figuras de ejercicios (inlined `<svg>` en DOM) | **31 / 31** figuras validadas con `width > 0` y trazo | ✅ 0 Figuras rotas |
 | **Validación Vectorial SVG** | `scripts/check_figures.py` (< 120 KB, XML, TeX fuente) | **25 / 25** figuras vectoriales validadas | ✅ Válido (Exit 0) |
 | **Control de Recorte y ViewBox** | Detección geométrica de límites y márgenes | **25 / 25** figuras con margen seguro en viewBox | ✅ 0 Recortes de trazo/glifo |
